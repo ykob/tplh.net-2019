@@ -18,13 +18,11 @@ export default {
 }
 </script>
 
-<template>
-  <div class="home">
-    <h1>This is a home page</h1>
-    <p>
-      {{ this.$store.state.globalId }}
-    </p>
-  </div>
+<template lang="pug">
+  div
+    h1 Home Page
+    p
+      |{{ this.$store.state.globalId }}
 </template>
 
 

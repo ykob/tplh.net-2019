@@ -18,11 +18,9 @@ export default {
 }
 </script>
 
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <p>
-      {{ this.$store.state.globalId }}
-    </p>
-  </div>
+<template lang="pug">
+  div
+    h1 About Page
+    p
+      |{{ this.$store.state.globalId }}
 </template>
