@@ -1,3 +1,24 @@
+<script>
+  export default {
+    name: 'App',
+    components: {
+    },
+    created: function() {
+      // If finish the preload process, Start requestAnimationFrame Loop.
+      this.update();
+    },
+    mounted: function() {
+    },
+    computed: {},
+    methods: {
+      update: function() {
+        // console.log(this.$router.currentRoute);
+        requestAnimationFrame(this.update);
+      },
+    },
+  }
+</script>
+
 <template>
   <div id="app">
     <div id="nav">
