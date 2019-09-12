@@ -9,6 +9,11 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "easing-js": "git://github.com/danro/easing-js.git",
+    "glsl-matrix": "git://github.com/ykob/glsl-matrix.git",
+    "glsl-util": "git://github.com/ykob/glsl-util.git",
+    "js-util": "git://github.com/ykob/js-util.git",
+    "lodash": "^4.17.15",
     "three": "^0.108.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
