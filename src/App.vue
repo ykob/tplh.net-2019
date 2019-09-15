@@ -64,10 +64,14 @@
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Lora:400,700&display=swap');
+  @import '@/assets/scss/foundation/_variables.scss';
+  @import '@/assets/scss/foundation/_normalize.scss';
+  @import '@/assets/scss/foundation/_global.scss';
 
   .p-page {
     position: relative;
     z-index: 10;
+    font-family: 'Lora', serif;
   }
   #nav {
     padding: 30px;

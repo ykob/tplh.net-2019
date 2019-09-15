@@ -1,0 +1,17 @@
+@function z($name, $childname: 0) {
+  $getkey: map-get($z-map, $name);
+  $counter: 1;
+  $is-index: 0;
+
+  @if $childname != 0 {
+    @return index($getkey, $childname);
+  }
+  @each $map-key, $map-value in $z-map {
+    @if $map-key == $name {
+      $is-index: $counter;
+    }
+    $counter: $counter + 1;
+  }
+
+  @return $is-index;
+}
