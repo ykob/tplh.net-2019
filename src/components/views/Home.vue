@@ -8,7 +8,8 @@
       SplitStr,
     },
     created: function() {
-      this.$store.dispatch('transit', {
+      this.$store.commit('enableDarkColor', false);
+      this.$store.commit('transit', {
         globalId: 0,
       });
     },

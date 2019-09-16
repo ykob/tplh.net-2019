@@ -12,15 +12,19 @@ export default new Vuex.Store({
     canvas: document.createElement('canvas'),
     resolution: new THREE.Vector2(),
     webgl: new WebGL(),
+    darkColor: false,
   },
   mutations: {
     transit (state, opts) {
       state.globalId = opts.globalId;
     },
+    enableDarkColor (state, bool) {
+      state.darkColor = bool;
+    },
   },
   actions: {
-    transit (context, opts) {
-      context.commit('transit', opts);
-    },
+    // transit (context, opts) {
+    //   context.commit('transit', opts);
+    // },
   }
 })

@@ -1,11 +1,13 @@
 <script>
   import _ from 'lodash';
 
+  import Background from '@/components/templates/Background.vue'
   import GlobalTitle from '@/components/templates/GlobalTitle.vue'
 
   export default {
     name: 'App',
     components: {
+      Background,
       GlobalTitle,
     },
     created: function() {
@@ -52,9 +54,12 @@
 </script>
 
 <template lang="pug">
-  .p-page
+  .p-page(
+    :class = '{ "is-enabled-dark-color": this.$store.state.darkColor === true }'
+    )
     GlobalTitle
     router-view
+    Background
 </template>
 
 <style lang="scss">
@@ -68,5 +73,9 @@
     position: relative;
     z-index: 10;
     font-family: 'Lora', serif;
+    color: #222;
+    &.is-enabled-dark-color {
+      color: #fff;
+    }
   }
 </style>
