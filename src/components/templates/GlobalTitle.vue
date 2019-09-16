@@ -23,27 +23,32 @@
 
   .p-global-title {
     position: fixed;
+    z-index: 100;
     line-height: 1;
     @include l-more-than-mobile {
+      height: 50px;
       top: 50px;
       left: 50px;
     }
     @include l-mobile {
-      top: 20px;
+      height: 36px;
+      top: 24px;
       left: 20px;
     }
     &__name {
-      text-transform: uppercase;
+      position: absolute;
+      top: 0;
+      left: 0;
+      white-space: nowrap;
       @include fontSizeAll(18, 18, 15);
+      text-transform: uppercase;
       letter-spacing: 0.18em;
-      @include l-more-than-mobile {
-        margin-bottom: 15px;
-      }
-      @include l-mobile {
-        margin-bottom: 8px;
-      }
     }
     &__summary {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      white-space: nowrap;
       @include fontSizeAll(12, 12, 10);
       letter-spacing: 0.18em;
     }

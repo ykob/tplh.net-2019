@@ -46,14 +46,11 @@
     top: 66.6%;
     right: 0;
     left: 0;
+    z-index: 100;
     line-height: 1;
-    @include l-more-than-mobile {
-    }
-    @include l-mobile {
-    }
     &__name {
       text-transform: uppercase;
-      @include fontSizeAll(42, 42, 28);
+      @include fontSizeAll(42, 42, 24);
       letter-spacing: 0.2em;
       @include l-more-than-mobile {
         margin-bottom: 25px;
@@ -63,7 +60,7 @@
       }
     }
     &__summary {
-      @include fontSizeAll(18, 18, 15);
+      @include fontSizeAll(18, 18, 12);
       letter-spacing: 0.16em;
     }
   }
