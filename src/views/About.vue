@@ -20,7 +20,4 @@ export default {
 
 <template lang="pug">
   div
-    h1 About Page
-    p
-      |{{ this.$store.state.globalId }}
 </template>

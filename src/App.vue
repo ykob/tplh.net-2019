@@ -1,9 +1,12 @@
 <script>
   import _ from 'lodash';
 
+  import GlobalTitle from '@/components/templates/GlobalTitle.vue'
+
   export default {
     name: 'App',
     components: {
+      GlobalTitle,
     },
     created: function() {
       const { canvas, webgl } = this.$store.state;
@@ -50,20 +53,13 @@
 
 <template lang="pug">
   .p-page
-    #nav
-      router-link(
-        to = '/'
-        )
-        |Home
-      router-link(
-        to = '/about/'
-        )
-        |About
+    GlobalTitle
     router-view
 </template>
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Lora:400,700&display=swap');
+
   @import '@/assets/scss/foundation/_variables.scss';
   @import '@/assets/scss/foundation/_normalize.scss';
   @import '@/assets/scss/foundation/_global.scss';
@@ -72,15 +68,5 @@
     position: relative;
     z-index: 10;
     font-family: 'Lora', serif;
-  }
-  #nav {
-    padding: 30px;
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      &.router-link-exact-active {
-        color: #42b983;
-      }
-    }
   }
 </style>

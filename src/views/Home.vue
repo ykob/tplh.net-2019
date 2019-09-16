@@ -20,11 +20,7 @@ export default {
 
 <template lang="pug">
   div
-    h1 Home Page
-    p
-      |{{ this.$store.state.globalId }}
 </template>
-
 
 <style lang="scss">
 </style>
