@@ -34,8 +34,6 @@ export default class WebGLContent {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0xffffff, 1.0);
 
-    scene.add(mesh);
-
     camera.start();
   }
   play() {
