@@ -12,10 +12,10 @@
 
 <template lang="pug">
   .p-global-title
-    .p-global-title__name.u-tt-u
+    .p-global-title__name
       |Yoichi Kobayashi
     .p-global-title__summary
-      |Front-End &amp; Creative Developer
+      |Front-End &amp; Creative Developer.
 </template>
 
 <style lang="scss">
