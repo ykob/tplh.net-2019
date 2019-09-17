@@ -75,7 +75,7 @@
     align-items: center;
     position: fixed;
     z-index: 100;
-    @include fontSizeAll(18, 18, 12);
+    @include fontSizeAll(16, 16, 12);
     @include l-more-than-mobile {
       bottom: 50px;
       right: 50px;
@@ -86,7 +86,7 @@
     }
     &__label {
       line-height: 1;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       @include l-more-than-mobile {
         margin-right: 12px;
       }

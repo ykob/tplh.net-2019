@@ -3,12 +3,14 @@
 
   import Background from '@/components/templates/Background.vue'
   import GlobalTitle from '@/components/templates/GlobalTitle.vue'
+  import UtilityNavi from '@/components/templates/UtilityNavi.vue'
 
   export default {
     name: 'App',
     components: {
       Background,
       GlobalTitle,
+      UtilityNavi,
     },
     created: function() {
       const { canvas, webgl } = this.$store.state;
@@ -58,6 +60,7 @@
     :class = '{ "is-enabled-dark-color": this.$store.state.darkColor === true }'
     )
     GlobalTitle
+    UtilityNavi
     router-view
     Background
 </template>
@@ -74,8 +77,14 @@
     z-index: 10;
     font-family: 'Lora', serif;
     color: #222;
+    a {
+      color: #222;
+    }
     &.is-enabled-dark-color {
       color: #fff;
+      a {
+        color: #fff;
+      }
     }
   }
 </style>
