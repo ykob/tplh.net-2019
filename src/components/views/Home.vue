@@ -1,5 +1,4 @@
 <script>
-  // @ is an alias to /src
   import SplitStr from '@/components/atoms/SplitStr.vue'
 
   export default {
