@@ -1,5 +1,5 @@
 <script>
-  import SplitStr from '@/components/atoms/SplitStr.vue'
+  import SplitStr from '@/components/organics/SplitStr.vue'
 
   export default {
     name: 'Home',
@@ -23,18 +23,16 @@
 <template lang="pug">
   div
     .p-home-title
-      .p-home-title__name
-        SplitStr(
-          label = 'Yoichi Kobayashi'
-          align = 'center'
-          exClassName = 'p-home-title__name-typo'
-          )
-      .p-home-title__summary
-        SplitStr(
-          label = 'Front-End & Creative Developer.'
-          align = 'center'
-          exClassName = 'p-home-title__summary-typo'
-          )
+      SplitStr.p-home-title__name(
+        label = 'Yoichi Kobayashi'
+        align = 'center'
+        childClassname = 'p-home-title__name-typo'
+        )
+      SplitStr.p-home-title__summary(
+        label = 'Front-End & Creative Developer.'
+        align = 'center'
+        childClassname = 'p-home-title__summary-typo'
+        )
     .p-home-wheel
       .p-home-wheel__label
         |Show Works
