@@ -33,6 +33,7 @@
         SplitStr(
           label = 'Front-End & Creative Developer.'
           align = 'center'
+          exClassName = 'p-home-title__summary-typo'
           )
     .p-home-wheel
       .p-home-wheel__label
