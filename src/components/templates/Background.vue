@@ -12,7 +12,7 @@
 
 <template lang="pug">
   .p-background(
-    :class = '{ "is-enabled-dark-color": this.$store.state.darkColor === true }'
+    :class = '{ "is-enabled-dark-color": this.$store.state.isEnabledDarkColor === true }'
     )
 </template>
 

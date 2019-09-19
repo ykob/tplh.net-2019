@@ -57,7 +57,7 @@
 
 <template lang="pug">
   .p-page(
-    :class = '{ "is-enabled-dark-color": this.$store.state.darkColor === true }'
+    :class = '{ "is-enabled-dark-color": this.$store.state.isEnabledDarkColor === true }'
     )
     GlobalTitle
     UtilityNavi
