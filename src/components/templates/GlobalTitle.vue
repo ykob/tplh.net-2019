@@ -1,7 +1,11 @@
 <script>
+  import SplitStr from '@/components/atoms/SplitStr.vue'
+
   export default {
     name: 'GlobalTitle',
-    components: {},
+    components: {
+      SplitStr,
+    },
     props: {},
     data: function() {
       return {}
@@ -11,14 +15,22 @@
 </script>
 
 <template lang="pug">
-  .p-global-title
   .p-global-title(
     :class = '{ "is-shown" : this.$store.state.isShownGlobalTitle === true }'
     )
     .p-global-title__name
-      |Yoichi Kobayashi
+      SplitStr(
+        label = 'Yoichi Kobayashi'
+        :step = '2'
+        exClassName = 'p-global-title__name-typo'
+        )
     .p-global-title__summary
-      |Front-End &amp; Creative Developer.
+      SplitStr(
+        label = 'Front-End & Creative Developer.'
+        :step = '2'
+        :base = '2'
+        exClassName = 'p-global-title__summary-typo'
+        )
 </template>
 
 <style lang="scss">
@@ -54,6 +66,13 @@
       white-space: nowrap;
       @include fontSizeAll(12, 12, 10);
       letter-spacing: 0.18em;
+    }
+
+    // Interaction
+    &.is-shown & {
+      &__name-typo,
+      &__summary-typo {
+      }
     }
   }
 </style>
