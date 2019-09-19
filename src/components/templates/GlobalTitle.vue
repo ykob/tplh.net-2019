@@ -12,6 +12,9 @@
 
 <template lang="pug">
   .p-global-title
+  .p-global-title(
+    :class = '{ "is-shown" : this.$store.state.isShownGlobalTitle === true }'
+    )
     .p-global-title__name
       |Yoichi Kobayashi
     .p-global-title__summary

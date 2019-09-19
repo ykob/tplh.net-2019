@@ -9,6 +9,7 @@
     },
     created: function() {
       this.$store.commit('enableDarkColor', false);
+      this.$store.commit('showGlobalTitle', false);
       this.$store.commit('transit', {
         globalId: 0,
       });

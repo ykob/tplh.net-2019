@@ -62,6 +62,7 @@
 <style lang="scss">
   .c-split-str {
     &__typo {
+      display: inline-block;
       @for $i from 0 through 100 {
         &--#{$i} {
           transition-delay: $i * 0.01s;
