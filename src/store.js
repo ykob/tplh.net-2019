@@ -13,6 +13,7 @@ export default new Vuex.Store({
     resolution: new THREE.Vector2(),
     webgl: new WebGL(),
     isEnabledDarkColor: false,
+    isShownGlobalTitle: false,
   },
   mutations: {
     transit (state, opts) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     enableDarkColor (state, bool) {
       state.isEnabledDarkColor = bool;
+    },
+    showGlobalTitle (state, bool) {
+      state.isShownGlobalTitle = bool;
     },
   },
   actions: {
