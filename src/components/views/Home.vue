@@ -21,7 +21,7 @@
 </script>
 
 <template lang="pug">
-  div
+  .p-view-home
     .p-home-title
       SplitStr.p-home-title__name(
         label = 'Yoichi Kobayashi'

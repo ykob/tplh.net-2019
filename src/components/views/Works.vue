@@ -1,13 +1,13 @@
 <script>
   export default {
-    name: 'About',
+    name: 'Contact',
     components: {
     },
     created: function() {
-      this.$store.commit('enableDarkColor', false);
+      this.$store.commit('enableDarkColor', true);
       this.$store.commit('showGlobalTitle', true);
       this.$store.commit('transit', {
-        globalId: 50,
+        globalId: 1,
       });
     },
     mounted: function() {
@@ -18,7 +18,7 @@
 </script>
 
 <template lang="pug">
-  .p-view-about
+  .p-view-works
 </template>
 
 <style lang="scss">
