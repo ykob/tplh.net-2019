@@ -1,6 +1,6 @@
 <script>
   export default {
-    name: 'Contact',
+    name: 'Works',
     components: {
     },
     created: function() {
