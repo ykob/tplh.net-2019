@@ -61,7 +61,10 @@
     )
     GlobalTitle
     UtilityNavi
-    router-view
+    transition(
+      name = 'view'
+      )
+      router-view
     Background
 </template>
 

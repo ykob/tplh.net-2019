@@ -23,11 +23,7 @@ export default new Vuex.Store({
       state.isEnabledDarkColor = bool;
     },
     showGlobalTitle (state, bool) {
-      state.isShownGlobalTitle = (bool === true)
-        ? 1
-        : (state.isShownGlobalTitle === 0)
-          ? 0
-          : 2;
+      state.isShownGlobalTitle = bool;
     },
   },
   actions: {

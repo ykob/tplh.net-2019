@@ -26,11 +26,14 @@
       SplitStr.p-home-title__name(
         label = 'Yoichi Kobayashi'
         align = 'center'
+        :step = '4'
         childClassname = 'p-home-title__name-typo'
         )
       SplitStr.p-home-title__summary(
         label = 'Front-End & Creative Developer.'
         align = 'center'
+        :step = '2'
+        :base = '20'
         childClassname = 'p-home-title__summary-typo'
         )
     .p-home-wheel
@@ -42,6 +45,23 @@
 
 <style lang="scss">
   @import '@/assets/scss/foundation/_mixins.scss';
+
+  .p-view-home {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 10;
+
+    // Transition
+    &.view-enter-active, &.view-leave-active {
+      transition-duration: 2s;
+      transition-property: opacity;
+    }
+    &.view-enter, &.view-leave-to {
+      opacity: 0.999;
+    }
+  }
 
   .p-home-title {
     display: flex;
@@ -67,6 +87,35 @@
     &__summary {
       @include fontSizeAll(18, 18, 12);
       letter-spacing: 0.16em;
+    }
+
+    // Transition
+    .view-enter-active &, .view-leave-active & {
+      &__name-typo, &__summary-typo {
+        transition-duration: .5s;
+        transition-property: opacity, transform;
+        backface-visibility: hidden;
+      }
+    }
+    .view-enter & {
+      &__name-typo {
+        opacity: 0;
+        transform: translate3d(0, .6em, 0) rotateY(70deg);
+      }
+      &__summary-typo {
+        opacity: 0;
+        transform: translate3d(0, .6em, 0);
+      }
+    }
+    .view-leave-to & {
+      &__name-typo {
+        opacity: 0;
+        transform: translate3d(0, -.6em, 0) rotateY(70deg);
+      }
+      &__summary-typo {
+        opacity: 0;
+        transform: translate3d(0, -.6em, 0);
+      }
     }
   }
   .p-home-wheel {
@@ -124,5 +173,7 @@
         left: calc(50% - 3px);
       }
     }
+
+
   }
 </style>
