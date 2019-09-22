@@ -21,7 +21,7 @@
 </script>
 
 <template lang="pug">
-  .p-view-home
+  .p-view-wrap
     .p-home-title
       SplitStr.p-home-title__name(
         label = 'Yoichi Kobayashi'
@@ -45,23 +45,6 @@
 
 <style lang="scss">
   @import '@/assets/scss/foundation/_mixins.scss';
-
-  .p-view-home {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0; left: 0;
-    z-index: 10;
-
-    // Transition
-    &.view-enter-active, &.view-leave-active {
-      transition-duration: 2s;
-      transition-property: opacity;
-    }
-    &.view-enter, &.view-leave-to {
-      opacity: 0.999;
-    }
-  }
 
   .p-home-title {
     display: flex;

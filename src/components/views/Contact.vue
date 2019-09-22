@@ -18,7 +18,7 @@
 </script>
 
 <template lang="pug">
-  .p-view-contact
+  .p-view-wrap
 </template>
 
 <style lang="scss">

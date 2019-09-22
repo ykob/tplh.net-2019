@@ -1,0 +1,19 @@
+.p-view-wrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 10;
+
+  // Transition
+  &.view-enter-active, &.view-leave-active {
+    transition-duration: 2s;
+    transition-property: opacity;
+  }
+  &.view-enter, &.view-leave-to {
+    opacity: 0.999;
+  }
+  &.view-leave-to {
+    pointer-events: none;
+  }
+}

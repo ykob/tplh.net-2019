@@ -18,7 +18,7 @@
 </script>
 
 <template lang="pug">
-  .p-view-works
+  .p-view-wrap
 </template>
 
 <style lang="scss">

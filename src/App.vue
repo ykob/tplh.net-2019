@@ -75,6 +75,8 @@
   @import '@/assets/scss/foundation/_normalize.scss';
   @import '@/assets/scss/foundation/_global.scss';
 
+  @import '@/assets/scss/object/project/_view-wrap.scss';
+
   .p-page {
     position: relative;
     z-index: 10;
