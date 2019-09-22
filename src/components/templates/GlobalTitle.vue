@@ -10,13 +10,21 @@
     data: function() {
       return {}
     },
+    computed: {
+      classnamesWrap: function() {
+        return {
+          'is-shown' : (this.$store.state.isShownGlobalTitle === 1),
+          'is-hidden': (this.$store.state.isShownGlobalTitle === 2)
+        }
+      },
+    },
     methods: {},
   };
 </script>
 
 <template lang="pug">
   .p-global-title(
-    :class = '{ "is-shown" : this.$store.state.isShownGlobalTitle === true }'
+    :class = 'classnamesWrap'
     )
     SplitStr.p-global-title__name(
       label = 'Yoichi Kobayashi'
