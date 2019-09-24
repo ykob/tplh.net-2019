@@ -31,7 +31,7 @@
     },
     created: function() {
       this.strArr = this.label.split('').map(s => {
-        return (s === '') ? '&nbsp' : s;
+        return (s === ' ') ? '&nbsp;' : s;
       });
     },
     methods: {
