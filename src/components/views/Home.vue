@@ -1,10 +1,17 @@
 <script>
+  import sleep from 'js-util/sleep'
+
   import SplitStr from '@/components/organics/SplitStr.vue'
 
   export default {
     name: 'Home',
     components: {
       SplitStr,
+    },
+    data: function() {
+      return {
+        isShown: false,
+      }
     },
     created: function() {
       this.$store.commit('enableDarkColor', false);
@@ -13,7 +20,9 @@
         globalId: 0,
       });
     },
-    mounted: function() {
+    mounted: async function() {
+      await sleep(500);
+      this.isShown = true;
     },
     computed: {},
     methods: {},
@@ -21,7 +30,9 @@
 </script>
 
 <template lang="pug">
-  .p-view-wrap
+  .p-view-wrap(
+    :class = '{ "is-shown" : isShown === true }'
+    )
     .p-home-title
       SplitStr.p-home-title__name(
         label = 'Yoichi Kobayashi'
@@ -73,21 +84,26 @@
     }
 
     // Transition
-    .view-enter-active &, .view-leave-active & {
+    &__name-typo {
+      opacity: 0;
+      transform: translate3d(0, .6em, 0) rotateY(70deg);
+    }
+    &__summary-typo {
+      opacity: 0;
+      transform: translate3d(0, .6em, 0);
+    }
+    .is-shown & {
       &__name-typo, &__summary-typo {
+        opacity: 1;
         transition-duration: .5s;
         transition-property: opacity, transform;
         backface-visibility: hidden;
       }
-    }
-    .view-enter & {
       &__name-typo {
-        opacity: 0;
-        transform: translate3d(0, .6em, 0) rotateY(70deg);
+        transform: translate3d(0, 0, 0) rotateY(0);
       }
       &__summary-typo {
-        opacity: 0;
-        transform: translate3d(0, .6em, 0);
+        transform: translate3d(0, 0, 0);
       }
     }
     .view-leave-to & {
