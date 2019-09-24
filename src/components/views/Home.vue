@@ -55,6 +55,7 @@
 </template>
 
 <style lang="scss">
+  @import '@/assets/scss/foundation/_variables-easings.scss';
   @import '@/assets/scss/foundation/_mixins.scss';
 
   .p-home-title {
@@ -95,9 +96,9 @@
     .is-shown & {
       &__name-typo, &__summary-typo {
         opacity: 1;
-        transition-duration: .5s;
+        transition-duration: 1s;
         transition-property: opacity, transform;
-        backface-visibility: hidden;
+        transition-timing-function: $easeOutQuad;
       }
       &__name-typo {
         transform: translate3d(0, 0, 0) rotateY(0);
@@ -107,13 +108,16 @@
       }
     }
     .view-leave-to & {
-      &__name-typo {
+      &__name-typo, &__summary-typo {
         opacity: 0;
-        transform: translate3d(0, -.6em, 0) rotateY(70deg);
+        transition-duration: .6s;
+        transition-timing-function: $easeInQuad;
+      }
+      &__name-typo {
+        transform: translate3d(0, -1.0em, 0) rotateY(-70deg);
       }
       &__summary-typo {
-        opacity: 0;
-        transform: translate3d(0, -.6em, 0);
+        transform: translate3d(0, -.8em, 0);
       }
     }
   }
