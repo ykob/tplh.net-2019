@@ -2,12 +2,19 @@
   export default {
     name: 'HomeWheel',
     components: {},
-    props: {},
+    props: {
+      isShown: {
+        type: Boolean,
+        default: false,
+      },
+    },
   };
 </script>
 
 <template lang="pug">
-  .p-home-wheel
+  .p-home-wheel(
+    :class = '{ "is-shown" : isShown === true }'
+    )
     .p-home-wheel__label
       |Show Works
     .p-home-wheel__circle

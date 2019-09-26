@@ -32,11 +32,13 @@
 </script>
 
 <template lang="pug">
-  .p-view-wrap(
-    :class = '{ "is-shown" : isShown === true }'
-    )
-    HomeTitle
-    HomeWheel
+  .p-view-wrap
+    HomeTitle(
+      :isShown = 'isShown'
+      )
+    HomeWheel(
+      :isShown = 'isShown'
+      )
 </template>
 
 <style lang="scss">

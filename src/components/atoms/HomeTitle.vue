@@ -6,12 +6,19 @@
     components: {
       SplitStr,
     },
-    props: {},
+    props: {
+      isShown: {
+        type: Boolean,
+        default: false,
+      },
+    },
   };
 </script>
 
 <template lang="pug">
-  .p-home-title
+  .p-home-title(
+    :class = '{ "is-shown" : isShown === true }'
+    )
     SplitStr.p-home-title__name(
       label = 'Yoichi Kobayashi'
       align = 'center'
