@@ -1,9 +1,12 @@
 <script>
   import _ from 'lodash';
+  import normalizeWheel from 'normalize-wheel';
 
-  import Background from '@/components/templates/Background.vue'
-  import GlobalTitle from '@/components/templates/GlobalTitle.vue'
-  import UtilityNavi from '@/components/templates/UtilityNavi.vue'
+  import Background from '@/components/templates/Background.vue';
+  import GlobalTitle from '@/components/templates/GlobalTitle.vue';
+  import UtilityNavi from '@/components/templates/UtilityNavi.vue';
+
+  const INTERVAL_TO_FIRE_WHEEL = 1000;
 
   export default {
     name: 'App',
@@ -11,6 +14,12 @@
       Background,
       GlobalTitle,
       UtilityNavi,
+    },
+    data: function() {
+      return {
+        wheelTimer: null,
+        isWheeling: false,
+      }
     },
     created: function() {
       const { canvas, webgl } = this.$store.state;
@@ -31,8 +40,33 @@
       // If finish the preload process, Start requestAnimationFrame Loop.
       this.update();
 
+      // For wheel events
+      // =====
+      const wheel = (e) => {
+        e.preventDefault();
+
+        const n = normalizeWheel(e);
+
+        // Run at the first wheel event only.
+        if (this.isWheeling === false) {
+          if (Math.abs(n.pixelY) < 10) return;
+
+          if (n.pixelY > 0) {
+            this.$router.push(`/works/${this.$store.state.works[0].key}/`)
+          }
+
+          // Prevent repeated wheel events fire with a timer.
+          this.isWheeling = true;
+          this.wheelTimer = setTimeout(() => {
+            this.isWheeling = false;
+          }, INTERVAL_TO_FIRE_WHEEL);
+        }
+      };
+
       // On global events.
       window.addEventListener('resize', _.debounce(this.resize, 100));
+      window.addEventListener('wheel', wheel, { passive: false });
+      window.addEventListener('DOMMouseScroll', wheel, { passive: false });
     },
     mounted: function() {
     },

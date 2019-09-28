@@ -1,10 +1,10 @@
-import thumbSketchThreejs from '@assets/img/webgl/thumb_sketch_threejs.jpg';
-import thumbWarpdrive from '@assets/img/webgl/thumb_warpdrive.jpg';
-import thumbHassyadai from '@assets/img/webgl/thumb_hassyadai.jpg';
+import thumbSketchThreejs from '@/assets/img/webgl/thumb_sketch_threejs.jpg';
+import thumbWarpdrive from '@/assets/img/webgl/thumb_warpdrive.jpg';
+import thumbHassyadai from '@/assets/img/webgl/thumb_hassyadai.jpg';
 
 export default [
   {
-    key: 'sketchThreejs',
+    key: 'sketch-threejs',
     title: 'Sketch of Three.js',
     description: '',
     img: thumbSketchThreejs,

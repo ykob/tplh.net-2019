@@ -1,8 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import * as THREE from 'three';
 
-import WebGL from '@/webgl/'
+import WebGL from '@/webgl/';
+
+import WORKS from '@/components/_const/WORKS';
 
 Vue.use(Vuex)
 
@@ -12,6 +14,7 @@ export default new Vuex.Store({
     canvas: document.createElement('canvas'),
     resolution: new THREE.Vector2(),
     webgl: new WebGL(),
+    works: WORKS,
     isEnabledDarkColor: false,
     isShownGlobalTitle: 0,
   },
