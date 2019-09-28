@@ -10,7 +10,6 @@
     data: function() {
       return {}
     },
-    methods: {},
   };
 </script>
 
@@ -21,11 +20,14 @@
     .p-global-title(
       v-if = '$store.state.isShownGlobalTitle'
       )
-      SplitStr.p-global-title__name(
-        label = 'Yoichi Kobayashi'
-        :step = '2'
-        childClassname = 'p-global-title__name-typo'
+      router-link.p-global-title__name(
+        to = '/'
         )
+        SplitStr(
+          label = 'Yoichi Kobayashi'
+          :step = '2'
+          childClassname = 'p-global-title__name-typo'
+          )
       SplitStr.p-global-title__summary(
         label = 'Front-End & Creative Developer.'
         :step = '1'
@@ -52,6 +54,7 @@
       left: 20px;
     }
     &__name {
+      cursor: pointer;
       position: absolute;
       top: 0;
       left: 0;
