@@ -1,7 +1,10 @@
 <script>
+  import SplitStr from '@/components/atoms/SplitStr.vue'
+
   export default {
     name: 'About',
     components: {
+      SplitStr,
     },
     created: function() {
       this.$store.commit('enableDarkColor', false);
@@ -19,8 +22,92 @@
 
 <template lang="pug">
   .p-view-wrap
+    SplitStr.p-about-title(
+      tag = 'h1'
+      label = 'About'
+      :step = '4'
+      childClassname = 'p-about-title__typo'
+      )
+    .p-about-description
+      h2
+        |About Me
+      p
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+      h2
+        |Credit
+      p
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
+        |I'm working in Japan as a Front-End Developer also a Creative Developer.
+        br
+        |From 2010, I've started to learn JavaScript, And my career as a Web Developer was started.
+        br
 </template>
 
 <style lang="scss">
   @import '@/assets/scss/foundation/_mixins.scss';
+
+  .p-about-title {
+    position: absolute;
+    line-height: .9;
+    margin-top: 0;
+    margin-bottom: 0;
+    @include fontSizeAll(64, 42, 24);
+    letter-spacing: 0.12em;
+    @include l-more-than-mobile {
+      top: 22.5%;
+      left: 50%;
+    }
+    @include l-mobile {
+    }
+  }
+  .p-about-description {
+    box-sizing: border-box;
+    position: absolute;
+    line-height: 2;
+    overflow: scroll;
+    letter-spacing: 0.08em;
+    mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 95%);
+    @include l-more-than-mobile {
+      width: 50%;
+      top: 33.3%;
+      bottom: 20%;
+      left: 50%;
+      padding-right: 100px;
+    }
+    @include l-mobile {
+    }
+    h2 {
+      letter-spacing: 0.12em;
+    }
+  }
 </style>
