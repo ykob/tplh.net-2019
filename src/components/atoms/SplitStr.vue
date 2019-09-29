@@ -3,6 +3,10 @@
     name: 'SplitStr',
     components: {},
     props: {
+      tag: {
+        Type: String,
+        default: 'div',
+      },
       label: {
         Type: String,
         default: '',
@@ -62,7 +66,9 @@
 </script>
 
 <template lang="pug">
-  .c-split-str
+  .c-split-str(
+    :is = 'tag'
+    )
     span(
       v-for = 'str, i in strArr'
       v-html = 'str'
