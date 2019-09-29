@@ -73,12 +73,8 @@
     }
 
     // Transition
-    &.show-enter-active, &.show-leave-active {
-      transition-duration: 1s;
-      transition-property: opacity;
-    }
-    &.show-enter, &.show-leave-to {
-      opacity: 0.999;
+    &__name-typo, &__summary-typo {
+      transition-property: opacity, transform;
     }
     &.show-enter-active &, &.show-leave-active & {
       &__name-typo, &__summary-typo {
