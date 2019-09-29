@@ -1,7 +1,11 @@
 <script>
+  import SplitStr from '@/components/atoms/SplitStr.vue'
+
   export default {
     name: 'HomeWheel',
-    components: {},
+    components: {
+      SplitStr,
+    },
     props: {
       isShown: {
         type: Boolean,
@@ -15,8 +19,11 @@
   .p-home-wheel(
     :class = '{ "is-shown" : isShown === true }'
     )
-    .p-home-wheel__label
-      |Show Works
+    SplitStr.p-home-wheel__label(
+      label = 'Show Works'
+      :step = '4'
+      childClassname = 'p-home-wheel__label-typo'
+      )
     .p-home-wheel__circle
       .p-home-wheel__point
 </template>
