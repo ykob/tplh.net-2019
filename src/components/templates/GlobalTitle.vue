@@ -26,6 +26,7 @@
         SplitStr(
           label = 'Yoichi Kobayashi'
           :step = '2'
+          :base = '0'
           childClassname = 'p-global-title__name-typo'
           )
       SplitStr.p-global-title__summary(
@@ -73,6 +74,13 @@
     }
 
     // Transition
+    &.show-enter-to, &.show-leave-to {
+      transition-property: opacity;
+    }
+    &.show-leave-to {
+      opacity: 0.999;
+      transition-duration: 1s;
+    }
     &__name-typo, &__summary-typo {
       transition-property: opacity, transform;
     }

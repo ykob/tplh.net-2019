@@ -1,4 +1,5 @@
 <script>
+  import sleep from 'js-util/sleep'
   import SplitStr from '@/components/atoms/SplitStr.vue'
 
   export default {
@@ -6,12 +7,13 @@
     components: {
       SplitStr,
     },
-    created: function() {
+    created: async function() {
       this.$store.commit('enableDarkColor', false);
-      this.$store.commit('showGlobalTitle', true);
       this.$store.commit('transit', {
         globalId: 50,
       });
+      await sleep(500);
+      this.$store.commit('showGlobalTitle', true);
     },
     mounted: function() {
     },
