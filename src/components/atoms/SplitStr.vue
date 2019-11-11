@@ -81,7 +81,7 @@
     &__typo {
       display: inline-block;
       backface-visibility: hidden;
-      @for $i from 0 through 100 {
+      @for $i from 0 through 200 {
         &--#{$i} {
           transition-delay: $i * 0.01s;
         }
