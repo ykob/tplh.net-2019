@@ -16,7 +16,7 @@ export default new Vuex.Store({
     webgl: new WebGL(),
     works: WORKS,
     isEnabledDarkColor: false,
-    isShownGlobalTitle: 0,
+    isShownGlobalTitle: false,
   },
   mutations: {
     transit (state, opts) {

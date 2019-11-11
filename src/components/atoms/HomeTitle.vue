@@ -91,6 +91,7 @@
       &__name-typo, &__summary-typo {
         opacity: 0;
         transition-duration: .6s;
+        transition-property: opacity, transform;
         transition-timing-function: $easeInQuad;
       }
       &__name-typo {
