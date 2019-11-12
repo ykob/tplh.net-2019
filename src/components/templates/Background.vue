@@ -23,9 +23,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-image: linear-gradient(0deg, rgba(220,190,190,1) 0%, rgba(251,251,251,1) 100%);
+    background-color: rgba(220,190,190,1);
+    transition-duration: 1s;
     &.is-enabled-dark-color {
-      background-image: linear-gradient(0deg, rgba(190,174,174,1) 0%, rgba(103,75,75,1) 100%);
+      background-color: rgba(190,174,174,1);
     }
   }
 </style>
