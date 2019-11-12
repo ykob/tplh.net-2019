@@ -35,9 +35,6 @@
 </template>
 
 <style lang="scss">
-  @import '@/assets/scss/foundation/_variables.scss';
-  @import '@/assets/scss/foundation/_mixins.scss';
-
   .p-home-title {
     display: flex;
     flex-direction: column;

@@ -38,8 +38,6 @@
 </template>
 
 <style lang="scss">
-  @import '@/assets/scss/foundation/_mixins.scss';
-
   .p-global-title {
     position: fixed;
     z-index: 100;

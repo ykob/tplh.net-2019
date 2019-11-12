@@ -23,8 +23,6 @@
 </template>
 
 <style lang="scss">
-  @import '@/assets/scss/foundation/_mixins.scss';
-
   .p-utility-navi {
     position: fixed;
     z-index: 100;

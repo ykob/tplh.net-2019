@@ -22,5 +22,4 @@
 </template>
 
 <style lang="scss">
-  @import '@/assets/scss/foundation/_mixins.scss';
 </style>

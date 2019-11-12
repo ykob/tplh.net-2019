@@ -29,9 +29,6 @@
 </template>
 
 <style lang="scss">
-  @import '@/assets/scss/foundation/_variables.scss';
-  @import '@/assets/scss/foundation/_mixins.scss';
-
   .p-home-wheel {
     display: flex;
     align-items: center;
