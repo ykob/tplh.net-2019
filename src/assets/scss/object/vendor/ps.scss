@@ -1,0 +1,25 @@
+.ps {
+  &__rail-y {
+    width: 1px;
+    position: absolute;
+    right: 50px;
+    background-color: #222;
+    transform: scaleY(0.7);
+    transition-duration: .4s;
+    transition-property: background-color;
+    .is-enabled-dark-color & {
+      background-color: #fff;
+    }
+  }
+  &__thumb-y {
+    width: 5px;
+    position: absolute;
+    left: -2px;
+    background-color: #222;
+    transition-duration: .4s;
+    transition-property: background-color;
+    .is-enabled-dark-color & {
+      background-color: #fff;
+    }
+  }
+}

@@ -117,8 +117,8 @@
 
   @import '@/assets/scss/foundation/_normalize.scss';
   @import '@/assets/scss/foundation/_global.scss';
-
   @import '@/assets/scss/object/project/_view-wrap.scss';
+  @import '@/assets/scss/object/vendor/ps.scss';
 
   .p-page {
     position: relative;

@@ -1,27 +1,42 @@
 <script>
-  export default {
-    name: 'AboutDescription',
-    components: {},
-    props: {
-      isShown: {
-        type: Boolean,
-        default: false,
-      },
+import PerfectScrollbar from 'perfect-scrollbar'
+
+export default {
+  name: 'AboutDescription',
+  components: {},
+  props: {
+    isShown: {
+      type: Boolean,
+      default: false,
     },
-    computed: {
-      getPadding() {
-        const { y } = this.$store.state.resolution;
-        return {
-          paddingTop: `${y * 0.467 * 0.15}px`,
-          paddingBottom: `${y * 0.467 * 0.15}px`,
-        }
+  },
+  data() {
+    return {
+      ps: null,
+    }
+  },
+  mounted() {
+    const { y } = this.$store.state.resolution;
+    this.ps = new PerfectScrollbar(this.$refs.wrap, {
+      swipeEasing: true,
+      suppressScrollX: true,
+    });
+  },
+  computed: {
+    getPadding() {
+      const { y } = this.$store.state.resolution;
+      return {
+        paddingTop: `${y * 0.467 * 0.15}px`,
+        paddingBottom: `${y * 0.467 * 0.15}px`,
       }
     }
-  };
+  }
+}
 </script>
 
 <template lang="pug">
 .p-about-description(
+  ref = 'wrap'
   :class = '{ "is-shown" : isShown === true }'
   )
   .p-about-description__in(
@@ -76,9 +91,9 @@
   box-sizing: border-box;
   position: absolute;
   line-height: 2;
-  overflow-y: scroll;
+  overflow: hidden;
   letter-spacing: 0.08em;
-  mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 95%);
+  mask-image: linear-gradient(to bottom, transparent 5%, black 15%, black 85%, transparent 95%);
   @include l-more-than-mobile {
     width: 50%;
     bottom: 20%;
