@@ -125,11 +125,11 @@
     z-index: 10;
     font-family: 'Lora', serif;
     color: #222;
-    transition-duration: .4s;
+    transition-duration: 1.4s;
     transition-property: color;
     a {
       color: #222;
-      transition-duration: .4s;
+      transition-duration: 1.4s;
       transition-property: color;
     }
     &.is-enabled-dark-color {

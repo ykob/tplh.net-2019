@@ -24,9 +24,9 @@
     top: 0;
     left: 0;
     background-color: rgba(220,190,190,1);
-    transition-duration: 1s;
+    transition-duration: 1.4s;
     &.is-enabled-dark-color {
-      background-color: rgba(190,174,174,1);
+      background-color: rgba(90,74,74,1);
     }
   }
 </style>
