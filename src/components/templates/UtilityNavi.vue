@@ -6,12 +6,21 @@
     data: function() {
       return {}
     },
+    computed: {
+      getCurrentWorkPath() {
+        return `/works/${this.$store.state.works[0].key}/`;
+      }
+    },
     methods: {},
   };
 </script>
 
 <template lang="pug">
   .p-utility-navi
+    router-link.p-utility-navi__item(
+      :to = 'getCurrentWorkPath'
+      )
+      |Works
     router-link.p-utility-navi__item(
       to = '/about/'
       )
