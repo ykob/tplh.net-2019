@@ -43,17 +43,28 @@
       // For wheel events
       // =====
       const wheel = (e) => {
-        e.preventDefault();
-
         const n = normalizeWheel(e);
+        const { works } = this.$store.state;
+        const { name } = this.$route;
 
         // Run at the first wheel event only.
         if (this.isWheeling === false) {
           if (Math.abs(n.pixelY) < 10) return;
 
-          if (n.pixelY > 0) {
-            this.$router.push(`/works/${this.$store.state.works[0].key}/`)
-          }
+            if (name === 'home') {
+              if (n.pixelY > 0) {
+                e.preventDefault();
+                this.$router.push(`/works/${works[0].key}/`);
+              }
+            } else if (name === 'works') {
+              e.preventDefault();
+              if (n.pixelY > 0) {
+                this.$store.commit('transitNextWorks');
+              } else {
+                this.$store.commit('transitPrevWorks');
+              }
+              this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+            }
 
           // Prevent repeated wheel events fire with a timer.
           this.isWheeling = true;
@@ -73,7 +84,6 @@
     computed: {},
     methods: {
       update: function() {
-        // console.log(this.$router.currentRoute);
         this.$store.state.webgl.update();
         requestAnimationFrame(this.update);
       },

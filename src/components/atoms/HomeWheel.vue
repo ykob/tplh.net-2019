@@ -53,6 +53,9 @@
         margin-right: 8px;
       }
     }
+    &__label-typo {
+      transition-property: opacity, transform;
+    }
     &__circle {
       box-sizing: border-box;
       position: relative;

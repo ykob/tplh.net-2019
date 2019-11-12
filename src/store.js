@@ -15,18 +15,32 @@ export default new Vuex.Store({
     resolution: new THREE.Vector2(),
     webgl: new WebGL(),
     works: WORKS,
+    currentWorksId: 0,
     isEnabledDarkColor: false,
     isShownGlobalTitle: false,
   },
   mutations: {
     transit (state, opts) {
       state.globalId = opts.globalId;
+      state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
     },
     enableDarkColor (state, bool) {
       state.isEnabledDarkColor = bool;
     },
     showGlobalTitle (state, bool) {
       state.isShownGlobalTitle = bool;
+    },
+    transitPrevWorks (state) {
+      state.currentWorksId =
+        (state.currentWorksId <= 0)
+          ? state.works.length - 1
+          : state.currentWorksId - 1;
+    },
+    transitNextWorks (state) {
+      state.currentWorksId =
+        (state.currentWorksId >= state.works.length - 1)
+          ? 0
+          : state.currentWorksId + 1;
     },
   },
   actions: {
