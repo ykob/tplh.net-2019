@@ -7,11 +7,6 @@
   z-index: 10;
   letter-spacing: 0.08em;
   @include fontSizeAll(14, 14, 12);
-  &--center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
   // Transition
   &.view-enter-active, &.view-leave-active {
