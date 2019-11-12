@@ -7,6 +7,11 @@
     components: {
       SplitStr,
     },
+    data: function() {
+      return {
+        isShown: false,
+      }
+    },
     created: async function() {
       this.$store.commit('enableDarkColor', false);
       this.$store.commit('transit', {
@@ -15,7 +20,9 @@
       await sleep(500);
       this.$store.commit('showGlobalTitle', true);
     },
-    mounted: function() {
+    mounted: async function() {
+      await sleep(500);
+      this.isShown = true;
     },
     computed: {},
     methods: {},
@@ -29,8 +36,11 @@
       label = 'About'
       :step = '4'
       childClassname = 'p-about-title__typo'
+      :class = '{ "is-shown" : isShown === true }'
       )
-    .p-about-description
+    .p-about-description(
+      :class = '{ "is-shown" : isShown === true }'
+      )
       h2
         |About Me
       p
@@ -76,6 +86,7 @@
 </template>
 
 <style lang="scss">
+  @import '@/assets/scss/foundation/_variables-easings.scss';
   @import '@/assets/scss/foundation/_mixins.scss';
 
   .p-about-title {
@@ -90,6 +101,23 @@
       left: 50%;
     }
     @include l-mobile {
+    }
+    &__typo {
+      opacity: 0;
+      transform: translate3d(0, .4em, 0) rotateY(70deg);
+      transition-property: opacity, transform;
+      .is-shown & {
+        opacity: 1;
+        transition-duration: 1s;
+        transition-timing-function: $easeOutQuad;
+        transform: translate3d(0, 0, 0) rotateY(0);
+      }
+      .view-leave-to & {
+        opacity: 0;
+        transition-duration: .6s;
+        transition-timing-function: $easeInQuad;
+        transform: translate3d(0, -.6em, 0) rotateY(-70deg);
+      }
     }
   }
   .p-about-description {
@@ -110,6 +138,20 @@
     }
     h2 {
       letter-spacing: 0.12em;
+    }
+
+    // Transition
+    opacity: 0;
+    transition-property: opacity;
+    &.is-shown {
+      opacity: 1;
+      transition-duration: 1s;
+      transition-delay: .4s;
+    }
+    .view-leave-to & {
+      opacity: 0;
+      transition-duration: .6s;
+      transition-delay: 0s;
     }
   }
 </style>
