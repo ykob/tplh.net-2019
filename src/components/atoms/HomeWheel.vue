@@ -29,7 +29,7 @@
 </template>
 
 <style lang="scss">
-  @import '@/assets/scss/foundation/_variables-easings.scss';
+  @import '@/assets/scss/foundation/_variables.scss';
   @import '@/assets/scss/foundation/_mixins.scss';
 
   .p-home-wheel {
