@@ -90,7 +90,6 @@ export default {
 .p-about-description {
   box-sizing: border-box;
   position: absolute;
-  line-height: 2;
   overflow: hidden;
   letter-spacing: 0.08em;
   mask-image: linear-gradient(to bottom, transparent 5%, black 15%, black 85%, transparent 95%);
