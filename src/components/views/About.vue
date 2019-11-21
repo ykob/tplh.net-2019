@@ -5,6 +5,15 @@ import AboutDescription from '@/components/atoms/AboutDescription.vue'
 
 export default {
   name: 'About',
+  metaInfo: {
+    title: 'About / ',
+    meta: [
+      {
+        name: 'description',
+        content: 'it is about page.'
+      }
+    ]
+  },
   components: {
     AboutTitle,
     AboutDescription,

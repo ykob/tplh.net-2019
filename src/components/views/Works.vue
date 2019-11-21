@@ -3,6 +3,15 @@
 
   export default {
     name: 'Works',
+    metaInfo: {
+      title: 'Works / ',
+      meta: [
+        {
+          name: 'description',
+          content: 'it is works page.'
+        }
+      ]
+    },
     components: {
     },
     created: function() {

@@ -10,6 +10,10 @@
 
   export default {
     name: 'App',
+    metaInfo: {
+      title: '',
+      titleTemplate: '%sYoichi Kobayashi / tplh.net',
+    },
     components: {
       Background,
       GlobalTitle,

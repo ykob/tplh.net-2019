@@ -6,6 +6,15 @@ import ContactForm from '@/components/organics/ContactForm.vue'
 
 export default {
   name: 'Contact',
+  metaInfo: {
+    title: 'Contact / ',
+    meta: [
+      {
+        name: 'description',
+        content: 'it is contact page.'
+      }
+    ]
+  },
   components: {
     ContactTitle,
     ContactDescription,
