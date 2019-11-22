@@ -77,6 +77,7 @@ export default {
     }
     &--2 {
       padding-left: 50px;
+      padding-right: 100px;
     }
   }
   @include l-mobile {

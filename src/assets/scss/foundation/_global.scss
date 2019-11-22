@@ -29,32 +29,3 @@ ul, ol {
 img {
   vertical-align: top;
 }
-input[type=text], input[type=password], input[type=email],
-input[type=tel], input[type=search], input[type=url], input[type=number],
-input[type=submit], button, select, textarea {
-  appearance: none;
-  border-radius: 0;
-}
-input[type=submit], button {
-  border: 0;
-}
-input[type=text], input[type=password], input[type=email],
-input[type=tel], input[type=search], input[type=url], input[type=number],
-select, textarea {
-  background-color: #fff;
-}
-select::-ms-expand {
-  display: none;
-}
-::selection {
-  background-color: rgba(#000, 0);
-}
-::-webkit-input-placeholder {
-  color: #666;
-}
-::-moz-placeholder {
-  color: #666;
-}
-:-ms-input-placeholder {
-  color: #666;
-}
