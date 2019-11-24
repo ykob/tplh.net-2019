@@ -6,7 +6,7 @@ export default [
   {
     key: 'sketch-threejs',
     title: 'Sketch of Three.js',
-    description: '',
+    description: 'Interactive sketches made with three.js.\nI start to create the sketches from 2015 and continue even now.',
     img: thumbSketchThreejs,
     href: 'https://ykob.github.io/sketch-threejs/',
   },
