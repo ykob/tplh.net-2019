@@ -19,7 +19,7 @@
         input: {
           name: {
             default: '',
-            value: 'a',
+            value: '',
             validation: null,
             error: []
           },
@@ -40,7 +40,6 @@
     },
     methods: {
       onChange(e) {
-        console.log(e)
         this.input.name.value = e.currentTarget.value;
       }
     }
