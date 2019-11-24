@@ -1,10 +1,12 @@
 <script>
+  import Button from '@/components/atoms/Button.vue';
   import InputText from '@/components/atoms/InputText.vue';
   import Textarea from '@/components/atoms/Textarea.vue';
 
   export default {
     name: 'ContactDescription',
     components: {
+      Button,
       InputText,
       Textarea
     },
@@ -47,7 +49,7 @@
 </script>
 
 <template lang="pug">
-.p-contact-form(
+form.p-contact-form(
   :class = '{ "is-shown" : isShown === true }'
   )
   .p-contact-form__row
@@ -74,6 +76,9 @@
       :value = 'input.content.value'
       @change = 'onChange'
       )
+  .p-contact-form__btns
+    Button
+      |Submit
 </template>
 
 <style lang="scss">
@@ -95,6 +100,10 @@
     height: 240px;
     display: block;
   }
+  &__btns {
+    margin-top: 20px;
+  }
+
   // Transition
   opacity: 0;
   transition-property: opacity;
