@@ -1,6 +1,7 @@
 <script>
   import _ from 'lodash';
-  
+  import sleep from 'js-util/sleep'
+
   import WorkOutline from '@/components/atoms/WorkOutline.vue';
 
   export default {
@@ -17,6 +18,11 @@
     components: {
       WorkOutline
     },
+    data() {
+      return {
+        isShown: false,
+      }
+    },
     created: function() {
       this.$store.commit('enableDarkColor', true);
       this.$store.commit('showGlobalTitle', true);
@@ -28,26 +34,25 @@
         )
       });
     },
-    mounted: function() {
+    async mounted() {
+      await sleep(500);
+      this.isShown = true;
     },
     computed: {
-    },
-    methods: {
-      getNumber(i) {
-        return zeroPadding(i + 1, 2);
-      }
     },
   }
 </script>
 
 <template lang="pug">
   .p-view-wrap
-    transition(
+    transition-group(
       name = 'show'
+      tag = 'div'
       )
       WorkOutline(
         v-for = 'item, index in $store.state.works'
-        v-if = 'item.key === $route.params.key'
+        v-if = 'item.key === $route.params.key && isShown === true'
+        :key = 'index'
         :index = 'index'
         :title = 'item.title'
         :description = 'item.description'

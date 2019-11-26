@@ -43,8 +43,12 @@
   .p-work-outline
     .p-work-outline__number
       |Works &#35;{{ getNumber(index) }}
-    h1.p-work-outline__title
-      |{{ title }}
+    SplitStr.p-work-outline__title(
+      tag = 'h1'
+      :label = 'title'
+      :step = '4'
+      childClassname = 'p-work-outline__title-typo'
+      )
     .p-work-outline__description
       |{{ description }}
     Button.p-work-outline__link(
@@ -64,6 +68,19 @@
     }
     @include l-mobile {
     }
+
+    // Transition
+    &.show-enter-active, &.show-leave-active {
+      transition-duration: 2s;
+      transition-property: opacity;
+    }
+    &.show-enter, &.show-leave-to {
+      opacity: 0.999;
+    }
+    &.show-leave-to {
+      pointer-events: none;
+    }
+
     &__number {
       line-height: 1;
       @include fontSizeAll(21, 21, 14);
@@ -90,16 +107,19 @@
       }
     }
     &__title-typo {
-      opacity: 0;
-      transform: translate3d(0, .4em, 0) rotateY(70deg);
       transition-property: opacity, transform;
-      .is-shown & {
+      .show-enter & {
+        opacity: 0;
+        transform: translate3d(0, .4em, 0) rotateY(70deg);
+      }
+      .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-timing-function: $easeOutQuad;
         transform: translate3d(0, 0, 0) rotateY(0);
       }
-      .view-leave-to & {
+      .view-leave-to &,
+      .show-leave-to & {
         opacity: 0;
         transition-duration: .6s;
         transition-timing-function: $easeInQuad;
