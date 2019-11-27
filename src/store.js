@@ -16,6 +16,7 @@ export default new Vuex.Store({
     webgl: new WebGL(),
     works: WORKS,
     currentWorksId: 0,
+    isLoaded: false,
     isEnabledDarkColor: false,
     isShownGlobalTitle: false,
   },

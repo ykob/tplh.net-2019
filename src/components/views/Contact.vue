@@ -27,15 +27,12 @@ export default {
   },
   async created() {
     this.$store.commit('enableDarkColor', true);
+    this.$store.commit('showGlobalTitle', true);
     this.$store.commit('transit', {
       globalId: 99,
     });
-    await sleep(500);
-    this.$store.commit('showGlobalTitle', true);
   },
-  async mounted() {
-    await sleep(500);
-    this.isShown = true;
+  mounted() {
   },
   computed: {},
   methods: {},
@@ -45,16 +42,10 @@ export default {
 <template lang="pug">
 .p-view-wrap.p-contact-wrap
   .p-contact-column.p-contact-column--1
-    ContactTitle(
-      :isShown = 'isShown'
-      )
-    ContactDescription(
-      :isShown = 'isShown'
-      )
+    ContactTitle
+    ContactDescription
   .p-contact-column.p-contact-column--2
-    ContactForm(
-      :isShown = 'isShown'
-      )
+    ContactForm
 </template>
 
 <style lang="scss">

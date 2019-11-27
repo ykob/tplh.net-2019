@@ -10,10 +10,6 @@
       SplitStr,
     },
     props: {
-      isShown: {
-        type: Boolean,
-        default: false,
-      },
       index: {
         type: Number,
         default: 0,
@@ -31,9 +27,9 @@
         default: '',
       },
     },
-    methods: {
-      getNumber(i) {
-        return zeroPadding(i + 1, 2);
+    computed: {
+      getNumber() {
+        return `Works #${zeroPadding(this.index + 1, 2)}`;
       }
     },
   };
@@ -41,12 +37,13 @@
 
 <template lang="pug">
   .p-work-outline
-    .p-work-outline__number
-      |Works &#35;{{ getNumber(index) }}
+    .p-work-outline__number(
+      )
+      |{{ getNumber }}
     SplitStr.p-work-outline__title(
       tag = 'h1'
       :label = 'title'
-      :step = '4'
+      :step = '2'
       childClassname = 'p-work-outline__title-typo'
       )
     .p-work-outline__description
@@ -92,6 +89,26 @@
       @include l-mobile {
         margin-bottom: 12px;
       }
+
+      // Transition
+      transition-property: opacity;
+      .view-enter &,
+      .show-enter & {
+        opacity: 0;
+      }
+      .view-enter-to &,
+      .show-enter-to & {
+        opacity: 1;
+        transition-duration: 1s;
+        transition-delay: 1.2s;
+        transition-timing-function: $easeOutQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        opacity: 0;
+        transition-duration: .6s;
+        transition-delay: 0s;
+      }
     }
     &__title {
       line-height: .9;
@@ -107,16 +124,24 @@
       }
     }
     &__title-typo {
+      // Transition
       transition-property: opacity, transform;
+      .view-enter &,
       .show-enter & {
         opacity: 0;
         transform: translate3d(0, .4em, 0) rotateY(70deg);
       }
+      .view-enter-to &,
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-timing-function: $easeOutQuad;
         transform: translate3d(0, 0, 0) rotateY(0);
+        @for $i from 0 through 200 {
+          &--#{$i} {
+            transition-delay: $i * 0.01 + 0.5s;
+          }
+        }
       }
       .view-leave-to &,
       .show-leave-to & {
@@ -134,6 +159,26 @@
       }
       @include l-mobile {
         margin-bottom: 10px;
+      }
+
+      // Transition
+      transition-property: opacity;
+      .view-enter &,
+      .show-enter & {
+        opacity: 0;
+      }
+      .view-enter-to &,
+      .show-enter-to & {
+        opacity: 1;
+        transition-duration: 1s;
+        transition-delay: 1.2s;
+        transition-timing-function: $easeOutQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        opacity: 0;
+        transition-duration: .6s;
+        transition-delay: 0s;
       }
     }
   }

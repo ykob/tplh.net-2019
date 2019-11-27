@@ -11,10 +11,6 @@
       Textarea
     },
     props: {
-      isShown: {
-        type: Boolean,
-        default: false,
-      },
     },
     data() {
       return {
@@ -105,12 +101,15 @@ form.p-contact-form(
   }
 
   // Transition
-  opacity: 0;
   transition-property: opacity;
-  &.is-shown {
+  .view-enter & {
+    opacity: 0;
+  }
+  .view-enter-to & {
     opacity: 1;
     transition-duration: 1s;
-    transition-delay: .4s;
+    transition-delay: 1.2s;
+    transition-timing-function: $easeOutQuad;
   }
   .view-leave-to & {
     opacity: 0;

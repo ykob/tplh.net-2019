@@ -40,10 +40,12 @@ SplitStr.p-about-title(
   @include l-mobile {
   }
   &__typo {
-    opacity: 0;
-    transform: translate3d(0, .4em, 0) rotateY(70deg);
     transition-property: opacity, transform;
-    .is-shown & {
+    .view-enter & {
+      opacity: 0;
+      transform: translate3d(0, .4em, 0) rotateY(70deg);
+    }
+    .view-enter-to & {
       opacity: 1;
       transition-duration: 1s;
       transition-timing-function: $easeOutQuad;

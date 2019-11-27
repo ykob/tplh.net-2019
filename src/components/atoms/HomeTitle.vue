@@ -7,18 +7,12 @@
       SplitStr,
     },
     props: {
-      isShown: {
-        type: Boolean,
-        default: false,
-      },
     },
   };
 </script>
 
 <template lang="pug">
-  .p-home-title(
-    :class = '{ "is-shown" : isShown === true }'
-    )
+  .p-home-title
     SplitStr.p-home-title__name(
       label = 'Yoichi Kobayashi'
       align = 'center'
@@ -62,19 +56,23 @@
     }
 
     // Transition
-    &__name-typo {
-      opacity: 0;
-      transform: translate3d(0, .6em, 0) rotateY(70deg);
+    &__name-typo, &__summary-typo {
+      transition-property: opacity, transform;
     }
-    &__summary-typo {
-      opacity: 0;
-      transform: translate3d(0, .6em, 0);
+    .view-enter & {
+      &__name-typo {
+        opacity: 0;
+        transform: translate3d(0, .6em, 0) rotateY(70deg);
+      }
+      &__summary-typo {
+        opacity: 0;
+        transform: translate3d(0, .6em, 0);
+      }
     }
-    .is-shown & {
+    .view-enter-to & {
       &__name-typo, &__summary-typo {
         opacity: 1;
         transition-duration: 1s;
-        transition-property: opacity, transform;
         transition-timing-function: $easeOutQuad;
       }
       &__name-typo {

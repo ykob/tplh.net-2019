@@ -20,20 +20,16 @@ export default {
   },
   data() {
     return {
-      isShown: false,
     }
   },
   async created() {
     this.$store.commit('enableDarkColor', false);
+    this.$store.commit('showGlobalTitle', true);
     this.$store.commit('transit', {
       globalId: 50,
     });
-    await sleep(500);
-    this.$store.commit('showGlobalTitle', true);
   },
-  async mounted() {
-    await sleep(500);
-    this.isShown = true;
+  mounted() {
   },
   computed: {},
   methods: {},
@@ -42,12 +38,8 @@ export default {
 
 <template lang="pug">
 .p-view-wrap
-  AboutTitle(
-    :isShown = 'isShown'
-    )
-  AboutDescription(
-    :isShown = 'isShown'
-    )
+  AboutTitle
+  AboutDescription
 </template>
 
 <style lang="scss">

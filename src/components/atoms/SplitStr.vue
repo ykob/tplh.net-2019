@@ -84,6 +84,10 @@
       @for $i from 0 through 200 {
         &--#{$i} {
           transition-delay: $i * 0.01s;
+          .view-enter-to &,
+          .show-enter-to & {
+            transition-delay: $i * 0.01 + .7s;
+          }
         }
       }
     }

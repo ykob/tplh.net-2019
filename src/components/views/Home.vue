@@ -20,7 +20,6 @@
     },
     data: function() {
       return {
-        isShown: false,
       }
     },
     created: function() {
@@ -30,9 +29,7 @@
         globalId: 0,
       });
     },
-    mounted: async function() {
-      await sleep(500);
-      this.isShown = true;
+    mounted() {
     },
     computed: {},
     methods: {},
@@ -41,12 +38,8 @@
 
 <template lang="pug">
   .p-view-wrap
-    HomeTitle(
-      :isShown = 'isShown'
-      )
-    HomeWheel(
-      :isShown = 'isShown'
-      )
+    HomeTitle
+    HomeWheel
 </template>
 
 <style lang="scss">

@@ -1,6 +1,7 @@
 <script>
   import _ from 'lodash';
   import normalizeWheel from 'normalize-wheel';
+  import sleep from 'js-util/sleep'
 
   import Background from '@/components/templates/Background.vue';
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
@@ -83,7 +84,9 @@
       window.addEventListener('wheel', wheel, { passive: false });
       window.addEventListener('DOMMouseScroll', wheel, { passive: false });
     },
-    mounted: function() {
+    async mounted() {
+      await sleep(500);
+      this.$store.state.isLoaded = true;
     },
     computed: {},
     methods: {
@@ -111,6 +114,8 @@
     UtilityNavi
     transition(
       name = 'view'
+      appear
+      v-if = '$store.state.isLoaded === true'
       )
       router-view
     Background

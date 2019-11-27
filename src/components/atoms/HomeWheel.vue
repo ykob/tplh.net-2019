@@ -7,18 +7,12 @@
       SplitStr,
     },
     props: {
-      isShown: {
-        type: Boolean,
-        default: false,
-      },
     },
   };
 </script>
 
 <template lang="pug">
-  .p-home-wheel(
-    :class = '{ "is-shown" : isShown === true }'
-    )
+  .p-home-wheel
     SplitStr.p-home-wheel__label(
       label = 'Show Works'
       :step = '4'
