@@ -39,6 +39,7 @@
 <template lang="pug">
   transition-group.p-view-wrap(
     name = 'show'
+    appear
     tag = 'div'
     )
     WorkOutline(
