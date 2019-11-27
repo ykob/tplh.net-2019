@@ -20,7 +20,7 @@ export default [
   {
     key: 'hassyadai',
     title: 'HASSYADAI Inc.',
-    description: '',
+    description: 'It is a brand site of the agent in Japan made with various WebGL effects.\nAnd I got CSSDA WOTD for the first time by making this site.',
     img: thumbHassyadai,
     href: 'https://hassyadai.com',
   },
