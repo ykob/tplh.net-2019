@@ -73,7 +73,9 @@ form.p-contact-form(
       @change = 'onChange'
       )
   .p-contact-form__btns
-    Button
+    Button(
+      width = '200px'
+      )
       |Submit
 </template>
 

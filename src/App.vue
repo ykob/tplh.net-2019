@@ -108,7 +108,7 @@
 
 <template lang="pug">
   .p-page(
-    :class = '{ "is-enabled-dark-color": this.$store.state.isEnabledDarkColor === true }'
+    :class = '{ "is-enabled-dark-color": $store.state.isEnabledDarkColor === true }'
     )
     GlobalTitle
     UtilityNavi
@@ -136,16 +136,16 @@
     color: #222;
     transition-duration: 1.4s;
     transition-property: color;
-    a {
-      color: #222;
-      transition-duration: 1.4s;
-      transition-property: color;
-    }
     &.is-enabled-dark-color {
       color: #fff;
-      a {
-        color: #fff;
-      }
+    }
+  }
+  a {
+    color: #222;
+    transition-duration: 1.4s;
+    transition-property: color;
+    .is-enabled-dark-color & {
+      color: #fff;
     }
   }
 </style>

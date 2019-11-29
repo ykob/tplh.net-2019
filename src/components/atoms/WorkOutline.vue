@@ -7,6 +7,7 @@
   export default {
     name: 'ContactTitle',
     components: {
+      Button,
       SplitStr,
     },
     props: {
@@ -48,12 +49,14 @@
       )
     .p-work-outline__description
       |{{ description }}
-    Button.p-work-outline__link(
-      tag = 'a'
-      :href = 'href'
-      target = '_blank'
-      )
-      |Show this.
+    .p-work-outline__links
+      Button(
+        tag = 'a'
+        :href = 'href'
+        target = '_blank'
+        width = '160px'
+        )
+        |Show this.
 </template>
 
 <style lang="scss">
@@ -165,17 +168,17 @@
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1.2s;
+        transition-delay: 1s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
         transition-duration: .6s;
-        transition-delay: 0s;
+        transition-delay: 0.1s;
       }
     }
-    &__link {
+    &__links {
       // Transition
       transition-property: opacity;
       .show-enter & {
@@ -184,14 +187,14 @@
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1.3s;
+        transition-delay: 1.1s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
         transition-duration: .6s;
-        transition-delay: 0s;
+        transition-delay: 0.2s;
       }
     }
   }
