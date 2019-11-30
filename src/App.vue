@@ -48,6 +48,8 @@
       // For wheel events
       // =====
       const wheel = (e) => {
+        e.preventDefault();
+
         const n = normalizeWheel(e);
         const { works } = this.$store.state;
         const { name } = this.$route;
@@ -55,24 +57,22 @@
         // Run at the first wheel event only.
         if (this.isWheeling === false) {
           if (Math.abs(n.pixelY) < 10) return;
+          this.isWheeling = true;
 
-            if (name === 'home') {
-              if (n.pixelY > 0) {
-                e.preventDefault();
-                this.$router.push(`/works/${works[0].key}/`);
-              }
-            } else if (name === 'works') {
-              e.preventDefault();
-              if (n.pixelY > 0) {
-                this.$store.commit('transitNextWorks');
-              } else {
-                this.$store.commit('transitPrevWorks');
-              }
-              this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+          if (name === 'home') {
+            if (n.pixelY > 0) {
+              this.$router.push(`/works/${works[0].key}/`);
             }
+          } else if (name === 'works') {
+            if (n.pixelY > 0) {
+              this.$store.commit('transitNextWorks');
+            } else {
+              this.$store.commit('transitPrevWorks');
+            }
+            this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+          }
 
           // Prevent repeated wheel events fire with a timer.
-          this.isWheeling = true;
           this.wheelTimer = setTimeout(() => {
             this.isWheeling = false;
           }, INTERVAL_TO_FIRE_WHEEL);
@@ -82,7 +82,6 @@
       // On global events.
       window.addEventListener('resize', _.debounce(this.resize, 100));
       window.addEventListener('wheel', wheel, { passive: false });
-      window.addEventListener('DOMMouseScroll', wheel, { passive: false });
     },
     async mounted() {
       await sleep(500);
