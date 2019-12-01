@@ -13,7 +13,7 @@ export default [
   {
     key: 'warpdrive',
     title: 'WarpDrive',
-    description: '',
+    description: 'It is the Chrome Extension, a data visualization of a user\'s active history on the browser.\nI was responsible for one of the contents named REQUEST VIEWER.\nI devised how to mix 2D and 3D user interfaces here.',
     img: thumbWarpdrive,
     href: 'https://warpdrive-project.jp/',
   },
