@@ -16,23 +16,30 @@
 </script>
 
 <template lang="pug">
-  .p-utility-navi
-    router-link.p-utility-navi__item(
-      :to = 'getCurrentWorkPath'
+  transition(
+    name = 'show'
+    appear
+    )
+    .p-utility-navi(
+      v-if = '$store.state.isLoaded'
       )
-      |Works
-    router-link.p-utility-navi__item(
-      to = '/about/'
-      )
-      |About
-    router-link.p-utility-navi__item(
-      to = '/contact/'
-      )
-      |Contact
+      router-link.p-utility-navi__item(
+        :to = 'getCurrentWorkPath'
+        )
+        |Works
+      router-link.p-utility-navi__item(
+        to = '/about/'
+        )
+        |About
+      router-link.p-utility-navi__item(
+        to = '/contact/'
+        )
+        |Contact
 </template>
 
 <style lang="scss">
   .p-utility-navi {
+    display: flex;
     position: fixed;
     z-index: 100;
     line-height: 1;
@@ -47,6 +54,7 @@
       bottom: 20px;
     }
     &__item {
+      display: block;
       position: relative;
       text-decoration: none;
       @include l-more-than-mobile {
@@ -54,6 +62,33 @@
       }
       @include l-mobile {
         margin-right: 10px;
+      }
+    }
+
+    // Transition
+    &.show-enter {
+      opacity: 0.999;
+    }
+    &.show-enter-to {
+      opacity: 1;
+      transition-duration: 3s;
+      transition-property: opacity;
+    }
+    &.show-enter & {
+      &__item {
+        opacity: 0;
+      }
+    }
+    &.show-enter-to & {
+      &__item {
+        opacity: 1;
+        transition-duration: 1s;
+        transition-property: opacity;
+        @for $i from 1 through 5 {
+          &:nth-of-type(#{$i}) {
+            transition-delay: $i * 0.14 + .6s;
+          }
+        }
       }
     }
   }
