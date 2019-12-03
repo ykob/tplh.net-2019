@@ -44,6 +44,12 @@ module.exports = {
           use: {
             loader: 'glslify-loader',
           }
+        },
+        {
+          test: /\.(obj)$/,
+          use: {
+            loader: 'file-loader',
+          }
         }
       ]
     }
