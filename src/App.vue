@@ -3,7 +3,6 @@
   import normalizeWheel from 'normalize-wheel';
   import sleep from 'js-util/sleep'
 
-  import Background from '@/components/templates/Background.vue';
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
   import UtilityNavi from '@/components/templates/UtilityNavi.vue';
 
@@ -16,7 +15,6 @@
       titleTemplate: '%sYoichi Kobayashi / tplh.net',
     },
     components: {
-      Background,
       GlobalTitle,
       UtilityNavi,
     },
@@ -26,7 +24,7 @@
         isWheeling: false,
       }
     },
-    created: function() {
+    async created() {
       const { canvas, webgl } = this.$store.state;
 
       document.body.append(canvas);
@@ -36,7 +34,7 @@
         left: 0;
       `;
 
-      webgl.start(canvas);
+      await webgl.start(canvas);
 
       this.resize();
 
@@ -117,7 +115,6 @@
       v-if = '$store.state.isLoaded === true'
       )
       router-view
-    Background
 </template>
 
 <style lang="scss">
