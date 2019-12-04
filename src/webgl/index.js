@@ -6,6 +6,7 @@ import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
+import Background from '@/webgl/Background';
 
 // ==========
 // Define common variables
@@ -23,6 +24,7 @@ const skullAuraCamera = new SkullAuraCamera();
 // Define unique variables
 //
 const skull = new Skull();
+const bg = new Background();
 
 // ==========
 // Define WebGLContent Class.
@@ -54,8 +56,10 @@ export default class WebGLContent {
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
+      bg.start();
 
       scene.add(skull);
+      scene.add(bg);
     });
   }
   play() {
@@ -78,6 +82,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
+    bg.update();
 
     // Render the 3D scene.
     renderer.render(scene, camera);
