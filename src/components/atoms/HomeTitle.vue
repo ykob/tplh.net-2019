@@ -34,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     position: fixed;
-    top: 66.6%;
+    top: 70%;
     right: 0;
     left: 0;
     z-index: 100;

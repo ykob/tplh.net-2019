@@ -19,7 +19,7 @@ export default class Skull extends THREE.Group {
     this.time = 0;
     this.isActive = false;
 
-    this.position.set(0, 1, 0)
+    this.position.set(0, 1.2, 0)
   }
   start(geometry1, geometry2, noiseTex) {
     this.body = new SkullBody(geometry1, geometry2);
