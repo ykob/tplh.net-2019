@@ -5,7 +5,7 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/SkullBody.vs';
 import fs from '@/webgl/glsl/SkullBody.fs';
 
-const DURATION_SHOW = 4;
+const DURATION_SHOW = 6;
 const DELAY_SHOW = 1;
 const DURATION_HIDE = 2;
 const DELAY_HIDE = 0;
