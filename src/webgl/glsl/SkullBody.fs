@@ -34,21 +34,21 @@ void main() {
 
   float noiseR2 = texture2D(
     noiseTex,
-    vNormal.yz * 0.1 + vec2(time * 0.02, 0.0)
+    vNormal.yz * 0.3 + vec2(time * 0.02, 0.0)
     ).r;
   float noiseG2 = texture2D(
     noiseTex,
-    vNormal.zx * 0.2 + vec2(0.0, time * 0.02)
+    vNormal.zx * 0.3 + vec2(0.0, time * 0.02)
     ).g;
   float noiseB2 = texture2D(
     noiseTex,
-    vNormal.xy * 0.1 - time * 0.02
+    vNormal.xy * 0.3 - time * 0.02
     ).b;
   float noise2 = length(vec3(noiseR2, noiseG2, noiseB2));
 
   float opacity = smoothstep(
-    -0.08,
-    -0.07,
+    -0.1,
+    -0.09,
     (alpha * 1.5 - noise2) / 1.5
     );
   float edge = 1.0 - smoothstep(
@@ -66,8 +66,8 @@ void main() {
   vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;
 
-  vec3 hsvNoise2 = vec3(noise * 0.12, -noise * 0.1, 0.0);
-  vec3 hsv4 = vec3(0.88, 0.15, 0.99) + hsvNoise2;
+  vec3 hsvNoise2 = vec3(noise * 0.12, -noise * 0.5, 0.0);
+  vec3 hsv4 = vec3(0.88, 0.5, 0.99) + hsvNoise2;
   vec3 edgeColor = convertHsvToRgb(hsv4) * edge;
 
   if (opacity < 0.01) {
