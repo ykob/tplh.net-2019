@@ -7,7 +7,7 @@ import fs from '@/webgl/glsl/SkullPoints.fs';
 const DURATION = 4;
 const NUM = 360;
 const DURATION_SHOW = 2;
-const DELAY_SHOW = 1;
+const DELAY_SHOW = 2;
 const DURATION_HIDE = 1;
 const DELAY_HIDE = 0;
 
@@ -83,6 +83,7 @@ export default class SkullPoints extends THREE.Points {
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = true;
+    this.isHidden = false;
   }
   hide() {
     this.isHidden = true;
@@ -98,14 +99,14 @@ export default class SkullPoints extends THREE.Points {
     // for the showing effect.
     if (this.isShown === true) {
       this.timeShow += time;
-      if (this.timeShow >= DURATION_SHOW) {
+      if (this.timeShow - DELAY_SHOW >= DURATION_SHOW) {
         this.isShown = false;
       }
     }
     // for the hiding effect.
     if (this.isHidden === true) {
       this.timeHide += time;
-      if (this.timeHide >= DURATION_HIDE) {
+      if (this.timeHide - DELAY_HIDE >= DURATION_HIDE) {
         this.isHidden = false;
       }
     }
