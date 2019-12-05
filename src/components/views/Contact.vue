@@ -25,14 +25,15 @@ export default {
       isShown: false,
     }
   },
-  async created() {
+  created() {
+  },
+  mounted() {
     this.$store.commit('enableDarkColor', true);
     this.$store.commit('showGlobalTitle', true);
+    this.$store.commit('showSkull', false);
     this.$store.commit('transit', {
       globalId: 99,
     });
-  },
-  mounted() {
   },
   computed: {},
   methods: {},

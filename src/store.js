@@ -31,6 +31,9 @@ export default new Vuex.Store({
     showGlobalTitle (state, bool) {
       state.isShownGlobalTitle = bool;
     },
+    showSkull (state, bool) {
+      state.webgl.showSkull(bool);
+    },
     transitPrevWorks (state) {
       state.currentWorksId =
         (state.currentWorksId <= 0)

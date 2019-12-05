@@ -19,5 +19,5 @@ void main() {
   // Define Colors
   vec3 color = vColor;
 
-  gl_FragColor = vec4(color, opacity);
+  gl_FragColor = vec4(color, opacity * alpha);
 }

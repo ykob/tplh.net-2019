@@ -3,8 +3,10 @@ precision highp float;
 uniform float time;
 uniform float renderOutline;
 uniform sampler2D noiseTex;
+uniform float alpha;
 
 varying vec3 vPosition;
+varying vec3 vNormal;
 varying vec2 vUv;
 varying vec3 vColor;
 
@@ -18,11 +20,11 @@ void main() {
 
   float noiseR = texture2D(
     noiseTex,
-    normal.yz * 0.2 + vec2(time * 0.02, 0.0)
+    normal.yz * 0.2 + vec2(time * 0.04, 0.0)
     ).r * 2.0 - 1.0;
   float noiseG = texture2D(
     noiseTex,
-    normal.zx * 0.2 + vec2(0.0, time * 0.02)
+    normal.zx * 0.2 + vec2(0.0, time * 0.04)
     ).g * 2.0 - 1.0;
   float noiseB = texture2D(
     noiseTex,
@@ -39,5 +41,29 @@ void main() {
   vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;
 
-  gl_FragColor = vec4(color + colorOutline, 1.0);
+  float noiseR2 = texture2D(
+    noiseTex,
+    vNormal.yz * 0.2 + vec2(time * 0.02, 0.0)
+    ).r;
+  float noiseG2 = texture2D(
+    noiseTex,
+    vNormal.zx * 0.2 + vec2(0.0, time * 0.02)
+    ).g;
+  float noiseB2 = texture2D(
+    noiseTex,
+    vNormal.xy * 0.2 - time * 0.02
+    ).b;
+  float noise2 = length(vec3(noiseR2, noiseG2, noiseB2));
+
+  float opacity = smoothstep(
+    0.0,
+    0.05,
+    (alpha * 1.5 - noise2) / 1.5
+    );
+
+  if (opacity < 0.01) {
+    discard;
+  }
+
+  gl_FragColor = vec4(color + colorOutline, opacity);
 }

@@ -69,6 +69,13 @@ export default class WebGLContent {
   pause() {
     clock.stop();
   }
+  showSkull(bool) {
+    if (bool === true) {
+      skull.show();
+    } else {
+      skull.hide();
+    }
+  }
   update() {
     // When the clock is stopped, it stops the all rendering too.
     if (clock.running === false) return;

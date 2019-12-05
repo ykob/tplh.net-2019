@@ -22,14 +22,15 @@ export default {
     return {
     }
   },
-  async created() {
+  created() {
+  },
+  mounted() {
     this.$store.commit('enableDarkColor', false);
     this.$store.commit('showGlobalTitle', true);
+    this.$store.commit('showSkull', false);
     this.$store.commit('transit', {
       globalId: 50,
     });
-  },
-  mounted() {
   },
   computed: {},
   methods: {},

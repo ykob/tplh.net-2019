@@ -18,9 +18,12 @@
     components: {
       WorkOutline
     },
-    created: function() {
+    created() {
+    },
+    mounted() {
       this.$store.commit('enableDarkColor', true);
       this.$store.commit('showGlobalTitle', true);
+      this.$store.commit('showSkull', false);
       this.$store.commit('transit', {
         globalId: 1,
         currentWorksId: _.findIndex(
@@ -28,8 +31,6 @@
           { key: this.$route.params.key }
         )
       });
-    },
-    mounted() {
     },
     computed: {
     },

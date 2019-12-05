@@ -22,14 +22,15 @@
       return {
       }
     },
-    created: function() {
+    created() {
+    },
+    mounted() {
       this.$store.commit('enableDarkColor', false);
       this.$store.commit('showGlobalTitle', false);
+      this.$store.commit('showSkull', true);
       this.$store.commit('transit', {
         globalId: 0,
       });
-    },
-    mounted() {
     },
     computed: {},
     methods: {},

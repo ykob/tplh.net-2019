@@ -6,6 +6,10 @@ import fs from '@/webgl/glsl/SkullPoints.fs';
 
 const DURATION = 4;
 const NUM = 360;
+const DURATION_SHOW = 2;
+const DELAY_SHOW = 1;
+const DURATION_HIDE = 1;
+const DELAY_HIDE = 0;
 
 export default class SkullPoints extends THREE.Points {
   constructor() {
@@ -52,6 +56,10 @@ export default class SkullPoints extends THREE.Points {
           type: 't',
           value: null
         },
+        alpha: {
+          type: 'f',
+          value: 0
+        },
       },
       vertexShader: vs,
       fragmentShader: fs,
@@ -63,9 +71,21 @@ export default class SkullPoints extends THREE.Points {
     // Create Object3D
     super(geometry, material);
     this.name = 'SkullPoints';
+    this.timeShow = 0;
+    this.timeHide = 0;
+    this.isShown = false;
+    this.isHidden = false;
   }
   start(noiseTex) {
     this.material.uniforms.noiseTex.value = noiseTex;
+  }
+  show() {
+    this.timeShow = 0;
+    this.timeHide = 0;
+    this.isShown = true;
+  }
+  hide() {
+    this.isHidden = true;
   }
   update(time) {
     this.material.uniforms.time.value += time;
@@ -74,6 +94,26 @@ export default class SkullPoints extends THREE.Points {
       this.material.uniforms.time.value * 0.2,
       0
     );
+
+    // for the showing effect.
+    if (this.isShown === true) {
+      this.timeShow += time;
+      if (this.timeShow >= DURATION_SHOW) {
+        this.isShown = false;
+      }
+    }
+    // for the hiding effect.
+    if (this.isHidden === true) {
+      this.timeHide += time;
+      if (this.timeHide >= DURATION_HIDE) {
+        this.isHidden = false;
+      }
+    }
+
+    // calculation the alpha.
+    const alphaShow = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
+    const alphaHide = MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0);
+    this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
   }
   resize(resolution) {
     this.material.uniforms.resolution.value.copy(resolution);

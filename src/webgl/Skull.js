@@ -37,6 +37,14 @@ export default class Skull extends THREE.Group {
 
     this.isActive = true;
   }
+  show() {
+    this.body.show();
+    this.points.show();
+  }
+  hide() {
+    this.body.hide();
+    this.points.hide();
+  }
   update(time, renderer, camera, sceneAura, cameraAura) {
     if (this.isActive === false) return;
 

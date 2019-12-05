@@ -4,6 +4,11 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/SkullAura.vs';
 import fs from '@/webgl/glsl/SkullAura.fs';
 
+const DURATION_SHOW = 3;
+const DELAY_SHOW = 0.5;
+const DURATION_HIDE = 1;
+const DELAY_HIDE = 0;
+
 export default class SkullAura extends THREE.Mesh {
   constructor() {
     // Define Geometry
@@ -23,6 +28,14 @@ export default class SkullAura extends THREE.Mesh {
         noiseTex: {
           type: 't',
           value: null
+        },
+        showAlpha: {
+          type: 'f',
+          value: 0
+        },
+        hideAlpha: {
+          type: 'f',
+          value: 0
         },
       },
       vertexShader: vs,
