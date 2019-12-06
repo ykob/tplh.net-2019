@@ -80,8 +80,7 @@
       // On global events.
       window.addEventListener('resize', _.debounce(this.resize, 100));
       window.addEventListener('wheel', wheel, { passive: false });
-    },
-    async mounted() {
+
       await sleep(500);
       this.$store.state.isLoaded = true;
     },
