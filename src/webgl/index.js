@@ -56,7 +56,7 @@ export default class WebGLContent {
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
-      bg.start();
+      bg.start(noiseTex);
 
       scene.add(skull);
       scene.add(bg);
@@ -89,7 +89,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
-    bg.update();
+    bg.update(time);
 
     // Render the 3D scene.
     renderer.render(scene, camera);
@@ -97,6 +97,7 @@ export default class WebGLContent {
   resize(resolution) {
     camera.resize(resolution);
     skull.resize(resolution);
+    bg.resize(camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
   }
 }
