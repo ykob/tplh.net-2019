@@ -33,7 +33,7 @@ void main() {
   vec3 hsvNoise = vec3(noise4 * 0.1, noise4 * 0.32, -noise4 * 0.1);
   float strength = smoothstep(0.0, 0.4, pow(mask, 3.0));
   vec3 hsv1 = vec3(0.88, 0.08, 0.999) + hsvNoise;
-  vec3 hsv2 = vec3(0.88, 0.15, 0.999);
+  vec3 hsv2 = vec3(0.88, 0.08, 0.999);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), strength);
 
   float opacity = smoothstep(0.07, 0.075, pow(mask, 3.0));

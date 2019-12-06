@@ -31,7 +31,7 @@ export default class Skull extends THREE.Group {
     this.add(this.aura);
     this.add(this.points);
 
-    this.body.start(noiseTex);
+    this.body.start();
     this.aura.start(this.renderTarget1.texture, noiseTex);
     this.points.start(noiseTex);
 

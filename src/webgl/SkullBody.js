@@ -5,9 +5,9 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/SkullBody.vs';
 import fs from '@/webgl/glsl/SkullBody.fs';
 
-const DURATION_SHOW = 6;
+const DURATION_SHOW = 5;
 const DELAY_SHOW = 1;
-const DURATION_HIDE = 2;
+const DURATION_HIDE = 1.4;
 const DELAY_HIDE = 0;
 
 export default class SkullBody extends THREE.Group {
@@ -25,10 +25,6 @@ export default class SkullBody extends THREE.Group {
         renderOutline: {
           type: 'f',
           value: 0
-        },
-        noiseTex: {
-          type: 't',
-          value: null
         },
         alpha: {
           type: 'f',
@@ -54,9 +50,8 @@ export default class SkullBody extends THREE.Group {
     this.isShown = false;
     this.isHidden = false;
   }
-  start(noiseTex) {
+  start() {
     this.isActive = true;
-    this.material.uniforms.noiseTex.value = noiseTex;
   }
   show() {
     this.timeShow = 0;
@@ -94,7 +89,7 @@ export default class SkullBody extends THREE.Group {
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
 
     // calculation the scale.
-    const scale = alphaShow * 0.3 + 0.7;
+    const scale = (alphaShow * 0.3 + 0.7) + (alphaHide * 0.2);
     this.scale.set(scale, scale, scale);
   }
 }

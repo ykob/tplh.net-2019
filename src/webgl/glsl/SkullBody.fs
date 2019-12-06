@@ -2,7 +2,6 @@ precision highp float;
 
 uniform float time;
 uniform float renderOutline;
-uniform sampler2D noiseTex;
 uniform float alpha;
 
 varying vec3 vPosition;
@@ -34,11 +33,11 @@ void main() {
     );
 
   vec3 hsvNoise1 = vec3(noise * 0.12, -noise * 0.1, noise * 0.1);
-  vec3 hsv1 = vec3(0.8, 0.4, 0.7) + hsvNoise1;
-  vec3 hsv2 = vec3(0.88, 0.45, 1.0) + hsvNoise1;
+  vec3 hsv1 = vec3(0.8, 0.35, 0.7) + hsvNoise1;
+  vec3 hsv2 = vec3(0.88, 0.4, 1.0) + hsvNoise1;
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
-  vec3 hsv3 = vec3(0.88, 0.15, 0.999);
+  vec3 hsv3 = vec3(0.88, 0.08, 0.999);
   vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;
 
