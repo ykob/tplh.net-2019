@@ -37,6 +37,15 @@
     },
     computed: {
     },
+    watch: {
+      '$route.params.key': function(key) {
+        const index = _.findIndex(
+          this.$store.state.works,
+          { key: key }
+        );
+        this.$store.commit('showWorksImage', index + 1);
+      }
+    },
   }
 </script>
 
