@@ -30,10 +30,10 @@ void main() {
   float mask = (mask1 * 2.0 + mask2 * 0.3) / 2.3 * mask3;
 
   float noise4 = texture2D(noiseTex, vUv * 1.6 - vec2(0.5, time * 1.2)).r;
-  vec3 hsvNoise = vec3(noise4 * 0.1, noise4 * 0.2, -noise4 * 0.1);
-  float strength = smoothstep(0.15, 0.155, pow(mask, 3.0));
-  vec3 hsv1 = vec3(0.84, 0.15, 0.95) + hsvNoise;
-  vec3 hsv2 = vec3(0.9, 0.1, 0.95);
+  vec3 hsvNoise = vec3(noise4 * 0.1, noise4 * 0.32, -noise4 * 0.1);
+  float strength = smoothstep(0.0, 0.4, pow(mask, 3.0));
+  vec3 hsv1 = vec3(0.88, 0.08, 0.999) + hsvNoise;
+  vec3 hsv2 = vec3(0.88, 0.15, 0.999);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), strength);
 
   float opacity = smoothstep(0.07, 0.075, pow(mask, 3.0));
