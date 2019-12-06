@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeOutCirc, easeOutQuad } from 'easing-js';
+import { easeOutCirc, easeInOutQuad } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/SkullBody.vs';
@@ -85,11 +85,11 @@ export default class SkullBody extends THREE.Group {
 
     // calculation the alpha.
     const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeOutQuad(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
+    const alphaHide = easeInOutQuad(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
 
     // calculation the scale.
-    const scale = (alphaShow * 0.3 + 0.7) + (alphaHide * 0.2);
+    const scale = (alphaShow * 0.3 + 0.7) + (alphaHide * 0.1);
     this.scale.set(scale, scale, scale);
   }
 }

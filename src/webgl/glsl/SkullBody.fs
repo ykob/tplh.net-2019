@@ -18,8 +18,8 @@ void main() {
   vec3 normal = normalize(cross(dFdx(vPosition), dFdy(vPosition)));
   float diff = dot(normal, light);
 
-  float noise = cnoise3(normal + time) * 0.5 + 0.5;
-  float noise2 = (cnoise3(vPosition * 0.4 + time) + cnoise3(vPosition * 5.0 - time * 3.0) * 0.15) / 1.15 * 0.5 + 0.5;
+  float noise = cnoise3(normal * 3.0 + time * 0.6) * 0.5 + 0.5;
+  float noise2 = (cnoise3(vPosition * 0.4 + time) + cnoise3(vPosition * 4.0 - time * 3.0) * 0.15) / 1.15 * 0.5 + 0.5;
 
   float opacity = smoothstep(
     0.0,
@@ -41,8 +41,8 @@ void main() {
   vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;
 
-  vec3 hsvNoise2 = vec3(noise * 0.14, -noise * 0.6, 0.0);
-  vec3 hsv4 = vec3(0.88, 0.6, 0.995) + hsvNoise2;
+  vec3 hsvNoise2 = vec3(noise * 0.14, -noise * 0.45, 0.0);
+  vec3 hsv4 = vec3(0.88, 0.45, 0.995) + hsvNoise2;
   vec3 edgeColor = convertHsvToRgb(hsv4) * edge;
 
   if (opacity < 0.01) {

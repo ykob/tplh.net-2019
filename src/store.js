@@ -27,6 +27,7 @@ export default new Vuex.Store({
     },
     enableDarkColor (state, bool) {
       state.isEnabledDarkColor = bool;
+      state.webgl.changeColorDark(bool);
     },
     showGlobalTitle (state, bool) {
       state.isShownGlobalTitle = bool;

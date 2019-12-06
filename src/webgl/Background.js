@@ -1,8 +1,11 @@
 import * as THREE from 'three';
+import { easeInOutQuad } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/Background.vs';
 import fs from '@/webgl/glsl/Background.fs';
+
+const DURATION = 1.4;
 
 export default class Background extends THREE.Mesh {
   constructor() {
@@ -24,6 +27,10 @@ export default class Background extends THREE.Mesh {
           type: 'v2',
           value: new THREE.Vector2()
         },
+        alpha: {
+          type: 'f',
+          value: 0
+        },
       },
       vertexShader: vs,
       fragmentShader: fs,
@@ -33,7 +40,11 @@ export default class Background extends THREE.Mesh {
     super(geometry, material);
     this.name = 'Background';
     this.size = new THREE.Vector3();
+    this.time = 0;
+    this.alphaStart = 0;
+    this.alphaEnd = 0;
     this.isActive = false;
+    this.isChanged = false;
   }
   start(noiseTex) {
     this.isActive = true;
@@ -41,7 +52,26 @@ export default class Background extends THREE.Mesh {
   }
   update(time) {
     if (this.isActive === false) return;
+
+    if (this.isChanged === true) {
+      this.time += time;
+      this.material.uniforms.alpha.value =
+        this.alphaStart + easeInOutQuad(
+          MathEx.clamp(this.time / DURATION, 0.0, 1.0)
+        ) * (this.alphaEnd - this.alphaStart);
+      if (this.time >= DURATION) {
+        this.time = 0;
+        this.isChanged = false;
+      }
+    }
+
     this.material.uniforms.time.value += time;
+  }
+  changeColorDark(bool) {
+    this.alphaStart = this.material.uniforms.alpha.value;
+    this.alphaEnd = (bool === true) ? 1 : 0;
+    this.time = 0;
+    this.isChanged = true;
   }
   resize(camera, resolution) {
     const height = Math.abs(

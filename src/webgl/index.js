@@ -76,6 +76,9 @@ export default class WebGLContent {
       skull.hide();
     }
   }
+  changeColorDark(bool) {
+    bg.changeColorDark(bool);
+  }
   update() {
     // When the clock is stopped, it stops the all rendering too.
     if (clock.running === false) return;
