@@ -21,15 +21,18 @@
     created() {
     },
     mounted() {
+      const index = _.findIndex(
+        this.$store.state.works,
+        { key: this.$route.params.key }
+      );
+
       this.$store.commit('enableDarkColor', true);
       this.$store.commit('showGlobalTitle', true);
       this.$store.commit('showSkull', false);
+      this.$store.commit('showWorksImage', index + 1);
       this.$store.commit('transit', {
         globalId: 1,
-        currentWorksId: _.findIndex(
-          this.$store.state.works,
-          { key: this.$route.params.key }
-        )
+        currentWorksId: index
       });
     },
     computed: {

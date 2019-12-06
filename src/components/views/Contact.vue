@@ -31,6 +31,7 @@ export default {
     this.$store.commit('enableDarkColor', true);
     this.$store.commit('showGlobalTitle', true);
     this.$store.commit('showSkull', false);
+    this.$store.commit('showWorksImage', 0);
     this.$store.commit('transit', {
       globalId: 99,
     });

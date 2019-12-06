@@ -35,6 +35,9 @@ export default new Vuex.Store({
     showSkull (state, bool) {
       state.webgl.showSkull(bool);
     },
+    showWorksImage (state, index) {
+      state.webgl.showWorksImage(index);
+    },
     transitPrevWorks (state) {
       state.currentWorksId =
         (state.currentWorksId <= 0)

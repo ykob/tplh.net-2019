@@ -6,6 +6,7 @@ import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
+import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
 
 // ==========
@@ -24,6 +25,7 @@ const skullAuraCamera = new SkullAuraCamera();
 // Define unique variables
 //
 const skull = new Skull();
+const image = new Image();
 const bg = new Background();
 
 // ==========
@@ -44,21 +46,32 @@ export default class WebGLContent {
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_skull.png')),
+      PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.png')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.jpg')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.jpg')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_warpdrive.jpg')),
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
       const noiseTex = response[1];
+      const noiseBurnTex = response[2];
+      const imgTexes = response.slice(3);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
+      noiseBurnTex.wrapS = THREE.RepeatWrapping;
+      noiseBurnTex.wrapT = THREE.RepeatWrapping;
 
       camera.start();
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
+      image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
       scene.add(skull);
+      scene.add(image);
       scene.add(bg);
     });
   }
@@ -76,6 +89,9 @@ export default class WebGLContent {
       skull.hide();
     }
   }
+  showWorksImage(index) {
+    image.change(index);
+  }
   changeColorDark(bool) {
     bg.changeColorDark(bool);
   }
@@ -92,6 +108,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
+    image.update(time);
     bg.update(time);
 
     // Render the 3D scene.
@@ -100,6 +117,7 @@ export default class WebGLContent {
   resize(resolution) {
     camera.resize(resolution);
     skull.resize(resolution);
+    image.resize(camera, resolution);
     bg.resize(camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
   }
