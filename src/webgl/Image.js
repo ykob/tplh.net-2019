@@ -1,12 +1,12 @@
 import * as THREE from 'three';
-import { easeInOutQuad } from 'easing-js';
+import { easeOutQuad } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import ImagePlane from '@/webgl/ImagePlane';
 import ImageFire from '@/webgl/ImageFire';
 import ImagePoints from '@/webgl/ImagePoints';
 
-const DURATION = 2;
+const DURATION = 1.6;
 
 export default class Image extends THREE.Group {
   constructor() {
@@ -16,6 +16,7 @@ export default class Image extends THREE.Group {
     this.margin = new THREE.Vector2();
     this.timeTransition = 0;
     this.currentIndex = 0;
+    this.delay = 0;
     this.isAnimated = false;
   }
   start(noiseTex, imgTexes) {
@@ -28,7 +29,8 @@ export default class Image extends THREE.Group {
     imagePoints.start(noiseTex);
 
     imageFire.renderOrder = 10;
-    imagePoints.position.z = 0.5;
+    imageFire.position.z = 2;
+    imagePoints.position.z = 2;
 
     this.add(imagePlane);
     this.add(imageFire);
@@ -36,6 +38,7 @@ export default class Image extends THREE.Group {
   }
   change(index) {
     if (index === this.currentIndex) return;
+    this.delay = (index > 0 && this.currentIndex === 0) ? 0.7 : 0;
     this.currentIndex = index;
     this.timeTransition = 0;
     this.isAnimated = true;
@@ -48,13 +51,13 @@ export default class Image extends THREE.Group {
     this.timeTransition += time;
 
     if (this.isAnimated === true) {
-      const easeStep = easeInOutQuad(Math.min(this.timeTransition / DURATION, 1.0));
+      const easeStep = easeOutQuad(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
 
       this.children[0].update(time, easeStep);
       this.children[1].update(time, easeStep);
       this.children[2].update(time, easeStep);
 
-      if (this.timeTransition >= DURATION) {
+      if (this.timeTransition - this.delay >= DURATION) {
         this.isAnimated = false;
       }
     }

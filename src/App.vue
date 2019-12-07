@@ -6,7 +6,7 @@
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
   import UtilityNavi from '@/components/templates/UtilityNavi.vue';
 
-  const INTERVAL_TO_FIRE_WHEEL = 1000;
+  const INTERVAL_TO_FIRE_WHEEL = 1500;
 
   export default {
     name: 'App',

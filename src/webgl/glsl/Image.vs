@@ -24,10 +24,10 @@ void main(void) {
   float noiseG = texture2D(noiseTex, updateUv + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, uv * vec2(0.998) + 0.001).b;
 
-  float mask = easeTransition * 1.6 - slide;
-  float maskPrev = smoothstep(0.0, 0.2, mask);
-  float maskNext = 1.0 - smoothstep(0.2, 0.4, mask);
-  float height = maskPrev * maskNext * 4.0;
+  float mask = easeTransition * 2.0 - slide;
+  float maskPrev = smoothstep(0.0, 0.5, mask);
+  float maskNext = 1.0 - smoothstep(0.5, 1.0, mask);
+  float height = maskPrev * maskNext * 8.0 * slide;
 
   // coordinate transformation
   vec4 mPosition = modelMatrix * vec4(position + vec3(0.0, 0.0, height), 1.0);
