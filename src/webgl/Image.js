@@ -38,7 +38,7 @@ export default class Image extends THREE.Group {
   }
   change(index) {
     if (index === this.currentIndex) return;
-    this.delay = (index > 0 && this.currentIndex === 0) ? 0.7 : 0;
+    this.delay = (index > 0 && this.currentIndex === 0) ? 0.5 : 0;
     this.currentIndex = index;
     this.timeTransition = 0;
     this.isAnimated = true;
@@ -69,8 +69,8 @@ export default class Image extends THREE.Group {
     const width = height * camera.aspect;
 
     this.margin.set(
-      (resolution.x > resolution.y) ? 400 : 200,
-      (resolution.x > resolution.y) ? 300 : 200
+      (resolution.x > resolution.y) ? 500 : 200,
+      (resolution.x > resolution.y) ? 240 : 200
     );
     this.size.set(
       width * (resolution.x - this.margin.x) / resolution.x,
