@@ -6,6 +6,7 @@ import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
+import PetalsRotate from '@/webgl/PetalsRotate';
 import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
 
@@ -25,6 +26,7 @@ const skullAuraCamera = new SkullAuraCamera();
 // Define unique variables
 //
 const skull = new Skull();
+const petalsRotate = new PetalsRotate();
 const image = new Image();
 const bg = new Background();
 
@@ -45,6 +47,7 @@ export default class WebGLContent {
 
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
+      PromiseOBJLoader(require('@/assets/obj/Petals.obj')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_skull.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
@@ -54,9 +57,11 @@ export default class WebGLContent {
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
-      const noiseTex = response[1];
-      const noiseBurnTex = response[2];
-      const imgTexes = response.slice(3);
+      const geometryPetal1 = response[1].children[0].geometry;
+      const geometryPetal2 = response[1].children[1].geometry;
+      const noiseTex = response[2];
+      const noiseBurnTex = response[3];
+      const imgTexes = response.slice(4);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
@@ -67,10 +72,12 @@ export default class WebGLContent {
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
+      petalsRotate.start(geometryPetal1, geometryPetal2, noiseTex);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
       scene.add(skull);
+      scene.add(petalsRotate);
       scene.add(image);
       scene.add(bg);
     });
@@ -108,6 +115,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
+    petalsRotate.update(time);
     image.update(time);
     bg.update(time);
 

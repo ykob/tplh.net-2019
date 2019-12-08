@@ -2,16 +2,13 @@ import * as THREE from 'three';
 import { easeOutExpo } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
-import vs from '@/webgl/glsl/Background.vs';
-import fs from '@/webgl/glsl/Background.fs';
+import vs from '@/webgl/glsl/Petal.vs';
+import fs from '@/webgl/glsl/Petal.fs';
 
 const DURATION = 3;
 
-export default class Background extends THREE.Mesh {
-  constructor() {
-    // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(1, 1, 128, 128);
-
+export default class Petal extends THREE.Mesh {
+  constructor(geometry) {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
@@ -23,10 +20,6 @@ export default class Background extends THREE.Mesh {
           type: 't',
           value: null
         },
-        imgRatio: {
-          type: 'v2',
-          value: new THREE.Vector2()
-        },
         alpha: {
           type: 'f',
           value: 0
@@ -34,19 +27,19 @@ export default class Background extends THREE.Mesh {
       },
       vertexShader: vs,
       fragmentShader: fs,
+      flatShading: true,
+      side: THREE.DoubleSide,
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'Background';
-    this.size = new THREE.Vector3();
-    this.time = 0;
+    this.name = 'Petal';
+    this.timeRotate = 0;
+    this.timeChanged = 0;
     this.alphaStart = 0;
     this.alphaEnd = 0;
     this.isActive = false;
     this.isChanged = false;
-
-    this.position.set(0, 0, -50);
   }
   start(noiseTex) {
     this.isActive = true;
@@ -55,14 +48,17 @@ export default class Background extends THREE.Mesh {
   update(time) {
     if (this.isActive === false) return;
 
+    this.timeRotate += time;
+    this.rotation.set(0, this.timeRotate, 0);
+
     if (this.isChanged === true) {
-      this.time += time;
+      this.timeChanged += time;
       this.material.uniforms.alpha.value =
         this.alphaStart + easeOutExpo(
-          MathEx.clamp(this.time / DURATION, 0.0, 1.0)
+          MathEx.clamp(this.timeChanged / DURATION, 0.0, 1.0)
         ) * (this.alphaEnd - this.alphaStart);
-      if (this.time >= DURATION) {
-        this.time = 0;
+      if (this.timeChanged >= DURATION) {
+        this.timeChanged = 0;
         this.isChanged = false;
       }
     }
@@ -72,20 +68,8 @@ export default class Background extends THREE.Mesh {
   changeColorDark(bool) {
     this.alphaStart = this.material.uniforms.alpha.value;
     this.alphaEnd = (bool === true) ? 1 : 0;
-    this.time = 0;
+    this.timeRotate = 0;
+    this.timeChanged = 0;
     this.isChanged = true;
-  }
-  resize(camera, resolution) {
-    const height = Math.abs(
-      (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
-    );
-    const width = height * camera.aspect;
-
-    this.size.set(width, height, 1);
-    this.material.uniforms.imgRatio.value.set(
-      Math.min(1, this.size.x / this.size.y),
-      Math.min(1, this.size.y / this.size.x)
-    );
-    this.scale.copy(this.size);
   }
 }
