@@ -43,7 +43,7 @@
     z-index: 100;
     line-height: 1;
     @include l-more-than-mobile {
-      height: 50px;
+      height: 40px;
       top: 50px;
       left: 50px;
     }
@@ -67,8 +67,8 @@
       bottom: 0;
       left: 0;
       white-space: nowrap;
-      @include fontSizeAll(12, 12, 10);
-      letter-spacing: 0.18em;
+      @include fontSizeAll(11, 11, 9);
+      letter-spacing: 0.22em;
     }
 
     // Transition

@@ -23,35 +23,52 @@
     .p-utility-navi(
       v-if = '$store.state.isLoaded'
       )
-      router-link.p-utility-navi__item(
-        :to = 'getCurrentWorkPath'
-        )
-        |Works
-      router-link.p-utility-navi__item(
-        to = '/about/'
-        )
-        |About
-      router-link.p-utility-navi__item(
-        to = '/contact/'
-        )
-        |Contact
+      .p-utility-navi__items
+        router-link.p-utility-navi__item(
+          :to = 'getCurrentWorkPath'
+          )
+          |Works
+        router-link.p-utility-navi__item(
+          to = '/about/'
+          )
+          |About
+        router-link.p-utility-navi__item(
+          to = '/contact/'
+          )
+          |Contact
+      .p-utility-navi__copyright
+        |Copyright &copy; 2019, Yoichi Kobayashi.
 </template>
 
 <style lang="scss">
   .p-utility-navi {
-    display: flex;
     position: fixed;
     z-index: 100;
     line-height: 1;
-    @include fontSizeAll(16, 16, 12);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.16em;
     @include l-more-than-mobile {
+      width: calc(50% - 50px);
+      height: 40px;
       left: 50px;
       bottom: 50px;
     }
     @include l-mobile {
+      width: calc(100% - 40px);
       left: 20px;
       bottom: 20px;
+    }
+    &__items {
+      display: flex;
+      @include fontSizeAll(14, 14, 11);
+      @include l-more-than-mobile {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      @include l-mobile {
+        justify-content: flex-end;
+        margin-bottom: 15px;
+      }
     }
     &__item {
       display: block;
@@ -61,7 +78,18 @@
         margin-right: 20px;
       }
       @include l-mobile {
-        margin-right: 10px;
+        margin-left: 10px;
+      }
+    }
+    &__copyright {
+      @include fontSizeAll(11, 11, 9);
+      @include l-more-than-mobile {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      @include l-mobile {
+        text-align: right;
       }
     }
 
@@ -78,6 +106,9 @@
       &__item {
         opacity: 0;
       }
+      &__copyright {
+        opacity: 0;
+      }
     }
     &.show-enter-to & {
       &__item {
@@ -89,6 +120,12 @@
             transition-delay: $i * 0.14 + .6s;
           }
         }
+      }
+      &__copyright {
+        opacity: 1;
+        transition-duration: 1s;
+        transition-property: opacity;
+        transition-delay: 1s;
       }
     }
   }
