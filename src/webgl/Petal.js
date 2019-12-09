@@ -54,11 +54,7 @@ export default class Petal extends THREE.Mesh {
     );
     this.axisBodyRotate = new THREE.Vector3().copy(this.up).applyEuler(this.rotation);
     this.quaternionPrev = new THREE.Quaternion();
-    this.timeChanged = 0;
-    this.alphaStart = 0;
-    this.alphaEnd = 0;
     this.isActive = false;
-    this.isChanged = false;
   }
   start(noiseTex) {
     this.isActive = true;
@@ -74,25 +70,6 @@ export default class Petal extends THREE.Mesh {
       time * this.rotateDirection * (1 - this.mass)
     ).multiply(this.quaternionPrev);
 
-    if (this.isChanged === true) {
-      this.timeChanged += time;
-      this.material.uniforms.alphaColor.value =
-        this.alphaStart + easeOutExpo(
-          MathEx.clamp(this.timeChanged / DURATION, 0.0, 1.0)
-        ) * (this.alphaEnd - this.alphaStart);
-      if (this.timeChanged >= DURATION) {
-        this.timeChanged = 0;
-        this.isChanged = false;
-      }
-    }
-
     this.material.uniforms.time.value += time;
-  }
-  changeColorDark(bool) {
-    this.alphaStart = this.material.uniforms.alphaColor.value;
-    this.alphaEnd = (bool === true) ? 1 : 0;
-    this.timeRotate = 0;
-    this.timeChanged = 0;
-    this.isChanged = true;
   }
 }
