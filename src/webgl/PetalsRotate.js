@@ -24,8 +24,14 @@ export default class PetalsRotate extends THREE.Group {
     this.isActive = true;
   }
   show() {
+    for (var i = 0; i < this.petals.length; i++) {
+      this.petals[i].show();
+    }
   }
   hide() {
+    for (var i = 0; i < this.petals.length; i++) {
+      this.petals[i].hide();
+    }
   }
   update(time, renderer, camera, sceneAura, cameraAura) {
     if (this.isActive === false) return;

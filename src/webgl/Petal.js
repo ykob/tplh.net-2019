@@ -20,7 +20,11 @@ export default class Petal extends THREE.Mesh {
           type: 't',
           value: null
         },
-        alpha: {
+        alphaShow: {
+          type: 'f',
+          value: 0
+        },
+        alphaColor: {
           type: 'f',
           value: 0
         },
@@ -39,9 +43,9 @@ export default class Petal extends THREE.Mesh {
     this.timeRotate = 0;
     this.timeRotateWorld = Math.random();
     this.scale.set(
-      this.mass * 0.4 + 0.8,
-      this.mass * 0.4 + 0.8,
-      this.mass * 0.4 + 0.8
+      this.mass * 0.7 + 0.7,
+      this.mass * 0.7 + 0.7,
+      this.mass * 0.7 + 0.7
     );
    this.rotation.set(
       MathEx.radians((Math.random() * 2 - 1) * 60),
@@ -72,7 +76,7 @@ export default class Petal extends THREE.Mesh {
 
     if (this.isChanged === true) {
       this.timeChanged += time;
-      this.material.uniforms.alpha.value =
+      this.material.uniforms.alphaColor.value =
         this.alphaStart + easeOutExpo(
           MathEx.clamp(this.timeChanged / DURATION, 0.0, 1.0)
         ) * (this.alphaEnd - this.alphaStart);
@@ -85,7 +89,7 @@ export default class Petal extends THREE.Mesh {
     this.material.uniforms.time.value += time;
   }
   changeColorDark(bool) {
-    this.alphaStart = this.material.uniforms.alpha.value;
+    this.alphaStart = this.material.uniforms.alphaColor.value;
     this.alphaEnd = (bool === true) ? 1 : 0;
     this.timeRotate = 0;
     this.timeChanged = 0;

@@ -92,8 +92,10 @@ export default class WebGLContent {
   showSkull(bool) {
     if (bool === true) {
       skull.show();
+      petalsRotate.show();
     } else {
       skull.hide();
+      petalsRotate.hide();
     }
   }
   showWorksImage(index) {
