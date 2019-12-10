@@ -52,6 +52,7 @@ export default class WebGLContent {
       PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_skull.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.png')),
+      PromiseTextureLoader(require('@/assets/img/webgl/portlate.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/mask_portlate.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.jpg')),
@@ -66,8 +67,9 @@ export default class WebGLContent {
       const geometryPetal2 = response[1].children[3].geometry;
       const noiseTex = response[2];
       const noiseBurnTex = response[3];
-      const maskPortlateTex = response[4];
-      const imgTexes = response.slice(5);
+      const portlateTex = response[4];
+      const maskPortlateTex = response[5];
+      const imgTexes = response.slice(6);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
@@ -84,7 +86,7 @@ export default class WebGLContent {
         geometryBlossom1, geometryBlossom2, geometryPetal1, geometryPetal2, noiseTex
       );
       image.start(noiseBurnTex, imgTexes);
-      portlate.start(maskPortlateTex);
+      portlate.start(portlateTex, maskPortlateTex);
       bg.start(noiseTex);
 
       scene.add(skull);

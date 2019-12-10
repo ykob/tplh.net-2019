@@ -22,6 +22,10 @@ export default class Portlate extends THREE.Mesh {
           type: 'f',
           value: 0
         },
+        tex: {
+          type: 't',
+          value: null
+        },
         maskTex: {
           type: 't',
           value: null
@@ -46,8 +50,9 @@ export default class Portlate extends THREE.Mesh {
     this.isHidden = false;
     this.rotation.set(0, 0, MathEx.radians(-20));
   }
-  start(maskTex) {
+  start(tex, maskTex) {
     this.isActive = true;
+    this.material.uniforms.tex.value = tex;
     this.material.uniforms.maskTex.value = maskTex;
   }
   show() {
