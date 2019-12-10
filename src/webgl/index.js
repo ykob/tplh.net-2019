@@ -113,6 +113,13 @@ export default class WebGLContent {
   showWorksImage(index) {
     image.change(index);
   }
+  showPortlate(bool) {
+    if (bool === true) {
+      portlate.show();
+    } else {
+      portlate.hide();
+    }
+  }
   changeColorDark(bool) {
     bg.changeColorDark(bool);
   }

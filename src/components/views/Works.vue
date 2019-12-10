@@ -30,6 +30,7 @@
       this.$store.commit('showGlobalTitle', true);
       this.$store.commit('showSkull', false);
       this.$store.commit('showWorksImage', index + 1);
+      this.$store.commit('showPortlate', false);
       this.$store.commit('transit', {
         globalId: 1,
         currentWorksId: index
