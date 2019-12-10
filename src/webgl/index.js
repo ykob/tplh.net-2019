@@ -6,7 +6,7 @@ import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
-import PetalsRotate from '@/webgl/PetalsRotate';
+import CherryRotate from '@/webgl/CherryRotate';
 import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
 
@@ -26,7 +26,7 @@ const skullAuraCamera = new SkullAuraCamera();
 // Define unique variables
 //
 const skull = new Skull();
-const petalsRotate = new PetalsRotate();
+const cherryRotate = new CherryRotate();
 const image = new Image();
 const bg = new Background();
 
@@ -47,7 +47,7 @@ export default class WebGLContent {
 
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
-      PromiseOBJLoader(require('@/assets/obj/Petals.obj')),
+      PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_skull.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
@@ -57,8 +57,10 @@ export default class WebGLContent {
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
-      const geometryPetal1 = response[1].children[0].geometry;
-      const geometryPetal2 = response[1].children[1].geometry;
+      const geometryBlossom1 = response[1].children[0].geometry;
+      const geometryBlossom2 = response[1].children[1].geometry;
+      const geometryPetal1 = response[1].children[2].geometry;
+      const geometryPetal2 = response[1].children[3].geometry;
       const noiseTex = response[2];
       const noiseBurnTex = response[3];
       const imgTexes = response.slice(4);
@@ -72,12 +74,14 @@ export default class WebGLContent {
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
-      petalsRotate.start(geometryPetal1, geometryPetal2, noiseTex);
+      cherryRotate.start(
+        geometryBlossom1, geometryBlossom2, geometryPetal1, geometryPetal2, noiseTex
+      );
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
       scene.add(skull);
-      scene.add(petalsRotate);
+      scene.add(cherryRotate);
       scene.add(image);
       scene.add(bg);
     });
@@ -92,10 +96,10 @@ export default class WebGLContent {
   showSkull(bool) {
     if (bool === true) {
       skull.show();
-      petalsRotate.show();
+      cherryRotate.show();
     } else {
       skull.hide();
-      petalsRotate.hide();
+      cherryRotate.hide();
     }
   }
   showWorksImage(index) {
@@ -117,7 +121,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
-    petalsRotate.update(time);
+    cherryRotate.update(time);
     image.update(time);
     bg.update(time);
 

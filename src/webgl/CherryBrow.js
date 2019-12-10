@@ -5,7 +5,7 @@ import PetalBrow from '@/webgl/PetalBrow';
 
 const NUM = 12;
 
-export default class PetalsBlow extends THREE.Group {
+export default class CherryBrow extends THREE.Group {
   constructor() {
     super();
     this.name = 'PetalsBlow';

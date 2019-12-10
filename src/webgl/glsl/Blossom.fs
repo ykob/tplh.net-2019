@@ -1,7 +1,6 @@
 precision highp float;
 
 uniform float time;
-uniform float renderOutline;
 uniform float alpha;
 
 varying vec3 vPosition;
@@ -19,7 +18,7 @@ void main() {
   float diff = dot(normal, light);
 
   float noise = cnoise3(normal * 3.0 + time * 0.6) * 0.5 + 0.5;
-  float noise2 = (cnoise3(vPosition * 0.4 + time) + cnoise3(vPosition * 4.0 - time * 3.0) * 0.15) / 1.15 * 0.5 + 0.5;
+  float noise2 = (cnoise3(vPosition * 0.8 + time) + cnoise3(vPosition * 6.0 - time * 3.0) * 0.15) / 1.15 * 0.5 + 0.5;
 
   float opacity = smoothstep(
     0.0,
@@ -33,21 +32,17 @@ void main() {
     );
 
   vec3 hsvNoise1 = vec3(noise * 0.12, -noise * 0.1, noise * 0.1);
-  vec3 hsv1 = vec3(0.82, 0.3, 0.7) + hsvNoise1;
-  vec3 hsv2 = vec3(0.94, 0.35, 1.0) + hsvNoise1;
-  vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
+  vec3 hsv1 = vec3(0.82, 0.25, 0.7) + hsvNoise1;
+  vec3 hsv2 = vec3(0.94, 0.3, 1.0) + hsvNoise1;
+  vec3 color = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff) * (1.0 - edge);
 
-  vec3 hsv3 = vec3(0.88, 0.08, 0.999);
-  vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
-  vec3 colorOutline = vec3(1.0) * renderOutline;
-
-  vec3 hsvNoise2 = vec3(noise * 0.14, -noise * 0.45, 0.0);
-  vec3 hsv4 = vec3(0.88, 0.45, 0.995) + hsvNoise2;
-  vec3 edgeColor = convertHsvToRgb(hsv4) * edge;
+  vec3 hsvNoise2 = vec3(noise * 0.14, -noise * 0.425, 0.0);
+  vec3 hsv3 = vec3(0.88, 0.25, 0.995) + hsvNoise2;
+  vec3 edgeColor = convertHsvToRgb(hsv3) * edge;
 
   if (opacity < 0.01) {
     discard;
   }
 
-  gl_FragColor = vec4((color + colorOutline) * (1.0 - edge) + edgeColor, opacity);
+  gl_FragColor = vec4(color + edgeColor, opacity);
 }
