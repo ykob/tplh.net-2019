@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "easing-js": "git://github.com/danro/easing-js.git",
+    "glsl-inverse": "^1.0.0",
     "glsl-matrix": "git://github.com/ykob/glsl-matrix.git",
     "glsl-noise": "0.0.0",
     "glsl-util": "git://github.com/ykob/glsl-util.git",

@@ -26,7 +26,6 @@ export default class Blossom extends THREE.Mesh {
       },
       vertexShader: vs,
       fragmentShader: fs,
-      flatShading: true,
       side: THREE.DoubleSide,
     });
 
