@@ -49,9 +49,6 @@ module.exports = {
           test: /\.(obj)$/,
           use: {
             loader: 'file-loader',
-            options: {
-              name: '/obj/[name].[contenthash].[ext]',
-            },
           }
         }
       ]
