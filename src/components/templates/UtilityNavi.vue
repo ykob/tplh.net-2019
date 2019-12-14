@@ -25,17 +25,9 @@
       )
       .p-utility-navi__items
         router-link.p-utility-navi__item(
-          :to = 'getCurrentWorkPath'
-          )
-          |Works
-        router-link.p-utility-navi__item(
           to = '/about/'
           )
           |About
-        router-link.p-utility-navi__item(
-          to = '/contact/'
-          )
-          |Contact
       .p-utility-navi__copyright
         |Copyright &copy; 2019, Yoichi Kobayashi.
 </template>
