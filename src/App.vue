@@ -117,8 +117,7 @@
 </template>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Lora:400,700&display=swap');
-
+  @import '@/assets/scss/foundation/font.scss';
   @import '@/assets/scss/foundation/_normalize.scss';
   @import '@/assets/scss/foundation/_global.scss';
   @import '@/assets/scss/object/project/_view-wrap.scss';
@@ -127,7 +126,7 @@
   .p-page {
     position: relative;
     z-index: 10;
-    font-family: 'Lora', serif;
+    font-family: 'EngraversMTPro';
     color: #222;
     transition-duration: 1.4s;
     transition-property: color;
