@@ -32,10 +32,10 @@
     position: fixed;
     left: 0;
     z-index: 100;
-    line-height: 1;
+    line-height: 0.75;
     @include l-more-than-mobile {
       width: 7.5%;
-      top: 50px;
+      top: 55px;
     }
     @include l-mobile {
       top: 24px;
