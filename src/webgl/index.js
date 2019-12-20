@@ -8,7 +8,6 @@ import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
 import CherryRotate from '@/webgl/CherryRotate';
 import Image from '@/webgl/Image';
-import Portlate from '@/webgl/Portlate';
 import Background from '@/webgl/Background';
 
 // ==========
@@ -29,7 +28,6 @@ const skullAuraCamera = new SkullAuraCamera();
 const skull = new Skull();
 const cherryRotate = new CherryRotate();
 const image = new Image();
-const portlate = new Portlate();
 const bg = new Background();
 
 // ==========
@@ -52,8 +50,6 @@ export default class WebGLContent {
       PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_skull.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.png')),
-      PromiseTextureLoader(require('@/assets/img/webgl/portlate.png')),
-      PromiseTextureLoader(require('@/assets/img/webgl/mask_portlate.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.jpg')),
@@ -67,16 +63,12 @@ export default class WebGLContent {
       const geometryPetal2 = response[1].children[3].geometry;
       const noiseTex = response[2];
       const noiseBurnTex = response[3];
-      const portlateTex = response[4];
-      const maskPortlateTex = response[5];
-      const imgTexes = response.slice(6);
+      const imgTexes = response.slice(4);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
       noiseBurnTex.wrapS = THREE.RepeatWrapping;
       noiseBurnTex.wrapT = THREE.RepeatWrapping;
-      maskPortlateTex.wrapS = THREE.RepeatWrapping;
-      maskPortlateTex.wrapT = THREE.RepeatWrapping;
 
       camera.start();
       skullAuraCamera.start();
@@ -86,13 +78,11 @@ export default class WebGLContent {
         geometryBlossom1, geometryBlossom2, geometryPetal1, geometryPetal2, noiseTex
       );
       image.start(noiseBurnTex, imgTexes);
-      portlate.start(portlateTex, maskPortlateTex);
       bg.start(noiseTex);
 
       scene.add(skull);
       scene.add(cherryRotate);
       scene.add(image);
-      scene.add(portlate);
       scene.add(bg);
     });
   }
@@ -115,13 +105,6 @@ export default class WebGLContent {
   showWorksImage(index) {
     image.change(index);
   }
-  showPortlate(bool) {
-    if (bool === true) {
-      portlate.show();
-    } else {
-      portlate.hide();
-    }
-  }
   changeColorDark(bool) {
     bg.changeColorDark(bool);
   }
@@ -140,7 +123,6 @@ export default class WebGLContent {
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
     cherryRotate.update(time);
     image.update(time);
-    portlate.update(time);
     bg.update(time);
 
     // Render the 3D scene.
@@ -150,7 +132,6 @@ export default class WebGLContent {
     camera.resize(resolution);
     skull.resize(resolution);
     image.resize(resolution);
-    portlate.resize(resolution);
     bg.resize(camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
   }

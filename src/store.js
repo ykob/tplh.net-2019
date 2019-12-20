@@ -38,9 +38,6 @@ export default new Vuex.Store({
     showWorksImage (state, index) {
       state.webgl.showWorksImage(index);
     },
-    showPortlate (state, index) {
-      state.webgl.showPortlate(index);
-    },
     transitPrevWorks (state) {
       state.currentWorksId =
         (state.currentWorksId <= 0)

@@ -29,7 +29,6 @@ export default {
     this.$store.commit('showGlobalTitle', true);
     this.$store.commit('showSkull', false);
     this.$store.commit('showWorksImage', 0);
-    this.$store.commit('showPortlate', true);
     this.$store.commit('transit', {
       globalId: 50,
     });
