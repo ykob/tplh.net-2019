@@ -1,11 +1,6 @@
 <script>
-  import SplitStr from '@/components/atoms/SplitStr.vue'
-
   export default {
     name: 'GlobalTitle',
-    components: {
-      SplitStr,
-    },
     props: {},
     data: function() {
       return {}
@@ -20,55 +15,42 @@
     .p-global-title(
       v-if = '$store.state.isShownGlobalTitle'
       )
-      router-link.p-global-title__name(
+      router-link.p-global-title__wrap(
         to = '/'
         )
-        SplitStr(
-          label = 'Yoichi Kobayashi'
-          :step = '2'
-          :base = '0'
-          childClassname = 'p-global-title__name-typo'
-          )
-      SplitStr.p-global-title__summary(
-        label = 'Front-End & Creative Developer.'
-        :step = '1'
-        :base = '20'
-        childClassname = 'p-global-title__summary-typo'
-        )
+        .p-global-title__typo.p-global-title__typo--1
+          |Y
+        .p-global-title__typo.p-global-title__typo--2
+          |K
 </template>
 
 <style lang="scss">
   .p-global-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: fixed;
+    left: 0;
     z-index: 100;
     line-height: 1;
     @include l-more-than-mobile {
-      height: 40px;
+      width: 7.5%;
       top: 50px;
-      left: 50px;
     }
     @include l-mobile {
-      height: 36px;
       top: 24px;
-      left: 20px;
     }
-    &__name {
+    &__wrap {
       cursor: pointer;
-      position: absolute;
-      top: 0;
-      left: 0;
-      white-space: nowrap;
-      @include fontSizeAll(18, 18, 15);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
+      display: block;
+      text-decoration: none;
     }
-    &__summary {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      white-space: nowrap;
-      @include fontSizeAll(11, 11, 9);
-      letter-spacing: 0.22em;
+    &__typo {
+      display: block;
+      @include fontSizeAll(24, 24, 24);
+      &--1 {
+        transform: rotate(180deg);
+      }
     }
 
     // Transition

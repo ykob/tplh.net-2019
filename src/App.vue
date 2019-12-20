@@ -125,12 +125,12 @@
     position: relative;
     z-index: 10;
     font-family: 'EngraversMTPro';
-    color: #fff;
+    color: $color-text;
     transition-duration: 1.4s;
     transition-property: color;
   }
   a {
-    color: #fff;
+    color: $color-text;
     transition-duration: 1.4s;
     transition-property: color;
   }
