@@ -18,6 +18,12 @@ export default class Image extends THREE.Group {
     this.currentIndex = 0;
     this.delay = 0;
     this.isAnimated = false;
+
+    this.rotation.set(
+      MathEx.radians(-22),
+      MathEx.radians(0),
+      MathEx.radians(-8)
+    )
   }
   start(noiseTex, imgTexes) {
     const imagePlane = new ImagePlane();
@@ -62,23 +68,7 @@ export default class Image extends THREE.Group {
       }
     }
   }
-  resize(camera, resolution) {
-    const height = Math.abs(
-      (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
-    );
-    const width = height * camera.aspect;
-
-    this.margin.set(
-      (resolution.x > resolution.y) ? 500 : 200,
-      (resolution.x > resolution.y) ? 240 : 200
-    );
-    this.size.set(
-      width * (resolution.x - this.margin.x) / resolution.x,
-      height * (resolution.y - this.margin.y) / resolution.y,
-      1
-    );
-    this.children[0].resize(this.size);
-    this.children[1].resize(this.size);
-    this.children[2].resize(this.size, resolution);
+  resize(resolution) {
+    this.children[2].resize(resolution);
   }
 }

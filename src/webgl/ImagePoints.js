@@ -6,7 +6,7 @@ import fs from '@/webgl/glsl/ImagePoints.fs';
 export default class ImagePoints extends THREE.Points {
   constructor() {
     // Define Geometry
-    const gaseGeometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32);
+    const gaseGeometry = new THREE.PlaneBufferGeometry(24, 16, 32, 32);
     const geometry = new THREE.BufferGeometry();
 
     geometry.addAttribute('position', gaseGeometry.attributes.position);
@@ -33,7 +33,7 @@ export default class ImagePoints extends THREE.Points {
         },
         imgRatio: {
           type: 'v2',
-          value: new THREE.Vector2()
+          value: new THREE.Vector2(1, 0.666)
         },
         pixelRatio: {
           type: 'f',
@@ -57,12 +57,7 @@ export default class ImagePoints extends THREE.Points {
     this.material.uniforms.time.value += time;
     this.material.uniforms.easeTransition.value = easeStep;
   }
-  resize(size, resolution) {
+  resize(resolution) {
     this.material.uniforms.resolution.value.copy(resolution);
-    this.material.uniforms.imgRatio.value.set(
-      Math.min(1, size.x / size.y),
-      Math.min(1, size.y / size.x)
-    );
-    this.scale.copy(size);
   }
 }

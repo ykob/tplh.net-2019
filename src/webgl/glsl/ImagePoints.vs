@@ -30,8 +30,8 @@ void main(void) {
 
   // coordinate transformation
   vec4 mPosition = modelMatrix * vec4(position + vec3(
-    cos(radians(noiseR * 360.0 + time * 200.0)) * (0.08 + 0.08 * slide),
-    sin(radians(noiseG * 360.0 + time * 200.0)) * (0.08 + 0.08 * slide),
+    cos(radians(noiseR * 360.0 + time * 200.0)) * (2.0 + 2.0 * slide),
+    sin(radians(noiseG * 360.0 + time * 200.0)) * (2.0 + 2.0 * slide),
     h
     ), 1.0);
 

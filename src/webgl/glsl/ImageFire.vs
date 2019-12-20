@@ -28,7 +28,7 @@ void main(void) {
   float slide = texture2D(noiseTex, uv * vec2(0.998) + 0.001).b;
 
   float mask = easeTransition * 1.24 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
-  float h1 = (1.0 - smoothstep(0.0, 0.22, mask)) * 14.0;
+  float h1 = (1.0 - smoothstep(0.0, 0.22, mask)) * 10.0;
 
   float mask2 = easeTransition * 2.0 - slide;
   float maskPrev = smoothstep(0.0, 0.5, mask2);
@@ -40,7 +40,7 @@ void main(void) {
   // coordinate transformation
   vec4 mPosition = modelMatrix * vec4(position + vec3(0.0, 0.0, height), 1.0);
 
-  float opacity = smoothstep(0.0, 1.0, h1) * (1.0 - smoothstep(8.0, 14.0, h1)) * (1.0 - pow(edge, 2.0));
+  float opacity = smoothstep(0.0, 1.0, h1) * (1.0 - smoothstep(4.0, 10.0, h1)) * (1.0 - pow(edge, 2.0));
 
   vPosition = mPosition.xyz;
   vUv = uv;

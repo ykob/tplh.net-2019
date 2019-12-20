@@ -7,7 +7,7 @@ import fs from '@/webgl/glsl/Image.fs';
 export default class ImagePlane extends THREE.Mesh {
   constructor() {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(1, 1, 64, 64);
+    const geometry = new THREE.PlaneBufferGeometry(24, 16, 64, 64);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
@@ -34,7 +34,7 @@ export default class ImagePlane extends THREE.Mesh {
         },
         imgRatio: {
           type: 'v2',
-          value: new THREE.Vector2()
+          value: new THREE.Vector2(1, 0.666)
         },
       },
       vertexShader: vs,
@@ -57,13 +57,6 @@ export default class ImagePlane extends THREE.Mesh {
   update(time, easeStep) {
     this.material.uniforms.time.value += time;
     this.material.uniforms.easeTransition.value = easeStep;
-  }
-  resize(size) {
-    this.material.uniforms.imgRatio.value.set(
-      Math.min(1, size.x / size.y),
-      Math.min(1, size.y / size.x)
-    );
-    this.scale.copy(size);
   }
   changeTex(index) {
     this.imgIndexPrev = this.imgIndexNext;

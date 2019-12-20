@@ -149,7 +149,7 @@ export default class WebGLContent {
   resize(resolution) {
     camera.resize(resolution);
     skull.resize(resolution);
-    image.resize(camera, resolution);
+    image.resize(resolution);
     portlate.resize(resolution);
     bg.resize(camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
