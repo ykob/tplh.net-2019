@@ -103,9 +103,7 @@
 </script>
 
 <template lang="pug">
-  .p-page(
-    :class = '{ "is-enabled-dark-color": $store.state.isEnabledDarkColor === true }'
-    )
+  .p-page
     GlobalTitle
     UtilityNavi
     transition(
@@ -127,19 +125,13 @@
     position: relative;
     z-index: 10;
     font-family: 'EngraversMTPro';
-    color: #222;
+    color: #fff;
     transition-duration: 1.4s;
     transition-property: color;
-    &.is-enabled-dark-color {
-      color: #fff;
-    }
   }
   a {
-    color: #222;
+    color: #fff;
     transition-duration: 1.4s;
     transition-property: color;
-    .is-enabled-dark-color & {
-      color: #fff;
-    }
   }
 </style>

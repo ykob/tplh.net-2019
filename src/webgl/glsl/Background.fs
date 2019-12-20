@@ -27,14 +27,14 @@ void main() {
   float noise = (noise1 * 0.6 + noise2 * 0.3 + noise3 * 0.1);
 
   vec3 rgb1 = convertHsvToRgb(mix(
-    vec3(0.78, 0.0, 1.0),
-    vec3(0.94, 0.2, 0.95),
+    vec3(0.05, 0.3, 0.25),
+    vec3(0.1, 0.3, 0.05),
     vUv.y + (1.0 - smoothstep(0.1, 0.9, noise)) * 0.4
     ));
 
   vec3 rgb2 = convertHsvToRgb(mix(
-    vec3(0.94, 0.3, 0.3),
-    vec3(0.78, 0.4, 0.05),
+    vec3(0.05, 0.3, 0.25),
+    vec3(0.1, 0.3, 0.05),
     vUv.y + (1.0 - smoothstep(0.1, 0.9, noise)) * 0.4
     ));
 

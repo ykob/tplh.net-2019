@@ -11,9 +11,7 @@
 </script>
 
 <template lang="pug">
-  .p-background(
-    :class = '{ "is-enabled-dark-color": this.$store.state.isEnabledDarkColor === true }'
-    )
+  .p-background
 </template>
 
 <style lang="scss">
@@ -23,10 +21,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(220,190,190,1);
+    background-color: rgba(90,74,74,1);
     transition-duration: 1.4s;
-    &.is-enabled-dark-color {
-      background-color: rgba(90,74,74,1);
-    }
   }
 </style>

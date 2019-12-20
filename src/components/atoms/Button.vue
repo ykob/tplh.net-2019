@@ -31,7 +31,6 @@
             'c-button',
             `c-button--${this.role}`,
             {
-              'is-enabled-dark-color': this.$store.state.isEnabledDarkColor === true,
               'is-over' : this.hoverState === 1,
               'is-leave': this.hoverState === 2
             }
@@ -93,14 +92,10 @@
     align-items: center;
     position: relative;
     padding: 0;
-    border: 1px solid #222;
+    border: 1px solid #fff;
     text-decoration: none;
     letter-spacing: 0.16em;
     background-color: transparent;
-    transition-property: color, border-color;
-    .is-enabled-dark-color & {
-      border-color: #fff;
-    }
     &__label {
       display: inline-block;
       position: relative;
@@ -113,13 +108,10 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-color: #222;
+      background-color: #fff;
       transition-duration: 1s;
       transition-timing-function: $easeOutCirc;
-      transition-property: opacity, background-color;
-      .is-enabled-dark-color & {
-        background-color: #fff;
-      }
+      transition-property: opacity;
     }
     &.is-over & {
       &__bg {
