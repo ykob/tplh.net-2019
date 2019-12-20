@@ -62,6 +62,7 @@
       :index = 'index'
       :title = 'item.title'
       :description = 'item.description'
+      :credit = 'item.credit'
       :href = 'item.href'
       )
 </template>
