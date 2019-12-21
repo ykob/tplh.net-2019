@@ -18,7 +18,7 @@ export default [
   {
     key: 'hassyadai',
     title: 'HASSYADAI Inc.',
-    description: 'It is a brand site of the temp agency in Japan made with various WebGL effects. Also I got CSSDA WOTD for the first time by making this site.',
+    description: 'I created a website of the temp agency in Japan made with various WebGL effects. Also I got CSSDA WOTD for the first time by making this site.',
     credit: 'Client : HASSYADAI Inc.\nAgency : BEES/HONEY INC\nDeveloper : Yoichi Kobayashi',
     img: '@/assets/img/webgl/thumb_hassyadai.jpg',
     href: 'https://hassyadai.com',
