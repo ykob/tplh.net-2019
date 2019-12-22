@@ -51,8 +51,8 @@ export default class ImagePlane extends THREE.Mesh {
   start(noiseTex, imgTexes) {
     this.imgTexes = imgTexes;
     this.material.uniforms.noiseTex.value = noiseTex;
-    this.material.uniforms.imgPrevTex.value = null;
-    this.material.uniforms.imgNextTex.value = null;
+    this.material.uniforms.imgPrevTex.value = imgTexes[0];
+    this.material.uniforms.imgNextTex.value = imgTexes[1];
   }
   update(time, easeStep) {
     this.material.uniforms.time.value += time;
