@@ -1,9 +1,6 @@
 <script>
   import sleep from 'js-util/sleep'
 
-  import HomeTitle from '@/components/atoms/HomeTitle.vue'
-  import HomeWheel from '@/components/atoms/HomeWheel.vue'
-
   export default {
     name: 'Home',
     metaInfo: {
@@ -15,8 +12,6 @@
       ]
     },
     components: {
-      HomeTitle,
-      HomeWheel,
     },
     data: function() {
       return {
@@ -40,8 +35,6 @@
 
 <template lang="pug">
   .p-view-wrap
-    HomeTitle
-    HomeWheel
 </template>
 
 <style lang="scss">

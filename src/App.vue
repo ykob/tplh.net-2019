@@ -5,6 +5,7 @@
 
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
   import UtilityNavi from '@/components/templates/UtilityNavi.vue';
+  import WorksNavi from '@/components/templates/WorksNavi.vue';
 
   const INTERVAL_TO_FIRE_WHEEL = 1500;
 
@@ -17,6 +18,7 @@
     components: {
       GlobalTitle,
       UtilityNavi,
+      WorksNavi,
     },
     data: function() {
       return {
@@ -106,6 +108,7 @@
   .p-page
     GlobalTitle
     UtilityNavi
+    WorksNavi
     transition(
       name = 'view'
       appear
@@ -122,7 +125,11 @@
   @import '@/assets/scss/object/vendor/ps.scss';
 
   .p-page {
-    position: relative;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 10;
     font-family: 'EngraversMTPro';
     color: $color-text;
