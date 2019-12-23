@@ -29,9 +29,9 @@ void main() {
   float slide = texture2D(noiseTex, vUv * vec2(0.998) + 0.001).b;
 
   float mask = vTime * 1.38 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
-  float maskPrev = 1.0 - smoothstep(0.14, 0.19, mask);
-  float maskNext = smoothstep(0.19, 0.24, mask);
-  float maskEdge = smoothstep(0.0, 0.14, mask) * (1.0 - smoothstep(0.24, 0.38, mask));
+  float maskPrev = 1.0 - smoothstep(0.17, 0.19, mask);
+  float maskNext = smoothstep(0.19, 0.21, mask);
+  float maskEdge = smoothstep(0.04, 0.19, mask) * (1.0 - smoothstep(0.19, 0.34, mask));
 
   vec4 imgPrev = texture2D(imgPrevTex, imgUv * (0.95 - 0.05 * easeTransition) + 0.025 + 0.025 * easeTransition);
   vec4 imgNext = texture2D(imgNextTex, imgUv * (1.0 - 0.05 * easeTransition) + 0.025 * easeTransition);
