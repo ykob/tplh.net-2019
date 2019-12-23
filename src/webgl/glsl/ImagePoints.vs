@@ -19,21 +19,30 @@ void main(void) {
     (1.0 - imgRatio.y) * 0.5
     );
 
+  // Calculation of the wave animation.
+  float wave1 = sin(updateUv.x * -8.0 + updateUv.y * -8.0 + time);
+  float wave2 = sin(updateUv.x * 5.0 + updateUv.y * 2.0 + time);
+  float wave = wave1 * 0.6 + wave2 * 1.2;
+
+  // Calculation of the slide animation.
   float noiseR = texture2D(noiseTex, updateUv * 2.0 + vec2(time * 0.1, 0.0)).r;
   float noiseG = texture2D(noiseTex, updateUv * 2.0 + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, uv * vec2(0.99) + 0.005).b;
 
   float mask = easeTransition * 1.24 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
-  float h = (easeTransition - slide) * (2.0 + slide * 8.0);
+  float height = (easeTransition - slide) * (2.0 + slide * 8.0);
 
   float opacity = smoothstep(0.3, 0.5, easeTransition * 2.0 - slide) * (1.0 - smoothstep(0.8, 1.0, easeTransition * 2.0 - slide)) * 0.8;
 
   // coordinate transformation
-  vec4 mPosition = modelMatrix * vec4(position + vec3(
+  vec3 wavePosition = vec3(0.0, 0.0, wave);
+  vec3 slidePosition = vec3(
     cos(radians(noiseR * 360.0 + time * 200.0)) * (2.0 + 2.0 * slide),
     sin(radians(noiseG * 360.0 + time * 200.0)) * (2.0 + 2.0 * slide),
-    h
-    ), 1.0);
+    height
+    );
+  vec3 updatePosition = position + wavePosition + slidePosition;
+  vec4 mPosition = modelMatrix * vec4(updatePosition, 1.0);
 
   float distanceFromCamera = length((viewMatrix * mPosition).xyz);
   float pointSize = 5.0 * pixelRatio * 50.0 / distanceFromCamera * resolution.y / 1024.0;

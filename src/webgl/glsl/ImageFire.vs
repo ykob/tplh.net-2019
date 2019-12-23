@@ -23,6 +23,12 @@ void main(void) {
     (1.0 - imgRatio.y) * 0.5
     );
 
+  // Calculation of the wave animation.
+  float wave1 = sin(updateUv.x * -8.0 + updateUv.y * -8.0 + time);
+  float wave2 = sin(updateUv.x * 5.0 + updateUv.y * 2.0 + time);
+  float wave = wave1 * 0.6 + wave2 * 1.2;
+
+  // Calculation of the slide animation.
   float noiseR = texture2D(noiseTex, updateUv + vec2(time * 0.1, 0.0)).r;
   float noiseG = texture2D(noiseTex, updateUv + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, uv * vec2(0.998) + 0.001).b;
@@ -38,7 +44,10 @@ void main(void) {
   float height = h1 + h2;
 
   // coordinate transformation
-  vec4 mPosition = modelMatrix * vec4(position + vec3(0.0, 0.0, height), 1.0);
+  vec3 wavePosition = vec3(0.0, 0.0, wave);
+  vec3 slidePosition = vec3(0.0, 0.0, height);
+  vec3 updatePosition = position + wavePosition + slidePosition;
+  vec4 mPosition = modelMatrix * vec4(updatePosition, 1.0);
 
   float opacity = smoothstep(0.0, 1.0, h1) * (1.0 - smoothstep(4.0, 10.0, h1)) * (1.0 - pow(edge, 2.0));
 

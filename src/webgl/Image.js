@@ -15,10 +15,12 @@ export default class Image extends THREE.Group {
     this.size = new THREE.Vector3();
     this.margin = new THREE.Vector2();
     this.timeTransition = 0;
+    this.easeStep = 0;
     this.currentIndex = 0;
     this.delay = 0;
     this.isAnimated = false;
 
+    this.position.set(0, 1, 0);
     this.rotation.set(
       MathEx.radians(-22),
       MathEx.radians(0),
@@ -57,16 +59,14 @@ export default class Image extends THREE.Group {
     this.timeTransition += time;
 
     if (this.isAnimated === true) {
-      const easeStep = easeOutQuad(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
-
-      this.children[0].update(time, easeStep);
-      this.children[1].update(time, easeStep);
-      this.children[2].update(time, easeStep);
-
+      this.easeStep = easeOutQuad(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
       if (this.timeTransition - this.delay >= DURATION) {
         this.isAnimated = false;
       }
     }
+    this.children[0].update(time, this.easeStep);
+    this.children[1].update(time, this.easeStep);
+    this.children[2].update(time, this.easeStep);
   }
   resize(resolution) {
     this.children[2].resize(resolution);
