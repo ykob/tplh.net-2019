@@ -28,9 +28,10 @@ export default class Image extends THREE.Group {
     )
   }
   start(noiseTex, imgTexes) {
-    const imagePlane = new ImagePlane();
-    const imageFire = new ImageFire();
-    const imagePoints = new ImagePoints();
+    const width = 20;
+    const imagePlane = new ImagePlane(width);
+    const imageFire = new ImageFire(width);
+    const imagePoints = new ImagePoints(width);
 
     imagePlane.start(noiseTex, imgTexes);
     imageFire.start(noiseTex);

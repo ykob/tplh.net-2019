@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 import MathEx from 'js-util/MathEx';
 
-import vs from '@/webgl/glsl/Image.vs';
-import fs from '@/webgl/glsl/Image.fs';
+import vs from '@/webgl/glsl/ImagePlane.vs';
+import fs from '@/webgl/glsl/ImagePlane.fs';
 
 export default class ImagePlane extends THREE.Mesh {
-  constructor() {
+  constructor(width) {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(24, 16, 64, 64);
+    const geometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 64, 64);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
@@ -40,6 +40,7 @@ export default class ImagePlane extends THREE.Mesh {
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
+      depthTest: false,
     });
 
     // Create Object3D

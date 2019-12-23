@@ -4,13 +4,13 @@ import vs from '@/webgl/glsl/ImagePoints.vs';
 import fs from '@/webgl/glsl/ImagePoints.fs';
 
 export default class ImagePoints extends THREE.Points {
-  constructor() {
+  constructor(width) {
     // Define Geometry
-    const gaseGeometry = new THREE.PlaneBufferGeometry(24, 16, 32, 32);
+    const baseGeometry = new THREE.PlaneBufferGeometry(width * 0.9, width * 0.9 * 0.666, 24, 24);
     const geometry = new THREE.BufferGeometry();
 
-    geometry.addAttribute('position', gaseGeometry.attributes.position);
-    geometry.addAttribute('uv', gaseGeometry.attributes.uv);
+    geometry.addAttribute('position', baseGeometry.attributes.position);
+    geometry.addAttribute('uv', baseGeometry.attributes.uv);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
@@ -44,6 +44,7 @@ export default class ImagePoints extends THREE.Points {
       fragmentShader: fs,
       transparent: true,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
     });
 
     // Create Object3D
