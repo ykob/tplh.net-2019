@@ -6,7 +6,7 @@ import fs from '@/webgl/glsl/ImagePoints.fs';
 export default class ImagePoints extends THREE.Points {
   constructor(width) {
     // Define Geometry
-    const baseGeometry = new THREE.PlaneBufferGeometry(width * 0.9, width * 0.9 * 0.666, 24, 24);
+    const baseGeometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 24, 24);
     const geometry = new THREE.BufferGeometry();
 
     geometry.addAttribute('position', baseGeometry.attributes.position);

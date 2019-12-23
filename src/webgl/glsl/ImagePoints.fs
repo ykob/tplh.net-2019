@@ -13,7 +13,7 @@ void main() {
   float opacity = (1.0 - smoothstep(0.5, 1.0, radius));
 
   // Define Colors
-  vec3 rgb = convertHsvToRgb(vec3(0.88, 0.4, 0.95));
+  vec3 rgb = convertHsvToRgb(vec3(0.11, 0.4, 0.95));
 
   gl_FragColor = vec4(rgb, opacity * vOpacity);
 }

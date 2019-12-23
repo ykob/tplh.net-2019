@@ -33,7 +33,7 @@ void main(void) {
   float noiseG = texture2D(noiseTex, updateUv + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, uv * vec2(0.998) + 0.001).b;
 
-  float mask = easeTransition * 1.24 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
+  float mask = easeTransition * 1.38 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
   float h1 = (1.0 - smoothstep(0.0, 0.22, mask)) * 10.0;
 
   float mask2 = easeTransition * 2.0 - slide;

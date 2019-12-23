@@ -6,7 +6,7 @@ import ImagePlane from '@/webgl/ImagePlane';
 import ImageFire from '@/webgl/ImageFire';
 import ImagePoints from '@/webgl/ImagePoints';
 
-const DURATION = 1.6;
+const DURATION = 1.8;
 
 export default class Image extends THREE.Group {
   constructor() {

@@ -28,21 +28,21 @@ void main() {
   float noiseG = texture2D(noiseTex, vUpdateUv + vec2(time * 0.04, 0.0)).g;
   float slide = texture2D(noiseTex, vUv * vec2(0.998) + 0.001).b;
 
-  float mask = vTime * 1.24 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
+  float mask = vTime * 1.38 - (slide * 0.6 + noiseR * 0.2 + noiseG * 0.2);
   float maskPrev = 1.0 - smoothstep(0.14, 0.19, mask);
   float maskNext = smoothstep(0.19, 0.24, mask);
-  float maskEdge = smoothstep(0.09, 0.14, mask) * (1.0 - smoothstep(0.24, 0.29, mask));
+  float maskEdge = smoothstep(0.0, 0.14, mask) * (1.0 - smoothstep(0.24, 0.38, mask));
 
   vec4 imgPrev = texture2D(imgPrevTex, imgUv * (0.95 - 0.05 * easeTransition) + 0.025 + 0.025 * easeTransition);
   vec4 imgNext = texture2D(imgNextTex, imgUv * (1.0 - 0.05 * easeTransition) + 0.025 * easeTransition);
 
   vec3 edgeColor = convertHsvToRgb(
-    vec3(1.04 - noiseG * 0.12, 0.24, 0.6)
+    vec3(1.1 - noiseG * 0.1, 0.45, 0.45)
     );
 
   vec4 color1 = imgPrev * maskPrev;
   vec4 color2 = imgNext * maskNext;
   vec3 color3 = edgeColor * maskEdge;
 
-  gl_FragColor = vec4(color1.rgb + color2.rgb + color3, (color1.a + color2.a) * 0.5);
+  gl_FragColor = vec4(color1.rgb + color2.rgb + color3, (color1.a + color2.a) * (0.5 + maskEdge * 0.5));
 }
