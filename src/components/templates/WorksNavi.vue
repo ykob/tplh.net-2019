@@ -19,9 +19,11 @@
           case 1:
             return 'is-next';
         }
-      },
-      getWorksUrl() {
-        return `/works/${this.$store.state.works[0].key}/`;
+      }
+    },
+    methods: {
+      getWorksUrl(i) {
+        return `/works/${this.$store.state.works[i].key}/`;
       }
     }
   };
@@ -34,7 +36,7 @@
     )
     .p-works-navi
       router-link.p-works-navi__label(
-        :to = 'getWorksUrl'
+        :to = 'getWorksUrl(0)'
         :class = 'classnames'
         )
         svg.p-works-navi__label-svg(
@@ -55,6 +57,11 @@
         )
       .p-works-navi__point.p-works-navi__point--upper
       .p-works-navi__point.p-works-navi__point--lower
+      .p-works-navi__items
+        router-link.p-works-navi__item(
+          v-for = 'item, index in $store.state.works'
+          :to = 'getWorksUrl(index)'
+          )
 </template>
 
 <style lang="scss">
@@ -130,6 +137,27 @@
       &--lower {
         bottom: -1px;
       }
+    }
+    &__items {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__item {
+      width: 8px;
+      height: 8px;
+      box-sizing: border-box;
+      cursor: pointer;
+      border: 1px solid $color-text;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      transform: rotate(45deg);
     }
   }
 </style>
