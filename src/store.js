@@ -16,6 +16,7 @@ export default new Vuex.Store({
     webgl: new WebGL(),
     works: WORKS,
     currentWorksId: 0,
+    positionFromWorks: -1,
     isLoaded: false,
     isEnabledDarkColor: false,
     isShownGlobalTitle: false,
@@ -49,6 +50,9 @@ export default new Vuex.Store({
         (state.currentWorksId >= state.works.length - 1)
           ? 0
           : state.currentWorksId + 1;
+    },
+    setPositionFromWorks (state, number) {
+      state.positionFromWorks = number;
     },
   },
   actions: {
