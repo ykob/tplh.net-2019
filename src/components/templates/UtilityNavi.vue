@@ -29,36 +29,33 @@
 
 <style lang="scss">
   .p-utility-navi {
-    position: fixed;
+    pointer-events: none;
+    position: absolute;
     left: 0;
     z-index: 100;
     line-height: 1;
     letter-spacing: 0.15em;
+    text-align: right;
+    writing-mode: vertical-rl;
     @include fontSizeAll(12, 12, 12);
     @include l-more-than-mobile {
-      width: 7.5%;
       bottom: 50px;
+      left: calc(3.75% - 0.55em);
     }
     @include l-mobile {
-      width: calc(100% - 40px);
-      left: 20px;
       bottom: 20px;
     }
     &__item {
       display: block;
+      pointer-events: auto;
       position: relative;
       text-decoration: none;
     }
     &__typos {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
     &__typo {
-      display: block;
-      transform: rotate(90deg);
+      display: inline-block;
     }
-
 
     // Transition
     &.show-enter {

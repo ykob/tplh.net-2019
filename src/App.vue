@@ -105,7 +105,7 @@
 </script>
 
 <template lang="pug">
-  .p-page
+  div
     GlobalTitle
     UtilityNavi
     WorksNavi
@@ -123,22 +123,4 @@
   @import '@/assets/scss/foundation/_global.scss';
   @import '@/assets/scss/object/project/_view-wrap.scss';
   @import '@/assets/scss/object/vendor/ps.scss';
-
-  .p-page {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    font-family: 'EngraversMTPro';
-    color: $color-text;
-    transition-duration: 1.4s;
-    transition-property: color;
-  }
-  a {
-    color: $color-text;
-    transition-duration: 1.4s;
-    transition-property: color;
-  }
 </style>
