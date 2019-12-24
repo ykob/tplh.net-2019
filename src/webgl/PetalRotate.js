@@ -15,7 +15,7 @@ export default class PetalRotate extends Petal {
     super(geometry);
     this.name = 'PetalRotate';
     this.delay = DELAY_SHOW + Math.random();
-    this.radius = (1 - this.mass) * 10 + 6;
+    this.radius = (1 - this.mass) * 30 + 6;
     this.radian1 = MathEx.radians((Math.random() * 2 - 1) * 180);
     this.radian2 = MathEx.radians((Math.random() * 2 - 1) * 180);
     this.timeShow = 0;

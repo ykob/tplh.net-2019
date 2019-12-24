@@ -32,18 +32,18 @@ void main() {
     (alphaShow * 2.0 - noise1) / 2.0
     );
 
-  vec3 hsvNoise1 = vec3(noise1 * 0.12, -noise1 * 0.1, noise1 * 0.1);
-  vec3 hsv1 = vec3(0.82, 0.25, 0.8) + hsvNoise1;
-  vec3 hsv2 = vec3(0.94, 0.3, 1.0) + hsvNoise1;
+  vec3 hsvNoise1 = vec3(noise1 * -0.06, noise1 * -0.1, noise1 * 0.1);
+  vec3 hsv1 = vec3(0.1, 0.25, 0.8) + hsvNoise1;
+  vec3 hsv2 = vec3(0.1, 0.3, 1.0) + hsvNoise1;
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
-  vec3 hsvNoise2 = vec3(noise2 * 0.14, -noise2 * 0.45, 0.0);
-  vec3 hsv3 = vec3(0.88, 0.45, 0.995) + hsvNoise2;
+  vec3 hsvNoise2 = vec3(noise2 * -0.06, noise2 * -0.45, 0.0);
+  vec3 hsv3 = vec3(0.1, 0.5, 0.9) + hsvNoise2;
   vec3 edgeColor = convertHsvToRgb(hsv3);
 
   if (opacity < 0.01) {
     discard;
   }
 
-  gl_FragColor = vec4(rgb * (1.0 - edge) + edgeColor * edge, opacity);
+  gl_FragColor = vec4(rgb * (1.0 - edge) + edgeColor * edge, opacity * 0.5);
 }

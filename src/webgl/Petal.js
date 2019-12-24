@@ -33,6 +33,7 @@ export default class Petal extends THREE.Mesh {
       fragmentShader: fs,
       flatShading: true,
       side: THREE.DoubleSide,
+      transparent: true,
     });
 
     // Create Object3D
@@ -41,9 +42,9 @@ export default class Petal extends THREE.Mesh {
     this.mass = Math.random();
     this.rotateDirection = Math.round(Math.random()) * 2 - 1;
     this.scale.set(
-      this.mass * 0.5 + 0.5,
-      this.mass * 0.5 + 0.5,
-      this.mass * 0.5 + 0.5
+      this.mass * 1.2 + 0.8,
+      this.mass * 1.2 + 0.8,
+      this.mass * 1.2 + 0.8
     );
    this.rotation.set(
       MathEx.radians((Math.random() * 2 - 1) * 60),
