@@ -96,6 +96,7 @@
       // Interaction
       &.is-current {
         top: 10px;
+        pointer-events: none;
       }
     }
     &__line {
@@ -168,6 +169,7 @@
         transform: rotate(45deg);
         transition-duration: .6s;
         transition-property: background-color;
+        backface-visibility: hidden;
       }
       &.is-shown {
         opacity: 1;
