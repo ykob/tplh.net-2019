@@ -57,10 +57,8 @@ export default class WebGLContent {
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
-      const geometryBlossom1 = response[1].children[0].geometry;
-      const geometryBlossom2 = response[1].children[1].geometry;
-      const geometryPetal1 = response[1].children[2].geometry;
-      const geometryPetal2 = response[1].children[3].geometry;
+      const geometryPetal1 = response[1].children[0].geometry;
+      const geometryPetal2 = response[1].children[1].geometry;
       const noiseTex = response[2];
       const noiseBurnTex = response[3];
       const imgTexes = response.slice(4);
@@ -74,9 +72,7 @@ export default class WebGLContent {
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
-      cherryRotate.start(
-        geometryBlossom1, geometryBlossom2, geometryPetal1, geometryPetal2, noiseTex
-      );
+      cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 

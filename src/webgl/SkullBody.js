@@ -33,6 +33,7 @@ export default class SkullBody extends THREE.Group {
       },
       vertexShader: vs,
       fragmentShader: fs,
+      transparent: true,
       flatShading: true,
     });
 

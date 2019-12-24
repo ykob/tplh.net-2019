@@ -14,35 +14,34 @@ varying vec3 vColor;
 
 void main() {
   // Flat Shading
-  vec3 light = normalize(vec3(-1.0, 0.7, 0.7));
+  vec3 light = normalize(vec3(-0.5, 1.0, 0.5));
   vec3 normal = normalize(cross(dFdx(vPosition), dFdy(vPosition)));
   float diff = dot(normal, light);
 
   float noise = cnoise3(normal * 3.0 + time * 0.6) * 0.5 + 0.5;
-  float noise2 = (cnoise3(vPosition * 0.4 + time) + cnoise3(vPosition * 4.0 - time * 3.0) * 0.15) / 1.15 * 0.5 + 0.5;
+  float noise2 = (cnoise3(vPosition * 0.4 + time) + cnoise3(vPosition * 5.5 - time * 3.0) * 0.2) / 1.2 * 0.5 + 0.5;
 
   float opacity = smoothstep(
     0.0,
-    0.01,
+    0.02,
     (alpha * 2.0 - noise2) / 2.0
     );
   float edge = 1.0 - smoothstep(
-    0.1,
-    0.15,
+    0.02,
+    0.2,
     (alpha * 2.0 - noise2) / 2.0
     );
 
-  vec3 hsvNoise1 = vec3(noise * 0.12, -noise * 0.1, noise * 0.1);
-  vec3 hsv1 = vec3(0.82, 0.3, 0.7) + hsvNoise1;
-  vec3 hsv2 = vec3(0.94, 0.35, 1.0) + hsvNoise1;
+  vec3 hsv1 = vec3(0.04, 0.12, 0.27);
+  vec3 hsv2 = vec3(0.1, 0.24, 0.08);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
-  vec3 hsv3 = vec3(0.88, 0.08, 0.999);
+  vec3 hsv3 = vec3(0.1, 0.27, 1.0);
   vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;
 
-  vec3 hsvNoise2 = vec3(noise * 0.14, -noise * 0.45, 0.0);
-  vec3 hsv4 = vec3(0.88, 0.45, 0.995) + hsvNoise2;
+  vec3 hsvNoise2 = vec3(noise * -0.02, noise * 0.2, noise * 0.1);
+  vec3 hsv4 = vec3(0.1, 0.27, 1.0) + hsvNoise2;
   vec3 edgeColor = convertHsvToRgb(hsv4) * edge;
 
   if (opacity < 0.01) {
