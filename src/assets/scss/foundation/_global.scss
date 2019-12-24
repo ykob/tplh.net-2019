@@ -31,3 +31,7 @@ ul, ol {
 img {
   vertical-align: top;
 }
+::selection {
+  color: rgba($color-text, 0.5);
+  background-color: rgba(#000, 0.5);
+}
