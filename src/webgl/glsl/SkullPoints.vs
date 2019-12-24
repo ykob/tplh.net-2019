@@ -42,7 +42,7 @@ void main() {
 
   vColor = convertHsvToRgb(
     vec3(
-      0.55 + delay * 0.33,
+      0.08 + delay * 0.02,
       0.8,
       0.4
       )
