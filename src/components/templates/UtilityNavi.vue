@@ -1,10 +1,12 @@
 <script>
   import SplitStr from '@/components/atoms/SplitStr.vue';
+  import Link from '@/components/organisms/Link.vue';
 
   export default {
     name: 'UtilityNavi',
     components: {
       SplitStr,
+      Link,
     },
   };
 </script>
@@ -18,13 +20,19 @@
       v-if = '$store.state.isLoaded'
       )
       router-link.p-utility-navi__item(
+        tag = 'div'
         to = '/about/'
+        :disabled = '$route.path === "/about/"'
         )
-        SplitStr.p-utility-navi__typos(
-          label = 'who we are'
-          :step = '2'
-          childClassname = 'p-utility-navi__typo'
+        Link(
+          :vertical = 'true'
+          :isCurrent = '$route.path === "/about/"'
           )
+          SplitStr.p-utility-navi__typos(
+            label = 'who we are'
+            :step = '2'
+            childClassname = 'p-utility-navi__typo'
+            )
 </template>
 
 <style lang="scss">
@@ -36,7 +44,6 @@
     line-height: 1;
     letter-spacing: 0.15em;
     text-align: right;
-    writing-mode: vertical-rl;
     @include fontSizeAll(12, 12, 12);
     @include l-more-than-mobile {
       bottom: 50px;
@@ -46,15 +53,13 @@
       bottom: 20px;
     }
     &__item {
+      cursor: pointer;
       display: block;
       pointer-events: auto;
       position: relative;
-      text-decoration: none;
-    }
-    &__typos {
-    }
-    &__typo {
-      display: inline-block;
+      &[disabled] {
+        pointer-events: none;
+      }
     }
 
     // Transition

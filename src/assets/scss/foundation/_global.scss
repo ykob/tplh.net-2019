@@ -3,6 +3,7 @@ html {
 }
 body {
   min-height: 100%;
+  overflow: hidden;
   color: $color-text;
   font-family: 'EngraversMTPro';
   -webkit-font-smoothing: antialiased;
