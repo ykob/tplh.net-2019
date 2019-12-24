@@ -159,6 +159,7 @@
       &:before {
         width: 9px;
         height: 9px;
+        backface-visibility: hidden;
         content: '';
         display: block;
         box-sizing: border-box;
@@ -169,7 +170,6 @@
         transform: rotate(45deg);
         transition-duration: .6s;
         transition-property: background-color;
-        backface-visibility: hidden;
       }
       &.is-shown {
         opacity: 1;
