@@ -1,7 +1,23 @@
 <script>
-  import zeroPadding from 'js-util/zeroPadding';
-
   import SplitStr from '@/components/atoms/SplitStr.vue'
+
+  const romanize = (num) => {
+    if (isNaN(num)) return NaN;
+
+    const digits = String(+num).split('');
+    const key = [
+      '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM',
+      '', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC',
+      '', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'
+    ];
+    let roman = '';
+    let i = 3;
+
+    while (i--) {
+      roman = (key[+digits.pop() + (i * 10)] || '') + roman;
+    }
+    return Array(+digits.join('') + 1).join('M') + roman;
+  }
 
   export default {
     name: 'ContactTitle',
@@ -32,7 +48,7 @@
     },
     computed: {
       getNumber() {
-        return `#${zeroPadding(this.index + 1, 2)}`;
+        return `#${romanize(this.index + 1)}`;
       }
     },
   };
@@ -61,6 +77,7 @@
         .p-work-outline__link-line
         a.p-work-outline__link(
           :href = 'href'
+          target = '_blank'
           )
           |Launch
 </template>
@@ -166,8 +183,10 @@
       }
     }
     &__content {
+      box-sizing: border-box;
       @include l-more-than-mobile {
         width: 50%;
+        padding-right: 20px;
       }
       @include l-mobile {
       }
@@ -176,12 +195,6 @@
       line-height: (25 / 12);
       white-space: pre-wrap;
       @include fontSizeAll(12, 12, 12);
-      @include l-more-than-mobile {
-        margin-bottom: 20px;
-      }
-      @include l-mobile {
-        margin-bottom: 10px;
-      }
 
       // Transition
       transition-property: opacity;
@@ -205,6 +218,15 @@
       line-height: 2;
       white-space: pre-wrap;
       @include fontSizeAll(10, 10, 10);
+      &:before {
+        width: 5px;
+        height: 1px;
+        content: '';
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        background-color: $color-text;
+      }
 
       // Transition
       transition-property: opacity;
@@ -224,8 +246,49 @@
         transition-delay: 0.2s;
       }
     }
+    &__link-wrap {
+      position: relative;
+      @include l-more-than-mobile {
+        width: 50%;
+      }
+      @include l-mobile {
+      }
+    }
+    &__link-line {
+      width: calc(100% - 110px);
+      height: 1px;
+      position: absolute;
+      top: calc(25 / 12 * 0.5em - 1px);
+      left: 0;
+      background-color: rgba($color-text, 0.5);
+
+      // Transition
+      transition-property: transform, opacity;
+      .show-enter & {
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+      .show-enter-to & {
+        transform: scaleX(1);
+        transform-origin: left;
+        transition-duration: .7s;
+        transition-delay: 1.1s;
+        transition-timing-function: $easeOutCirc;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: scaleX(0);
+        transform-origin: right;
+        transition-duration: .7s;
+        transition-delay: 0.2s;
+        transition-timing-function: $easeOutCirc;
+      }
+    }
     &__link {
-      line-height: (20 / 12);
+      line-height: (25 / 12);
+      position: absolute;
+      top: 0;
+      right: 0;
       @include fontSizeAll(12, 12, 12);
 
       // Transition
@@ -236,7 +299,7 @@
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1.1s;
+        transition-delay: 1.3s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
