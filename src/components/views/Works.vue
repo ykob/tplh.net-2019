@@ -2,7 +2,7 @@
   import _ from 'lodash';
   import sleep from 'js-util/sleep'
 
-  import WorkOutline from '@/components/atoms/WorkOutline.vue';
+  import WorkOutline from '@/components/organisms/WorkOutline.vue';
 
   export default {
     name: 'Works',

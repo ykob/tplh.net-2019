@@ -46,11 +46,29 @@
         default: '',
       },
     },
+    data() {
+      return {
+        isOvered: false
+      }
+    },
     computed: {
       getNumber() {
         return `#${romanize(this.index + 1)}`;
+      },
+      linkLineClassnames() {
+        return {
+          'is-overed': this.isOvered === true
+        }
       }
     },
+    methods: {
+      enter() {
+        this.isOvered = true;
+      },
+      leave() {
+        this.isOvered = false;
+      }
+    }
   };
 </script>
 
@@ -74,10 +92,14 @@
           br
           |{{ credit }}
       .p-work-outline__link-wrap
-        .p-work-outline__link-line
+        .p-work-outline__link-line(
+          :class = 'linkLineClassnames'
+          )
         a.p-work-outline__link(
           :href = 'href'
           target = '_blank'
+          @mouseenter = 'enter'
+          @mouseleave = 'leave'
           )
           |Launch
 </template>
@@ -258,12 +280,14 @@
       width: calc(100% - 110px);
       height: 1px;
       position: absolute;
-      top: calc(25 / 12 * 0.5em - 1px);
+      top: calc(25 / 12 * 0.5em - 2px);
       left: 0;
       background-color: rgba($color-text, 0.5);
 
       // Transition
-      transition-property: transform, opacity;
+      transition-duration: .7s;
+      transition-property: width, transform, opacity;
+      transition-timing-function: $easeOutCirc;
       .show-enter & {
         transform: scaleX(0);
         transform-origin: left;
@@ -271,17 +295,16 @@
       .show-enter-to & {
         transform: scaleX(1);
         transform-origin: left;
-        transition-duration: .7s;
         transition-delay: 1.1s;
-        transition-timing-function: $easeOutCirc;
       }
       .view-leave-to &,
       .show-leave-to & {
         transform: scaleX(0);
         transform-origin: right;
-        transition-duration: .7s;
         transition-delay: 0.2s;
-        transition-timing-function: $easeOutCirc;
+      }
+      &.is-overed {
+        width: calc(100% + 10px);
       }
     }
     &__link {
