@@ -65,11 +65,24 @@
             }
           } else if (name === 'works') {
             if (n.pixelY > 0) {
-              this.$store.commit('transitNextWorks');
+              if (this.$store.state.currentWorksId < works.length - 1) {
+                this.$store.commit('transitNextWorks');
+                this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+              } else {
+                this.$router.push(`/about/`);
+              }
             } else {
-              this.$store.commit('transitPrevWorks');
+              if (this.$store.state.currentWorksId > 0) {
+                this.$store.commit('transitPrevWorks');
+                this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+              } else {
+                this.$router.push(`/`);
+              }
             }
-            this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+          } else if (name === 'about') {
+            if (n.pixelY < 0) {
+              this.$router.push(`/works/${works[works.length - 1].key}/`);
+            }
           }
 
           // Prevent repeated wheel events fire with a timer.
