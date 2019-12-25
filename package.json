@@ -18,7 +18,6 @@
     "js-util": "git://github.com/ykob/js-util.git",
     "lodash": "^4.17.15",
     "normalize-wheel": "^1.0.1",
-    "perfect-scrollbar": "^1.4.0",
     "three": "^0.109.0",
     "vue": "^2.6.10",
     "vue-meta": "^2.3.1",

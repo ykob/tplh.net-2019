@@ -48,8 +48,8 @@ export default class WebGLContent {
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
       PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
-      PromiseTextureLoader(require('@/assets/img/webgl/noise_skull.png')),
-      PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.png')),
+      PromiseTextureLoader(require('@/assets/img/webgl/noise.jpg')),
+      PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.jpg')),

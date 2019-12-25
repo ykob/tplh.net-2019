@@ -1,6 +1,4 @@
 <script>
-import PerfectScrollbar from 'perfect-scrollbar'
-
 export default {
   name: 'AboutDescription',
   components: {},
@@ -8,24 +6,11 @@ export default {
   },
   data() {
     return {
-      ps: null,
     }
   },
   mounted() {
-    const { y } = this.$store.state.resolution;
-    this.ps = new PerfectScrollbar(this.$refs.wrap, {
-      swipeEasing: true,
-      suppressScrollX: true,
-    });
   },
   computed: {
-    getPadding() {
-      const { y } = this.$store.state.resolution;
-      return {
-        paddingTop: `${y * 0.467 * 0.15}px`,
-        paddingBottom: `${y * 0.467 * 0.15}px`,
-      }
-    }
   }
 }
 </script>
@@ -35,9 +20,7 @@ export default {
   ref = 'wrap'
   :class = '{ "is-shown" : isShown === true }'
   )
-  .p-about-description__in(
-    :style = 'getPadding'
-    )
+  .p-about-description__in
     h2
       |About Me
     p
