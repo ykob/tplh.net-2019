@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "start": "npm run dev",
-    "dev"  : "vue-cli-service serve --mode development",
+    "dev": "vue-cli-service serve --mode development",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {
     "core-js": "^2.6.11",
+    "dat.gui": "^0.7.6",
     "easing-js": "git://github.com/danro/easing-js.git",
     "glsl-inverse": "^1.0.0",
     "glsl-matrix": "git://github.com/ykob/glsl-matrix.git",
