@@ -19,6 +19,7 @@ void main() {
     vUv.x * imgRatio.x + (1.0 - imgRatio.x) * 0.5,
     vUv.y * imgRatio.y + (1.0 - imgRatio.y) * 0.5
   );
+  vec2 p = vUv * 2.0 - 1.0;
 
   float noiseR = texture2D(noiseTex, vUpdateUv - vec2(time * 0.04, 0.0)).r;
   float noiseG = texture2D(noiseTex, vUpdateUv + vec2(time * 0.04, 0.0)).g;
@@ -30,7 +31,7 @@ void main() {
   float maskEdge = smoothstep(0.04, 0.19, mask) * (1.0 - smoothstep(0.19, 0.34, mask));
 
   vec4 imgPrev = texture2D(imgPrevTex, imgUv);
-  vec4 imgNext = texture2D(imgNextTex, imgUv);
+  vec4 imgNext = texture2D(imgNextTex, imgUv - p * 0.1 * (1.0 - easeTransition));
 
   vec3 edgeColor = convertHsvToRgb(
     vec3(1.1 - noiseG * 0.1, 0.45, 0.45)
