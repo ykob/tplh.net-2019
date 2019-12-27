@@ -52,8 +52,8 @@ export default class WebGLContent {
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_warpdrive.jpg')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.jpg')),
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;

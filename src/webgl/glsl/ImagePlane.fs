@@ -15,13 +15,9 @@ varying float vTime;
 #pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb)
 
 void main() {
-  vec2 ratio = vec2(
-    min(imgRatio.x / imgRatio.y / 3.0 * 2.0, 1.0),
-    min(imgRatio.y / imgRatio.x / 2.0 * 3.0, 1.0) / 3.0 * 2.0
-  );
   vec2 imgUv = vec2(
-    vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-    vUv.y * ratio.y  + (1.0 - ratio.y) * 0.5
+    vUv.x * imgRatio.x + (1.0 - imgRatio.x) * 0.5,
+    vUv.y * imgRatio.y + (1.0 - imgRatio.y) * 0.5
   );
 
   float noiseR = texture2D(noiseTex, vUpdateUv - vec2(time * 0.04, 0.0)).r;
@@ -33,8 +29,8 @@ void main() {
   float maskNext = smoothstep(0.19, 0.21, mask);
   float maskEdge = smoothstep(0.04, 0.19, mask) * (1.0 - smoothstep(0.19, 0.34, mask));
 
-  vec4 imgPrev = texture2D(imgPrevTex, imgUv * (0.95 - 0.05 * easeTransition) + 0.025 + 0.025 * easeTransition);
-  vec4 imgNext = texture2D(imgNextTex, imgUv * (1.0 - 0.05 * easeTransition) + 0.025 * easeTransition);
+  vec4 imgPrev = texture2D(imgPrevTex, imgUv);
+  vec4 imgNext = texture2D(imgNextTex, imgUv);
 
   vec3 edgeColor = convertHsvToRgb(
     vec3(1.1 - noiseG * 0.1, 0.45, 0.45)
