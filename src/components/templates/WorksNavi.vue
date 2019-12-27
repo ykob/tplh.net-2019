@@ -8,20 +8,28 @@
     },
     props: {
     },
+    data() {
+      return {
+        isOvered: false
+      }
+    },
     computed: {
       classnames() {
-        switch (this.$store.state.positionFromWorks) {
-          case -1:
-            return 'is-previous';
-          case 0:
-          default:
-            return 'is-current';
-          case 1:
-            return 'is-next';
+        return {
+          'is-previous': this.$store.state.positionFromWorks === -1,
+          'is-current': this.$store.state.positionFromWorks === 0,
+          'is-next': this.$store.state.positionFromWorks === 1,
+          'is-overed': this.isOvered === true
         }
-      },
+      }
     },
     methods: {
+      enter() {
+        this.isOvered = true;
+      },
+      leave() {
+        this.isOvered = false;
+      },
       getWorksUrl(i) {
         return `/works/${this.$store.state.works[i].key}/`;
       },
@@ -48,10 +56,15 @@
     )
     .p-works-navi
       router-link.p-works-navi__label(
+        tag = 'div'
         :to = 'getWorksUrl(0)'
         :class = 'classnames'
         )
-        |Works
+        a(
+          @mouseenter = 'enter'
+          @mouseleave = 'leave'
+          )
+          |Works
       .p-works-navi__line.p-works-navi__line--upper(
         :class = 'classnames'
         )
@@ -104,6 +117,7 @@
       height: calc(50% - 60px);
       position: absolute;
       right: 50%;
+      pointer-events: none;
       background-color: rgba($color-text, 0.2);
       transition-duration: 1.2s;
       transition-timing-function: $easeOutCirc;
@@ -112,6 +126,9 @@
         top: 0;
 
         // Interaction
+        &.is-overed {
+          height: calc(50% + 60px);
+        }
         &.is-current {
           height: 0;
         }
@@ -123,6 +140,9 @@
         bottom: 0;
 
         // Interaction
+        &.is-overed {
+          height: calc(50% + 60px);
+        }
         &.is-current {
           height: 100%;
         }
