@@ -20,8 +20,6 @@
     created() {
     },
     mounted() {
-      this.$store.commit('enableDarkColor', false);
-      this.$store.commit('showGlobalTitle', false);
       this.$store.commit('showSkull', true);
       this.$store.commit('showWorksImage', 0);
       this.$store.commit('setPositionFromWorks', -1);

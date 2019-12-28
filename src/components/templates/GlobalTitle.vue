@@ -13,7 +13,7 @@
     name = 'show'
     )
     .p-global-title(
-      v-if = '$store.state.isShownGlobalTitle'
+      v-if = '$store.state.isLoaded === true'
       )
       router-link.p-global-title__wrap(
         to = '/'

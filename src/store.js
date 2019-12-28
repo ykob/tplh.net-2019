@@ -18,20 +18,11 @@ export default new Vuex.Store({
     currentWorksId: 0,
     positionFromWorks: -1,
     isLoaded: false,
-    isEnabledDarkColor: false,
-    isShownGlobalTitle: false,
   },
   mutations: {
     transit (state, opts) {
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
-    },
-    enableDarkColor (state, bool) {
-      state.isEnabledDarkColor = bool;
-      state.webgl.changeColorDark(bool);
-    },
-    showGlobalTitle (state, bool) {
-      state.isShownGlobalTitle = bool;
     },
     showSkull (state, bool) {
       state.webgl.showSkull(bool);

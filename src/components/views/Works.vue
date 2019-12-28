@@ -26,8 +26,6 @@
         { key: this.$route.params.key }
       );
 
-      this.$store.commit('enableDarkColor', true);
-      this.$store.commit('showGlobalTitle', true);
       this.$store.commit('showSkull', false);
       this.$store.commit('showWorksImage', index + 1);
       this.$store.commit('setPositionFromWorks', 0);
