@@ -71,7 +71,9 @@
       .p-works-navi__line.p-works-navi__line--lower(
         :class = 'classnames'
         )
-      .p-works-navi__point.p-works-navi__point--upper
+      .p-works-navi__point.p-works-navi__point--upper(
+        :class = 'classnames'
+        )
       .p-works-navi__point.p-works-navi__point--lower
       router-link.p-works-navi__anchor(
         v-for = 'anchor, index in $store.state.works'
@@ -158,8 +160,15 @@
       right: calc(50% - 1px);
       border-radius: 50%;
       background-color: rgba($color-text, 0.5);
+      transition-duration: .7s;
+      transition-property: opacity;
       &--upper {
         top: -1px;
+
+        // Interaction
+        &.is-current {
+          opacity: 0;
+        }
       }
       &--lower {
         bottom: -1px;
