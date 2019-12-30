@@ -110,7 +110,7 @@
 
       // Interaction
       &.is-current {
-        top: 10px;
+        top: 0;
         pointer-events: none;
       }
     }
@@ -146,7 +146,7 @@
           height: calc(50% + 60px);
         }
         &.is-current {
-          height: 100%;
+          height: calc(100% + 10px);
         }
         &.is-next {
           height: 0;
