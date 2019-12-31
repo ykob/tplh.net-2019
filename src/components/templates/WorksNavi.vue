@@ -21,6 +21,17 @@
           'is-next': this.$store.state.positionFromWorks === 1,
           'is-overed': this.isOvered === true
         }
+      },
+      lineProgressStyles() {
+        return {
+          height:
+            (this.$store.state.positionFromWorks === 0)
+              ?
+                `calc(50% + ${
+                  (this.$store.state.currentWorksId - (this.$store.state.works.length - 1) / 2) * 50
+                }px + 10px)`
+              : undefined,
+        }
       }
     },
     methods: {
@@ -71,6 +82,10 @@
       .p-works-navi__line.p-works-navi__line--lower(
         :class = 'classnames'
         )
+      .p-works-navi__line.p-works-navi__line--progress(
+        :class = 'classnames'
+        :style = 'lineProgressStyles'
+        )
       .p-works-navi__point.p-works-navi__point--upper(
         :class = 'classnames'
         )
@@ -120,10 +135,12 @@
       position: absolute;
       right: 50%;
       pointer-events: none;
-      background-color: rgba($color-text, 0.2);
       transition-duration: 1.2s;
       transition-timing-function: $easeOutCirc;
-      transition-property: height;
+      &--upper, &--lower {
+        background-color: rgba($color-text, 0.2);
+        transition-property: height;
+      }
       &--upper {
         top: 0;
 
@@ -150,6 +167,17 @@
         }
         &.is-next {
           height: 0;
+        }
+      }
+      &--progress {
+        height: 0;
+        top: -10px;
+        background-color: rgba($color-text, 0.8);
+        transition-property: height, opacity;
+
+        // Interaction
+        &.is-current {
+          top: -10px;
         }
       }
     }

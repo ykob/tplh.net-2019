@@ -43,6 +43,10 @@
           { key: key }
         );
         this.$store.commit('showWorksImage', index + 1);
+        this.$store.commit('transit', {
+          globalId: 1,
+          currentWorksId: index
+        });
       }
     },
   }
