@@ -69,7 +69,7 @@
                 this.$store.commit('transitNextWorks');
                 this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
               } else {
-                this.$router.push(`/about/`);
+                this.$router.push(`/who-i-am/`);
               }
             } else {
               if (this.$store.state.currentWorksId > 0) {
@@ -79,7 +79,7 @@
                 this.$router.push(`/`);
               }
             }
-          } else if (name === 'about') {
+          } else if (name === 'who-i-am') {
             if (n.pixelY < 0) {
               this.$router.push(`/works/${works[works.length - 1].key}/`);
             }

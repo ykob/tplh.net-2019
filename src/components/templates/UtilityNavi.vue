@@ -21,15 +21,15 @@
       )
       router-link.p-utility-navi__item(
         tag = 'div'
-        to = '/about/'
-        :disabled = '$route.path === "/about/"'
+        to = '/who-i-am/'
+        :disabled = '$route.name === "who-i-am"'
         )
         Link(
           :vertical = 'true'
-          :isCurrent = '$route.path === "/about/"'
+          :isCurrent = '$route.name === "who-i-am"'
           )
           SplitStr.p-utility-navi__typos(
-            label = 'who we are'
+            label = 'Who I am'
             :step = '2'
             childClassname = 'p-utility-navi__typo'
             )

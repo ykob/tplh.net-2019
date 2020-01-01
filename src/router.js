@@ -4,7 +4,7 @@ import Meta from 'vue-meta'
 
 import Home from './components/views/Home.vue'
 import Works from './components/views/Works.vue'
-import About from './components/views/About.vue'
+import WhoIAm from './components/views/WhoIAm.vue'
 
 Vue.use(Router)
 Vue.use(Meta)
@@ -24,9 +24,9 @@ export default new Router({
       component: Works
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/who-i-am',
+      name: 'who-i-am',
+      component: WhoIAm
     },
   ]
 })

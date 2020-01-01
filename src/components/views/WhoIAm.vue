@@ -4,9 +4,9 @@ import AboutTitle from '@/components/atoms/AboutTitle.vue'
 import AboutDescription from '@/components/atoms/AboutDescription.vue'
 
 export default {
-  name: 'About',
+  name: 'WhoIAm',
   metaInfo: {
-    title: 'About / ',
+    title: 'Who I am / ',
     meta: [
       {
         name: 'description',
