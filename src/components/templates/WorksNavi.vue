@@ -10,7 +10,8 @@
     },
     data() {
       return {
-        isOvered: false
+        isOvered: false,
+        isOveredAnchor: -1,
       }
     },
     computed: {
@@ -44,6 +45,12 @@
       getWorksUrl(i) {
         return `/works/${this.$store.state.works[i].key}/`;
       },
+      anchorEnter(i) {
+        this.isOveredAnchor = i;
+      },
+      anchorLeave() {
+        this.isOveredAnchor = -1;
+      },
       anchorStyles(i) {
         return {
           top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px)`,
@@ -55,7 +62,19 @@
           'is-shown': this.$store.state.positionFromWorks === 0,
           'is-current': this.$store.state.works[i].key === this.$route.params.key,
         }
-      }
+      },
+      anchorLabelStyles(i) {
+        const strLength = this.$store.state.works[i].title.length;
+        return {
+          height: `${strLength}em`,
+          top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px - ${strLength / 2}em)`,
+        }
+      },
+      anchorLabelClassnames(i) {
+        return {
+          'is-overed': this.isOveredAnchor === i,
+        }
+      },
     }
   };
 </script>
@@ -67,15 +86,12 @@
     )
     .p-works-navi
       router-link.p-works-navi__label(
-        tag = 'div'
         :to = 'getWorksUrl(0)'
         :class = 'classnames'
+        @mouseenter.native = 'enter'
+        @mouseleave.native = 'leave'
         )
-        a(
-          @mouseenter = 'enter'
-          @mouseleave = 'leave'
-          )
-          |Works
+        |Works
       .p-works-navi__line.p-works-navi__line--upper(
         :class = 'classnames'
         )
@@ -95,7 +111,15 @@
         :to = 'getWorksUrl(index)'
         :style = 'anchorStyles(index)'
         :class = 'anchorClassnames(index)'
+        @mouseenter.native = 'anchorEnter(index)'
+        @mouseleave.native = 'anchorLeave'
         )
+      .p-works-navi__anchor-label(
+        v-for = 'anchor, index in $store.state.works'
+        :style = 'anchorLabelStyles(index)'
+        :class = 'anchorLabelClassnames(index)'
+        )
+        |{{ anchor.title }}
 </template>
 
 <style lang="scss">
@@ -236,6 +260,27 @@
         &:before {
           background-color: $color-text;
         }
+      }
+    }
+    &__anchor-label {
+      height: 20em;
+      position: absolute;
+      @include fontSizeAll(12, 12, 12);
+      text-align: center;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.15em;
+      @include l-more-than-mobile {
+        left: 25px;
+      }
+      @include l-mobile {
+      }
+
+      // Interaction
+      opacity: 0;
+      transition-duration: .6s;
+      transition-property: opacity;
+      &.is-overed {
+        opacity: 1;
       }
     }
   }
