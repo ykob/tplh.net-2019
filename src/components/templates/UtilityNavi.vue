@@ -103,6 +103,7 @@
     &__line {
       width: 1px;
       height: 0;
+      pointer-events: none;
       position: absolute;
       right: 50%;
       bottom: -10px;

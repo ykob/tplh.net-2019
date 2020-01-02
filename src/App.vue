@@ -130,7 +130,9 @@
       v-if = '$store.state.isLoaded === true'
       )
       router-view
-    Guide
+    Guide(
+      v-if = 'false'
+      )
 </template>
 
 <style lang="scss">
