@@ -8,7 +8,7 @@
   import WorksNavi from '@/components/templates/WorksNavi.vue';
   import Guide from '@/components/templates/Guide.vue';
 
-  const INTERVAL_TO_FIRE_WHEEL = 1500;
+  const INTERVAL_TO_FIRE_WHEEL = 1000;
 
   export default {
     name: 'App',
