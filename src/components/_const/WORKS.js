@@ -20,4 +20,18 @@ export default [
     credit: 'Client : HASSYADAI Inc.\nAgency : BEES/HONEY INC\nDeveloper : Yoichi Kobayashi',
     href: 'https://hassyadai.com',
   },
+  {
+    key: 'imago',
+    title: 'IMAGO',
+    description: 'The work of the paint artist Hiroshi Yoshida. I expressed it as a 3D world on the web.',
+    credit: 'Client : Hiroshi Yoshida\nDeveloper : Yoichi Kobayashi',
+    href: 'http://hiroshi-yoshida.noor.jp/imago/',
+  },
+  {
+    key: 'best-film-2018',
+    title: 'Filmarks Best Film of 2018',
+    description: 'A special site launched at the end of the year of 2018 by Japanese film review service Filmarks.\n* This site is already closed.',
+    credit: 'Client : TSUMIKI INC.\nDeveloper : Yoichi Kobayashi',
+    href: 'https://thefwa.com/cases/filmarks-best-film-of-2018-p2',
+  },
 ]

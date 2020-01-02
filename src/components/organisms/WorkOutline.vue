@@ -1,6 +1,4 @@
 <script>
-  import SplitStr from '@/components/atoms/SplitStr.vue'
-
   const romanize = (num) => {
     if (isNaN(num)) return NaN;
 
@@ -21,9 +19,6 @@
 
   export default {
     name: 'ContactTitle',
-    components: {
-      SplitStr,
-    },
     props: {
       index: {
         type: Number,
@@ -77,12 +72,8 @@
     .p-work-outline__number(
       )
       |{{ getNumber }}
-    SplitStr.p-work-outline__title(
-      tag = 'h1'
-      :label = 'title'
-      :step = '2'
-      childClassname = 'p-work-outline__title-typo'
-      )
+    h1.p-work-outline__title
+      |{{ title }}
     .p-work-outline__content-wrap
       .p-work-outline__content
         .p-work-outline__description
@@ -133,10 +124,10 @@
       @include fontSizeAll(20, 20, 20);
       text-transform: uppercase;
       @include l-more-than-mobile {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
       }
       @include l-mobile {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
 
       // Transition
@@ -158,43 +149,35 @@
       }
     }
     &__title {
-      line-height: .9;
+      line-height: 1.2;
       margin-top: 0;
       margin-bottom: 0;
       @include fontSizeAll(28, 28, 28);
       letter-spacing: 0.14em;
       @include l-more-than-mobile {
         width: 50%;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
       @include l-mobile {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
-    }
-    &__title-typo {
+
       // Transition
-      transition-property: opacity, transform;
+      transition-property: opacity;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(0, .4em, 0) rotateY(70deg);
       }
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
+        transition-delay: 1s;
         transition-timing-function: $easeOutQuad;
-        transform: translate3d(0, 0, 0) rotateY(0);
-        @for $i from 0 through 200 {
-          &--#{$i} {
-            transition-delay: $i * 0.01 + 0.5s;
-          }
-        }
       }
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
         transition-duration: .6s;
-        transition-timing-function: $easeInQuad;
-        transform: translate3d(0, -.6em, 0) rotateY(-70deg);
+        transition-delay: 0.1s;
       }
     }
     &__content-wrap {
