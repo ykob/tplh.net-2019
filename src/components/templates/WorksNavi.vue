@@ -6,8 +6,6 @@
     components: {
       SplitStr,
     },
-    props: {
-    },
     data() {
       return {
         isOvered: false,
