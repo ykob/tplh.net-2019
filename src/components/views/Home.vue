@@ -20,6 +20,7 @@
     created() {
     },
     mounted() {
+      this.$store.commit('changeBackground', false);
       this.$store.commit('showSkull', true);
       this.$store.commit('showWorksImage', 0);
       this.$store.commit('setPositionFromWorks', -1);

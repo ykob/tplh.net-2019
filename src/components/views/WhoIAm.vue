@@ -25,6 +25,7 @@ export default {
   created() {
   },
   mounted() {
+    this.$store.commit('changeBackground', true);
     this.$store.commit('showSkull', false);
     this.$store.commit('showWorksImage', 0);
     this.$store.commit('setPositionFromWorks', 1);

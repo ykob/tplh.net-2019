@@ -24,6 +24,9 @@ export default new Vuex.Store({
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
     },
+    changeBackground (state, bool) {
+      state.webgl.changeBackground(bool);
+    },
     showSkull (state, bool) {
       state.webgl.showSkull(bool);
     },
@@ -44,7 +47,7 @@ export default new Vuex.Store({
     },
     setPositionFromWorks (state, number) {
       state.positionFromWorks = number;
-    },
+    }
   },
   actions: {
     // transit (context, opts) {

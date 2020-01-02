@@ -91,6 +91,9 @@ export default class WebGLContent {
   pause() {
     clock.stop();
   }
+  changeBackground (bool) {
+    bg.change(bool);
+  }
   showSkull(bool) {
     if (bool === true) {
       skull.show();

@@ -69,7 +69,7 @@ export default class Background extends THREE.Mesh {
 
     this.material.uniforms.time.value += time;
   }
-  changeColorDark(bool) {
+  change(bool) {
     this.alphaStart = this.material.uniforms.alpha.value;
     this.alphaEnd = (bool === true) ? 1 : 0;
     this.time = 0;
