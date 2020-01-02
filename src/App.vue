@@ -6,6 +6,7 @@
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
   import UtilityNavi from '@/components/templates/UtilityNavi.vue';
   import WorksNavi from '@/components/templates/WorksNavi.vue';
+  import Guide from '@/components/templates/Guide.vue';
 
   const INTERVAL_TO_FIRE_WHEEL = 1500;
 
@@ -19,6 +20,7 @@
       GlobalTitle,
       UtilityNavi,
       WorksNavi,
+      Guide,
     },
     data: function() {
       return {
@@ -128,6 +130,7 @@
       v-if = '$store.state.isLoaded === true'
       )
       router-view
+    Guide
 </template>
 
 <style lang="scss">
