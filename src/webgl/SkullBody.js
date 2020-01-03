@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeOutCirc } from 'easing-js';
+import { easeOutCirc, easeInOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/SkullBody.vs';
@@ -9,6 +9,8 @@ const DURATION_SHOW = 5;
 const DELAY_SHOW = 1;
 const DURATION_HIDE = 1.4;
 const DELAY_HIDE = 0;
+const DURATION_SCREAM = 4;
+const DELAY_SCREAM = 3;
 
 export default class SkullBody extends THREE.Group {
   constructor(geometry1, geometry2) {
@@ -29,7 +31,7 @@ export default class SkullBody extends THREE.Group {
         alpha: {
           type: 'f',
           value: 0
-        },
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,
@@ -46,6 +48,8 @@ export default class SkullBody extends THREE.Group {
     this.name = 'SkullBody';
     this.timeShow = 0;
     this.timeHide = 0;
+    this.timeScream = 0;
+    this.timeLoop = -MathEx.radians(90);
     this.isActive = false;
     this.isShown = false;
     this.isHidden = false;
@@ -60,27 +64,25 @@ export default class SkullBody extends THREE.Group {
     this.isHidden = false;
   }
   hide() {
+    this.isShown = false;
     this.isHidden = true;
   }
   update(time, camera) {
     if (this.isActive === false) return;
     this.material.uniforms.time.value += time;
-    this.head.rotation.set(MathEx.radians(-(Math.sin(this.material.uniforms.time.value) * 0.7 + 0.7) * 8), 0, 0);
-    this.jaw.rotation.set(MathEx.radians((Math.sin(this.material.uniforms.time.value) * 0.7 + 0.7) * 8), 0, 0);
 
     // for the showing effect.
     if (this.isShown === true) {
       this.timeShow += time;
-      if (this.timeShow - DELAY_SHOW >= DURATION_SHOW) {
-        this.isShown = false;
-      }
+      this.timeScream += time;
     }
     // for the hiding effect.
     if (this.isHidden === true) {
       this.timeHide += time;
-      if (this.timeHide - DELAY_HIDE >= DURATION_HIDE) {
-        this.isHidden = false;
-      }
+    }
+    // for the loop animation
+    if (this.timeScream >= DELAY_SCREAM + DURATION_SCREAM) {
+      this.timeLoop += time;
     }
 
     // calculation the alpha.
@@ -88,8 +90,28 @@ export default class SkullBody extends THREE.Group {
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
 
+    // scream
+    const alphaScream = easeInOutCirc(
+      MathEx.smoothstep(DELAY_SCREAM, DELAY_SCREAM + DURATION_SCREAM * 0.33, this.timeScream)
+      * (1 - MathEx.smoothstep(DELAY_SCREAM + DURATION_SCREAM * 0.33, DELAY_SCREAM + DURATION_SCREAM, this.timeScream))
+    );
+
+    const shake = alphaScream * 0.05;
+    const shakeRadian = MathEx.radians(Math.random() * 360);
+    this.position.set(
+      Math.cos(shakeRadian) * shake,
+      Math.sin(shakeRadian) * shake,
+      0
+    );
+
+    // loop animation
+    const loopDegree = (Math.sin(this.timeLoop) * 0.5 + 0.5) * 8;
+
+    this.head.rotation.set(MathEx.radians(alphaScream * -24 - loopDegree), 0, 0);
+    this.jaw.rotation.set(MathEx.radians(alphaScream * 24 + loopDegree), 0, 0);
+
     // calculation the scale.
-    const scale = (alphaShow * 0.3 + 0.7) + (alphaHide * 0.1);
+    const scale = (alphaShow * 0.3 + 0.7) + (alphaHide * 0.1) + alphaScream * 0.2;
     this.scale.set(scale, scale, scale);
   }
 }
