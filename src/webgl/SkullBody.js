@@ -90,6 +90,14 @@ export default class SkullBody extends THREE.Group {
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
 
+    // Frist rotate
+    const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
+    this.rotation.set(
+      MathEx.radians(-15 + (1.0 - alphaRaise) * 60),
+      MathEx.radians(15),
+      MathEx.radians(-25)
+    );
+
     // scream
     const alphaScream = easeInOutCirc(
       MathEx.smoothstep(DELAY_SCREAM, DELAY_SCREAM + DURATION_SCREAM * 0.33, this.timeScream)

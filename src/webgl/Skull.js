@@ -50,13 +50,6 @@ export default class Skull extends THREE.Group {
     this.time += time;
     this.radian += time;
 
-    // rotate skull.
-    this.body.rotation.set(
-      MathEx.radians(-15),
-      MathEx.radians(15),
-      MathEx.radians(-20)
-    );
-
     // update children.
     this.body.update(time, camera);
     this.aura.update(time, camera);
