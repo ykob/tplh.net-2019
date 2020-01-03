@@ -194,7 +194,7 @@
       &--progress {
         height: 0;
         top: -10px;
-        background-color: rgba($color-text, 0.8);
+        background-color: rgba($color-text, 0.5);
         transition-property: height, opacity;
 
         // Interaction

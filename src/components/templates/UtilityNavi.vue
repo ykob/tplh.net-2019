@@ -123,7 +123,7 @@
     &__bar {
       width: 1px;
       top: 0;
-      background-color: rgba($color-text, 0.8);
+      background-color: rgba($color-text, 0.5);
     }
     &__point {
       width: 3px;
