@@ -6,6 +6,7 @@ uniform vec2 resolution;
 uniform float radius;
 uniform sampler2D postEffectTex;
 uniform sampler2D noiseTex;
+uniform float alpha;
 
 varying vec3 vPosition;
 varying vec2 vUv;
@@ -27,7 +28,7 @@ void main() {
   float mask1 = (texColor1.r + noise) / 2.0;
   float mask2 = (texColor2.r + (noise * 2.0 - 1.0));
   float mask3 = texColor3.r + noise * 0.5;
-  float mask = (mask1 * 1.5 + mask2 * 0.3) / 1.8 * mask3;
+  float mask = (mask1 * 1.5 + mask2 * 0.3) / 1.8 * mask3 * pow(alpha, 2.0);
 
   float noise4 = texture2D(noiseTex, vUv * 1.6 - vec2(0.5, time * 1.2)).r;
   vec3 hsvNoise = vec3(noise4 * -0.035, noise4 * 0.2, -noise4 * 0.5);

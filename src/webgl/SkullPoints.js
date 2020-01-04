@@ -7,7 +7,7 @@ import fs from '@/webgl/glsl/SkullPoints.fs';
 const DURATION = 4;
 const NUM = 360;
 const DURATION_SHOW = 2;
-const DELAY_SHOW = 2;
+const DELAY_SHOW = 4;
 const DURATION_HIDE = 1;
 const DELAY_HIDE = 0;
 
@@ -80,7 +80,7 @@ export default class SkullPoints extends THREE.Points {
     this.material.uniforms.noiseTex.value = noiseTex;
   }
   show() {
-    this.timeShow = 0;
+    if (this.timeShow > 0) this.timeShow = DELAY_SHOW / 2;
     this.timeHide = 0;
     this.isShown = true;
     this.isHidden = false;

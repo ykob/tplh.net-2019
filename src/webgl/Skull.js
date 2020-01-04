@@ -37,6 +37,7 @@ export default class Skull extends THREE.Group {
   }
   show() {
     this.body.show();
+    this.aura.show();
     this.points.show();
   }
   hide() {
