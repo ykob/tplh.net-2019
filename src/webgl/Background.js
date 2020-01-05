@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import { easeOutExpo } from 'easing-js';
+import { easeInOutCubic } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/Background.vs';
 import fs from '@/webgl/glsl/Background.fs';
 
-const DURATION = 3;
+const DURATION = 2;
 
 export default class Background extends THREE.Mesh {
   constructor() {
@@ -58,7 +58,7 @@ export default class Background extends THREE.Mesh {
     if (this.isChanged === true) {
       this.time += time;
       this.material.uniforms.alpha.value =
-        this.alphaStart + easeOutExpo(
+        this.alphaStart + easeInOutCubic(
           MathEx.clamp(this.time / DURATION, 0.0, 1.0)
         ) * (this.alphaEnd - this.alphaStart);
       if (this.time >= DURATION) {
