@@ -6,6 +6,7 @@ import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
+import Title from '@/webgl/Title';
 import CherryRotate from '@/webgl/CherryRotate';
 import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
@@ -26,6 +27,7 @@ const skullAuraCamera = new SkullAuraCamera();
 // Define unique variables
 //
 const skull = new Skull();
+const title = new Title();
 const cherryRotate = new CherryRotate();
 const image = new Image();
 const bg = new Background();
@@ -48,6 +50,7 @@ export default class WebGLContent {
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
       PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
+      PromiseTextureLoader(require('@/assets/img/webgl/title.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
@@ -61,9 +64,10 @@ export default class WebGLContent {
       const geometrySkullJaw = response[0].children[0].geometry;
       const geometryPetal1 = response[1].children[0].geometry;
       const geometryPetal2 = response[1].children[1].geometry;
-      const noiseTex = response[2];
-      const noiseBurnTex = response[3];
-      const imgTexes = response.slice(4);
+      const titleTex = response[2];
+      const noiseTex = response[3];
+      const noiseBurnTex = response[4];
+      const imgTexes = response.slice(5);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
@@ -74,11 +78,13 @@ export default class WebGLContent {
       skullAuraCamera.start();
 
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
+      title.start(titleTex, noiseTex);
       cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
       scene.add(skull);
+      scene.add(title);
       scene.add(cherryRotate);
       scene.add(image);
       scene.add(bg);
@@ -97,9 +103,11 @@ export default class WebGLContent {
   showSkull(bool) {
     if (bool === true) {
       skull.show();
+      title.change(true);
       cherryRotate.show();
     } else {
       skull.hide();
+      title.change(false);
       cherryRotate.hide();
     }
   }

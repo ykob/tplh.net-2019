@@ -32,7 +32,7 @@ void main() {
 
   float noise4 = texture2D(noiseTex, vUv * 1.6 - vec2(0.5, time * 1.2)).r;
   vec3 hsvNoise = vec3(noise4 * -0.035, noise4 * 0.2, -noise4 * 0.5);
-  float strength = smoothstep(0.3, 1.2, mask);
+  float strength = smoothstep(0.2, 1.0, mask);
   vec3 hsv1 = vec3(0.115, 0.65, 1.0) + hsvNoise;
   vec3 hsv2 = vec3(0.1, 0.27, 1.0);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), strength);

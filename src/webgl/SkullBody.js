@@ -26,6 +26,10 @@ export default class SkullBody extends THREE.Group {
           type: 'f',
           value: 0
         },
+        rotateMatrix: {
+          type: 'm4',
+          value: new THREE.Matrix4()
+        },
         renderOutline: {
           type: 'f',
           value: 0
@@ -104,10 +108,11 @@ export default class SkullBody extends THREE.Group {
     // Frist rotate
     const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
     this.rotation.set(
-      MathEx.radians(-15 + (1.0 - alphaRaise) * 60),
-      MathEx.radians(15),
+      MathEx.radians(-5 + (1.0 - alphaRaise) * 60),
+      MathEx.radians(10),
       MathEx.radians(-25)
     );
+    this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
 
     // scream
     const alphaScream = easeInOutCirc(
@@ -133,7 +138,7 @@ export default class SkullBody extends THREE.Group {
     this.material.uniforms.alphaEdge.value = easeOutCirc(MathEx.clamp((this.timeShowEdge - DELAY_EDGE) / DURATION_EDGE, 0.0, 1.0));
 
     // calculation the scale.
-    const scale = (alphaShow * 0.3 + 0.7) + (alphaHide * 0.1) + alphaScream * 0.2;
+    const scale = ((alphaShow * 0.3 + 0.7) + (alphaHide * 0.1) + alphaScream * 0.2);
     this.scale.set(scale, scale, scale);
   }
 }
