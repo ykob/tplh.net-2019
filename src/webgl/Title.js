@@ -6,8 +6,8 @@ import vs from '@/webgl/glsl/Title.vs';
 import fs from '@/webgl/glsl/Title.fs';
 
 const DURATION_SHOW = 3;
-const DELAY_SHOW = 1;
-const DURATION_HIDE = 1;
+const DELAY_SHOW = 2;
+const DURATION_HIDE = 0.7;
 const DELAY_HIDE = 0;
 
 export default class Title extends THREE.Mesh {
@@ -48,6 +48,7 @@ export default class Title extends THREE.Mesh {
     this.alphaStart = 0;
     this.alphaEnd = 0;
     this.isActive = false;
+    this.isShownFirst = false;
     this.isShown = false;
     this.isHidden = false;
 
@@ -59,10 +60,16 @@ export default class Title extends THREE.Mesh {
     this.material.uniforms.noiseTex.value = noiseTex;
   }
   show() {
-    this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = true;
     this.isHidden = false;
+    if (this.isShownFirst === false) {
+      this.isShownFirst = true;
+      this.timeShow = -3.5;
+    } else {
+      this.timeShow = 0;
+    }
+
   }
   hide() {
     this.isShown = false;
@@ -88,7 +95,7 @@ export default class Title extends THREE.Mesh {
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
     this.position.set(
       0.0,
-      alphaShow * 2 + alphaHide * 2 - 9,
+      alphaShow * 1.2 + alphaHide * 1.2 - 8.2,
       0.0
     );
     this.rotation.set(

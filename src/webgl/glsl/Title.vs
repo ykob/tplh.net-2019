@@ -12,7 +12,7 @@ varying vec2 vUv;
 
 void main(void) {
   float noise = texture2D(noiseTex, uv / vec2(1.0, 8.0) * 0.6 - vec2(0.0, time * 0.1)).r;
-  vec3 noisePosition = vec3(0.0, 0.0, (noise * 2.0 - 1.0) * 6.0 * (1.0 - alpha));
+  vec3 noisePosition = vec3(0.0, 0.0, (noise * 1.5 - 0.5) * 6.0 * (1.0 - alpha));
 
   // coordinate transformation
   vec4 mPosition = modelMatrix * vec4(position + noisePosition, 1.0);
