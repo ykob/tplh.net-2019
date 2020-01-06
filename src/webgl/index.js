@@ -45,7 +45,7 @@ export default class WebGLContent {
       canvas: canvas,
     });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setClearColor(0x000000, 0.0);
+    renderer.setClearColor(0x1b191c, 0.0);
 
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
@@ -77,17 +77,17 @@ export default class WebGLContent {
       camera.start();
       skullAuraCamera.start();
 
-      skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
-      title.start(titleTex, noiseTex);
-      cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
-      image.start(noiseBurnTex, imgTexes);
-      bg.start(noiseTex);
-
       scene.add(skull);
       scene.add(title);
       scene.add(cherryRotate);
       scene.add(image);
       scene.add(bg);
+
+      skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
+      title.start(titleTex, noiseTex);
+      cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
+      image.start(noiseBurnTex, imgTexes);
+      bg.start(noiseTex);
     });
   }
   play() {
@@ -113,9 +113,6 @@ export default class WebGLContent {
   }
   showWorksImage(index) {
     image.change(index);
-  }
-  changeColorDark(bool) {
-    bg.changeColorDark(bool);
   }
   update() {
     // When the clock is stopped, it stops the all rendering too.

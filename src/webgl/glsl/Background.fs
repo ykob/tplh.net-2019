@@ -4,6 +4,7 @@ uniform float time;
 uniform vec2 imgRatio;
 uniform sampler2D noiseTex;
 uniform float alpha;
+uniform float alphaShowFirst;
 
 varying vec2 vUv;
 varying vec3 vColor;
@@ -31,11 +32,11 @@ void main() {
 
   float colorNoise1 = texture2D(noiseTex, imgUv + vec2(0.0, time * 0.1)).b;
 
-  vec3 rgb1 = convertHsvToRgb(mix(
-    vec3(0.11 - colorNoise1 * 0.04, 0.6 - colorNoise1 * 0.3, 0.05),
-    vec3(0.11 - colorNoise1 * 0.04, 0.6 - colorNoise1 * 0.3, 0.4),
+  vec3 rgb1 = mix(
+    convertHsvToRgb(vec3(280.0 / 360.0, 0.11, 0.11)),
+    convertHsvToRgb(vec3(0.11 - colorNoise1 * 0.04, 0.6 - colorNoise1 * 0.3, 0.4)),
     smoothstep(0.0, 0.9, length(p)) * (1.0 - smoothstep(0.0, 0.8, noise1))
-    ));
+    );
 
   float noiseC1 = texture2D(noiseTex, imgUv * 1.0 - vec2(0.5, time * 0.04)).r;
   float noiseC2 = texture2D(noiseTex, imgUv * 2.0 - vec2(0.5 + time * 0.01, time * 0.08)).r;
@@ -47,18 +48,20 @@ void main() {
 
   float colorNoise2 = texture2D(noiseTex, imgUv + vec2(0.0, time * 0.1)).b;
 
-  vec3 rgb2 = convertHsvToRgb(mix(
-    vec3(0.11 - colorNoise2 * 0.04, 0.6 - colorNoise2 * 0.3, 0.05),
-    vec3(0.11 - colorNoise2 * 0.04, 0.6 - colorNoise2 * 0.3, 0.35),
+  vec3 rgb2 = mix(
+    convertHsvToRgb(vec3(280.0 / 360.0, 0.11, 0.11)),
+    convertHsvToRgb(vec3(0.11 - colorNoise2 * 0.04, 0.6 - colorNoise2 * 0.3, 0.35)),
     1.0 - smoothstep(0.0, 0.8, noise2)
-    ));
+    );
 
   float noiseE1 = texture2D(noiseTex, imgUv + vec2(time * 0.01, 0.0)).r;
   float noiseE2 = texture2D(noiseTex, imgUv + vec2(time * 0.01, 0.0)).r;
   float noise3 = 1.0 - smoothstep(0.3, 0.7, noiseE1 * 0.5 + noiseE2 * 0.5);
   float noiseAlpha = clamp(alpha * 2.0 - noise3, 0.0, 1.0);
 
-  vec3 rgb = mix(rgb1, rgb2, noiseAlpha);
+  vec3 rgb3 = convertHsvToRgb(vec3(280.0 / 360.0, 0.11, 0.11));
+
+  vec3 rgb = mix(rgb3, mix(rgb1, rgb2, noiseAlpha), alphaShowFirst);
 
   gl_FragColor = vec4(rgb, 1.0);
 }
