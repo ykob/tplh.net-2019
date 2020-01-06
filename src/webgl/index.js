@@ -103,11 +103,11 @@ export default class WebGLContent {
   showSkull(bool) {
     if (bool === true) {
       skull.show();
-      title.change(true);
+      title.show();
       cherryRotate.show();
     } else {
       skull.hide();
-      title.change(false);
+      title.hide();
       cherryRotate.hide();
     }
   }
@@ -131,6 +131,7 @@ export default class WebGLContent {
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
     cherryRotate.update(time);
+    title.update(time);
     image.update(time);
     bg.update(time);
 

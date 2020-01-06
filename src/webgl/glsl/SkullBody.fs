@@ -36,7 +36,7 @@ void main() {
   vec3 hsv2 = vec3(0.1, 0.24, 0.08);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
-  vec3 hsv3 = vec3(0.1, 0.27, 1.0);
+  vec3 hsv3 = vec3(47.0 / 360.0, 0.6, 0.9);
   vec3 color = (rgb * (1.0 - vColor) + convertHsvToRgb(hsv3) * vColor) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;
 
