@@ -166,7 +166,7 @@
 
       // Transition
       transition-property: opacity, transform;
-      transform-origin: left top;
+      transform-origin: bottom;
       .show-enter & {
         opacity: 0;
         transform: translate3d(-20px, 50px, 0) skewX(-20deg);
