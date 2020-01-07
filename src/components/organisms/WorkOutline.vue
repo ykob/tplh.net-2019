@@ -131,14 +131,16 @@
       }
 
       // Transition
-      transition-property: opacity;
+      transition-property: opacity, transform;
+      transform-origin: bottom;
       .show-enter & {
         opacity: 0;
+        transform: translate3d(-5px, 10px, 0);
       }
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: .7s;
+        transition-delay: .8s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
@@ -163,14 +165,16 @@
       }
 
       // Transition
-      transition-property: opacity;
+      transition-property: opacity, transform;
+      transform-origin: top right;
       .show-enter & {
         opacity: 0;
+        transform: translate3d(-8px, 16px, 0) skewX(-15deg);
       }
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1s;
+        transition-delay: .9s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
@@ -202,9 +206,11 @@
       @include fontSizeAll(12, 12, 12);
 
       // Transition
-      transition-property: opacity;
+      transition-property: opacity, transform;
+      transform-origin: bottom;
       .show-enter & {
         opacity: 0;
+        transform: translate3d(-5px, 10px, 0);
       }
       .show-enter-to & {
         opacity: 1;
@@ -234,9 +240,11 @@
       }
 
       // Transition
-      transition-property: opacity;
+      transition-property: opacity, transform;
+      transform-origin: bottom;
       .show-enter & {
         opacity: 0;
+        transform: translate3d(-5px, 10px, 0);
       }
       .show-enter-to & {
         opacity: 1;
