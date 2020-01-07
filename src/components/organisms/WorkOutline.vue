@@ -166,16 +166,16 @@
 
       // Transition
       transition-property: opacity, transform;
-      transform-origin: top right;
+      transform-origin: left top;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-8px, 16px, 0) skewX(-15deg);
+        transform: translate3d(-20px, 50px, 0) skewX(-20deg);
       }
       .show-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-delay: .9s;
-        transition-timing-function: $easeOutQuad;
+        transition-timing-function: $easeOutCubic;
       }
       .view-leave-to &,
       .show-leave-to & {
@@ -210,7 +210,7 @@
       transform-origin: bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-5px, 10px, 0);
+        transform: translate3d(-20px, 50px, 0) skewX(-8deg);
       }
       .show-enter-to & {
         opacity: 1;
@@ -244,7 +244,7 @@
       transform-origin: bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-5px, 10px, 0);
+        transform: translate3d(-20px, 50px, 0) skewX(-8deg);
       }
       .show-enter-to & {
         opacity: 1;
