@@ -20,6 +20,9 @@ export default new Vuex.Store({
     isLoaded: false,
   },
   mutations: {
+    loaded (state) {
+      state.isLoaded = true;
+    },
     transit (state, opts) {
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;

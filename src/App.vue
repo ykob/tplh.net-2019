@@ -99,7 +99,7 @@
       window.addEventListener('wheel', wheel, { passive: false });
 
       await sleep(500);
-      this.$store.state.isLoaded = true;
+      this.$store.commit('loaded');
     },
     computed: {},
     methods: {
