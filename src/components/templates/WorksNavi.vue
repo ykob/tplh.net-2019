@@ -106,7 +106,9 @@
       .p-works-navi__point.p-works-navi__point--upper(
         :class = 'classnames'
         )
-      .p-works-navi__point.p-works-navi__point--lower
+      .p-works-navi__point.p-works-navi__point--lower(
+        :class = 'classnames'
+        )
       router-link.p-works-navi__anchor(
         v-for = 'anchor, index in $store.state.works'
         :to = 'getWorksUrl(index)'
