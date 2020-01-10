@@ -54,11 +54,11 @@ export default class WebGLContent {
       PromiseTextureLoader(require('@/assets/img/webgl/noise.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_warpdrive.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_imago.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_best_film_2018.jpg')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.webp')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_warpdrive.webp')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.webp')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_imago.webp')),
+      PromiseTextureLoader(require('@/assets/img/webgl/thumb_best_film_2018.webp')),
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
