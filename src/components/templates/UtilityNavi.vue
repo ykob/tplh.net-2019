@@ -14,11 +14,13 @@
     computed: {
       classnames() {
         return {
+          'is-shown': this.$store.state.isShownUI === true,
           'is-current': this.$route.name === 'who-i-am'
         }
       },
       classnamesLabel() {
         return {
+          'is-shown': this.$store.state.isShownUI === true,
           'is-current': this.$route.name === 'who-i-am',
           'is-overed': this.isOvered === true
         }
@@ -36,31 +38,25 @@
 </script>
 
 <template lang="pug">
-  transition(
-    name = 'show'
-    appear
-    )
-    .p-utility-navi(
-      v-if = '$store.state.isLoaded'
+  .p-utility-navi
+    router-link.p-utility-navi__label(
+      to = '/who-i-am/'
+      :class = 'classnames'
+      @mouseenter.native = 'enter'
+      @mouseleave.native = 'leave'
       )
-      router-link.p-utility-navi__label(
-        to = '/who-i-am/'
-        :class = 'classnames'
-        @mouseenter.native = 'enter'
-        @mouseleave.native = 'leave'
+      SplitStr.p-utility-navi__typos(
+        label = 'Who I am'
+        :step = '2'
+        childClassname = 'p-utility-navi__typo'
         )
-        SplitStr.p-utility-navi__typos(
-          label = 'Who I am'
-          :step = '2'
-          childClassname = 'p-utility-navi__typo'
-          )
-      .p-utility-navi__line(
-        :class = 'classnamesLabel'
-        )
-        .p-utility-navi__bar
-      .p-utility-navi__point(
-        :class = 'classnames'
-        )
+    .p-utility-navi__line(
+      :class = 'classnamesLabel'
+      )
+      .p-utility-navi__bar
+    .p-utility-navi__point(
+      :class = 'classnames'
+      )
 </template>
 
 <style lang="scss">
@@ -111,13 +107,15 @@
       transition-duration: 1s;
       transition-timing-function: $easeOutCirc;
       transition-property: height, bottom;
-      &.is-overed {
-        height: calc(1em * 7 + 0.3em * 6 + 20px);
-      }
-      &.is-current {
-        height: calc(100% + (1em * 7 + 0.3em * 6) / 2 + 10px);
-        bottom: 0;
-        transition-duration: 1.4s;
+      &.is-shown {
+        &.is-overed {
+          height: calc(1em * 7 + 0.3em * 6 + 20px);
+        }
+        &.is-current {
+          height: calc(100% + (1em * 7 + 0.3em * 6) / 2 + 10px);
+          bottom: 0;
+          transition-duration: 1.4s;
+        }
       }
     }
     &__bar {
@@ -134,13 +132,16 @@
       opacity: 0;
       border-radius: 50%;
       background-color: rgba($color-text, 0.5);
-      transition-duration: .7s;
-      transition-property: opacity;
+      &.is-shown {
+        transition-duration: .7s;
+        transition-property: opacity;
+      }
 
       // Interaction
-      &.is-current {
-        opacity: 1;
-        transition-delay: .4s;
+      &.is-shown {
+        &.is-current {
+          opacity: 1;
+        }
       }
     }
 

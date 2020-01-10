@@ -9,19 +9,14 @@
 </script>
 
 <template lang="pug">
-  transition(
-    name = 'show'
-    )
-    .p-global-title(
-      v-if = '$store.state.isLoaded === true'
+  .p-global-title
+    router-link.p-global-title__wrap(
+      to = '/'
       )
-      router-link.p-global-title__wrap(
-        to = '/'
-        )
-        .p-global-title__typo.p-global-title__typo--1
-          |Y
-        .p-global-title__typo.p-global-title__typo--2
-          |K
+      .p-global-title__typo.p-global-title__typo--1
+        |Y
+      .p-global-title__typo.p-global-title__typo--2
+        |K
 </template>
 
 <style lang="scss">

@@ -81,48 +81,44 @@
 </script>
 
 <template lang="pug">
-  transition(
-    name = 'show'
-    appear
-    )
-    .p-works-navi
-      router-link.p-works-navi__label(
-        :to = 'getWorksUrl(0)'
-        :class = 'classnames'
-        @mouseenter.native = 'enter'
-        @mouseleave.native = 'leave'
-        )
-        |Works
-      .p-works-navi__line.p-works-navi__line--upper(
-        :class = 'classnames'
-        )
-      .p-works-navi__line.p-works-navi__line--lower(
-        :class = 'classnames'
-        )
-      .p-works-navi__line.p-works-navi__line--progress(
-        :class = 'classnames'
-        :style = 'lineProgressStyles'
-        )
-      .p-works-navi__point.p-works-navi__point--upper(
-        :class = 'classnames'
-        )
-      .p-works-navi__point.p-works-navi__point--lower(
-        :class = 'classnames'
-        )
-      router-link.p-works-navi__anchor(
-        v-for = 'anchor, index in $store.state.works'
-        :to = 'getWorksUrl(index)'
-        :style = 'anchorStyles(index)'
-        :class = 'anchorClassnames(index)'
-        @mouseenter.native = 'anchorEnter(index)'
-        @mouseleave.native = 'anchorLeave'
-        )
-      .p-works-navi__anchor-label(
-        v-for = 'anchor, index in $store.state.works'
-        :style = 'anchorLabelStyles(index)'
-        :class = 'anchorLabelClassnames(index)'
-        )
-        |{{ anchor.title }}
+  .p-works-navi
+    router-link.p-works-navi__label(
+      :to = 'getWorksUrl(0)'
+      :class = 'classnames'
+      @mouseenter.native = 'enter'
+      @mouseleave.native = 'leave'
+      )
+      |Works
+    .p-works-navi__line.p-works-navi__line--upper(
+      :class = 'classnames'
+      )
+    .p-works-navi__line.p-works-navi__line--lower(
+      :class = 'classnames'
+      )
+    .p-works-navi__line.p-works-navi__line--progress(
+      :class = 'classnames'
+      :style = 'lineProgressStyles'
+      )
+    .p-works-navi__point.p-works-navi__point--upper(
+      :class = 'classnames'
+      )
+    .p-works-navi__point.p-works-navi__point--lower(
+      :class = 'classnames'
+      )
+    router-link.p-works-navi__anchor(
+      v-for = 'anchor, index in $store.state.works'
+      :to = 'getWorksUrl(index)'
+      :style = 'anchorStyles(index)'
+      :class = 'anchorClassnames(index)'
+      @mouseenter.native = 'anchorEnter(index)'
+      @mouseleave.native = 'anchorLeave'
+      )
+    .p-works-navi__anchor-label(
+      v-for = 'anchor, index in $store.state.works'
+      :style = 'anchorLabelStyles(index)'
+      :class = 'anchorLabelClassnames(index)'
+      )
+      |{{ anchor.title }}
 </template>
 
 <style lang="scss">
