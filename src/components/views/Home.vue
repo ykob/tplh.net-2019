@@ -19,7 +19,7 @@
     },
     created() {
     },
-    mounted() {
+    async mounted() {
       this.$store.commit('changeBackground', false);
       this.$store.commit('showSkull', true);
       this.$store.commit('showWorksImage', 0);
@@ -27,6 +27,8 @@
       this.$store.commit('transit', {
         globalId: 0,
       });
+      await sleep(5000);
+      this.$store.commit('showUI');
     },
     computed: {},
     methods: {},

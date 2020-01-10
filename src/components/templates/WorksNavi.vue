@@ -15,6 +15,7 @@
     computed: {
       classnames() {
         return {
+          'is-shown': this.$store.state.isShownUI === true,
           'is-previous': this.$store.state.positionFromWorks === -1,
           'is-current': this.$store.state.positionFromWorks === 0,
           'is-next': this.$store.state.positionFromWorks === 1,
@@ -24,7 +25,7 @@
       lineProgressStyles() {
         return {
           height:
-            (this.$store.state.positionFromWorks === 0)
+            (this.$store.state.positionFromWorks === 0 && this.$store.state.isShownUI)
               ?
                 `calc(50% + ${
                   (this.$store.state.currentWorksId - (this.$store.state.works.length - 1) / 2) * 50
@@ -52,12 +53,14 @@
       anchorStyles(i) {
         return {
           top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px)`,
-          transitionDelay: `${i * 0.06}s`
+          transitionDelay: (this.$store.state.positionFromWorks === 0)
+            ? `${i * 0.06 + 0.6}s`
+            : `${i * 0.06}s`
         }
       },
       anchorClassnames(i) {
         return {
-          'is-shown': this.$store.state.positionFromWorks === 0,
+          'is-shown': this.$store.state.positionFromWorks === 0 && this.$store.state.isShownUI,
           'is-current': this.$store.state.works[i].key === this.$route.params.key,
         }
       },
@@ -141,9 +144,11 @@
       text-decoration: none;
       letter-spacing: 0.3em;
       writing-mode: vertical-rl;
-      transition-duration: 1.2s;
-      transition-timing-function: $easeOutCirc;
-      transition-property: top;
+      &.is-shown {
+        transition-duration: 1.2s;
+        transition-timing-function: $easeOutCirc;
+        transition-property: top;
+      }
 
       // Interaction
       &.is-current {
@@ -153,7 +158,7 @@
     }
     &__line {
       width: 1px;
-      height: calc(50% - 60px);
+      height: 0;
       position: absolute;
       right: 50%;
       pointer-events: none;
@@ -161,38 +166,49 @@
       transition-timing-function: $easeOutCirc;
       &--upper, &--lower {
         background-color: rgba($color-text, 0.2);
-        transition-property: height;
+        &.is-shown {
+          transition-property: height;
+        }
       }
       &--upper {
         top: 0;
 
         // Interaction
-        &.is-overed {
-          height: calc(50% + 60px);
-        }
-        &.is-current {
-          height: 0;
-        }
-        &.is-previous {
-          height: 0;
+        &.is-shown {
+          &.is-overed {
+            height: calc(50% + 60px);
+          }
+          &.is-current {
+            height: 0;
+          }
+          &.is-previous {
+            height: 0;
+          }
+          &.is-next {
+            height: calc(50% - 60px);
+          }
         }
       }
       &--lower {
         bottom: 0;
 
         // Interaction
-        &.is-overed {
-          height: calc(50% + 60px);
-        }
-        &.is-current {
-          height: calc(100% + 10px);
-        }
-        &.is-next {
-          height: 0;
+        &.is-shown {
+          &.is-overed {
+            height: calc(50% + 60px);
+          }
+          &.is-current {
+            height: calc(100% + 10px);
+          }
+          &.is-previous {
+            height: calc(50% - 60px);
+          }
+          &.is-next {
+            height: 0;
+          }
         }
       }
       &--progress {
-        height: 0;
         top: -10px;
         background-color: rgba($color-text, 0.5);
         transition-property: height, opacity;
@@ -200,18 +216,23 @@
         // Interaction
         &.is-current {
           top: -10px;
+          transition-delay: .6s;
         }
       }
     }
     &__point {
       width: 3px;
       height: 3px;
+      opacity: 0;
       position: absolute;
       right: calc(50% - 1px);
       border-radius: 50%;
       background-color: rgba($color-text, 0.5);
-      transition-duration: .7s;
-      transition-property: opacity;
+      &.is-shown {
+        opacity: 1;
+        transition-duration: .7s;
+        transition-property: opacity;
+      }
       &--upper {
         top: -1px;
 

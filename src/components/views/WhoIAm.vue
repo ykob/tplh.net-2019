@@ -24,7 +24,7 @@ export default {
   },
   created() {
   },
-  mounted() {
+  async mounted() {
     this.$store.commit('changeBackground', true);
     this.$store.commit('showSkull', false);
     this.$store.commit('showWorksImage', 0);
@@ -32,6 +32,8 @@ export default {
     this.$store.commit('transit', {
       globalId: 50,
     });
+    await sleep(500);
+    this.$store.commit('showUI');
   },
   computed: {},
   methods: {},

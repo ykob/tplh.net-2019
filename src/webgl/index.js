@@ -79,7 +79,7 @@ export default class WebGLContent {
 
       scene.add(skull);
       scene.add(title);
-      scene.add(cherryRotate);
+      // scene.add(cherryRotate);
       scene.add(image);
       scene.add(bg);
 

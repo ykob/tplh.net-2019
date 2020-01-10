@@ -20,7 +20,7 @@
     },
     created() {
     },
-    mounted() {
+    async mounted() {
       const index = _.findIndex(
         this.$store.state.works,
         { key: this.$route.params.key }
@@ -34,6 +34,8 @@
         globalId: 1,
         currentWorksId: index
       });
+      await sleep(500);
+      this.$store.commit('showUI');
     },
     computed: {
     },

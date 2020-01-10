@@ -16,12 +16,16 @@ export default new Vuex.Store({
     webgl: new WebGL(),
     works: WORKS,
     currentWorksId: 0,
-    positionFromWorks: -1,
+    positionFromWorks: -2,
     isLoaded: false,
+    isShownUI: false,
   },
   mutations: {
     loaded (state) {
       state.isLoaded = true;
+    },
+    showUI (state) {
+      state.isShownUI = true;
     },
     transit (state, opts) {
       state.globalId = opts.globalId;
