@@ -5,8 +5,8 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/SkullAura.vs';
 import fs from '@/webgl/glsl/SkullAura.fs';
 
-const DURATION_SHOW = 0.8;
-const DELAY_SHOW = 3.5;
+const DURATION_SHOW = 2;
+const DELAY_SHOW = 2.5;
 
 export default class SkullAura extends THREE.Mesh {
   constructor() {

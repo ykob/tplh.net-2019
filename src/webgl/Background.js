@@ -70,7 +70,7 @@ export default class Background extends THREE.Mesh {
         this.alphaEnd = 1;
         this.timeShowFirst = 0;
       } else {
-        this.timeShowFirst = -6;
+        this.timeShowFirst = -5.5;
       }
     } else {
       if (this.timeShowFirst < 0) {

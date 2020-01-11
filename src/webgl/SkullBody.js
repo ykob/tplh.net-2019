@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeOutCirc, easeInOutCirc } from 'easing-js';
+import { easeOutCirc, easeInOutCubic } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/SkullBody.vs';
@@ -9,10 +9,10 @@ const DURATION_SHOW = 5;
 const DELAY_SHOW = 1;
 const DURATION_HIDE = 1.4;
 const DELAY_HIDE = 0;
-const DURATION_SCREAM = 4;
-const DELAY_SCREAM = 3;
-const DURATION_EDGE = 1;
-const DELAY_EDGE = 3.6;
+const DURATION_SCREAM = 2.5;
+const DELAY_SCREAM = 2.5;
+const DURATION_EDGE = 0.6;
+const DELAY_EDGE = 2.8;
 
 export default class SkullBody extends THREE.Group {
   constructor(geometry1, geometry2) {
@@ -108,19 +108,19 @@ export default class SkullBody extends THREE.Group {
     // Frist rotate
     const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
     this.rotation.set(
-      MathEx.radians(-5 + (1.0 - alphaRaise) * 60),
+      MathEx.radians(-5 + (1.0 - alphaRaise) * 70),
       MathEx.radians(10),
       MathEx.radians(-25)
     );
     this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
 
     // scream
-    const alphaScream = easeInOutCirc(
-      MathEx.smoothstep(DELAY_SCREAM, DELAY_SCREAM + DURATION_SCREAM * 0.33, this.timeScream)
-      * (1 - MathEx.smoothstep(DELAY_SCREAM + DURATION_SCREAM * 0.33, DELAY_SCREAM + DURATION_SCREAM, this.timeScream))
+    const alphaScream = easeInOutCubic(
+      MathEx.smoothstep(DELAY_SCREAM, DELAY_SCREAM + DURATION_SCREAM * 0.2, this.timeScream)
+      * (1 - MathEx.smoothstep(DELAY_SCREAM + DURATION_SCREAM * 0.15, DELAY_SCREAM + DURATION_SCREAM, this.timeScream))
     );
 
-    const shake = alphaScream * 0.05;
+    const shake = alphaScream * 0.035;
     const shakeRadian = MathEx.radians(Math.random() * 360);
     this.position.set(
       Math.cos(shakeRadian) * shake,

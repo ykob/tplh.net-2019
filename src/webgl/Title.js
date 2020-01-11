@@ -65,7 +65,7 @@ export default class Title extends THREE.Mesh {
     this.isHidden = false;
     if (this.isShownFirst === false) {
       this.isShownFirst = true;
-      this.timeShow = -3.5;
+      this.timeShow = -2;
     } else {
       this.timeShow = 0;
     }

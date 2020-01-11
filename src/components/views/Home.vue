@@ -27,7 +27,7 @@
       this.$store.commit('transit', {
         globalId: 0,
       });
-      await sleep(6000);
+      await sleep(5000);
       this.$store.commit('showUI');
     },
     computed: {},
