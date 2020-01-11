@@ -1,22 +1,29 @@
 <script>
   export default {
     name: 'GlobalTitle',
-    props: {},
-    data: function() {
-      return {}
+    computed: {
+      classnames() {
+        return {
+          'is-shown': this.$store.state.isShownUI === true,
+        }
+      }
     },
   };
 </script>
 
 <template lang="pug">
-  .p-global-title
+  .p-global-title(
+    :class = 'classnames'
+    )
     router-link.p-global-title__wrap(
       to = '/'
       )
       .p-global-title__typo.p-global-title__typo--1
-        |Y
+        .p-global-title__typo-in.p-global-title__typo-in--1
+          |Y
       .p-global-title__typo.p-global-title__typo--2
-        |K
+        .p-global-title__typo-in.p-global-title__typo-in--2
+          |K
 </template>
 
 <style lang="scss">
@@ -27,7 +34,7 @@
     position: fixed;
     left: 0;
     z-index: 100;
-    line-height: 0.75;
+    line-height: 1;
     @include l-more-than-mobile {
       width: 7.5%;
       top: 55px;
@@ -42,49 +49,32 @@
     }
     &__typo {
       display: block;
+      overflow: hidden;
       @include fontSizeAll(24, 24, 24);
       &--1 {
         transform: rotate(180deg);
       }
+      &--2 {
+        margin-top: -0.25em;
+      }
     }
 
     // Transition
-    &.show-enter-to, &.show-leave-to {
-      transition-property: opacity;
-    }
-    &.show-leave-to {
-      opacity: 0.999;
+    &__typo-in {
+      // Interaction
       transition-duration: 1s;
-    }
-    &__name-typo, &__summary-typo {
-      transition-property: opacity, transform;
-    }
-    &.show-enter-active &, &.show-leave-active & {
-      &__name-typo, &__summary-typo {
-        transition-duration: .5s;
-        transition-property: opacity, transform;
-        backface-visibility: hidden;
+      transition-property: transform;
+      &--1 {
+        transform: translate3d(1.01em, 0 ,0);
+      }
+      &--2 {
+        transform: translate3d(-1.01em, 0 ,0);
+        transition-delay: .1s
+      }
+      .is-shown & {
+        transform: translate3d(0, 0 ,0);
       }
     }
-    &.show-enter & {
-      &__name-typo {
-        opacity: 0;
-        transform: translate3d(0, 15px, 0) rotateY(90deg);
-      }
-      &__summary-typo {
-        opacity: 0;
-        transform: translate3d(0, 6px, 0);
-      }
-    }
-    &.show-leave-to & {
-      &__name-typo {
-        opacity: 0;
-        transform: translate3d(0, -15px, 0) rotateY(90deg);
-      }
-      &__summary-typo {
-        opacity: 0;
-        transform: translate3d(0, -6px, 0);
-      }
-    }
+
   }
 </style>

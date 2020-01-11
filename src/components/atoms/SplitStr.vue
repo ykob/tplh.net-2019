@@ -40,7 +40,7 @@
     },
     methods: {
       classnames: function(i) {
-        const base = 'c-split-str__typo';
+        const base = 'c-split-str__typo-in';
         let num;
 
         switch (this.align) {
@@ -69,28 +69,28 @@
   .c-split-str(
     :is = 'tag'
     )
-    span(
+    .c-split-str__typo(
       v-for = 'str, i in strArr'
-      v-html = 'str'
       :class = 'classnames(i)'
       )
+      span(
+        v-html = 'str'
+        :class = 'classnames(i)'
+        )
 </template>
 
 <style lang="scss">
   .c-split-str {
     &__typo {
       display: inline-block;
+      overflow: hidden;
+    }
+    &__typo-in {
+      display: inline-block;
       backface-visibility: hidden;
       @for $i from 0 through 200 {
         &--#{$i} {
-          .view-enter-to &,
-          .show-enter-to & {
-            transition-delay: $i * 0.01 + .7s;
-          }
-          .view-leave-to &,
-          .show-leave-to & {
-            transition-delay: $i * 0.01s;
-          }
+          transition-delay: $i * 0.01s;
         }
       }
     }

@@ -47,7 +47,7 @@
       )
       SplitStr.p-utility-navi__typos(
         label = 'Who I am'
-        :step = '2'
+        :step = '4'
         childClassname = 'p-utility-navi__typo'
         )
     .p-utility-navi__line(
@@ -79,7 +79,7 @@
     &__label {
       position: absolute;
       bottom: -0.3em;
-      left: calc(50% - 0.45em);
+      right: calc(50% - 0.55em);
       line-height: 1;
       white-space: nowrap;
       @include fontSizeAll(12, 12, 12);
@@ -94,6 +94,15 @@
       &.is-current {
         bottom: calc(100% - (1em * 7 + 0.3em * 6) / 2);
         pointer-events: none;
+      }
+    }
+    &__typo {
+      // Interaction
+      transform: translate3d(-1.01em, 0 ,0);
+      transition-duration: 1s;
+      transition-property: transform;
+      .is-shown & {
+        transform: translate3d(0, 0 ,0);
       }
     }
     &__line {
@@ -141,33 +150,6 @@
       &.is-shown {
         &.is-current {
           opacity: 1;
-        }
-      }
-    }
-
-    // Transition
-    &.show-enter {
-      opacity: 0.999;
-    }
-    &.show-enter-to {
-      opacity: 1;
-      transition-duration: 3s;
-      transition-property: opacity;
-    }
-    &.show-enter & {
-      &__item {
-        opacity: 0;
-      }
-    }
-    &.show-enter-to & {
-      &__item {
-        opacity: 1;
-        transition-duration: 1s;
-        transition-property: opacity;
-        @for $i from 1 through 5 {
-          &:nth-of-type(#{$i}) {
-            transition-delay: $i * 0.14 + .6s;
-          }
         }
       }
     }

@@ -88,7 +88,11 @@
       @mouseenter.native = 'enter'
       @mouseleave.native = 'leave'
       )
-      |Works
+      SplitStr(
+        label = 'Works'
+        :step = '4'
+        childClassname = 'p-works-navi__typo'
+        )
     .p-works-navi__line.p-works-navi__line--upper(
       :class = 'classnames'
       )
@@ -152,6 +156,15 @@
       &.is-current {
         top: 0;
         pointer-events: none;
+      }
+    }
+    &__typo {
+      // Interaction
+      transform: translate3d(-1.01em, 0 ,0);
+      transition-duration: 1s;
+      transition-property: transform;
+      .is-shown & {
+        transform: translate3d(0, 0 ,0);
       }
     }
     &__line {
