@@ -105,20 +105,20 @@ export default class SkullBody extends THREE.Group {
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
 
-    // Frist rotate
-    const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
-    this.rotation.set(
-      MathEx.radians(-5 + (1.0 - alphaRaise) * 70),
-      MathEx.radians(10),
-      MathEx.radians(-25)
-    );
-    this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
-
     // scream
     const alphaScream = easeInOutCubic(
       MathEx.smoothstep(DELAY_SCREAM, DELAY_SCREAM + DURATION_SCREAM * 0.2, this.timeScream)
       * (1 - MathEx.smoothstep(DELAY_SCREAM + DURATION_SCREAM * 0.15, DELAY_SCREAM + DURATION_SCREAM, this.timeScream))
     );
+
+    // Frist rotate
+    const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
+    this.rotation.set(
+      MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
+      MathEx.radians(0),
+      MathEx.radians(0)
+    );
+    this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
 
     const shake = alphaScream * 0.035;
     const shakeRadian = MathEx.radians(Math.random() * 360);
