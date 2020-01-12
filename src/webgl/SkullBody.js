@@ -11,7 +11,7 @@ const DURATION_HIDE = 1.4;
 const DELAY_HIDE = 0;
 const DURATION_SCREAM = 2.5;
 const DELAY_SCREAM = 2.5;
-const DURATION_EDGE = 0.6;
+const DURATION_EDGE = 1.2;
 const DELAY_EDGE = 2.8;
 
 export default class SkullBody extends THREE.Group {

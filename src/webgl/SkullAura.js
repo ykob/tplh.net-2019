@@ -1,12 +1,12 @@
 import * as THREE from 'three';
-import { easeOutBack } from 'easing-js';
+import { easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/SkullAura.vs';
 import fs from '@/webgl/glsl/SkullAura.fs';
 
-const DURATION_SHOW = 2;
-const DELAY_SHOW = 2.5;
+const DURATION_SHOW = 1;
+const DELAY_SHOW = 2.6;
 
 export default class SkullAura extends THREE.Mesh {
   constructor() {
@@ -63,7 +63,7 @@ export default class SkullAura extends THREE.Mesh {
 
     if (this.isShown === true) {
       this.timeShow += time;
-      this.material.uniforms.alpha.value = easeOutBack(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
+      this.material.uniforms.alpha.value = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
     }
   }
 }
