@@ -283,10 +283,11 @@
         transition-property: background-color;
       }
       &.is-shown {
-        opacity: 1;
+        opacity: 0.5;
         transform: scale(1);
       }
       &.is-current {
+        opacity: 1;
         &:before {
           background-color: $color-text;
         }
