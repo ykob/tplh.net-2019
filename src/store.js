@@ -19,6 +19,7 @@ export default new Vuex.Store({
     positionFromWorks: -2,
     isLoaded: false,
     isShownUI: false,
+    isTransitionInWorks: false,
   },
   mutations: {
     loaded (state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     showUI (state) {
       state.isShownUI = true;
+    },
+    transitInWorks(state, bool) {
+      state.isTransitionInWorks = bool;
     },
     transit (state, opts) {
       state.globalId = opts.globalId;

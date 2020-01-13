@@ -23,14 +23,16 @@
         }
       },
       lineProgressStyles() {
+        const { state } = this.$store;
         return {
           height:
-            (this.$store.state.positionFromWorks === 0 && this.$store.state.isShownUI)
+            (state.positionFromWorks === 0 && state.isShownUI)
               ?
                 `calc(50% + ${
-                  (this.$store.state.currentWorksId - (this.$store.state.works.length - 1) / 2) * 50
+                  (state.currentWorksId - (state.works.length - 1) / 2) * 50
                 }px + 10px)`
               : undefined,
+          transitionDelay: `${(state.isTransitionInWorks === true) ? 0 : 0.6}s`,
         }
       }
     },
@@ -227,7 +229,6 @@
         // Interaction
         &.is-current {
           top: -10px;
-          transition-delay: .6s;
         }
       }
     }
@@ -277,19 +278,19 @@
         position: absolute;
         top: 16px;
         left: 16px;
-        border: 1px solid $color-text;
+        border: 1px solid rgba($color-text, 0.5);
         transform: rotate(45deg);
         transition-duration: .6s;
-        transition-property: background-color;
+        transition-property: border-color, background-color;
       }
       &.is-shown {
-        opacity: 0.5;
+        opacity: 1;
         transform: scale(1);
       }
       &.is-current {
-        opacity: 1;
         &:before {
-          background-color: $color-text;
+          border: 1px solid rgba($color-text, 1);
+          background-color: rgba($color-text, 1);
         }
       }
     }

@@ -34,6 +34,7 @@
         globalId: 1,
         currentWorksId: index
       });
+      this.$store.commit('transitInWorks', false);
       await sleep(500);
       this.$store.commit('showUI');
     },
@@ -46,6 +47,7 @@
           { key: key }
         );
         this.$store.commit('showWorksImage', index + 1);
+        this.$store.commit('transitInWorks', true);
         this.$store.commit('transit', {
           globalId: 1,
           currentWorksId: index
