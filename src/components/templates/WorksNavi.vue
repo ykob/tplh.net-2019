@@ -32,7 +32,7 @@
                   (state.currentWorksId - (state.works.length - 1) / 2) * 50
                 }px + 10px)`
               : undefined,
-          transitionDelay: `${(state.isTransitionInWorks === true) ? 0 : 0.6}s`,
+          transitionDelay: `${(state.isTransitionInWorks === true || state.positionFromWorks != 0) ? 0 : 0.6}s`,
         }
       }
     },
