@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as dat from 'dat.gui';
 import sleep from 'js-util/sleep';
 
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
@@ -31,6 +32,32 @@ const title = new Title();
 const cherryRotate = new CherryRotate();
 const image = new Image();
 const bg = new Background();
+
+// ==========
+// Define Dat.Gui
+//
+const initGui = () => {
+  const gui = new dat.GUI();
+  const elm = document.body.querySelector('.dg.ac');
+  elm.style.zIndex = 100000;
+
+  const skullBodyHsv = skull.body.material.uniforms.hsv1.value;
+  const obj = {
+    h: skullBodyHsv.x,
+    s: skullBodyHsv.y,
+    v: skullBodyHsv.z,
+  }
+  const guiSkullBody = gui.addFolder('SkullBody');
+  guiSkullBody.add(obj, 'h', 0, 1, 0.01).onChange((response) => {
+    skull.body.material.uniforms.hsv1.value.setX(response)
+  });
+  guiSkullBody.add(obj, 's', 0, 1, 0.01).onChange((response) => {
+    skull.body.material.uniforms.hsv1.value.setY(response)
+  });
+  guiSkullBody.add(obj, 'v', 0, 1, 0.01).onChange((response) => {
+    skull.body.material.uniforms.hsv1.value.setX(response)
+  });
+}
 
 // ==========
 // Define WebGLContent Class.
@@ -88,6 +115,8 @@ export default class WebGLContent {
       cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
+
+      initGui();
     });
   }
   play() {

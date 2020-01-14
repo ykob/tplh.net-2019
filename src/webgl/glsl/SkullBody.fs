@@ -4,6 +4,7 @@ uniform float time;
 uniform float renderOutline;
 uniform float alpha;
 uniform float alphaEdge;
+uniform vec3 hsv1;
 
 varying vec3 vPosition;
 varying vec3 vNormal;
@@ -33,7 +34,6 @@ void main() {
     (alpha * 2.0 - noise2) / 2.0
     );
 
-  vec3 hsv1 = vec3(0.04, 0.12, 0.27);
   vec3 hsv2 = vec3(280.0 / 360.0, 0.11, 0.11);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
