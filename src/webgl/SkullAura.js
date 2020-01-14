@@ -32,6 +32,14 @@ export default class SkullAura extends THREE.Mesh {
           type: 'f',
           value: 0
         },
+        hsv1: {
+          type: 'v3',
+          value: new THREE.Vector3(47.0 / 360.0, 0.83, 0.71)
+        },
+        hsv2: {
+          type: 'v3',
+          value: new THREE.Vector3(47.0 / 360.0, 0.6, 0.9)
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,

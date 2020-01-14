@@ -5,6 +5,7 @@ uniform float renderOutline;
 uniform float alpha;
 uniform float alphaEdge;
 uniform vec3 hsv1;
+uniform vec3 hsv3;
 
 varying vec3 vPosition;
 varying vec3 vNormal;
@@ -37,7 +38,6 @@ void main() {
   vec3 hsv2 = vec3(280.0 / 360.0, 0.11, 0.11);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
-  vec3 hsv3 = vec3(47.0 / 360.0, 0.6, 0.9);
   vec3 edgeColor = mix(convertHsvToRgb(hsv2), convertHsvToRgb(hsv3), alphaEdge);
   vec3 color = (rgb * (1.0 - vEdge) + edgeColor * vEdge) * (1.0 - renderOutline);
   vec3 colorOutline = vec3(1.0) * renderOutline;

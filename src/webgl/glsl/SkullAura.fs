@@ -7,6 +7,8 @@ uniform float radius;
 uniform sampler2D postEffectTex;
 uniform sampler2D noiseTex;
 uniform float alpha;
+uniform vec3 hsv1;
+uniform vec3 hsv2;
 
 varying vec3 vPosition;
 varying vec2 vUv;
@@ -33,9 +35,7 @@ void main() {
   float noise4 = texture2D(noiseTex, vUv * 1.6 - vec2(0.5, time * 1.2)).r;
   vec3 hsvNoise = vec3(noise4 * -0.1, noise4 * 0.05, -noise4 * 0.2);
   float strength = smoothstep(0.45, 1.0, mask);
-  vec3 hsv1 = vec3(47.0 / 360.0, 0.83, 0.71) + hsvNoise;
-  vec3 hsv2 = vec3(47.0 / 360.0, 0.6, 0.9);
-  vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), strength);
+  vec3 rgb = mix(convertHsvToRgb(hsv1 + hsvNoise), convertHsvToRgb(hsv2), strength);
 
   float opacity = smoothstep(0.35, 0.7, mask);
   if (opacity < 0.01) {
