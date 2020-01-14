@@ -33,7 +33,7 @@ void main(void) {
   float mask = easeTransition * 2.0 - slide;
   float maskPrev = smoothstep(0.0, 0.5, mask);
   float maskNext = 1.0 - smoothstep(0.5, 1.0, mask);
-  float height = maskPrev * maskNext * 8.0 * slide;
+  float height = maskPrev * maskNext * 8.0 * (slide * 0.5 + 0.5);
 
   // coordinate transformation
   vec3 wavePosition = vec3(0.0, 0.0, wave);

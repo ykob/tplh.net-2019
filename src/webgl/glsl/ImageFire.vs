@@ -39,7 +39,7 @@ void main(void) {
   float mask2 = easeTransition * 2.0 - slide;
   float maskPrev = smoothstep(0.0, 0.5, mask2);
   float maskNext = 1.0 - smoothstep(0.5, 1.0, mask2);
-  float h2 = maskPrev * maskNext * 8.0 * slide;
+  float h2 = maskPrev * maskNext * 8.0 * (slide * 0.5 + 0.5);
 
   float height = h1 + h2;
 
