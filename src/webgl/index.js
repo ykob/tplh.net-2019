@@ -66,6 +66,12 @@ const initGui = () => {
     hsv2h: skullAuraUniforms.hsv2.value.x,
     hsv2s: skullAuraUniforms.hsv2.value.y,
     hsv2v: skullAuraUniforms.hsv2.value.z,
+    strength: skullAuraUniforms.strength.value,
+    colorRangeMin: skullAuraUniforms.colorRangeMin.value,
+    colorRangeMax: skullAuraUniforms.colorRangeMax.value,
+    opacityRangeMin: skullAuraUniforms.opacityRangeMin.value,
+    opacityRangeMax: skullAuraUniforms.opacityRangeMax.value,
+    opacityBase: skullAuraUniforms.opacityBase.value,
   }
   const guiSkullAura = gui.addFolder('SkullAura');
   guiSkullAura.add(skullAuraObj, 'hsv1h', 0, 1, 0.01).onChange((response) => {
@@ -79,15 +85,30 @@ const initGui = () => {
   });
   guiSkullAura.add(skullAuraObj, 'hsv2h', 0, 1, 0.01).onChange((response) => {
     skull.aura.material.uniforms.hsv2.value.setX(response)
-    skull.body.material.uniforms.hsv3.value.setX(response)
   });
   guiSkullAura.add(skullAuraObj, 'hsv2s', 0, 1, 0.01).onChange((response) => {
     skull.aura.material.uniforms.hsv2.value.setY(response)
-    skull.body.material.uniforms.hsv3.value.setY(response)
   });
   guiSkullAura.add(skullAuraObj, 'hsv2v', 0, 1, 0.01).onChange((response) => {
     skull.aura.material.uniforms.hsv2.value.setZ(response)
-    skull.body.material.uniforms.hsv3.value.setZ(response)
+  });
+  guiSkullAura.add(skullAuraObj, 'strength', 1, 3, 0.01).onChange((response) => {
+    skull.aura.material.uniforms.strength.value = response
+  });
+  guiSkullAura.add(skullAuraObj, 'colorRangeMin', 0, 1, 0.01).onChange((response) => {
+    skull.aura.material.uniforms.colorRangeMin.value = response
+  });
+  guiSkullAura.add(skullAuraObj, 'colorRangeMax', 0, 1, 0.01).onChange((response) => {
+    skull.aura.material.uniforms.colorRangeMax.value = response
+  });
+  guiSkullAura.add(skullAuraObj, 'opacityRangeMin', 0, 1, 0.01).onChange((response) => {
+    skull.aura.material.uniforms.opacityRangeMin.value = response
+  });
+  guiSkullAura.add(skullAuraObj, 'opacityRangeMax', 0, 1, 0.01).onChange((response) => {
+    skull.aura.material.uniforms.opacityRangeMax.value = response
+  });
+  guiSkullAura.add(skullAuraObj, 'opacityBase', 0, 1, 0.01).onChange((response) => {
+    skull.aura.material.uniforms.opacityBase.value = response
   });
 }
 
