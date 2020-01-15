@@ -32,10 +32,43 @@ export default class SkullAura extends THREE.Mesh {
           type: 'f',
           value: 0
         },
+        hsv1: {
+          type: 'v3',
+          value: new THREE.Vector3(0.15, 0.5, 1)
+        },
+        hsv2: {
+          type: 'v3',
+          value: new THREE.Vector3(0, 0, 0.02)
+        },
+        strength: {
+          type: 'f',
+          value: 1.9
+        },
+        colorRangeMin: {
+          type: 'f',
+          value: 0.4
+        },
+        colorRangeMax: {
+          type: 'f',
+          value: 0.6
+        },
+        opacityRangeMin: {
+          type: 'f',
+          value: 0.45
+        },
+        opacityRangeMax: {
+          type: 'f',
+          value: 0.6
+        },
+        opacityBase: {
+          type: 'f',
+          value: 0.9
+        },
       },
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
+      blending: THREE.AdditiveBlending,
     });
 
     // Create Object3D
@@ -44,6 +77,7 @@ export default class SkullAura extends THREE.Mesh {
     this.timeShow = 0;
     this.isActive = false;
     this.isShown = false;
+    this.position.set(0, 0, 8);
   }
   start(postEffectTex, noiseTex) {
     this.isActive = true;

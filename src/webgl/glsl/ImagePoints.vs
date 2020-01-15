@@ -29,7 +29,7 @@ void main(void) {
   float noiseG = texture2D(noiseTex, updateUv * 1.4 + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, updateUv * vec2(0.99) + 0.005).b;
 
-  float height = (easeTransition - slide) * slide * 6.0;
+  float height = (easeTransition - slide) * 6.0 * (slide * 0.5 + 0.5);
   float opacity =
     smoothstep(0.2, 0.4, easeTransition * 2.1 - slide)
     * (1.0 - smoothstep(0.7, 1.0, easeTransition * 2.1 - slide))

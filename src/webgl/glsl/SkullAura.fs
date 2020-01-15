@@ -7,6 +7,14 @@ uniform float radius;
 uniform sampler2D postEffectTex;
 uniform sampler2D noiseTex;
 uniform float alpha;
+uniform vec3 hsv1;
+uniform vec3 hsv2;
+uniform float strength;
+uniform float colorRangeMin;
+uniform float colorRangeMax;
+uniform float opacityRangeMin;
+uniform float opacityRangeMax;
+uniform float opacityBase;
 
 varying vec3 vPosition;
 varying vec2 vUv;
@@ -16,7 +24,7 @@ const float blurIteration = 12.0;
 #pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb)
 
 void main() {
-  vec4 texColor1 = texture2D(postEffectTex, vUv * vec2(1.02) - vec2(0.01, 0.025));
+  vec4 texColor1 = texture2D(postEffectTex, vUv);
   vec4 texColor2 = texture2D(postEffectTex, vUv * vec2(0.7, 0.65) + vec2(0.15, 0.125));
   vec4 texColor3 = texture2D(postEffectTex, vUv * vec2(0.55, 0.45) + vec2(0.225, 0.175));
 
@@ -25,19 +33,18 @@ void main() {
   float noise3 = texture2D(noiseTex, vUv * 3.0 - vec2(0.0, time * 0.8)).b;
   float noise = (noise1 * 0.65 + noise2 * 0.3 + noise3 * 0.05);
 
-  float mask1 = (texColor1.r + noise) / 2.0;
-  float mask2 = (texColor2.r + (noise * 2.0 - 1.0));
-  float mask3 = texColor3.r + noise * 0.5;
-  float mask = (mask1 * 1.3 + mask2 * 0.5) / 1.8 * mask3 * pow(alpha, 2.0);
+  float mask1 = (texColor1.r + noise * 2.0) / 3.0;
+  float mask2 = (texColor2.r + noise * 2.0) / 3.0;
+  float mask3 = texColor3.r * 0.5 + noise * 0.5;
+  float mask = (mask1 + mask2) / 2.0 * strength * pow(mask3, 2.0) * pow(alpha, 2.0);
 
   float noise4 = texture2D(noiseTex, vUv * 1.6 - vec2(0.5, time * 1.2)).r;
   vec3 hsvNoise = vec3(noise4 * -0.1, noise4 * 0.05, -noise4 * 0.2);
-  float strength = smoothstep(0.45, 1.0, mask);
-  vec3 hsv1 = vec3(47.0 / 360.0, 0.83, 0.71) + hsvNoise;
-  vec3 hsv2 = vec3(47.0 / 360.0, 0.6, 0.9);
-  vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), strength);
+  float colorMask = (mask1 + noise) / 2.0;
+  float colorAlpha = smoothstep(colorRangeMin, colorRangeMax, colorMask);
+  vec3 rgb = mix(convertHsvToRgb(hsv1 + hsvNoise), convertHsvToRgb(hsv2), colorAlpha);
 
-  float opacity = smoothstep(0.35, 0.7, mask);
+  float opacity = smoothstep(opacityRangeMin, opacityRangeMax, mask) * opacityBase;
   if (opacity < 0.01) {
     discard;
   }
