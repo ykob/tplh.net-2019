@@ -44,7 +44,7 @@ export default class SkullBody extends THREE.Group {
         },
         hsv1: {
           type: 'v3',
-          value: new THREE.Vector3(0.13, 0.55, 0.22)
+          value: new THREE.Vector3(0.09, 0.7, 0.35)
         }
       },
       vertexShader: vs,

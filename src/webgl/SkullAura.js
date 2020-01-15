@@ -34,35 +34,35 @@ export default class SkullAura extends THREE.Mesh {
         },
         hsv1: {
           type: 'v3',
-          value: new THREE.Vector3(0.15, 0.5, 1)
+          value: new THREE.Vector3(0.15, 0.9, 1)
         },
         hsv2: {
           type: 'v3',
-          value: new THREE.Vector3(0, 0, 0.02)
+          value: new THREE.Vector3(0, 0, 0)
         },
         strength: {
           type: 'f',
-          value: 1.9
+          value: 2.5
         },
         colorRangeMin: {
           type: 'f',
-          value: 0.4
+          value: 0.35
         },
         colorRangeMax: {
           type: 'f',
-          value: 0.6
+          value: 0.54
         },
         opacityRangeMin: {
           type: 'f',
-          value: 0.45
+          value: 0.58
         },
         opacityRangeMax: {
           type: 'f',
-          value: 0.6
+          value: 0.8
         },
         opacityBase: {
           type: 'f',
-          value: 0.9
+          value: 0.8
         },
       },
       vertexShader: vs,

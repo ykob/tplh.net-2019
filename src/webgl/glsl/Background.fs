@@ -35,7 +35,7 @@ void main() {
   vec3 rgb1 = mix(
     convertHsvToRgb(vec3(280.0 / 360.0, 0.11, 0.11)),
     convertHsvToRgb(vec3(0.11 - colorNoise1 * 0.04, 0.6 - colorNoise1 * 0.3, 0.4)),
-    smoothstep(0.0, 0.9, length(p)) * (1.0 - smoothstep(0.0, 0.8, noise1))
+    smoothstep(0.2, 0.8, length(p)) * (1.0 - smoothstep(0.0, 0.8, noise1))
     );
 
   float noiseC1 = texture2D(noiseTex, imgUv * 1.0 - vec2(0.5, time * 0.04)).r;
