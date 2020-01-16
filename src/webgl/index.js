@@ -12,6 +12,8 @@ import CherryRotate from '@/webgl/CherryRotate';
 import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
 
+import CheckWebpFeature from '@/vendor/CheckWebpFeature';
+
 // ==========
 // Define common variables
 //
@@ -119,6 +121,15 @@ export default class WebGLContent {
   constructor() {
   }
   async start(canvas) {
+    let webpExe = '';
+    await CheckWebpFeature('lossy')
+      .then(() => {
+        webpExe = 'webp';
+      })
+      .catch(() => {
+        webpExe = 'jpg';
+      });
+
     renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
@@ -134,11 +145,11 @@ export default class WebGLContent {
       PromiseTextureLoader(require('@/assets/img/webgl/noise.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.jpg')),
       PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_sketch_threejs.webp')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_warpdrive.webp')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_hassyadai.webp')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_imago.webp')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_best_film_2018.webp')),
+      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`)),
+      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`)),
+      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_hassyadai.${webpExe}`)),
+      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_imago.${webpExe}`)),
+      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`)),
     ]).then((response) => {
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
