@@ -1,0 +1,34 @@
+<script>
+  import PreloaderProgress from '@/components/atoms/PreloaderProgress.vue'
+
+  export default {
+    name: 'Preloader',
+    components: {
+      PreloaderProgress,
+    },
+  };
+</script>
+
+<template lang="pug">
+  .preloader
+    PreloaderProgress.preloader__progress
+</template>
+
+<style lang="scss" scoped>
+  .preloader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    pointer-events: none;
+    &__progress {
+      width: 252px;
+      height: 252px;
+      position: absolute;
+      top: calc(50% - 126px);
+      left: calc(50% - 126px);
+    }
+  }
+</style>

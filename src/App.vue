@@ -6,6 +6,7 @@
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
   import UtilityNavi from '@/components/templates/UtilityNavi.vue';
   import WorksNavi from '@/components/templates/WorksNavi.vue';
+  import Preloader from '@/components/templates/Preloader.vue';
   import Guide from '@/components/templates/Guide.vue';
 
   const INTERVAL_TO_FIRE_WHEEL = 1000;
@@ -20,6 +21,7 @@
       GlobalTitle,
       UtilityNavi,
       WorksNavi,
+      Preloader,
       Guide,
     },
     data: function() {
@@ -106,6 +108,7 @@
       update: function() {
         this.$store.state.webgl.update();
         requestAnimationFrame(this.update);
+        this.$store.commit('updatePreloadProgress', 0)
       },
       resize: function() {
         const { canvas, resolution, webgl } = this.$store.state;
@@ -130,6 +133,7 @@
       v-if = '$store.state.isLoaded === true'
       )
       router-view
+    Preloader
     Guide(
       v-if = 'false'
       )

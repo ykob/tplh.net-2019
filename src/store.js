@@ -17,11 +17,16 @@ export default new Vuex.Store({
     works: WORKS,
     currentWorksId: 0,
     positionFromWorks: -2,
+    preloadProgress: 0,
     isLoaded: false,
     isShownUI: false,
     isTransitionInWorks: false,
   },
   mutations: {
+    updatePreloadProgress (state, num) {
+      // state.preloadProgress = num;
+      state.preloadProgress = (state.preloadProgress + 0.01) % 1
+    },
     loaded (state) {
       state.isLoaded = true;
     },
