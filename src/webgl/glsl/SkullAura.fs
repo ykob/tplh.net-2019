@@ -36,7 +36,7 @@ void main() {
   float mask1 = (texColor1.r + noise * 2.0) / 3.0;
   float mask2 = (texColor2.r + noise * 2.0) / 3.0;
   float mask3 = texColor3.r * 0.5 + noise * 0.5;
-  float mask = (mask1 + mask2) / 2.0 * strength * pow(mask3, 2.0) * pow(alpha, 2.0);
+  float mask = (mask1 * 1.2 + mask2 * 0.8) / 2.0 * strength * pow(mask3, 2.0) * pow(alpha, 2.0);
 
   float noise4 = texture2D(noiseTex, vUv * 1.6 - vec2(0.5, time * 1.2)).r;
   vec3 hsvNoise = vec3(noise4 * -0.1, noise4 * 0.05, -noise4 * 0.2);
