@@ -19,6 +19,7 @@ export default class SkullPoints extends THREE.Points {
     // Define attributes of the geometry
     const baPositions = new THREE.BufferAttribute(new Float32Array(NUM * 3), 3);
     const baDelays = new THREE.BufferAttribute(new Float32Array(NUM), 1);
+    const baStartY = new THREE.BufferAttribute(new Float32Array(NUM), 1);
     for (var i = 0, ul = NUM; i < ul; i++) {
       const radian = MathEx.radians(Math.random() * 360);
       const radius = Math.random() * 4 + 1;
@@ -29,9 +30,11 @@ export default class SkullPoints extends THREE.Points {
         Math.sin(radian) * radius
       );
       baDelays.setX(i, Math.random() * DURATION);
+      baStartY.setX(i, Math.random() * 4);
     }
     geometry.addAttribute('position', baPositions);
     geometry.addAttribute('delay', baDelays);
+    geometry.addAttribute('startY', baStartY);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({

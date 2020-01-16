@@ -1,5 +1,6 @@
 attribute vec3 position;
 attribute float delay;
+attribute float startY;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -18,7 +19,7 @@ varying float vAlpha;
 void main() {
   // Coordinate transformation
   float alpha = mod(time - delay, duration) / duration;
-  vec3 risePosition = vec3(0.0, alpha * 10.0 - 4.0, 0.0);
+  vec3 risePosition = vec3(0.0, alpha * 10.0 - 7.0 + startY, 0.0);
 
   float noiseR = texture2D(
     noiseTex,
@@ -38,7 +39,7 @@ void main() {
   float distanceFromCamera = length(mvPosition.xyz);
 
   // Define the point size.
-  float pointSize = 5.0 * pixelRatio * 50.0 / distanceFromCamera * resolution.y / 1024.0;
+  float pointSize = 4.0 * pixelRatio * 50.0 / distanceFromCamera * resolution.y / 1024.0;
 
   vColor = convertHsvToRgb(
     vec3(
