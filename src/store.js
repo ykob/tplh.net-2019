@@ -19,6 +19,7 @@ export default new Vuex.Store({
     positionFromWorks: -2,
     preloadProgress: 0,
     isLoaded: false,
+    isShowView: false,
     isShownUI: false,
     isTransitionInWorks: false,
   },
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     loaded (state) {
       state.isLoaded = true;
+    },
+    showView (state) {
+      state.isShowView = true;
     },
     showUI (state) {
       state.isShownUI = true;

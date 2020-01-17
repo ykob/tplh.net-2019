@@ -40,15 +40,6 @@
         left: 0;
       `;
 
-      await webgl.start(canvas);
-
-      this.resize();
-
-      webgl.play();
-
-      // If finish the preload process, Start requestAnimationFrame Loop.
-      this.update();
-
       // For wheel events
       // =====
       const wheel = (e) => {
@@ -100,8 +91,12 @@
       window.addEventListener('resize', _.debounce(this.resize, 100));
       window.addEventListener('wheel', wheel, { passive: false });
 
-      await sleep(500);
+      await webgl.start(canvas);
+      this.resize();
       this.$store.commit('loaded');
+      webgl.play();
+      this.update();
+      this.$store.commit('showView');
     },
     computed: {},
     methods: {
@@ -130,7 +125,7 @@
     transition(
       name = 'view'
       appear
-      v-if = '$store.state.isLoaded === true'
+      v-if = '$store.state.isShowView === true'
       )
       router-view
     Preloader

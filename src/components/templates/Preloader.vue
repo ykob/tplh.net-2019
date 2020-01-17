@@ -6,12 +6,21 @@
     components: {
       PreloaderProgress,
     },
+    computed: {
+      classnames() {
+        return {
+          'is-hidden': this.$store.state.isLoaded === true
+        }
+      }
+    }
   };
 </script>
 
 <template lang="pug">
   .preloader
-    PreloaderProgress.preloader__progress
+    PreloaderProgress.preloader__progress(
+      :class = 'classnames'
+      )
 </template>
 
 <style lang="scss" scoped>
@@ -29,6 +38,14 @@
       position: absolute;
       top: calc(50% - 126px);
       left: calc(50% - 126px);
+
+      &.is-hidden {
+        opacity: 0;
+        transform: scale(1.05);
+        transition-duration: 1s;
+        transition-timing-function: $easeOutCirc;
+        transition-property: opacity, transparent;
+      }
     }
   }
 </style>
