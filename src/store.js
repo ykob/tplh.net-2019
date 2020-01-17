@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 import WebGL from '@/webgl/';
 
-import WORKS from '@/components/_const/WORKS';
+import WORKS from '@/const/WORKS';
 
 Vue.use(Vuex)
 
