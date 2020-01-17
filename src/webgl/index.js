@@ -186,7 +186,10 @@ export default class WebGLContent {
       bg.start(noiseTex);
 
       // show the dat.gui.
-      initGui();
+      console.log(process.env)
+      if (process.env.VUE_APP_MODE === 'development') {
+        initGui();
+      }
     });
   }
   play() {
