@@ -121,6 +121,7 @@ export default class WebGLContent {
   constructor() {
   }
   async start(canvas) {
+    // Check whether the webp format is enabled.
     let webpExe = '';
     await CheckWebpFeature('lossy')
       .then(() => {
@@ -130,6 +131,7 @@ export default class WebGLContent {
         webpExe = 'jpg';
       });
 
+    // Initialize the WebGL renderer.
     renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
@@ -138,6 +140,7 @@ export default class WebGLContent {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0x1b191c, 0.0);
 
+    // Loading all assets for WebGL.
     await Promise.all([
       PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
       PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
@@ -151,6 +154,7 @@ export default class WebGLContent {
       PromiseTextureLoader(require(`@/assets/img/webgl/thumb_imago.${webpExe}`)),
       PromiseTextureLoader(require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`)),
     ]).then((response) => {
+      // Initialize all instance on WebGL scene.
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
       const geometryPetal1 = response[1].children[0].geometry;
@@ -165,21 +169,23 @@ export default class WebGLContent {
       noiseBurnTex.wrapS = THREE.RepeatWrapping;
       noiseBurnTex.wrapT = THREE.RepeatWrapping;
 
-      camera.start();
-      skullAuraCamera.start();
-
+      // Add the webgl objects to the scene.
       scene.add(skull);
       scene.add(title);
       // scene.add(cherryRotate);
       scene.add(image);
       scene.add(bg);
 
+      // Start all updating.
+      camera.start();
+      skullAuraCamera.start();
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
       title.start(titleTex, noiseTex);
       cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
+      // show the dat.gui.
       initGui();
     });
   }
