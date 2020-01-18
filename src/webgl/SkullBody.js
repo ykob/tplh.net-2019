@@ -38,10 +38,6 @@ export default class SkullBody extends THREE.Group {
           type: 'f',
           value: 0
         },
-        alphaEdge: {
-          type: 'f',
-          value: 0
-        },
         hsv1: {
           type: 'v3',
           value: new THREE.Vector3(0.09, 0.7, 0.35)
@@ -64,7 +60,6 @@ export default class SkullBody extends THREE.Group {
     this.timeHide = 0;
     this.timeScream = 0;
     this.timeLoop = -MathEx.radians(90);
-    this.timeShowEdge = 0;
     this.isActive = false;
     this.isShown = false;
     this.isHidden = false;
@@ -93,7 +88,6 @@ export default class SkullBody extends THREE.Group {
     if (this.isShown === true) {
       this.timeShow += time;
       this.timeScream += time;
-      this.timeShowEdge += time;
     }
     // for the hiding effect.
     if (this.isHidden === true) {
@@ -137,9 +131,6 @@ export default class SkullBody extends THREE.Group {
 
     this.head.rotation.set(MathEx.radians(alphaScream * -24 - loopDegree), 0, 0);
     this.jaw.rotation.set(MathEx.radians(alphaScream * 24 + loopDegree), 0, 0);
-
-    // for to add the edge color
-    this.material.uniforms.alphaEdge.value = easeOutCirc(MathEx.clamp((this.timeShowEdge - DELAY_EDGE) / DURATION_EDGE, 0.0, 1.0));
 
     // calculation the scale.
     const scale = ((alphaShow * 0.3 + 0.7) + (alphaHide * 0.1) + alphaScream * 0.2);

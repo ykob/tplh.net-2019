@@ -10,7 +10,6 @@ uniform vec3 cameraPosition;
 uniform float time;
 uniform float renderOutline;
 uniform float alpha;
-uniform float alphaEdge;
 
 varying vec3 vPosition;
 varying vec3 vNormal;
@@ -29,7 +28,7 @@ void main(void) {
   vPosition = mPosition.xyz;
   vNormal = normalize(mPosition.xyz);
   vUv = uv;
-  vEdge = smoothstep(0.4, 1.0, abs(sin(angleToCamera)) + smoothstep(0.4, 1.0, angleToLight) * 0.05) * smoothstep(0.3, 0.7, alpha + (1.0 - alphaEdge));
+  vEdge = smoothstep(0.4, 1.0, abs(sin(angleToCamera)) + smoothstep(0.4, 1.0, angleToLight) * 0.05);
 
   gl_Position = projectionMatrix * viewMatrix * mPosition;
 }

@@ -3,7 +3,6 @@ precision highp float;
 uniform float time;
 uniform float renderOutline;
 uniform float alpha;
-uniform float alphaEdge;
 uniform vec3 hsv1;
 
 varying vec3 vPosition;
