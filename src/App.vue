@@ -89,6 +89,7 @@
 
       // On global events.
       window.addEventListener('resize', _.debounce(this.resize, 100));
+      window.addEventListener('mousemove', this.mousemove);
       window.addEventListener('wheel', wheel, { passive: false });
 
       await webgl.start(canvas);
@@ -100,12 +101,12 @@
     },
     computed: {},
     methods: {
-      update: function() {
-        this.$store.state.webgl.update();
+      update() {
+        this.$store.state.webgl.update(this.$store.state.mouse);
         requestAnimationFrame(this.update);
         this.$store.commit('updatePreloadProgress', 0)
       },
-      resize: function() {
+      resize() {
         const { canvas, resolution, webgl } = this.$store.state;
 
         resolution.set(document.body.clientWidth, window.innerHeight);
@@ -113,6 +114,14 @@
         canvas.height = resolution.y;
         webgl.resize(resolution);
       },
+      mousemove(e) {
+        const { resolution, mouse } = this.$store.state;
+
+        mouse.set(
+          (e.clientX / resolution.x) * 2 - 1,
+          -(e.clientY / resolution.y) * 2 + 1
+        );
+      }
     },
   }
 </script>

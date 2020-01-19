@@ -10,6 +10,7 @@ import Title from '@/webgl/Title';
 import CherryRotate from '@/webgl/CherryRotate';
 import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
+import Intersector from '@/webgl/Intersector';
 
 import checkWebpFeature from '@/utils/checkWebpFeature';
 import initDatGui from '@/utils/initDatGui';
@@ -25,6 +26,7 @@ const clock = new THREE.Clock({
 });
 const sceneAura = new THREE.Scene();
 const skullAuraCamera = new SkullAuraCamera();
+const raycaster = new THREE.Raycaster();
 
 // ==========
 // Define unique variables
@@ -34,11 +36,7 @@ const title = new Title();
 const cherryRotate = new CherryRotate();
 const image = new Image();
 const bg = new Background();
-
-// ==========
-// Define Dat.Gui
-//
-
+const intersector = new Intersector();
 
 // ==========
 // Define WebGLContent Class.
@@ -101,6 +99,7 @@ export default class WebGLContent {
       // scene.add(cherryRotate);
       scene.add(image);
       scene.add(bg);
+      scene.add(intersector);
 
       // Start all updating.
       camera.start();
@@ -119,7 +118,6 @@ export default class WebGLContent {
   }
   play() {
     clock.start();
-    this.update();
   }
   pause() {
     clock.stop();
@@ -141,7 +139,7 @@ export default class WebGLContent {
   showWorksImage(index) {
     image.change(index);
   }
-  update() {
+  update(mouse) {
     // When the clock is stopped, it stops the all rendering too.
     if (clock.running === false) return;
 
@@ -151,6 +149,11 @@ export default class WebGLContent {
     // Update Camera.
     camera.update(time);
     skullAuraCamera.update(camera);
+
+    // Raycast
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects([intersector]);
+    console.log(intersects)
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
@@ -167,6 +170,7 @@ export default class WebGLContent {
     skull.resize(resolution);
     image.resize(resolution);
     bg.resize(camera, resolution);
+    intersector.resize(camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
   }
 }
