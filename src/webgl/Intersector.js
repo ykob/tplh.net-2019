@@ -20,7 +20,7 @@ export default class Intersector extends THREE.Mesh {
     this.name = 'Intersector';
     this.size = new THREE.Vector3();
 
-    this.position.set(0, 0, 40);
+    this.position.set(0, 0, 20);
   }
   resize(camera, resolution) {
     const height = Math.abs(

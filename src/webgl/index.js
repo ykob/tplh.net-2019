@@ -153,7 +153,9 @@ export default class WebGLContent {
     // Raycast
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects([intersector]);
-    console.log(intersects)
+    if (intersects.length > 0) {
+      skull.lookMouse(intersects[0].point)
+    }
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);

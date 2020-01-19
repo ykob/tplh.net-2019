@@ -17,6 +17,7 @@ export default class Skull extends THREE.Group {
     this.renderTarget1 = new THREE.WebGLRenderTarget(256, 256);
     this.renderTarget2 = new THREE.WebGLRenderTarget(256, 256);
     this.time = 0;
+    this.move = new THREE.Vector3();
     this.isActive = false;
 
     this.position.set(0, 0, -3);
@@ -46,12 +47,19 @@ export default class Skull extends THREE.Group {
     this.body.hide();
     this.points.hide();
   }
+  lookMouse(lookV) {
+    this.move.copy(lookV).multiplyScalar(-0.2);
+    this.body.lookMouse(lookV);
+  }
   update(time, renderer, camera, sceneAura, cameraAura) {
     if (this.isActive === false) return;
 
     // update the attributes of this group.
     this.time += time;
     this.radian += time;
+
+    // move
+    this.position.copy(this.move);
 
     // update children.
     this.body.update(time, camera);
