@@ -60,6 +60,7 @@ export default class SkullBody extends THREE.Group {
     this.timeHide = 0;
     this.timeScream = 0;
     this.timeLoop = -MathEx.radians(90);
+    this.eulerLookMouse = new THREE.Euler();
     this.isActive = false;
     this.isShown = false;
     this.isHidden = false;
@@ -82,6 +83,7 @@ export default class SkullBody extends THREE.Group {
   }
   lookMouse(lookV) {
     this.lookAt(lookV);
+    this.eulerLookMouse.copy(this.rotation);
   }
   update(time, camera) {
     if (this.isActive === false) return;
@@ -114,11 +116,11 @@ export default class SkullBody extends THREE.Group {
 
     // Frist rotate
     const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
-    // this.rotation.set(
-    //   MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
-    //   MathEx.radians(0),
-    //   MathEx.radians(0)
-    // );
+    this.rotation.set(
+      this.eulerLookMouse.x + MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
+      this.eulerLookMouse.y + MathEx.radians(0),
+      this.eulerLookMouse.z + MathEx.radians(0)
+    );
     this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
 
     const shake = alphaScream * 0.035;
