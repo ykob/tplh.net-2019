@@ -145,8 +145,8 @@
 
 <style lang="scss">
   @import '@/assets/scss/foundation/font.scss';
-  @import '@/assets/scss/foundation/_normalize.scss';
-  @import '@/assets/scss/foundation/_global.scss';
-  @import '@/assets/scss/object/project/_view-wrap.scss';
+  @import '@/assets/scss/foundation/normalize.scss';
+  @import '@/assets/scss/foundation/global.scss';
+  @import '@/assets/scss/object/project/view-wrap.scss';
   @import '@/assets/scss/object/vendor/ps.scss';
 </style>

@@ -3,10 +3,10 @@ module.exports = {
     loaderOptions: {
       sass: {
         data: `
-          @import "@/assets/scss/foundation/_variables.scss";
-          @import "@/assets/scss/foundation/_functions.scss";
-          @import "@/assets/scss/foundation/_mixins.scss";
-          @import "@/assets/scss/foundation/_keyframes.scss";
+          @import "@/assets/scss/foundation/variables.scss";
+          @import "@/assets/scss/foundation/functions.scss";
+          @import "@/assets/scss/foundation/mixins.scss";
+          @import "@/assets/scss/foundation/keyframes.scss";
         `
       }
     }
