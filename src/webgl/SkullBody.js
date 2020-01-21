@@ -60,7 +60,10 @@ export default class SkullBody extends THREE.Group {
     this.timeHide = 0;
     this.timeScream = 0;
     this.timeLoop = -MathEx.radians(90);
-    this.eulerLookMouse = new THREE.Euler();
+    this.lookEuler = new THREE.Euler();
+    this.lookV = new THREE.Vector3();
+    this.lookA = new THREE.Vector3();
+    this.lookAnchor = new THREE.Vector3();
     this.isActive = false;
     this.isShown = false;
     this.isHidden = false;
@@ -82,8 +85,7 @@ export default class SkullBody extends THREE.Group {
     this.isHidden = true;
   }
   lookMouse(lookV) {
-    this.lookAt(lookV);
-    this.eulerLookMouse.copy(this.rotation);
+    this.lookAnchor.copy(lookV);
   }
   update(time, camera) {
     if (this.isActive === false) return;
@@ -116,10 +118,17 @@ export default class SkullBody extends THREE.Group {
 
     // Frist rotate
     const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
+
+    // Move to look at a mouse coordinate.
+    // rotate
+    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(12);
+    this.lookV.add(this.lookA);
+    this.lookAt(this.lookV);
+    this.lookEuler.copy(this.rotation);
     this.rotation.set(
-      this.eulerLookMouse.x + MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
-      this.eulerLookMouse.y + MathEx.radians(0),
-      this.eulerLookMouse.z + MathEx.radians(0)
+      this.lookEuler.x + MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
+      this.lookEuler.y + MathEx.radians(0),
+      this.lookEuler.z + MathEx.radians(0)
     );
     this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
 
