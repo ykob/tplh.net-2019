@@ -90,6 +90,7 @@
       // On global events.
       window.addEventListener('resize', _.debounce(this.resize, 100));
       window.addEventListener('mousemove', this.mousemove);
+      document.addEventListener('mouseleave', this.mouseleave);
       window.addEventListener('wheel', wheel, { passive: false });
 
       await webgl.start(canvas);
@@ -116,11 +117,13 @@
       },
       mousemove(e) {
         const { resolution, mouse } = this.$store.state;
-
         mouse.set(
           (e.clientX / resolution.x) * 2 - 1,
           -(e.clientY / resolution.y) * 2 + 1
         );
+      },
+      mouseleave() {
+        this.$store.state.mouse.set(0, 0);
       }
     },
   }
