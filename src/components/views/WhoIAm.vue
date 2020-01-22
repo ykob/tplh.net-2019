@@ -18,12 +18,6 @@ export default {
     AboutTitle,
     AboutDescription,
   },
-  data() {
-    return {
-    }
-  },
-  created() {
-  },
   async mounted() {
     this.$store.commit('changeBackground', true);
     this.$store.commit('showSkull', false);
@@ -35,9 +29,7 @@ export default {
     this.$store.commit('transitInWorks', false);
     await sleep(500);
     this.$store.commit('showUI');
-  },
-  computed: {},
-  methods: {},
+  }
 }
 </script>
 

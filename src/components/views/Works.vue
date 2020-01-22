@@ -18,8 +18,6 @@
     components: {
       WorkOutline
     },
-    created() {
-    },
     async mounted() {
       const index = _.findIndex(
         this.$store.state.works,
@@ -37,8 +35,6 @@
       this.$store.commit('transitInWorks', false);
       await sleep(500);
       this.$store.commit('showUI');
-    },
-    computed: {
     },
     watch: {
       '$route.params.key': function(key) {

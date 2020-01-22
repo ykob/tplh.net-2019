@@ -39,6 +39,7 @@
         top: 0;
         left: 0;
       `;
+      console.log(this.$route)
 
       // For wheel events
       // =====

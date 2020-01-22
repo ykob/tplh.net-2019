@@ -11,14 +11,6 @@
         }
       ]
     },
-    components: {
-    },
-    data: function() {
-      return {
-      }
-    },
-    created() {
-    },
     async mounted() {
       this.$store.commit('changeBackground', false);
       this.$store.commit('showSkull', true);
@@ -30,9 +22,7 @@
       this.$store.commit('transitInWorks', false);
       await sleep(5000);
       this.$store.commit('showUI');
-    },
-    computed: {},
-    methods: {},
+    }
   }
 </script>
 
