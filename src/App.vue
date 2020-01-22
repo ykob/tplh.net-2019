@@ -39,7 +39,6 @@
         top: 0;
         left: 0;
       `;
-      console.log(this.$route)
 
       // For wheel events
       // =====
@@ -117,6 +116,7 @@
         webgl.resize(resolution);
       },
       mousemove(e) {
+        if (this.$store.state.isShownUI === false) return;
         const { resolution, mouse } = this.$store.state;
         mouse.set(
           (e.clientX / resolution.x) * 2 - 1,
