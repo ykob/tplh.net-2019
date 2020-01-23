@@ -1,26 +1,24 @@
 <script>
   export default {
     name: 'PreloaderProgress',
-    props: {
-      progress: {
-        type: Number,
-        default: 0
-      }
-    },
     computed: {
+      ratio() {
+        const { preloadProgress, preloadMax } = this.$store.state;
+        return preloadProgress / preloadMax;
+      },
       stylesRightRect() {
         return {
-          opacity: (this.$store.state.preloadProgress >= 0.5) ? 1 : 0
+          opacity: (this.ratio >= 0.5) ? 1 : 0
         }
       },
       stylesLeftRect() {
         return {
-          opacity: (this.$store.state.preloadProgress >= 0.5) ? 0 : 1
+          opacity: (this.ratio >= 0.5) ? 0 : 1
         }
       },
       stylesRotateRect() {
         return {
-          transform: `rotate(${this.$store.state.preloadProgress * 360}deg)`
+          transform: `rotate(${this.ratio * 360}deg)`
         }
       },
     },

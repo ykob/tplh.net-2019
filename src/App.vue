@@ -93,19 +93,31 @@
       document.addEventListener('mouseleave', this.mouseleave);
       window.addEventListener('wheel', wheel, { passive: false });
 
-      await webgl.start(canvas);
-      this.resize();
-      this.$store.commit('loaded');
-      webgl.play();
+      await sleep(500);
+      this.$store.commit('showPreloader');
+      await sleep(500);
       this.update();
-      this.$store.commit('showView');
+      webgl.start(canvas, this.$store);
     },
     computed: {},
     methods: {
       update() {
-        this.$store.state.webgl.update(this.$store.state.mouse);
+        const { mouse, webgl, preloadMax, preloadProgress, isLoaded } = this.$store.state;
+        if (isLoaded === false) {
+          this.$store.commit('updatePreloadProgress');
+          if (preloadProgress / preloadMax > 0.999) {
+            this.loaded();
+          }
+        } else {
+          webgl.update(mouse);
+        }
         requestAnimationFrame(this.update);
-        this.$store.commit('updatePreloadProgress', 0)
+      },
+      loaded() {
+        this.resize();
+        this.$store.commit('loaded');
+        this.$store.state.webgl.play();
+        this.$store.commit('showView');
       },
       resize() {
         const { canvas, resolution, webgl } = this.$store.state;

@@ -44,7 +44,7 @@ const intersector = new Intersector();
 export default class WebGLContent {
   constructor() {
   }
-  async start(canvas) {
+  async start(canvas, store) {
     // Check whether the webp format is enabled.
     let webpExe = '';
     await checkWebpFeature('lossy')
@@ -65,18 +65,34 @@ export default class WebGLContent {
     renderer.setClearColor(0x1b191c, 0.0);
 
     // Loading all assets for WebGL.
+    const updateProgressAnchor = (result) => {
+      store.commit('updatePreloadAnchor');
+      return result
+    }
+    const assetsObj = [
+      require('@/assets/obj/SkullHead.obj'),
+      require('@/assets/obj/CherryBlossom.obj')
+    ]
+    const assetsImgs = [
+      require('@/assets/img/webgl/title.jpg'),
+      require('@/assets/img/webgl/noise.jpg'),
+      require('@/assets/img/webgl/noise_burn.jpg'),
+      require('@/assets/img/webgl/thumb_blank.png'),
+      require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`),
+      require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`),
+      require(`@/assets/img/webgl/thumb_hassyadai.${webpExe}`),
+      require(`@/assets/img/webgl/thumb_imago.${webpExe}`),
+      require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`),
+    ]
+    store.commit('setPreloadMax', assetsObj.length + assetsImgs.length);
+
     await Promise.all([
-      PromiseOBJLoader(require('@/assets/obj/SkullHead.obj')),
-      PromiseOBJLoader(require('@/assets/obj/CherryBlossom.obj')),
-      PromiseTextureLoader(require('@/assets/img/webgl/title.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/noise.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/noise_burn.jpg')),
-      PromiseTextureLoader(require('@/assets/img/webgl/thumb_blank.png')),
-      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`)),
-      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`)),
-      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_hassyadai.${webpExe}`)),
-      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_imago.${webpExe}`)),
-      PromiseTextureLoader(require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`)),
+      ...(assetsObj.map(o => {
+        return PromiseOBJLoader(o).then(updateProgressAnchor)
+      })),
+      ...(assetsImgs.map(o => {
+        return PromiseTextureLoader(o).then(updateProgressAnchor)
+      }))
     ]).then((response) => {
       // Initialize all instance on WebGL scene.
       const geometrySkullHead = response[0].children[1].geometry;

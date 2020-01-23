@@ -18,16 +18,27 @@ export default new Vuex.Store({
     works: WORKS,
     currentWorksId: 0,
     positionFromWorks: -2,
+    preloadMax: 0,
+    preloadAnchor: 0,
     preloadProgress: 0,
+    isShownPreloader: false,
     isLoaded: false,
     isShowView: false,
     isShownUI: false,
     isTransitionInWorks: false,
   },
   mutations: {
-    updatePreloadProgress (state, num) {
-      // state.preloadProgress = num;
-      state.preloadProgress = (state.preloadProgress + 0.01) % 1
+    showPreloader (state) {
+      state.isShownPreloader = true;
+    },
+    setPreloadMax (state, num) {
+      state.preloadMax = num;
+    },
+    updatePreloadAnchor (state) {
+      state.preloadAnchor++;
+    },
+    updatePreloadProgress (state) {
+      state.preloadProgress += (state.preloadAnchor - state.preloadProgress) / 20;
     },
     loaded (state) {
       state.isLoaded = true;
