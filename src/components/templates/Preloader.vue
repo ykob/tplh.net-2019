@@ -1,9 +1,11 @@
 <script>
+  import PreloaderCount from '@/components/atoms/PreloaderCount.vue'
   import PreloaderProgress from '@/components/atoms/PreloaderProgress.vue'
 
   export default {
     name: 'Preloader',
     components: {
+      PreloaderCount,
       PreloaderProgress,
     }
   };
@@ -16,6 +18,7 @@
     .preloader(
       v-if = '$store.state.isShownPreloader === true && $store.state.isLoaded === false'
       )
+      PreloaderCount
       PreloaderProgress.preloader__progress
 </template>
 
