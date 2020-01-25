@@ -30,6 +30,7 @@
     .preloader-counter__col(
       v-for = 'col in cols'
       )
+      .preloader-counter__col-in
       .preloader-counter__row(
         v-for = 'row in col'
         )
@@ -38,6 +39,38 @@
 
 <style lang="scss">
   .preloader-counter {
-    display: flex;
+    width: 112px;
+    height: 1.5em;
+    overflow: hidden;
+    position: absolute;
+    top: calc(50% - 0.75em);
+    left: calc(50% - 56px);
+    &__col {
+      display: flex;
+      flex-direction: column-reverse;
+      position: absolute;
+      bottom: 0;
+      &:nth-of-type(1) {
+        left: 0;
+      }
+      &:nth-of-type(2) {
+        left: 1em;
+      }
+      &:nth-of-type(3) {
+        right: 1em;
+      }
+      &:nth-of-type(4) {
+        right: 0;
+      }
+    }
+    &__row {
+      width: 1em;
+      height: 1.5em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+      @include fontSizeAll(16, 16, 16);
+    }
   }
 </style>
