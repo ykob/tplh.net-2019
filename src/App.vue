@@ -113,9 +113,10 @@
         }
         requestAnimationFrame(this.update);
       },
-      loaded() {
+      async loaded() {
         this.resize();
         this.$store.commit('loaded');
+        await sleep(1500)
         this.$store.state.webgl.play();
         this.$store.commit('showView');
       },

@@ -30,7 +30,6 @@
     .preloader-counter__col(
       v-for = 'col in cols'
       )
-      .preloader-counter__col-in
       .preloader-counter__row(
         v-for = 'row in col'
         )
@@ -41,10 +40,10 @@
   .preloader-counter {
     width: 112px;
     height: 1.5em;
-    overflow: hidden;
     position: absolute;
     top: calc(50% - 0.75em);
     left: calc(50% - 56px);
+    overflow: hidden;
     &__col {
       display: flex;
       flex-direction: column-reverse;
@@ -71,6 +70,23 @@
       align-items: center;
       line-height: 1;
       @include fontSizeAll(16, 16, 16);
+    }
+    &__col {
+      transform: translate3d(0, 0, 0);
+      .preloader-enter & {
+        transform: translate3d(0, -1.5em, 0);
+      }
+      .preloader-enter-to & {
+        transform: translate3d(0, 0, 0);
+        transition-duration: 1s;
+        @include iterateTransitionDelay(4, 0.08, 0);
+      }
+      .preloader-leave-to & {
+        transform: translate3d(0, calc(100% - 1.5em), 0);
+        transition-duration: 1s;
+        transition-timing-function: $easeInOutExpo;
+        @include iterateTransitionDelay(4, 0.08, 0);
+      }
     }
   }
 </style>
