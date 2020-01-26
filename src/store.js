@@ -38,7 +38,7 @@ export default new Vuex.Store({
       state.preloadAnchor++;
     },
     updatePreloadProgress (state) {
-      state.preloadProgress += (state.preloadAnchor - state.preloadProgress) / 20;
+      state.preloadProgress += (state.preloadAnchor - state.preloadProgress) / 14;
     },
     loaded (state) {
       state.isLoaded = true;

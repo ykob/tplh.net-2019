@@ -18,7 +18,7 @@
       },
       stylesRotateRect() {
         return {
-          transform: `rotate(${this.ratio * 360}deg)`
+          transform: `rotate(${this.ratio * 354}deg)`
         }
       },
     },
@@ -47,7 +47,7 @@
 
 <style lang="scss" scoped>
 .mask-rotate-group {
-  transform: rotate(33.3deg);
+  transform: rotate(34deg);
   transform-origin: center center;
 }
 .mask-rotate-rect {

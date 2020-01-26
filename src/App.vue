@@ -95,7 +95,6 @@
 
       await sleep(500);
       this.$store.commit('showPreloader');
-      await sleep(500);
       this.update();
       webgl.start(canvas, this.$store);
     },
