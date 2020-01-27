@@ -157,10 +157,9 @@ export default class WebGLContent {
   }
   update(mouse) {
     // When the clock is stopped, it stops the all rendering too.
-    if (clock.running === false) return;
+    const time = (clock.running === true) ? clock.getDelta() : 0;
 
     // Calculate msec for this frame.
-    const time = clock.getDelta();
 
     // Update Camera.
     camera.update(time);
