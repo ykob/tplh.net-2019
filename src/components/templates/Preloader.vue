@@ -1,11 +1,13 @@
 <script>
   import PreloaderCount from '@/components/atoms/PreloaderCount.vue'
+  import PreloaderInitial from '@/components/atoms/PreloaderInitial.vue'
   import PreloaderProgress from '@/components/atoms/PreloaderProgress.vue'
 
   export default {
     name: 'Preloader',
     components: {
       PreloaderCount,
+      PreloaderInitial,
       PreloaderProgress,
     }
   };
@@ -19,7 +21,8 @@
       v-if = '$store.state.isShownPreloader === true && $store.state.isLoaded === false'
       )
       PreloaderCount
-      PreloaderProgress.preloader__progress
+      PreloaderInitial
+      PreloaderProgress
 </template>
 
 <style lang="scss" scoped>
@@ -31,13 +34,6 @@
     left: 0;
     z-index: 10000;
     pointer-events: none;
-    &__progress {
-      width: 252px;
-      height: 252px;
-      position: absolute;
-      top: calc(50% - 126px);
-      left: calc(50% - 126px);
-    }
 
     //
     // transition

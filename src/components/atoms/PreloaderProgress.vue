@@ -46,6 +46,14 @@
 </template>
 
 <style lang="scss" scoped>
+svg {
+  width: 252px;
+  height: 252px;
+  display: block;
+  position: absolute;
+  top: calc(50% - 126px);
+  left: calc(50% - 126px);
+}
 .mask-rotate-group {
   transform: rotate(34deg);
   transform-origin: center center;
