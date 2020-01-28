@@ -1,6 +1,6 @@
 import * as dat from 'dat.gui';
 
-export default function(skull) {
+export default function(skull, petalHsv1, petalHsv2) {
   const gui = new dat.GUI();
   const elm = document.body.querySelector('.dg.ac');
   elm.style.zIndex = 100000;
@@ -73,5 +73,33 @@ export default function(skull) {
   });
   guiSkullAura.add(skullAuraObj, 'opacityBase', 0, 1, 0.01).onChange((response) => {
     skull.aura.material.uniforms.opacityBase.value = response
+  });
+
+  const petalObj = {
+    hsv1h: petalHsv1.x,
+    hsv1s: petalHsv1.y,
+    hsv1v: petalHsv1.z,
+    hsv2h: petalHsv2.x,
+    hsv2s: petalHsv2.y,
+    hsv2v: petalHsv2.z,
+  }
+  const guiPetal = gui.addFolder('Petal');
+  guiPetal.add(petalObj, 'hsv1h', 0, 1, 0.01).onChange((response) => {
+    petalHsv1.setX(response)
+  });
+  guiPetal.add(petalObj, 'hsv1s', 0, 1, 0.01).onChange((response) => {
+    petalHsv1.setY(response)
+  });
+  guiPetal.add(petalObj, 'hsv1v', 0, 1, 0.01).onChange((response) => {
+    petalHsv1.setZ(response)
+  });
+  guiPetal.add(petalObj, 'hsv2h', 0, 1, 0.01).onChange((response) => {
+    petalHsv2.setX(response)
+  });
+  guiPetal.add(petalObj, 'hsv2s', 0, 1, 0.01).onChange((response) => {
+    petalHsv2.setY(response)
+  });
+  guiPetal.add(petalObj, 'hsv2v', 0, 1, 0.01).onChange((response) => {
+    petalHsv2.setZ(response)
   });
 }

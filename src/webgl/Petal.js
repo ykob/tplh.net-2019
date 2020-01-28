@@ -8,7 +8,7 @@ import fs from '@/webgl/glsl/Petal.fs';
 const DURATION = 3;
 
 export default class Petal extends THREE.Mesh {
-  constructor(geometry) {
+  constructor(geometry, hsv1, hsv2) {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
@@ -28,6 +28,14 @@ export default class Petal extends THREE.Mesh {
           type: 'f',
           value: 0
         },
+        hsv1: {
+          type: 'v3',
+          value: hsv1
+        },
+        hsv2: {
+          type: 'v3',
+          value: hsv2
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,
@@ -42,9 +50,9 @@ export default class Petal extends THREE.Mesh {
     this.mass = Math.random();
     this.rotateDirection = Math.round(Math.random()) * 2 - 1;
     this.scale.set(
-      this.mass * 1.2 + 0.8,
-      this.mass * 1.2 + 0.8,
-      this.mass * 1.2 + 0.8
+      this.mass * 1.2 + 0.7,
+      this.mass * 1.2 + 0.7,
+      this.mass * 1.2 + 0.7
     );
    this.rotation.set(
       MathEx.radians((Math.random() * 2 - 1) * 60),
@@ -66,7 +74,7 @@ export default class Petal extends THREE.Mesh {
     this.quaternionPrev.copy(this.quaternion);
     this.quaternion.setFromAxisAngle(
       this.axisBodyRotate,
-      time * this.rotateDirection * (1 - this.mass)
+      time * this.rotateDirection * (1 - this.mass + 0.5) * 1.4
     ).multiply(this.quaternionPrev);
 
     this.material.uniforms.time.value += time;

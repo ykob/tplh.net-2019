@@ -10,14 +10,16 @@ const DURATION_HIDE = 1;
 const DELAY_HIDE = 0;
 
 export default class PetalRotate extends Petal {
-  constructor(geometry) {
+  constructor(geometry, hsv1, hsv2) {
     // Create Object3D
-    super(geometry);
+    super(geometry, hsv1, hsv2);
     this.name = 'PetalRotate';
-    this.delay = DELAY_SHOW + Math.random();
-    this.radius = (1 - this.mass) * 30 + 6;
-    this.radian1 = MathEx.radians((Math.random() * 2 - 1) * 180);
-    this.radian2 = MathEx.radians((Math.random() * 2 - 1) * 180);
+    this.durationRise = (1 - this.mass) * 20 + Math.random() * 5 + 10;
+    this.delayRise = this.durationRise * Math.random();
+    this.delayShow = DELAY_SHOW + Math.random();
+    this.radius = Math.random() * Math.random() * Math.random() * 18 + 9;
+    this.radian = MathEx.radians((Math.random() * 2 - 1) * 90);
+    this.timeRise = 0;
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = false;
@@ -34,6 +36,7 @@ export default class PetalRotate extends Petal {
   }
   update(time) {
     super.update(time);
+    this.timeRise += time;
 
     // for the showing effect.
     if (this.isShown === true) {
@@ -51,18 +54,14 @@ export default class PetalRotate extends Petal {
     }
 
     // calculation the alpha.
-    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - this.delay) / DURATION_SHOW, 0.0, 1.0));
+    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - this.delayShow) / DURATION_SHOW, 0.0, 1.0));
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
-    // calculation the world rotation.
-    this.radian1 += time * (1 - this.mass + 1) * 0.1 * this.rotateDirection;
-    this.radian2 += time * (1 - this.mass + 1) * 0.1 * this.rotateDirection;
-
     this.position.set(
-      Math.sin(this.radian1) * (this.radius + (1.0 - alphaShow) * this.radius * 0.5),
-      Math.sin(this.radian2) * this.radius * 0.333,
-      Math.cos(this.radian1) * (this.radius + (1.0 - alphaShow) * this.radius * 0.5)
+      Math.sin(this.radian) * this.radius,
+      ((this.timeRise + this.delayRise) / this.durationRise % 1 * 2 - 1) * 20,
+      Math.cos(this.radian) * this.radius
     );
   }
 }

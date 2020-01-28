@@ -4,6 +4,8 @@ uniform float time;
 uniform sampler2D noiseTex;
 uniform float alphaShow;
 uniform float alphaColor;
+uniform vec3 hsv1;
+uniform vec3 hsv2;
 
 varying vec3 vPosition;
 varying vec3 vNormal;
@@ -32,8 +34,6 @@ void main() {
     (alphaShow * 2.0 - noise1) / 2.0
     );
 
-  vec3 hsv1 = vec3(29.0 / 360.0, 0.37, 0.58);
-  vec3 hsv2 = vec3(28.0 / 360.0, 0.61, 0.33);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), diff);
 
   vec3 hsvNoise = vec3(noise2 * -0.06, noise2 * -0.45, 0.0);

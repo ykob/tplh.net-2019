@@ -7,7 +7,7 @@ import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
 import Title from '@/webgl/Title';
-import CherryRotate from '@/webgl/CherryRotate';
+import PetalRotateGroup from '@/webgl/PetalRotateGroup';
 import Image from '@/webgl/Image';
 import Background from '@/webgl/Background';
 import Intersector from '@/webgl/Intersector';
@@ -33,10 +33,13 @@ const raycaster = new THREE.Raycaster();
 //
 const skull = new Skull();
 const title = new Title();
-const cherryRotate = new CherryRotate();
+const petalRotateGroup = new PetalRotateGroup();
 const image = new Image();
 const bg = new Background();
 const intersector = new Intersector();
+
+const petalHsv1 = new THREE.Vector3(0.09, 0.7, 0.35);
+const petalHsv2 = new THREE.Vector3(0.09, 0.46, 0.1);
 
 // ==========
 // Define WebGLContent Class.
@@ -112,7 +115,7 @@ export default class WebGLContent {
       // Add the webgl objects to the scene.
       scene.add(skull);
       scene.add(title);
-      // scene.add(cherryRotate);
+      scene.add(petalRotateGroup);
       scene.add(image);
       scene.add(bg);
       scene.add(intersector);
@@ -122,13 +125,13 @@ export default class WebGLContent {
       skullAuraCamera.start();
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
       title.start(titleTex, noiseTex);
-      cherryRotate.start(geometryPetal1, geometryPetal2, noiseTex);
+      petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
       // show the dat.gui.
       if (process.env.VUE_APP_MODE === 'development') {
-        initDatGui(skull);
+        initDatGui(skull, petalHsv1, petalHsv2);
       }
     });
   }
@@ -145,11 +148,11 @@ export default class WebGLContent {
     if (bool === true) {
       skull.show();
       title.show();
-      cherryRotate.show();
+      petalRotateGroup.show();
     } else {
       skull.hide();
       title.hide();
-      cherryRotate.hide();
+      petalRotateGroup.hide();
     }
   }
   showWorksImage(index) {
@@ -174,7 +177,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
-    cherryRotate.update(time);
+    petalRotateGroup.update(time);
     title.update(time);
     image.update(time);
     bg.update(time);
