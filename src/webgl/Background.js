@@ -59,12 +59,12 @@ export default class Background extends THREE.Mesh {
     this.isActive = true;
     this.material.uniforms.noiseTex.value = noiseTex;
   }
-  change(bool) {
+  change(isHome) {
     this.isChanged = true;
 
     if (this.isShownFirst === false) {
       this.isShownFirst = true;
-      if (bool === true) {
+      if (isHome === true) {
         this.material.uniforms.alpha.value = 1;
         this.alphaStart = 1;
         this.alphaEnd = 1;
@@ -77,7 +77,7 @@ export default class Background extends THREE.Mesh {
         this.timeShowFirst = 0;
       }
       this.alphaStart = this.material.uniforms.alpha.value;
-      this.alphaEnd = (bool === true) ? 1 : 0;
+      this.alphaEnd = (isHome === true) ? 1 : 0;
       this.time = 0;
     }
   }
