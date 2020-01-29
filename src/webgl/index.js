@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import UAParser from 'ua-parser-js';
 import sleep from 'js-util/sleep';
 
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
@@ -42,6 +43,8 @@ const petalHsv1 = new THREE.Vector3(0.09, 0.7, 0.35);
 const petalHsv2 = new THREE.Vector3(0.09, 0.46, 0.1);
 const petalHsv3 = new THREE.Vector3(0.09, 0.72, 0.18);
 
+const ua = UAParser();
+
 // ==========
 // Define WebGLContent Class.
 //
@@ -65,7 +68,7 @@ export default class WebGLContent {
       antialias: true,
       canvas: canvas,
     });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio((ua.os.name === 'iOS' || ua.os.name === 'Android') ? 2 : 1);
     renderer.setClearColor(0x1b191c, 0.0);
 
     // Loading all assets for WebGL.
