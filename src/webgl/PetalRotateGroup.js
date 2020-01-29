@@ -14,10 +14,10 @@ export default class PetalRotateGroup extends THREE.Group {
     this.isActive = false;
     this.isShownFirst = false;
   }
-  start(geometryPetal1, geometryPetal2, noiseTex, hsv1, hsv2) {
+  start(geometryPetal1, geometryPetal2, noiseTex, hsv1, hsv2, hsv3) {
     for (var i = 0; i < this.petals.length; i++) {
       const geometry = (i % 2 === 1) ? geometryPetal1 : geometryPetal2;
-      this.petals[i] = new PetalRotate(geometry, hsv1, hsv2);
+      this.petals[i] = new PetalRotate(geometry, hsv1, hsv2, hsv3);
       this.add(this.petals[i]);
       this.petals[i].start(noiseTex);
     }

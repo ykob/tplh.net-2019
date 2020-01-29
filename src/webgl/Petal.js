@@ -8,7 +8,7 @@ import fs from '@/webgl/glsl/Petal.fs';
 const DURATION = 3;
 
 export default class Petal extends THREE.Mesh {
-  constructor(geometry, hsv1, hsv2) {
+  constructor(geometry, hsv1, hsv2, hsv3) {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
@@ -35,6 +35,10 @@ export default class Petal extends THREE.Mesh {
         hsv2: {
           type: 'v3',
           value: hsv2
+        },
+        hsv3: {
+          type: 'v3',
+          value: hsv3
         }
       },
       vertexShader: vs,

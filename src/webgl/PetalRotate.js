@@ -11,9 +11,9 @@ const DURATION_HIDE = 1;
 const DELAY_HIDE = 0;
 
 export default class PetalRotate extends Petal {
-  constructor(geometry, hsv1, hsv2) {
+  constructor(geometry, hsv1, hsv2, hsv3) {
     // Create Object3D
-    super(geometry, hsv1, hsv2);
+    super(geometry, hsv1, hsv2, hsv3);
     this.name = 'PetalRotate';
     this.durationRise = (1 - this.mass) * 20 + Math.random() * 5 + 10;
     this.delayRise = this.durationRise * Math.random();

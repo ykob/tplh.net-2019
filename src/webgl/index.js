@@ -40,6 +40,7 @@ const intersector = new Intersector();
 
 const petalHsv1 = new THREE.Vector3(0.09, 0.7, 0.35);
 const petalHsv2 = new THREE.Vector3(0.09, 0.46, 0.1);
+const petalHsv3 = new THREE.Vector3(0.09, 0.72, 0.18);
 
 // ==========
 // Define WebGLContent Class.
@@ -125,13 +126,13 @@ export default class WebGLContent {
       skullAuraCamera.start();
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
       title.start(titleTex, noiseTex);
-      petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2);
+      petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       image.start(noiseBurnTex, imgTexes);
       bg.start(noiseTex);
 
       // show the dat.gui.
       if (process.env.VUE_APP_MODE === 'development') {
-        initDatGui(skull, petalHsv1, petalHsv2);
+        initDatGui(skull, petalHsv1, petalHsv2, petalHsv3);
       }
     });
   }
