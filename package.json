@@ -21,6 +21,7 @@
     "lodash": "^4.17.15",
     "normalize-wheel": "^1.0.1",
     "three": "^0.109.0",
+    "ua-parser-js": "^0.7.21",
     "vue": "^2.6.10",
     "vue-meta": "^2.3.1",
     "vue-router": "^3.0.3",
