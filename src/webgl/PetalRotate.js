@@ -6,6 +6,7 @@ import Petal from '@/webgl/Petal';
 
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1.2;
+const DELAY_SHOW_FIRST = 4;
 const DURATION_HIDE = 1;
 const DELAY_HIDE = 0;
 
@@ -23,13 +24,21 @@ export default class PetalRotate extends Petal {
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = false;
+    this.isShownFirst = false;
     this.isHidden = false;
   }
-  show() {
+  show(isShownFirst) {
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = true;
     this.isHidden = false;
+
+    if (this.isShownFirst === false && isShownFirst === true) {
+      this.isShownFirst = isShownFirst;
+      this.delayShow = DELAY_SHOW_FIRST + Math.random();
+    } else {
+      this.delayShow = DELAY_SHOW + Math.random();
+    }
   }
   hide() {
     this.isHidden = true;
@@ -41,7 +50,7 @@ export default class PetalRotate extends Petal {
     // for the showing effect.
     if (this.isShown === true) {
       this.timeShow += time;
-      if (this.timeShow - DELAY_SHOW >= DURATION_SHOW) {
+      if (this.timeShow - this.delayShow >= DURATION_SHOW) {
         this.isShown = false;
       }
     }

@@ -12,6 +12,7 @@ export default class PetalRotateGroup extends THREE.Group {
     this.petals = Array(PETAL_NUM);
     this.time = 0;
     this.isActive = false;
+    this.isShownFirst = false;
   }
   start(geometryPetal1, geometryPetal2, noiseTex, hsv1, hsv2) {
     for (var i = 0; i < this.petals.length; i++) {
@@ -23,8 +24,11 @@ export default class PetalRotateGroup extends THREE.Group {
     this.isActive = true;
   }
   show() {
+    if (this.isShownFirst === false) {
+      this.isShownFirst = true;
+    }
     for (var i = 0; i < this.petals.length; i++) {
-      this.petals[i].show();
+      this.petals[i].show(this.isShownFirst);
     }
   }
   hide() {
