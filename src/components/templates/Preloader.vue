@@ -50,8 +50,8 @@
     }
     &.preloader-leave-to {
       opacity: 0;
-      transform: scale(1.2);
-      transition-duration: 1.4s;
+      transform: scale(1.8);
+      transition-duration: 2s;
       transition-delay: 1s;
       transition-timing-function: $easeInOutCirc;
       transition-property: opacity, transform;
