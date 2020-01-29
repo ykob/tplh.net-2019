@@ -19,7 +19,7 @@ export default class PetalRotate extends Petal {
     this.delayRise = this.durationRise * Math.random();
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;
-    this.radius = Math.random() * Math.random() * Math.random() * 18 + 9;
+    this.radius = Math.random() * Math.random() * Math.random() * 18 + 7;
     this.radian = MathEx.radians((Math.random() * 2 - 1) * 90);
     this.timeRise = 0;
     this.timeShow = 0;
@@ -68,10 +68,11 @@ export default class PetalRotate extends Petal {
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
+    const additiveRadian = MathEx.radians(Math.sin(this.timeRise * 0.4 + this.delayShow * 2) * (25 - this.radius + 10));
     this.position.set(
-      Math.sin(this.radian) * this.radius,
+      Math.sin(this.radian + additiveRadian) * this.radius,
       ((this.timeRise + this.delayRise) / this.durationRise % 1 * 2 - 1) * 20,
-      Math.cos(this.radian) * this.radius
+      Math.cos(this.radian + additiveRadian) * this.radius
     );
   }
 }
