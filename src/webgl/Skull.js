@@ -50,7 +50,7 @@ export default class Skull extends THREE.Group {
     this.points.hide();
   }
   lookMouse(lookV) {
-    this.lookAnchor.copy(lookV).multiplyScalar(-0.2);
+    this.lookAnchor.copy(lookV).multiplyScalar(-0.3);
     this.body.lookMouse(lookV);
   }
   update(time, renderer, camera, sceneAura, cameraAura) {
@@ -61,7 +61,7 @@ export default class Skull extends THREE.Group {
     this.radian += time;
 
     // move with a mouse coordinate.
-    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(14);
+    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(32);
     this.lookV.add(this.lookA);
     this.position.copy(this.lookV);
 
