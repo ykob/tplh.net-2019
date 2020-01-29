@@ -121,7 +121,7 @@ export default class SkullBody extends THREE.Group {
 
     // Move to look at a mouse coordinate.
     // rotate
-    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(12);
+    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(24);
     this.lookV.add(this.lookA);
     this.lookAt(this.lookV);
     this.lookEuler.copy(this.rotation);

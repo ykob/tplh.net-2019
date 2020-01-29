@@ -61,7 +61,7 @@ export default class Skull extends THREE.Group {
     this.radian += time;
 
     // move with a mouse coordinate.
-    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(32);
+    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(36);
     this.lookV.add(this.lookA);
     this.position.copy(this.lookV);
 
