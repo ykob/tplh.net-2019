@@ -4,11 +4,10 @@ import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/SkullBody.vs';
 import fs from '@/webgl/glsl/SkullBody.fs';
-
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1;
-const DURATION_HIDE = 1.4;
-const DELAY_HIDE = 0;
+const DURATION_HIDE = 0.8;
+const DELAY_HIDE = 0.4;
 const DURATION_SCREAM = 2.5;
 const DELAY_SCREAM = 2.5;
 const DURATION_EDGE = 1.2;

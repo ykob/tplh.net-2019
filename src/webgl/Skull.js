@@ -1,10 +1,16 @@
 import * as THREE from 'three';
+import { easeInOutCirc, easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import SkullBody from '@/webgl/SkullBody';
 import SkullAuraPostEffect from '@/webgl/SkullAuraPostEffect';
 import SkullAura from '@/webgl/SkullAura';
 import SkullPoints from '@/webgl/SkullPoints';
+
+const DURATION_SHOW = 2;
+const DELAY_SHOW = 1;
+const DURATION_HIDE = 1.2;
+const DELAY_HIDE = 0;
 
 export default class Skull extends THREE.Group {
   constructor() {
@@ -17,10 +23,14 @@ export default class Skull extends THREE.Group {
     this.renderTarget1 = new THREE.WebGLRenderTarget(256, 256);
     this.renderTarget2 = new THREE.WebGLRenderTarget(256, 256);
     this.time = 0;
+    this.timeShow = 0;
+    this.timeHide = 0;
     this.lookV = new THREE.Vector3();
     this.lookA = new THREE.Vector3();
     this.lookAnchor = new THREE.Vector3();
     this.isActive = false;
+    this.isShown = false;
+    this.isHidden = false;
 
     this.position.set(0, 0, -3);
   }
@@ -41,11 +51,17 @@ export default class Skull extends THREE.Group {
     this.isActive = true;
   }
   show() {
+    this.timeShow = 0;
+    this.timeHide = 0;
+    this.isShown = true;
+    this.isHidden = false;
     this.body.show();
     this.aura.show();
     this.points.show();
   }
   hide() {
+    this.isShown = false;
+    this.isHidden = true;
     this.body.hide();
     this.points.hide();
   }
@@ -60,10 +76,27 @@ export default class Skull extends THREE.Group {
     this.time += time;
     this.radian += time;
 
+    // for the showing effect.
+    if (this.isShown === true) {
+      this.timeShow += time;
+    }
+    // for the hiding effect.
+    if (this.isHidden === true) {
+      this.timeHide += time;
+    }
+
     // move with a mouse coordinate.
     this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(36);
     this.lookV.add(this.lookA);
-    this.position.copy(this.lookV);
+
+    // rising first.
+    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
+    const alphaHide = easeInOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
+
+    // add all translates to this position..
+    this.position
+      .set(0, (alphaShow + alphaHide - 1) * 6, 0)
+      .add(this.lookV);
 
     // update children.
     this.body.update(time, camera);
