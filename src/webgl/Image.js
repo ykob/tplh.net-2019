@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeOutQuad } from 'easing-js';
+import { easeOutQuad, easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import ImagePlane from '@/webgl/ImagePlane';
@@ -15,6 +15,7 @@ export default class Image extends THREE.Group {
     this.size = new THREE.Vector3();
     this.margin = new THREE.Vector2();
     this.timeTransition = 0;
+    this.easeRise = 0;
     this.easeStep = 0;
     this.currentIndex = 0;
     this.delay = 0;
@@ -60,11 +61,13 @@ export default class Image extends THREE.Group {
     this.timeTransition += time;
 
     if (this.isAnimated === true) {
+      this.easeRise = easeOutCirc(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
       this.easeStep = easeOutQuad(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
       if (this.timeTransition - this.delay >= DURATION) {
         this.isAnimated = false;
       }
     }
+    this.position.y = (1.0 - this.easeRise) * -10;
     this.children[0].update(time, this.easeStep);
     this.children[1].update(time, this.easeStep);
     this.children[2].update(time, this.easeStep);
