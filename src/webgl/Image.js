@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeOutQuad, easeOutCirc } from 'easing-js';
+import { easeOutQuad, easeInOutCirc, easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import ImagePlane from '@/webgl/ImagePlane';
@@ -15,8 +15,11 @@ export default class Image extends THREE.Group {
     this.size = new THREE.Vector3();
     this.margin = new THREE.Vector2();
     this.timeTransition = 0;
-    this.easeRise = 0;
+    this.easeFuncRise = null;
+    this.easeStepRise = 0;
     this.easeStep = 0;
+    this.transitionStart = 0;
+    this.transitionEnd = 0;
     this.currentIndex = 0;
     this.delay = 0;
     this.isAnimated = false;
@@ -46,9 +49,21 @@ export default class Image extends THREE.Group {
     this.add(imageFire);
     this.add(imagePoints);
   }
-  change(index) {
+  change(index, direction) {
     if (index === this.currentIndex) return;
-    this.delay = (index > 0 && this.currentIndex === 0) ? 0.5 : 0;
+
+    if (index > 0 && this.currentIndex === 0) {
+      this.easeFuncRise = easeOutCirc;
+      this.delay = 0.5;
+      this.transitionStart = (this.currentIndex === 0) ? direction * 12 : 0;
+      this.transitionEnd = 0;
+    } else {
+      this.easeFuncRise = easeInOutCirc;
+      this.delay = 0;
+      this.transitionStart = this.position.y;
+      this.transitionEnd = direction * 24;
+    }
+
     this.currentIndex = index;
     this.timeTransition = 0;
     this.isAnimated = true;
@@ -61,13 +76,14 @@ export default class Image extends THREE.Group {
     this.timeTransition += time;
 
     if (this.isAnimated === true) {
-      this.easeRise = easeOutCirc(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
+      this.easeStepRise = this.easeFuncRise(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
       this.easeStep = easeOutQuad(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
       if (this.timeTransition - this.delay >= DURATION) {
         this.isAnimated = false;
       }
     }
-    this.position.y = (1.0 - this.easeRise) * -10;
+
+    this.position.y = this.transitionStart + this.easeStepRise * (this.transitionEnd - this.transitionStart);
     this.children[0].update(time, this.easeStep);
     this.children[1].update(time, this.easeStep);
     this.children[2].update(time, this.easeStep);

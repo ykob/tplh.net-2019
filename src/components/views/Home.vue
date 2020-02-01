@@ -14,8 +14,10 @@
     async mounted() {
       this.$store.commit('changeBackground', false);
       this.$store.commit('showSkull', true);
-      this.$store.commit('showWorksImage', 0);
-      this.$store.commit('setPositionFromWorks', -1);
+      this.$store.commit('showWorksImage', {
+        index: 0,
+        direction: -1
+      });
       this.$store.commit('transit', {
         globalId: 0,
       });

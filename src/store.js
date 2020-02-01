@@ -62,8 +62,9 @@ export default new Vuex.Store({
     showSkull (state, bool) {
       state.webgl.showSkull(bool);
     },
-    showWorksImage (state, index) {
-      state.webgl.showWorksImage(index);
+    showWorksImage (state, { index, direction }) {
+      state.webgl.showWorksImage(index, state.positionFromWorks + direction);
+      state.positionFromWorks = direction;
     },
     transitPrevWorks (state) {
       state.currentWorksId =
@@ -76,9 +77,6 @@ export default new Vuex.Store({
         (state.currentWorksId >= state.works.length - 1)
           ? 0
           : state.currentWorksId + 1;
-    },
-    setPositionFromWorks (state, number) {
-      state.positionFromWorks = number;
     }
   },
   actions: {

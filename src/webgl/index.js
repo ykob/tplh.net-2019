@@ -159,8 +159,8 @@ export default class WebGLContent {
       petalRotateGroup.hide();
     }
   }
-  showWorksImage(index) {
-    image.change(index);
+  showWorksImage(index, direction) {
+    image.change(index, direction);
   }
   update(mouse) {
     // When the clock is stopped, it stops the all rendering too.

@@ -21,8 +21,10 @@ export default {
   async mounted() {
     this.$store.commit('changeBackground', true);
     this.$store.commit('showSkull', false);
-    this.$store.commit('showWorksImage', 0);
-    this.$store.commit('setPositionFromWorks', 1);
+    this.$store.commit('showWorksImage', {
+      index: 0,
+      direction: 1
+    });
     this.$store.commit('transit', {
       globalId: 50,
     });

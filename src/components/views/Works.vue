@@ -26,8 +26,10 @@
 
       this.$store.commit('changeBackground', true);
       this.$store.commit('showSkull', false);
-      this.$store.commit('showWorksImage', index + 1);
-      this.$store.commit('setPositionFromWorks', 0);
+      this.$store.commit('showWorksImage', {
+        index: index + 1,
+        direction: 0
+      });
       this.$store.commit('transit', {
         globalId: 1,
         currentWorksId: index
@@ -42,7 +44,10 @@
           this.$store.state.works,
           { key: key }
         );
-        this.$store.commit('showWorksImage', index + 1);
+        this.$store.commit('showWorksImage', {
+          index: index + 1,
+          direction: 0
+        });
         this.$store.commit('transitInWorks', true);
         this.$store.commit('transit', {
           globalId: 1,
