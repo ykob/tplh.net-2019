@@ -169,6 +169,7 @@ export default class WebGLContent {
   }
   showWorksImage(index, direction) {
     image.change(index, direction);
+    worksText.change(index);
   }
   update(mouse) {
     // When the clock is stopped, it stops the all rendering too.

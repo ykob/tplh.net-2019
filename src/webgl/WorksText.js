@@ -5,7 +5,10 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/WorksText.vs';
 import fs from '@/webgl/glsl/WorksText.fs';
 
+import WORKS from '@/const/WORKS';
+
 const WIDTH = 90;
+const DURATION_TRANSITION = 1.6;
 
 export default class WorksText extends THREE.Mesh {
   constructor() {
@@ -27,17 +30,25 @@ export default class WorksText extends THREE.Mesh {
           type: 'f',
           value: 0
         },
+        prevMaxUvX: {
+          type: 'f',
+          value: 0
+        },
         nextId: {
           type: 'f',
-          value: 1
+          value: 0
+        },
+        nextMaxUvX: {
+          type: 'f',
+          value: 0
         },
         maxId: {
           type: 'f',
           value: 16
         },
-        maxUvX: {
+        alphaChanging: {
           type: 'f',
-          value: 650 / 1024
+          value: 0
         }
       },
       vertexShader: vs,
@@ -49,20 +60,40 @@ export default class WorksText extends THREE.Mesh {
     super(geometry, material);
     this.name = 'WorksText';
     this.time = 0;
+    this.timeTransition = 0;
     this.isActive = false;
+    this.isChanging = false;
 
-    this.position.set(0, 0, 0);
+    this.visible = false;
   }
   start(tex) {
     this.isActive = true;
     this.material.uniforms.tex.value = tex;
   }
-  show() {
+  change(id) {
+    const { prevId, prevMaxUvX, nextId, nextMaxUvX } = this.material.uniforms;
+    prevId.value = nextId.value;
+    prevMaxUvX.value = nextMaxUvX.value;
+    nextId.value = id;
+    nextMaxUvX.value = (id > 0) ? (WORKS[id - 1].textWidth + 40) / 2048 : 0;
+    this.timeTransition = 0;
+    this.isChanging = true;
+    if (id > 0) this.visible = true;
   }
-  hide() {
-  }
-  update(time) {
+  update(t) {
+    const { time, alphaChanging, nextId } = this.material.uniforms;
+
     if (this.isActive === false) return;
-    this.material.uniforms.time.value += time;
+    time.value += t;
+
+    // run the animation of changing text.
+    if (this.isChanging) {
+      this.timeTransition += t;
+      alphaChanging.value = easeInOutCirc(MathEx.clamp(this.timeTransition / DURATION_TRANSITION, 0.0, 1.0));
+      if (this.timeTransition >= DURATION_TRANSITION) {
+        this.isChanging = false;
+        if (nextId.value === 0) this.visible = false;
+      }
+    }
   }
 }
