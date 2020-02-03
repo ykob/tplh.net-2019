@@ -63,8 +63,6 @@ export default class WorksText extends THREE.Mesh {
     this.timeTransition = 0;
     this.isActive = false;
     this.isChanging = false;
-
-    this.visible = false;
   }
   start(tex) {
     this.isActive = true;
@@ -78,12 +76,11 @@ export default class WorksText extends THREE.Mesh {
     nextMaxUvX.value = (id > 0) ? (WORKS[id - 1].textWidth + 40) / 2048 : 0;
     this.timeTransition = 0;
     this.isChanging = true;
-    if (id > 0) this.visible = true;
   }
   update(t) {
-    const { time, alphaChanging, nextId } = this.material.uniforms;
-
     if (this.isActive === false) return;
+
+    const { time, alphaChanging, nextId } = this.material.uniforms;
     time.value += t;
 
     // run the animation of changing text.
@@ -92,7 +89,6 @@ export default class WorksText extends THREE.Mesh {
       alphaChanging.value = easeInOutCirc(MathEx.clamp(this.timeTransition / DURATION_TRANSITION, 0.0, 1.0));
       if (this.timeTransition >= DURATION_TRANSITION) {
         this.isChanging = false;
-        if (nextId.value === 0) this.visible = false;
       }
     }
   }
