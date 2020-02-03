@@ -35,6 +35,10 @@ export default class WorksText extends THREE.Mesh {
           type: 'f',
           value: 16
         },
+        maxUvX: {
+          type: 'f',
+          value: 650 / 1024
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,

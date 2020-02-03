@@ -5,6 +5,7 @@ uniform sampler2D tex;
 uniform float prevId;
 uniform float nextId;
 uniform float maxId;
+uniform float maxUvX;
 
 varying vec2 vUv;
 
@@ -12,7 +13,7 @@ void main() {
   vec2 p = vUv * 2.0 - 1.0;
 
   vec2 textUv = vec2(
-    vUv.x,
+    mod(vUv.x + time * 0.1, maxUvX),
     (clamp(vUv.y * 3.0 + sin(time), 1.0, 2.0) + (maxId - prevId - 2.0)) / maxId
     );
 
