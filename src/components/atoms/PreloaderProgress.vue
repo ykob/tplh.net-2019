@@ -46,6 +46,14 @@
 </template>
 
 <style lang="scss" scoped>
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 svg {
   width: 252px;
   height: 252px;
@@ -53,6 +61,10 @@ svg {
   position: absolute;
   top: calc(50% - 126px);
   left: calc(50% - 126px);
+  animation-name: rotate;
+  animation-duration: 30s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 .mask-rotate-group {
   transform: rotate(34deg);
