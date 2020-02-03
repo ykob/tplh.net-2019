@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeOutQuad, easeInOutCirc, easeOutCirc } from 'easing-js';
+import { easeOutQuad, easeInOutExpo, easeOutExpo } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import ImagePlane from '@/webgl/ImagePlane';
@@ -53,12 +53,12 @@ export default class Image extends THREE.Group {
     if (index === this.currentIndex) return;
 
     if (index > 0 && this.currentIndex === 0) {
-      this.easeFuncRise = easeOutCirc;
+      this.easeFuncRise = easeOutExpo;
       this.delay = 0.5;
-      this.transitionStart = (this.currentIndex === 0) ? direction * 12 : 0;
+      this.transitionStart = (this.currentIndex === 0) ? direction * 24 : 0;
       this.transitionEnd = 0;
     } else {
-      this.easeFuncRise = easeInOutCirc;
+      this.easeFuncRise = easeInOutExpo;
       this.delay = 0;
       this.transitionStart = this.position.y;
       this.transitionEnd = direction * 24;
