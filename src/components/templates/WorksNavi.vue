@@ -269,15 +269,15 @@
       transition-property: transform, opacity;
       transform: scale(0);
       &:before {
-        width: 9px;
-        height: 9px;
+        width: 7px;
+        height: 7px;
         backface-visibility: hidden;
         content: '';
         display: block;
         box-sizing: border-box;
         position: absolute;
-        top: 16px;
-        left: 16px;
+        top: 17px;
+        left: 17px;
         border: 1px solid rgba($color-text, 0.5);
         transform: rotate(45deg);
         transition-duration: .6s;
