@@ -5,7 +5,7 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/WorksText.vs';
 import fs from '@/webgl/glsl/WorksText.fs';
 
-const WIDTH = 32;
+const WIDTH = 90;
 
 export default class WorksText extends THREE.Mesh {
   constructor() {
