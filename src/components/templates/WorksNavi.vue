@@ -188,9 +188,6 @@
 
         // Interaction
         &.is-shown {
-          &.is-overed {
-            height: calc(50% + 60px);
-          }
           &.is-current {
             height: 0;
           }
@@ -199,6 +196,9 @@
           }
           &.is-next {
             height: calc(50% - 60px);
+            &.is-overed {
+              height: calc(50% + 60px);
+            }
           }
         }
       }
@@ -207,14 +207,14 @@
 
         // Interaction
         &.is-shown {
-          &.is-overed {
-            height: calc(50% + 60px);
-          }
           &.is-current {
             height: calc(100% + 10px);
           }
           &.is-previous {
             height: calc(50% - 60px);
+            &.is-overed {
+              height: calc(50% + 60px);
+            }
           }
           &.is-next {
             height: 0;
