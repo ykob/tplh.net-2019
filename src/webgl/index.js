@@ -10,6 +10,7 @@ import Skull from '@/webgl/Skull';
 import Title from '@/webgl/Title';
 import PetalRotateGroup from '@/webgl/PetalRotateGroup';
 import Image from '@/webgl/Image';
+import WorksText from '@/webgl/WorksText';
 import Background from '@/webgl/Background';
 import Intersector from '@/webgl/Intersector';
 
@@ -36,6 +37,7 @@ const skull = new Skull();
 const title = new Title();
 const petalRotateGroup = new PetalRotateGroup();
 const image = new Image();
+const worksText = new WorksText();
 const bg = new Background();
 const intersector = new Intersector();
 
@@ -84,6 +86,7 @@ export default class WebGLContent {
       require('@/assets/img/webgl/title.jpg'),
       require('@/assets/img/webgl/noise.jpg'),
       require('@/assets/img/webgl/noise_burn.jpg'),
+      require('@/assets/img/webgl/works_text.jpg'),
       require('@/assets/img/webgl/thumb_blank.png'),
       require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`),
       require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`),
@@ -109,18 +112,22 @@ export default class WebGLContent {
       const titleTex = response[2];
       const noiseTex = response[3];
       const noiseBurnTex = response[4];
-      const imgTexes = response.slice(5);
+      const worksTextTex = response[5];
+      const imgTexes = response.slice(6);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
       noiseBurnTex.wrapS = THREE.RepeatWrapping;
       noiseBurnTex.wrapT = THREE.RepeatWrapping;
+      worksTextTex.wrapS = THREE.RepeatWrapping;
+      worksTextTex.wrapT = THREE.RepeatWrapping;
 
       // Add the webgl objects to the scene.
       scene.add(skull);
       scene.add(title);
       scene.add(petalRotateGroup);
       scene.add(image);
+      scene.add(worksText);
       scene.add(bg);
       scene.add(intersector);
 
@@ -131,6 +138,7 @@ export default class WebGLContent {
       title.start(titleTex, noiseTex);
       petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       image.start(noiseBurnTex, imgTexes);
+      worksText.start(worksTextTex);
       bg.start(noiseTex);
 
       // show the dat.gui.
@@ -184,6 +192,7 @@ export default class WebGLContent {
     petalRotateGroup.update(time);
     title.update(time);
     image.update(time);
+    worksText.update(time);
     bg.update(time);
 
     // Render the 3D scene.
