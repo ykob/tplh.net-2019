@@ -115,7 +115,11 @@
       async loaded() {
         this.resize();
         this.$store.commit('loaded');
-        await sleep(800);
+        if (this.$route.name === 'home') {
+          await sleep(800);
+        } else {
+          await sleep(1400);
+        }
         this.$store.state.webgl.play();
         this.$store.commit('showView');
       },
