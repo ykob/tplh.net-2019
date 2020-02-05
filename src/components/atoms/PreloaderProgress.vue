@@ -62,7 +62,7 @@ svg {
   top: calc(50% - 126px);
   left: calc(50% - 126px);
   animation-name: rotate;
-  animation-duration: 30s;
+  animation-duration: 20s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
