@@ -63,7 +63,7 @@ export default new Vuex.Store({
       state.webgl.showSkull(bool);
     },
     showWorksImage (state, { index, direction }) {
-      state.webgl.showWorksImage(index, state.positionFromWorks + direction);
+      state.webgl.showWorksImage(index, direction, state.positionFromWorks);
       state.positionFromWorks = direction;
     },
     transitPrevWorks (state) {

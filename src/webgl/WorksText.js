@@ -26,7 +26,7 @@ export default class WorksText extends THREE.Mesh {
           type: 't',
           value: null
         },
-        prevId: {
+        prevIndex: {
           type: 'f',
           value: 0
         },
@@ -34,7 +34,7 @@ export default class WorksText extends THREE.Mesh {
           type: 'f',
           value: 0
         },
-        nextId: {
+        nextIndex: {
           type: 'f',
           value: 0
         },
@@ -42,13 +42,17 @@ export default class WorksText extends THREE.Mesh {
           type: 'f',
           value: 0
         },
-        maxId: {
+        maxIndex: {
           type: 'f',
           value: 16
         },
         alphaChanging: {
           type: 'f',
           value: 0
+        },
+        direction: {
+          type: 'f',
+          value: 1
         }
       },
       vertexShader: vs,
@@ -68,19 +72,28 @@ export default class WorksText extends THREE.Mesh {
     this.isActive = true;
     this.material.uniforms.tex.value = tex;
   }
-  change(id) {
-    const { prevId, prevMaxUvX, nextId, nextMaxUvX } = this.material.uniforms;
-    prevId.value = nextId.value;
+  change(index, dir, prevPosFromWorks) {
+    const { prevIndex, prevMaxUvX, nextIndex, nextMaxUvX, direction } = this.material.uniforms;
+    prevIndex.value = nextIndex.value;
     prevMaxUvX.value = nextMaxUvX.value;
-    nextId.value = id;
-    nextMaxUvX.value = (id > 0) ? (WORKS[id - 1].textWidth + 40) / 2048 : 0;
+    nextIndex.value = index;
+    nextMaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
     this.timeTransition = 0;
     this.isChanging = true;
+
+    if (index === 0) {
+      direction.value = -dir;
+    } else if (prevIndex.value === 0) {
+      direction.value = prevPosFromWorks;
+    } else {
+      const diff = nextIndex.value - prevIndex.value;
+      direction.value = -diff / Math.abs(diff);
+    }
   }
   update(t) {
     if (this.isActive === false) return;
 
-    const { time, alphaChanging, nextId } = this.material.uniforms;
+    const { time, alphaChanging, nextIndex } = this.material.uniforms;
     time.value += t;
 
     // run the animation of changing text.
