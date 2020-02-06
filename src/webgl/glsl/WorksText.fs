@@ -17,14 +17,14 @@ const float CHANGE_DIST = 1.3;
 void main() {
   // Calculate the mask of text.
   vec2 uvText1 = vec2(
-    mod(vUv.x + time * 0.02, prevMaxUvX),
-    (clamp(vUv.y * 3.0 + alphaChanging * direction * CHANGE_DIST, 1.0, 2.0) + (maxIndex - prevIndex - 2.0)) / maxIndex
+    mod(vUv.x - time * 0.02, prevMaxUvX),
+    (clamp((1.0 - vUv.y) * 3.0 + alphaChanging * direction * CHANGE_DIST, 1.0, 2.0) + (maxIndex - prevIndex - 2.0)) / maxIndex
     );
   float textMask1 = texture2D(tex, uvText1).r;
 
   vec2 uvText2 = vec2(
-    mod(vUv.x + time * 0.02, nextMaxUvX),
-    (clamp(vUv.y * 3.0 - (1.0 - alphaChanging) * direction * CHANGE_DIST, 1.0, 2.0) + (maxIndex - nextIndex - 2.0)) / maxIndex
+    mod(vUv.x - time * 0.02, nextMaxUvX),
+    (clamp((1.0 - vUv.y) * 3.0 - (1.0 - alphaChanging) * direction * CHANGE_DIST, 1.0, 2.0) + (maxIndex - nextIndex - 2.0)) / maxIndex
     );
   float textMask2 = texture2D(tex, uvText2).r;
 
