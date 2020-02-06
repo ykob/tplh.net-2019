@@ -39,22 +39,17 @@
     // transition
     // ==========
     &.preloader-enter {
-      opacity: 0;
-      transform: scale(0.6);
+      opacity: 0.999;
     }
     &.preloader-enter-to {
-      transform: scale(1);
-      transition-duration: 1.4s;
-      transition-timing-function: $easeOutCirc;
-      transition-property: opacity, transform;
+      opacity: 1;
+      transition-duration: 1.6s;
+      transition-property: opacity;
     }
     &.preloader-leave-to {
-      opacity: 0;
-      transform: scale(1.8);
-      transition-duration: 1.4s;
+      opacity: 0.999;
+      transition-duration: 1.6s;
       transition-delay: 0.8s;
-      transition-timing-function: $easeInExpo;
-      transition-property: opacity, transform;
     }
   }
 </style>

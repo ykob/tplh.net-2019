@@ -25,7 +25,8 @@
   };
 </script>
 
-<template>
+<template lang="pug">
+.preloader-progress.
   <svg xmlns="http://www.w3.org/2000/svg" width="252" height="252" viewBox="0 0 252 252">
     <g mask="url(#mask-text)">
       <mask id="mask-rotate">
@@ -45,7 +46,7 @@
   </svg>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -54,23 +55,50 @@
     transform: rotate(360deg);
   }
 }
-svg {
+.preloader-progress {
   width: 252px;
   height: 252px;
-  display: block;
   position: absolute;
   top: calc(50% - 126px);
   left: calc(50% - 126px);
-  animation-name: rotate;
-  animation-duration: 20s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-.mask-rotate-group {
-  transform: rotate(34deg);
-  transform-origin: center center;
-}
-.mask-rotate-rect {
-  transform-origin: center center;
+
+  svg {
+    width: 252px;
+    height: 252px;
+    display: block;
+    animation-name: rotate;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .mask-rotate-group {
+    transform: rotate(34deg);
+    transform-origin: center center;
+  }
+  .mask-rotate-rect {
+    transform-origin: center center;
+  }
+
+  //
+  // transition
+  // ==========
+  .preloader-enter & {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  .preloader-enter-to & {
+    transform: scale(1);
+    transition-duration: 1.4s;
+    transition-timing-function: $easeOutCirc;
+    transition-property: opacity, transform;
+  }
+  .preloader-leave-to & {
+    opacity: 0;
+    transform: scale(1.8);
+    transition-duration: 1.4s;
+    transition-delay: 0.8s;
+    transition-timing-function: $easeInExpo;
+    transition-property: opacity, transform;
+  }
 }
 </style>

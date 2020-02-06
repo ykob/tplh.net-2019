@@ -71,6 +71,29 @@
       line-height: 1;
       @include fontSizeAll(16, 16, 16);
     }
+
+    //
+    // transition
+    // ==========
+    .preloader-enter & {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    .preloader-enter-to & {
+      transform: scale(1);
+      transition-duration: 1.4s;
+      transition-delay: 0.1s;
+      transition-timing-function: $easeOutCirc;
+      transition-property: opacity, transform;
+    }
+    .preloader-leave-to & {
+      opacity: 0;
+      transform: scale(1.4);
+      transition-duration: 1.4s;
+      transition-delay: 0.9s;
+      transition-timing-function: $easeInExpo;
+      transition-property: opacity, transform;
+    }
     &__col {
       transform: translate3d(0, 0, 0);
       .preloader-enter & {

@@ -45,5 +45,28 @@
         }
       }
     }
+
+    //
+    // transition
+    // ==========
+    .preloader-enter & {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    .preloader-enter-to & {
+      transform: scale(1);
+      transition-duration: 1.4s;
+      transition-delay: 0.2s;
+      transition-timing-function: $easeOutCirc;
+      transition-property: opacity, transform;
+    }
+    .preloader-leave-to & {
+      opacity: 0;
+      transform: scale(1.4);
+      transition-duration: 1.4s;
+      transition-delay: 1s;
+      transition-timing-function: $easeInExpo;
+      transition-property: opacity, transform;
+    }
   }
 </style>
