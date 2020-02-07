@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeInOutCirc } from 'easing-js';
+import { easeInCirc, easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
 import vs from '@/webgl/glsl/WorksText.vs';
@@ -8,7 +8,8 @@ import fs from '@/webgl/glsl/WorksText.fs';
 import WORKS from '@/const/WORKS';
 
 const WIDTH = 90;
-const DURATION_TRANSITION = 1.6;
+const DURATION_TRANSITION = 1;
+const DELAY_SHOW = 0.5;
 
 export default class WorksText extends THREE.Mesh {
   constructor() {
@@ -46,7 +47,11 @@ export default class WorksText extends THREE.Mesh {
           type: 'f',
           value: 16
         },
-        alphaChanging: {
+        alphaShow: {
+          type: 'f',
+          value: 0
+        },
+        alphaHide: {
           type: 'f',
           value: 0
         },
@@ -82,25 +87,26 @@ export default class WorksText extends THREE.Mesh {
     this.isChanging = true;
 
     if (index === 0) {
-      direction.value = -dir;
+      direction.value = dir;
     } else if (prevIndex.value === 0) {
-      direction.value = prevPosFromWorks;
+      direction.value = -prevPosFromWorks;
     } else {
       const diff = nextIndex.value - prevIndex.value;
-      direction.value = -diff / Math.abs(diff);
+      direction.value = diff / Math.abs(diff);
     }
   }
   update(t) {
     if (this.isActive === false) return;
 
-    const { time, alphaChanging, nextIndex } = this.material.uniforms;
+    const { time, alphaShow, alphaHide, nextIndex } = this.material.uniforms;
     time.value += t;
 
     // run the animation of changing text.
     if (this.isChanging) {
       this.timeTransition += t;
-      alphaChanging.value = easeInOutCirc(MathEx.clamp(this.timeTransition / DURATION_TRANSITION, 0.0, 1.0));
-      if (this.timeTransition >= DURATION_TRANSITION) {
+      alphaShow.value = easeOutCirc(MathEx.clamp((this.timeTransition - DELAY_SHOW) / DURATION_TRANSITION, 0.0, 1.0));
+      alphaHide.value = easeInCirc(MathEx.clamp(this.timeTransition / DURATION_TRANSITION, 0.0, 1.0));
+      if (this.timeTransition - DELAY_SHOW >= DURATION_TRANSITION) {
         this.isChanging = false;
       }
     }
