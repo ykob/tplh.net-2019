@@ -6,7 +6,8 @@ import ImagePlane from '@/webgl/ImagePlane';
 import ImageFire from '@/webgl/ImageFire';
 import ImagePoints from '@/webgl/ImagePoints';
 
-const DURATION = 1.8;
+const DURATION_RISE = 1.8;
+const DURATION_CHANGE = 1.8;
 
 export default class Image extends THREE.Group {
   constructor() {
@@ -14,14 +15,16 @@ export default class Image extends THREE.Group {
     this.name = 'ImageGroup';
     this.size = new THREE.Vector3();
     this.margin = new THREE.Vector2();
-    this.timeTransition = 0;
+    this.timeRise = 0;
+    this.timeChange = 0;
     this.easeFuncRise = null;
     this.easeStepRise = 0;
-    this.easeStep = 0;
+    this.easeStepChange = 0;
     this.transitionStart = 0;
     this.transitionEnd = 0;
     this.currentIndex = 0;
-    this.delay = 0;
+    this.delayRise = 0;
+    this.delayChange = 0;
     this.isAnimated = false;
 
     this.position.set(0, 1, 0);
@@ -54,18 +57,26 @@ export default class Image extends THREE.Group {
 
     if (index > 0 && this.currentIndex === 0) {
       this.easeFuncRise = easeOutExpo;
-      this.delay = 0.5;
-      this.transitionStart = (this.currentIndex === 0) ? direction * 24 : 0;
+      this.delayRise = 0.5;
+      this.delayChange = 0.5;
+      this.transitionStart = direction * 24;
       this.transitionEnd = 0;
-    } else {
+    } else if (index === 0 && this.currentIndex > 0) {
       this.easeFuncRise = easeInOutExpo;
-      this.delay = 0;
+      this.delayRise = 0;
+      this.delayChange = 0.3;
       this.transitionStart = this.position.y;
       this.transitionEnd = direction * 24;
+    } else {
+      this.delayRise = 0;
+      this.delayChange = 0;
+      this.transitionStart = this.position.y;
+      this.transitionEnd = this.position.y;
     }
 
     this.currentIndex = index;
-    this.timeTransition = 0;
+    this.timeRise = 0;
+    this.timeChange = 0;
     this.isAnimated = true;
     this.children[0].changeTex(index);
     this.children[0].update(0, 0);
@@ -73,20 +84,21 @@ export default class Image extends THREE.Group {
     this.children[2].update(0, 0);
   }
   update(time) {
-    this.timeTransition += time;
+    this.timeRise += time;
+    this.timeChange += time;
 
     if (this.isAnimated === true) {
-      this.easeStepRise = this.easeFuncRise(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
-      this.easeStep = easeOutQuad(MathEx.clamp((this.timeTransition - this.delay) / DURATION, 0.0, 1.0));
-      if (this.timeTransition - this.delay >= DURATION) {
+      this.easeStepRise = this.easeFuncRise(MathEx.clamp((this.timeRise - this.delayRise) / DURATION_RISE, 0.0, 1.0));
+      this.easeStepChange = easeOutQuad(MathEx.clamp((this.timeChange - this.delayChange) / DURATION_CHANGE, 0.0, 1.0));
+      if (this.timeChange - this.delayChange >= DURATION_CHANGE) {
         this.isAnimated = false;
       }
     }
 
     this.position.y = this.transitionStart + this.easeStepRise * (this.transitionEnd - this.transitionStart);
-    this.children[0].update(time, this.easeStep);
-    this.children[1].update(time, this.easeStep);
-    this.children[2].update(time, this.easeStep);
+    this.children[0].update(time, this.easeStepChange);
+    this.children[1].update(time, this.easeStepChange);
+    this.children[2].update(time, this.easeStepChange);
   }
   resize(resolution) {
     this.children[2].resize(resolution);
