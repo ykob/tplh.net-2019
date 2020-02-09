@@ -1,5 +1,6 @@
 <script>
   import _ from 'lodash';
+  import normalizeWheel from 'normalize-wheel';
   import sleep from 'js-util/sleep'
 
   import WorkOutline from '@/components/organisms/WorkOutline.vue';
@@ -17,6 +18,9 @@
     },
     components: {
       WorkOutline
+    },
+    created () {
+      window.addEventListener('wheel', this.wheel, { passive: false });
     },
     async mounted() {
       const index = _.findIndex(
@@ -55,6 +59,39 @@
         });
       }
     },
+    destroyed () {
+      window.removeEventListener('wheel', this.wheel, { passive: false });
+    },
+    methods: {
+      wheel(e) {
+        e.preventDefault();
+
+        const n = normalizeWheel(e);
+        const { works, isWheeling } = this.$store.state;
+
+        // Run at the first wheel event only.
+        if (isWheeling === false) {
+          if (Math.abs(n.pixelY) < 10) return;
+          this.$store.commit('startWheeling');
+
+          if (n.pixelY > 0) {
+            if (this.$store.state.currentWorksId < works.length - 1) {
+              this.$store.commit('transitNextWorks');
+              this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+            } else {
+              this.$router.push(`/who-i-am/`);
+            }
+          } else {
+            if (this.$store.state.currentWorksId > 0) {
+              this.$store.commit('transitPrevWorks');
+              this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+            } else {
+              this.$router.push(`/`);
+            }
+          }
+        }
+      }
+    }
   }
 </script>
 

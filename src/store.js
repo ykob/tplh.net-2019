@@ -6,6 +6,8 @@ import WebGL from '@/webgl/';
 
 import WORKS from '@/const/WORKS';
 
+const INTERVAL_TO_FIRE_WHEEL = 1000;
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -21,11 +23,13 @@ export default new Vuex.Store({
     preloadMax: 0,
     preloadAnchor: 0,
     preloadProgress: 0,
+    wheelTimer: null,
     isShownPreloader: false,
     isLoaded: false,
     isShowView: false,
     isShownUI: false,
     isTransitionInWorks: false,
+    isWheeling: false,
   },
   mutations: {
     showPreloader (state) {
@@ -77,7 +81,15 @@ export default new Vuex.Store({
         (state.currentWorksId >= state.works.length - 1)
           ? 0
           : state.currentWorksId + 1;
-    }
+    },
+    startWheeling (state) {
+      state.isWheeling = true;
+
+      // Prevent repeated wheel events fire with a timer.
+      state.wheelTimer = setTimeout(() => {
+        state.isWheeling = false;
+      }, INTERVAL_TO_FIRE_WHEEL);
+    },
   },
   actions: {
     // transit (context, opts) {
