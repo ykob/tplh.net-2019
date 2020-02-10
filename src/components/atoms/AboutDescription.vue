@@ -68,14 +68,9 @@ export default {
 <style lang="scss">
 .p-about-description {
   box-sizing: border-box;
-  position: absolute;
-  overflow: hidden;
   letter-spacing: 0.08em;
-  mask-image: linear-gradient(to bottom, transparent 5%, black 15%, black 85%, transparent 95%);
   @include l-more-than-mobile {
     width: 50%;
-    bottom: 20%;
-    left: 50%;
   }
   @include l-pc {
     top: calc(64 / 16 * 0.9 * 1rem + 25%);

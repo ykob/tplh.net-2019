@@ -20,8 +20,26 @@
       AboutTitle,
       AboutDescription,
     },
-    created () {
+    data() {
+      return {
+        scrollY: 0,
+        anchorY: 0,
+        isRendering: false
+      }
+    },
+    computed: {
+      styles() {
+        return {
+          transform: `translate3d(0, ${-this.scrollY}px, 0)`
+        }
+      }
+    },
+    async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
+      this.scrollY = 0;
+      this.anchorY = 0;
+      this.isRendering = true;
+      this.update();
     },
     async mounted() {
       this.$store.commit('changeBackground', true);
@@ -39,23 +57,34 @@
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
+      this.isRendering = false;
     },
     methods: {
+      update() {
+        this.scrollY += (this.anchorY - this.scrollY) / 20;
+        if (this.isRendering === true) {
+          requestAnimationFrame(this.update);
+        }
+      },
       wheel(e) {
         e.preventDefault();
 
         const n = normalizeWheel(e);
         const { works, isWheeling } = this.$store.state;
 
-        // Run at the first wheel event only.
-        if (isWheeling === false) {
-          if (Math.abs(n.pixelY) < 10) return;
-          this.$store.commit('startWheeling');
+        if (isWheeling === true) return;
+        
+        this.anchorY += n.pixelY;
 
-          if (n.pixelY < 0) {
-            this.$router.push(`/works/${works[works.length - 1].key}/`);
-          }
-        }
+        // Run at the first wheel event only.
+        // if (isWheeling === false) {
+        //   if (Math.abs(n.pixelY) < 10) return;
+        //   this.$store.commit('startWheeling');
+        //
+        //   if (n.pixelY < 0) {
+        //     this.$router.push(`/works/${works[works.length - 1].key}/`);
+        //   }
+        // }
       }
     }
   }
@@ -63,9 +92,16 @@
 
 <template lang="pug">
 .p-view-wrap
-  AboutTitle
-  AboutDescription
+  .about-content(
+    :style = 'styles'
+    )
+    AboutTitle
+    AboutDescription
 </template>
 
 <style lang="scss">
+  .about-content {
+    margin-right: 7.5%;
+    margin-left: 7.5%;
+  }
 </style>
