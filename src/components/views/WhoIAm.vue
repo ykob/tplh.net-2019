@@ -39,6 +39,9 @@
     async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
       window.addEventListener('resize', this.resize);
+      this.scrollY = 0;
+      this.anchorY = 0;
+      this.$store.commit('setScrollProgress', 0);
     },
     async mounted() {
       this.$store.commit('changeBackground', true);
@@ -53,8 +56,6 @@
       this.$store.commit('transitInWorks', false);
       await sleep(500);
       this.$store.commit('showUI');
-      this.scrollY = 0;
-      this.anchorY = 0;
       this.isRendering = true;
       this.resize();
       this.update();
@@ -67,6 +68,7 @@
     methods: {
       update() {
         this.scrollY = Math.floor((this.scrollY + (this.anchorY - this.scrollY) / 10) * 100) / 100;
+        this.$store.commit('setScrollProgress', this.scrollY / (this.clientHeight - this.$store.state.resolution.y));
         if (this.isRendering === true) {
           requestAnimationFrame(this.update);
         }
@@ -99,6 +101,7 @@
           0,
           this.clientHeight - this.$store.state.resolution.y
         );
+        this.$store.commit('setScrollProgress', this.scrollY / (this.clientHeight - this.$store.state.resolution.y));
       }
     }
   }

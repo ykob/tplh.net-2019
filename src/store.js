@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as THREE from 'three';
+import MathEx from 'js-util/MathEx'
 
 import WebGL from '@/webgl/';
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     preloadMax: 0,
     preloadAnchor: 0,
     preloadProgress: 0,
+    scrollProgress: 0,
     wheelTimer: null,
     isShownPreloader: false,
     isLoaded: false,
@@ -90,6 +92,9 @@ export default new Vuex.Store({
         state.isWheeling = false;
       }, INTERVAL_TO_FIRE_WHEEL);
     },
+    setScrollProgress (state, ratio) {
+      state.scrollProgress = MathEx.clamp(ratio, 0, 1);
+    }
   },
   actions: {
     // transit (context, opts) {
