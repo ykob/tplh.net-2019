@@ -1,5 +1,6 @@
 <script>
   import sleep from 'js-util/sleep'
+  import MathEx from 'js-util/MathEx'
   import normalizeWheel from 'normalize-wheel';
 
   import AboutTitle from '@/components/atoms/AboutTitle.vue'
@@ -24,6 +25,7 @@
       return {
         scrollY: 0,
         anchorY: 0,
+        clientHeight: 0,
         isRendering: false
       }
     },
@@ -36,10 +38,7 @@
     },
     async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
-      this.scrollY = 0;
-      this.anchorY = 0;
-      this.isRendering = true;
-      this.update();
+      window.addEventListener('resize', this.resize);
     },
     async mounted() {
       this.$store.commit('changeBackground', true);
@@ -54,14 +53,20 @@
       this.$store.commit('transitInWorks', false);
       await sleep(500);
       this.$store.commit('showUI');
+      this.scrollY = 0;
+      this.anchorY = 0;
+      this.isRendering = true;
+      this.resize();
+      this.update();
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
+      window.removeEventListener('resize', this.resize);
       this.isRendering = false;
     },
     methods: {
       update() {
-        this.scrollY += (this.anchorY - this.scrollY) / 20;
+        this.scrollY += (this.anchorY - this.scrollY) / 10;
         if (this.isRendering === true) {
           requestAnimationFrame(this.update);
         }
@@ -73,8 +78,11 @@
         const { works, isWheeling } = this.$store.state;
 
         if (isWheeling === true) return;
-        
-        this.anchorY += n.pixelY;
+        this.anchorY = MathEx.clamp(
+          this.anchorY + n.pixelY,
+          0,
+          this.clientHeight - this.$store.state.resolution.y
+        );
 
         // Run at the first wheel event only.
         // if (isWheeling === false) {
@@ -85,6 +93,14 @@
         //     this.$router.push(`/works/${works[works.length - 1].key}/`);
         //   }
         // }
+      },
+      resize() {
+        this.clientHeight = this.$refs['about-content'].clientHeight;
+        this.anchorY = MathEx.clamp(
+          this.anchorY,
+          0,
+          this.clientHeight - this.$store.state.resolution.y
+        );
       }
     }
   }
@@ -94,6 +110,7 @@
 .p-view-wrap
   .about-content(
     :style = 'styles'
+    ref = 'about-content'
     )
     AboutTitle
     AboutDescription
