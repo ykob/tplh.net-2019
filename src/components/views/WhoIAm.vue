@@ -79,12 +79,10 @@
 
         if (isWheeling === true) return;
 
-        if (this.scrollY === 0 && n.pixelY < 0) {
+        if (this.scrollY < 1 && n.pixelY < 0) {
           // Go to the previous page.
           this.$store.commit('startWheeling');
-          if (n.pixelY < 0) {
-            this.$router.push(`/works/${works[works.length - 1].key}/`);
-          }
+          this.$router.push(`/works/${works[works.length - 1].key}/`);
         } else {
           // Scroll the content of the current page.
           this.anchorY = MathEx.clamp(
