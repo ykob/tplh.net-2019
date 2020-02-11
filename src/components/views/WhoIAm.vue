@@ -66,7 +66,7 @@
     },
     methods: {
       update() {
-        this.scrollY += (this.anchorY - this.scrollY) / 10;
+        this.scrollY = Math.floor((this.scrollY + (this.anchorY - this.scrollY) / 10) * 100) / 100;
         if (this.isRendering === true) {
           requestAnimationFrame(this.update);
         }
@@ -78,21 +78,21 @@
         const { works, isWheeling } = this.$store.state;
 
         if (isWheeling === true) return;
-        this.anchorY = MathEx.clamp(
-          this.anchorY + n.pixelY,
-          0,
-          this.clientHeight - this.$store.state.resolution.y
-        );
 
-        // Run at the first wheel event only.
-        // if (isWheeling === false) {
-        //   if (Math.abs(n.pixelY) < 10) return;
-        //   this.$store.commit('startWheeling');
-        //
-        //   if (n.pixelY < 0) {
-        //     this.$router.push(`/works/${works[works.length - 1].key}/`);
-        //   }
-        // }
+        if (this.scrollY === 0 && n.pixelY < 0) {
+          // Go to the previous page.
+          this.$store.commit('startWheeling');
+          if (n.pixelY < 0) {
+            this.$router.push(`/works/${works[works.length - 1].key}/`);
+          }
+        } else {
+          // Scroll the content of the current page.
+          this.anchorY = MathEx.clamp(
+            this.anchorY + n.pixelY,
+            0,
+            this.clientHeight - this.$store.state.resolution.y
+          );
+        }
       },
       resize() {
         this.clientHeight = this.$refs['about-content'].clientHeight;
