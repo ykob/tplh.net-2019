@@ -24,6 +24,11 @@
           'is-current': this.$route.name === 'who-i-am',
           'is-overed': this.isOvered === true
         }
+      },
+      barStyles() {
+        return {
+          height: `${this.$store.state.scrollProgress * 100}%`
+        }
       }
     },
     methods: {
@@ -53,7 +58,10 @@
     .p-utility-navi__line(
       :class = 'classnamesLabel'
       )
-      .p-utility-navi__bar
+      .p-utility-navi__bar(
+        :class = 'classnames'
+        :style = 'barStyles'
+        )
     .p-utility-navi__point(
       :class = 'classnames'
       )
@@ -130,7 +138,13 @@
     &__bar {
       width: 1px;
       top: 0;
+      opacity: 0;
       background-color: rgba($color-text, 0.5);
+      transition-duration: 1s;
+      transition-property: opacity;
+      &.is-current {
+        opacity: 1;
+      }
     }
     &__point {
       width: 3px;

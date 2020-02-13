@@ -27,18 +27,12 @@ SplitStr.p-about-title(
 
 <style lang="scss">
 .p-about-title {
-  position: absolute;
   line-height: .9;
   margin-top: 0;
   margin-bottom: 0;
   @include fontSizeAll(64, 42, 24);
   letter-spacing: 0.12em;
-  @include l-more-than-mobile {
-    top: 25%;
-    left: 50%;
-  }
-  @include l-mobile {
-  }
+
   &__typo {
     transition-property: opacity, transform;
     .view-enter & {

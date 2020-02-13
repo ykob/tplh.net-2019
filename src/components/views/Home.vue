@@ -1,4 +1,5 @@
 <script>
+  import normalizeWheel from 'normalize-wheel';
   import sleep from 'js-util/sleep'
 
   export default {
@@ -10,6 +11,9 @@
           content: 'I am a Front-End & Creative Developer in Japan.'
         }
       ]
+    },
+    created () {
+      window.addEventListener('wheel', this.wheel, { passive: false });
     },
     async mounted() {
       this.$store.commit('changeBackground', false);
@@ -24,6 +28,27 @@
       this.$store.commit('transitInWorks', false);
       await sleep(5000);
       this.$store.commit('showUI');
+    },
+    destroyed () {
+      window.removeEventListener('wheel', this.wheel, { passive: false });
+    },
+    methods: {
+      wheel(e) {
+        e.preventDefault();
+
+        const n = normalizeWheel(e);
+        const { works, isWheeling } = this.$store.state;
+
+        // Run at the first wheel event only.
+        if (isWheeling === false) {
+          if (Math.abs(n.pixelY) < 10) return;
+          this.$store.commit('startWheeling');
+
+          if (n.pixelY > 0) {
+            this.$router.push(`/works/${works[0].key}/`);
+          }
+        }
+      }
     }
   }
 </script>
