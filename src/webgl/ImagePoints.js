@@ -3,6 +3,8 @@ import * as THREE from 'three';
 import vs from '@/webgl/glsl/ImagePoints.vs';
 import fs from '@/webgl/glsl/ImagePoints.fs';
 
+import PIXEL_RATIO from '@/const/PIXEL_RATIO';
+
 export default class ImagePoints extends THREE.Points {
   constructor(width) {
     // Define Geometry
@@ -37,7 +39,7 @@ export default class ImagePoints extends THREE.Points {
         },
         pixelRatio: {
           type: 'f',
-          value: window.devicePixelRatio
+          value: PIXEL_RATIO
         },
       },
       vertexShader: vs,

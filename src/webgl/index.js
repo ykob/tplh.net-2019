@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import UAParser from 'ua-parser-js';
 import sleep from 'js-util/sleep';
 
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
@@ -19,6 +18,8 @@ import PostEffectBloom from '@/webgl/PostEffectBloom';
 
 import checkWebpFeature from '@/utils/checkWebpFeature';
 import initDatGui from '@/utils/initDatGui';
+
+import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
 // ==========
 // Define common variables
@@ -61,9 +62,6 @@ const petalHsv1 = new THREE.Vector3(0.09, 0.7, 0.35);
 const petalHsv2 = new THREE.Vector3(0.09, 0.46, 0.1);
 const petalHsv3 = new THREE.Vector3(0.09, 0.72, 0.18);
 
-const ua = UAParser();
-let pixelRatio = (ua.os.name === 'iOS' || ua.os.name === 'Android') ? 2 : 1;
-
 // ==========
 // Define WebGLContent Class.
 //
@@ -87,7 +85,7 @@ export default class WebGLContent {
       antialias: false,
       canvas: canvas,
     });
-    renderer.setPixelRatio(pixelRatio);
+    renderer.setPixelRatio(PIXEL_RATIO);
     renderer.setClearColor(0x1b191c, 0.0);
 
     // For the Post Effect.
@@ -250,9 +248,9 @@ export default class WebGLContent {
     renderer.setSize(resolution.x, resolution.y);
 
     // For the Post Effect.
-    renderTarget1.setSize(resolution.x * pixelRatio, resolution.y * pixelRatio);
-    renderTarget2.setSize(resolution.x * pixelRatio, resolution.y * pixelRatio);
-    renderTarget3.setSize(resolution.x * pixelRatio, resolution.y * pixelRatio);
+    renderTarget1.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
+    renderTarget2.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
+    renderTarget3.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     postEffectBlurY.resize(resolution.x / 3, resolution.y / 3);
     postEffectBlurX.resize(resolution.x / 3, resolution.y / 3);
   }

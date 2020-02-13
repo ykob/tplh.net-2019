@@ -4,6 +4,8 @@ import MathEx from 'js-util/MathEx';
 import vs from '@/webgl/glsl/SkullPoints.vs';
 import fs from '@/webgl/glsl/SkullPoints.fs';
 
+import PIXEL_RATIO from '@/const/PIXEL_RATIO';
+
 const DURATION = 4;
 const NUM = 360;
 const DURATION_SHOW = 2;
@@ -53,7 +55,7 @@ export default class SkullPoints extends THREE.Points {
         },
         pixelRatio: {
           type: 'f',
-          value: window.devicePixelRatio
+          value: PIXEL_RATIO
         },
         noiseTex: {
           type: 't',
