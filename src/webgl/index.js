@@ -13,6 +13,9 @@ import Image from '@/webgl/Image';
 import WorksText from '@/webgl/WorksText';
 import Background from '@/webgl/Background';
 import Intersector from '@/webgl/Intersector';
+import PostEffectBright from '@/webgl/PostEffectBright';
+import PostEffectBlur from '@/webgl/PostEffectBlur';
+import PostEffectBloom from '@/webgl/PostEffectBloom';
 
 import checkWebpFeature from '@/utils/checkWebpFeature';
 import initDatGui from '@/utils/initDatGui';
@@ -30,6 +33,13 @@ const sceneAura = new THREE.Scene();
 const skullAuraCamera = new SkullAuraCamera();
 const raycaster = new THREE.Raycaster();
 
+// For the post effect.
+const renderTarget1 = new THREE.WebGLRenderTarget();
+const renderTarget2 = new THREE.WebGLRenderTarget();
+const renderTarget3 = new THREE.WebGLRenderTarget();
+const scenePE = new THREE.Scene();
+const cameraPE = new THREE.OrthographicCamera(-1, 1, 1, -1, 1, 2);
+
 // ==========
 // Define unique variables
 //
@@ -41,11 +51,18 @@ const worksText = new WorksText();
 const bg = new Background();
 const intersector = new Intersector();
 
+// For the post effect.
+const postEffectBright = new PostEffectBright();
+const postEffectBlurX = new PostEffectBlur();
+const postEffectBlurY = new PostEffectBlur();
+const postEffectBloom = new PostEffectBloom();
+
 const petalHsv1 = new THREE.Vector3(0.09, 0.7, 0.35);
 const petalHsv2 = new THREE.Vector3(0.09, 0.46, 0.1);
 const petalHsv3 = new THREE.Vector3(0.09, 0.72, 0.18);
 
 const ua = UAParser();
+let pixelRatio = (ua.os.name === 'iOS' || ua.os.name === 'Android') ? 2 : 1;
 
 // ==========
 // Define WebGLContent Class.
@@ -67,11 +84,17 @@ export default class WebGLContent {
     // Initialize the WebGL renderer.
     renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
+      antialias: false,
       canvas: canvas,
     });
-    renderer.setPixelRatio((ua.os.name === 'iOS' || ua.os.name === 'Android') ? 2 : 1);
+    renderer.setPixelRatio(pixelRatio);
     renderer.setClearColor(0x1b191c, 0.0);
+
+    // For the Post Effect.
+    postEffectBright.start(renderTarget1.texture);
+    postEffectBlurX.start(renderTarget2.texture, 1, 0);
+    postEffectBlurY.start(renderTarget3.texture, 0, 1);
+    postEffectBloom.start(renderTarget1.texture, renderTarget2.texture);
 
     // Loading all assets for WebGL.
     const updateProgressAnchor = (result) => {
@@ -196,8 +219,27 @@ export default class WebGLContent {
     worksText.update(time);
     bg.update(time);
 
-    // Render the 3D scene.
+    // Render the main scene to frame buffer.
+    renderer.setRenderTarget(renderTarget1);
     renderer.render(scene, camera);
+
+    // // Render the post effect.
+    scenePE.add(postEffectBright);
+    renderer.setRenderTarget(renderTarget2);
+    renderer.render(scenePE, cameraPE);
+    scenePE.remove(postEffectBright);
+    scenePE.add(postEffectBlurX);
+    renderer.setRenderTarget(renderTarget3);
+    renderer.render(scenePE, cameraPE);
+    scenePE.remove(postEffectBlurX);
+    scenePE.add(postEffectBlurY);
+    renderer.setRenderTarget(renderTarget2);
+    renderer.render(scenePE, cameraPE);
+    scenePE.remove(postEffectBlurY);
+    scenePE.add(postEffectBloom);
+    renderer.setRenderTarget(null);
+    renderer.render(scenePE, cameraPE);
+    scenePE.remove(postEffectBloom);
   }
   resize(resolution) {
     camera.resize(resolution);
@@ -206,5 +248,12 @@ export default class WebGLContent {
     bg.resize(camera, resolution);
     intersector.resize(camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
+
+    // For the Post Effect.
+    renderTarget1.setSize(resolution.x * pixelRatio, resolution.y * pixelRatio);
+    renderTarget2.setSize(resolution.x * pixelRatio, resolution.y * pixelRatio);
+    renderTarget3.setSize(resolution.x * pixelRatio, resolution.y * pixelRatio);
+    postEffectBlurY.resize(resolution.x / 3, resolution.y / 3);
+    postEffectBlurX.resize(resolution.x / 3, resolution.y / 3);
   }
 }
