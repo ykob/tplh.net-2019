@@ -39,7 +39,7 @@ export default class SkullBody extends THREE.Group {
         },
         hsv1: {
           type: 'v3',
-          value: new THREE.Vector3(0.09, 0.7, 0.6)
+          value: new THREE.Vector3(0.09, 0.7, 0.3)
         }
       },
       vertexShader: vs,
@@ -86,7 +86,7 @@ export default class SkullBody extends THREE.Group {
   lookMouse(lookV) {
     this.lookAnchor.copy(lookV);
   }
-  update(time, camera) {
+  update(time, camera, fluctuation) {
     if (this.isActive === false) return;
     this.material.uniforms.time.value += time;
 
@@ -148,5 +148,8 @@ export default class SkullBody extends THREE.Group {
     // calculation the scale.
     const scale = ((alphaShow * 0.3 + 0.7) + (alphaHide * 0.1) + alphaScream * 0.2);
     this.scale.set(scale, scale, scale);
+
+    // fluctuation of the color
+    this.material.uniforms.hsv1.value.z = 0.3 + fluctuation * 0.3;
   }
 }

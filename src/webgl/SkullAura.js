@@ -42,7 +42,7 @@ export default class SkullAura extends THREE.Mesh {
         },
         strength: {
           type: 'f',
-          value: 2.5
+          value: 2.2
         },
         colorRangeMin: {
           type: 'f',
@@ -90,7 +90,7 @@ export default class SkullAura extends THREE.Mesh {
       this.timeShow = DURATION_SHOW + DELAY_SHOW;
     }
   }
-  update(time, camera) {
+  update(time, camera, fluctuation) {
     if (this.isActive === false) return;
     this.rotation.copy(camera.rotation);
     this.material.uniforms.time.value += time;
@@ -98,6 +98,7 @@ export default class SkullAura extends THREE.Mesh {
     if (this.isShown === true) {
       this.timeShow += time;
       this.material.uniforms.alpha.value = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
+      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.5;
     }
   }
 }

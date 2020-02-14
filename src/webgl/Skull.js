@@ -98,9 +98,16 @@ export default class Skull extends THREE.Group {
       .set(0, (alphaShow + alphaHide - 1) * 6, 0)
       .add(this.lookV);
 
+    // calculate the fluctuation of the color
+    const fluctuation = (
+      Math.sin(this.time) * 0.5
+      + Math.sin(this.time * 2.4) * 0.3
+      + Math.sin(this.time * 4.2) * 0.2
+    ) * 0.5 + 0.5;
+
     // update children.
-    this.body.update(time, camera);
-    this.aura.update(time, camera);
+    this.body.update(time, camera, fluctuation);
+    this.aura.update(time, camera, fluctuation);
     this.points.update(time);
 
     // processing before rendering the aura as texture.
