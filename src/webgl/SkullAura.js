@@ -46,15 +46,15 @@ export default class SkullAura extends THREE.Mesh {
         },
         colorRangeMin: {
           type: 'f',
-          value: 0.35
+          value: 0.45
         },
         colorRangeMax: {
           type: 'f',
-          value: 0.54
+          value: 0.6
         },
         opacityRangeMin: {
           type: 'f',
-          value: 0.58
+          value: 0.6
         },
         opacityRangeMax: {
           type: 'f',
@@ -62,7 +62,7 @@ export default class SkullAura extends THREE.Mesh {
         },
         opacityBase: {
           type: 'f',
-          value: 0.8
+          value: 0.9
         },
       },
       vertexShader: vs,
