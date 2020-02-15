@@ -3,8 +3,8 @@
   import MathEx from 'js-util/MathEx'
   import normalizeWheel from 'normalize-wheel';
 
-  import AboutTitle from '@/components/atoms/AboutTitle.vue'
-  import AboutDescription from '@/components/atoms/AboutDescription.vue'
+  import WhoIAmContent from '@/components/atoms/WhoIAmContent.vue'
+  import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue'
 
   export default {
     name: 'WhoIAm',
@@ -18,8 +18,8 @@
       ]
     },
     components: {
-      AboutTitle,
-      AboutDescription,
+      WhoIAmContent,
+      WhoIAmHeading,
     },
     data() {
       return {
@@ -95,7 +95,7 @@
         }
       },
       resize() {
-        this.clientHeight = this.$refs['about-content'].clientHeight;
+        this.clientHeight = this.$refs['whoiam-wrap'].clientHeight;
         this.anchorY = MathEx.clamp(
           this.anchorY,
           0,
@@ -109,16 +109,16 @@
 
 <template lang="pug">
 .p-view-wrap
-  .about-content(
+  .p-whoiam-wrap(
     :style = 'styles'
-    ref = 'about-content'
+    ref = 'whoiam-wrap'
     )
-    AboutTitle
-    AboutDescription
+    WhoIAmHeading
+    WhoIAmContent
 </template>
 
 <style lang="scss">
-  .about-content {
+  .p-whoiam-wrap {
     margin-right: 7.5%;
     margin-left: 7.5%;
   }
