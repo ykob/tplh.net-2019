@@ -13,8 +13,7 @@ void main() {
   float radius = length(p);
   float opacity = smoothstep(0.0, 0.2, vAlpha)
     * (1.0 - smoothstep(0.8, 1.0, vAlpha))
-    * (1.0 - smoothstep(0.5, 1.0, radius))
-    * 0.45;
+    * (1.0 - smoothstep(0.5, 1.0, radius));
 
   // Define Colors
   vec3 color = vColor;
