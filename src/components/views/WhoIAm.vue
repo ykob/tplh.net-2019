@@ -5,6 +5,7 @@
 
   import WhoIAmContent from '@/components/atoms/WhoIAmContent.vue'
   import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue'
+  import WhoIAmLinks from '@/components/organisms/WhoIAmLinks.vue'
 
   export default {
     name: 'WhoIAm',
@@ -20,6 +21,7 @@
     components: {
       WhoIAmContent,
       WhoIAmHeading,
+      WhoIAmLinks,
     },
     data() {
       return {
@@ -115,6 +117,7 @@
     )
     WhoIAmHeading
     WhoIAmContent
+    WhoIAmLinks
 </template>
 
 <style lang="scss">
