@@ -34,6 +34,7 @@
     computed: {
       styles() {
         return {
+          paddingTop: `${this.$store.state.resolution.y / 2}px`,
           transform: `translate3d(0, ${-this.scrollY}px, 0)`
         }
       }

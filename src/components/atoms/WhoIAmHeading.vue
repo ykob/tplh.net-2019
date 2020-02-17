@@ -13,23 +13,15 @@ export default {
 
 <style lang="scss">
 .p-whoiam-heading {
-  overflow: hidden;
-
-  // Transition
-  transition-property: opacity;
-  .view-enter & {
-    opacity: 0;
+  line-height: (70 / 60);
+  @include fontSizeAll(60, 60, 60);
+  letter-spacing: 0.15em;
+  @include l-more-than-mobile {
+    margin-top: -25px;
+    margin-bottom: 75px;
+    margin-left: 50%;
   }
-  .view-enter-to & {
-    opacity: 1;
-    transition-duration: 1s;
-    transition-delay: 1.2s;
-    transition-timing-function: $easeOutQuad;
-  }
-  .view-leave-to & {
-    opacity: 0;
-    transition-duration: .6s;
-    transition-delay: 0s;
+  @include l-mobile {
   }
 }
 </style>
