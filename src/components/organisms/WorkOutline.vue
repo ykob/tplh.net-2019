@@ -207,9 +207,7 @@
       }
     }
     &__description {
-      line-height: (25 / 12);
       white-space: pre-wrap;
-      @include fontSizeAll(12, 12, 12);
 
       // Transition
       transition-property: opacity, transform;

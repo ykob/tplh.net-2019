@@ -38,9 +38,6 @@ export default {
 <style lang="scss">
 .p-whoiam-content {
   overflow: hidden;
-  line-height: (25 / 12);
-  @include fontSizeAll(12, 12, 12);
-  letter-spacing: 0.15em;
   @include l-more-than-mobile {
     margin-bottom: 300px;
   }
