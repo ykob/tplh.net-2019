@@ -5,6 +5,7 @@
 
   import WhoIAmContent from '@/components/atoms/WhoIAmContent.vue'
   import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue'
+  import WhoIAmThanks from '@/components/atoms/WhoIAmThanks.vue'
   import WhoIAmLinks from '@/components/organisms/WhoIAmLinks.vue'
 
   export default {
@@ -21,6 +22,7 @@
     components: {
       WhoIAmContent,
       WhoIAmHeading,
+      WhoIAmThanks,
       WhoIAmLinks,
     },
     data() {
@@ -116,14 +118,25 @@
     :style = 'styles'
     ref = 'whoiam-wrap'
     )
-    WhoIAmHeading
-    WhoIAmContent
-    WhoIAmLinks
+    .p-whoiam-wrap__in
+      WhoIAmHeading
+      WhoIAmContent
+      WhoIAmLinks
+      WhoIAmThanks
 </template>
 
 <style lang="scss">
   .p-whoiam-wrap {
-    margin-right: 7.5%;
-    margin-left: 7.5%;
+    @include l-more-than-mobile {
+      margin-right: 7.5%;
+      margin-left: 7.5%;
+      padding-bottom: 300px;
+    }
+    @include l-mobile {
+    }
+    &__in {
+      position: relative;
+      margin-top: -25px;
+    }
   }
 </style>

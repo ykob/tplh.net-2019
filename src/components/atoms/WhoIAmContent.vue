@@ -37,7 +37,6 @@ export default {
 
 <style lang="scss">
 .p-whoiam-content {
-  overflow: hidden;
   @include l-more-than-mobile {
     margin-bottom: 300px;
   }
@@ -48,7 +47,7 @@ export default {
     margin-top: 0;
     @include fontSizeAll(18, 18, 18);
     @include l-more-than-mobile {
-      margin-bottom: 25px;
+      margin-bottom: 35px;
     }
     @include l-mobile {
     }

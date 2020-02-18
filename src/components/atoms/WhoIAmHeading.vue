@@ -17,7 +17,6 @@ export default {
   @include fontSizeAll(60, 60, 60);
   letter-spacing: 0.15em;
   @include l-more-than-mobile {
-    margin-top: -25px;
     margin-bottom: 75px;
     margin-left: 50%;
   }
