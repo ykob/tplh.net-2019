@@ -5,13 +5,10 @@ body {
   min-height: 100%;
   overflow: hidden;
   color: $color-text;
-  line-height: (25 / 12);
-  @include fontSizeAll(12, 12, 12);
   font-family: 'EngraversMTPro';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'palt';
-  letter-spacing: 0.15em;
   background-color: #1b191c;
 }
 h1, h2, h3, h4, h5, h6 {

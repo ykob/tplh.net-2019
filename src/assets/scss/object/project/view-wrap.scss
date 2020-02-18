@@ -4,6 +4,9 @@
   position: fixed;
   top: 0; left: 0;
   z-index: 10;
+  line-height: (25 / 12);
+  @include fontSizeAll(12, 12, 12);
+  letter-spacing: 0.15em;
 
   // Transition
   &.view-enter-active, &.view-leave-active {
