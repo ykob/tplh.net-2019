@@ -46,15 +46,15 @@ export default class SkullAura extends THREE.Mesh {
         },
         colorRangeMin: {
           type: 'f',
-          value: 0.45
+          value: 0.3
         },
         colorRangeMax: {
           type: 'f',
-          value: 0.6
+          value: 0.7
         },
         opacityRangeMin: {
           type: 'f',
-          value: 0.6
+          value: 0.58
         },
         opacityRangeMax: {
           type: 'f',
@@ -98,7 +98,7 @@ export default class SkullAura extends THREE.Mesh {
     if (this.isShown === true) {
       this.timeShow += time;
       this.material.uniforms.alpha.value = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.5;
+      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8;
     }
   }
 }
