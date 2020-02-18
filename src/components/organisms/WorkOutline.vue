@@ -132,7 +132,7 @@
 
       // Transition
       transition-property: opacity, transform;
-      transform-origin: bottom;
+      transform-origin: left bottom;
       .show-enter & {
         opacity: 0;
         transform: translate3d(-20px, 50px, 0) skewY(8deg);
