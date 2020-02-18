@@ -104,10 +104,10 @@ export default class WebGLContent {
       require('@/assets/obj/CherryBlossom.obj')
     ]
     const assetsImgs = [
-      require('@/assets/img/webgl/title.jpg'),
-      require('@/assets/img/webgl/noise.jpg'),
-      require('@/assets/img/webgl/noise_burn.jpg'),
-      require('@/assets/img/webgl/works_text.jpg'),
+      require(`@/assets/img/webgl/title.${webpExe}`),
+      require(`@/assets/img/webgl/noise.${webpExe}`),
+      require(`@/assets/img/webgl/noise_burn.${webpExe}`),
+      require(`@/assets/img/webgl/works_text.${webpExe}`),
       require('@/assets/img/webgl/thumb_blank.png'),
       require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`),
       require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`),
