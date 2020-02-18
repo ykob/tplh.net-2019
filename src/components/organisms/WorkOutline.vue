@@ -135,7 +135,7 @@
       transform-origin: bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-20px, 50px, 0) skewX(-8deg);
+        transform: translate3d(-20px, 50px, 0) skewY(8deg);
       }
       .show-enter-to & {
         opacity: 1;
@@ -169,10 +169,10 @@
 
       // Transition
       transition-property: opacity, transform;
-      transform-origin: bottom;
+      transform-origin: left bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-20px, 50px, 0) skewX(-20deg);
+        transform: translate3d(-20px, 50px, 0) skewY(8deg);
       }
       .show-enter-to & {
         opacity: 1;
