@@ -1,10 +1,10 @@
 <script>
-import Link from '@/components/organisms/Link'
+import LinkListItem from '@/components/organisms/LinkListItem'
 
 export default {
   name: 'WhoIAmLinks',
   components: {
-    Link
+    LinkListItem
   }
 }
 </script>
@@ -12,18 +12,18 @@ export default {
 <template lang="pug">
   .p-whoiam-links
     .p-whoiam-links__items
-      Link.p-whoiam-links__item(
+      LinkListItem.p-whoiam-links__item(
         href = 'https://twitter.com/ykob0123'
         target = '_blank'
         )
         |Twitter
-      Link.p-whoiam-links__item(
+      LinkListItem.p-whoiam-links__item(
         href = 'https://github.com/ykob'
         target = '_blank'
         )
         |GitHub
     .p-whoiam-links__items
-      Link.p-whoiam-links__item(
+      LinkListItem.p-whoiam-links__item(
         href = 'mailto:info@tplh.net'
         )
         |info@tplh.net
