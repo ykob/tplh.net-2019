@@ -55,6 +55,7 @@
         index: 0,
         direction: 1
       });
+      this.$store.commit('showWhoIAmObjs', true);
       this.$store.commit('transit', {
         globalId: 50,
       });

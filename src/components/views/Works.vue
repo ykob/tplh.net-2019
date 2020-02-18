@@ -34,6 +34,7 @@
         index: index + 1,
         direction: 0
       });
+      this.$store.commit('showWhoIAmObjs', false);
       this.$store.commit('transit', {
         globalId: 1,
         currentWorksId: index

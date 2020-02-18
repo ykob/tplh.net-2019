@@ -72,6 +72,9 @@ export default new Vuex.Store({
       state.webgl.showWorksImage(index, direction, state.positionFromWorks);
       state.positionFromWorks = direction;
     },
+    showWhoIAmObjs (state, bool) {
+      state.webgl.showWhoIAmObjs(bool);
+    },
     transitPrevWorks (state) {
       state.currentWorksId =
         (state.currentWorksId <= 0)

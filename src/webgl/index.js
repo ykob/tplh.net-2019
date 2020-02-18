@@ -7,6 +7,7 @@ import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
 import Title from '@/webgl/Title';
+import PetalFloatGroup from '@/webgl/PetalFloatGroup';
 import PetalRotateGroup from '@/webgl/PetalRotateGroup';
 import Image from '@/webgl/Image';
 import WorksText from '@/webgl/WorksText';
@@ -47,6 +48,7 @@ const cameraPE = new THREE.OrthographicCamera(-1, 1, 1, -1, 1, 2);
 const skull = new Skull();
 const title = new Title();
 const petalRotateGroup = new PetalRotateGroup();
+const petalFloatGroup = new PetalFloatGroup();
 const image = new Image();
 const worksText = new WorksText();
 const bg = new Background();
@@ -146,6 +148,7 @@ export default class WebGLContent {
       // Add the webgl objects to the scene.
       scene.add(skull);
       scene.add(title);
+      scene.add(petalFloatGroup);
       scene.add(petalRotateGroup);
       scene.add(image);
       scene.add(worksText);
@@ -157,6 +160,7 @@ export default class WebGLContent {
       skullAuraCamera.start();
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
       title.start(titleTex, noiseTex);
+      petalFloatGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       image.start(noiseBurnTex, imgTexes);
       worksText.start(worksTextTex);
@@ -192,6 +196,13 @@ export default class WebGLContent {
     image.change(index, direction + prevPosFromWorks);
     worksText.change(index, direction, prevPosFromWorks);
   }
+  showWhoIAmObjs(bool) {
+    if (bool === true) {
+      petalFloatGroup.show();
+    } else {
+      petalFloatGroup.hide();
+    }
+  }
   update(mouse) {
     // When the clock is stopped, it stops the all rendering too.
     const time = (clock.running === true) ? clock.getDelta() : 0;
@@ -211,6 +222,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
+    petalFloatGroup.update(time);
     petalRotateGroup.update(time);
     title.update(time);
     image.update(time);

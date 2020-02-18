@@ -22,6 +22,7 @@
         index: 0,
         direction: -1
       });
+      this.$store.commit('showWhoIAmObjs', false);
       this.$store.commit('transit', {
         globalId: 0,
       });
