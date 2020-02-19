@@ -59,7 +59,6 @@
       this.$store.commit('transit', {
         globalId: 50,
       });
-      this.$store.commit('transitInWorks', false);
       await sleep(500);
       this.$store.commit('showUI');
       this.isRendering = true;

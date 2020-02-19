@@ -55,12 +55,10 @@ export default new Vuex.Store({
     showUI (state) {
       state.isShownUI = true;
     },
-    transitInWorks(state, bool) {
-      state.isTransitionInWorks = bool;
-    },
     transit (state, opts) {
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
+      state.isTransitionInWorks = state.globalId === 1 && opts.globalId === 1;
     },
     changeBackground (state, bool) {
       state.webgl.changeBackground(bool);
@@ -74,18 +72,6 @@ export default new Vuex.Store({
     },
     showWhoIAmObjs (state, bool) {
       state.webgl.showWhoIAmObjs(bool);
-    },
-    transitPrevWorks (state) {
-      state.currentWorksId =
-        (state.currentWorksId <= 0)
-          ? state.works.length - 1
-          : state.currentWorksId - 1;
-    },
-    transitNextWorks (state) {
-      state.currentWorksId =
-        (state.currentWorksId >= state.works.length - 1)
-          ? 0
-          : state.currentWorksId + 1;
     },
     startWheeling (state) {
       state.isWheeling = true;

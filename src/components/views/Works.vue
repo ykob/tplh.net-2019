@@ -39,7 +39,6 @@
         globalId: 1,
         currentWorksId: index
       });
-      this.$store.commit('transitInWorks', false);
       await sleep(500);
       this.$store.commit('showUI');
     },
@@ -53,7 +52,6 @@
           index: index + 1,
           direction: 0
         });
-        this.$store.commit('transitInWorks', true);
         this.$store.commit('transit', {
           globalId: 1,
           currentWorksId: index
@@ -77,15 +75,15 @@
 
           if (n.pixelY > 0) {
             if (this.$store.state.currentWorksId < works.length - 1) {
-              this.$store.commit('transitNextWorks');
-              this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+              const i = this.$store.state.currentWorksId + 1;
+              this.$router.push(`/works/${works[i].key}/`);
             } else {
               this.$router.push(`/who-i-am/`);
             }
           } else {
             if (this.$store.state.currentWorksId > 0) {
-              this.$store.commit('transitPrevWorks');
-              this.$router.push(`/works/${works[this.$store.state.currentWorksId].key}/`);
+              const i = this.$store.state.currentWorksId - 1;
+              this.$router.push(`/works/${works[i].key}/`);
             } else {
               this.$router.push(`/`);
             }

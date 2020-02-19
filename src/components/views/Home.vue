@@ -26,7 +26,6 @@
       this.$store.commit('transit', {
         globalId: 0,
       });
-      this.$store.commit('transitInWorks', false);
       await sleep(5000);
       this.$store.commit('showUI');
     },
