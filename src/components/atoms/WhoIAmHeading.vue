@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss">
 .p-whoiam-heading {
+  perspective: 500px;
   line-height: (70 / 60);
   @include fontSizeAll(60, 60, 60);
   letter-spacing: 0.15em;
@@ -31,7 +32,7 @@ export default {
     transform-origin: left bottom;
     .view-enter & {
       opacity: 0;
-      transform: translate3d(-20px, 50px, 0) skewY(5deg);
+      transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
     }
     .view-enter-to & {
       opacity: 1;
@@ -41,7 +42,7 @@ export default {
     }
     .view-leave-to & {
       opacity: 0;
-      transform: translate3d(0, -60px, 0);
+      transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
       transform-origin: top;
       transition-duration: .6s;
       transition-timing-function: $easeInQuad;

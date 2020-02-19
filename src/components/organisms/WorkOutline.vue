@@ -97,6 +97,7 @@
 
 <style lang="scss">
   .p-work-outline {
+    perspective: 500px;
     position: absolute;
     letter-spacing: 0.15em;
     @include l-more-than-mobile {
@@ -135,7 +136,7 @@
       transform-origin: left bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-20px, 50px, 0) skewY(8deg);
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
       .show-enter-to & {
         opacity: 1;
@@ -146,8 +147,7 @@
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 0);
-        transform-origin: top;
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transition-duration: .6s;
         transition-delay: 0s;
         transition-timing-function: $easeInQuad;
@@ -169,10 +169,10 @@
 
       // Transition
       transition-property: opacity, transform;
-      transform-origin: left bottom;
+      transform-origin: left center;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-20px, 50px, 0) skewY(8deg);
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
       .show-enter-to & {
         opacity: 1;
@@ -183,8 +183,7 @@
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 0);
-        transform-origin: top;
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transition-duration: .6s;
         transition-delay: 0.04s;
         transition-timing-function: $easeInQuad;
@@ -214,7 +213,7 @@
       transform-origin: bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-20px, 50px, 0) skewX(-8deg);
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
       .show-enter-to & {
         opacity: 1;
@@ -225,7 +224,7 @@
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 0);
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transform-origin: top;
         transition-duration: .6s;
         transition-delay: 0.08s;
@@ -251,7 +250,7 @@
       transform-origin: bottom;
       .show-enter & {
         opacity: 0;
-        transform: translate3d(-20px, 50px, 0) skewX(-8deg);
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
       .show-enter-to & {
         opacity: 1;
@@ -262,7 +261,7 @@
       .view-leave-to &,
       .show-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 0);
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transform-origin: top;
         transition-duration: .6s;
         transition-delay: 0.12s;
