@@ -109,14 +109,21 @@
     }
 
     // Transition
-    &.show-enter-active, &.show-leave-active {
+    &.show-enter-active,
+    &.show-leave-active,
+    &.show-asc-enter-active,
+    &.show-asc-leave-active {
       transition-duration: 2s;
       transition-property: opacity;
     }
-    &.show-enter, &.show-leave-to {
+    &.show-enter,
+    &.show-leave-to,
+    &.show-asc-enter,
+    &.show-asc-leave-to {
       opacity: 0.999;
     }
-    &.show-leave-to {
+    &.show-leave-to,
+    &.show-asc-leave-to {
       pointer-events: none;
     }
 
@@ -134,23 +141,39 @@
       // Transition
       transition-property: opacity, transform;
       transform-origin: left bottom;
-      .show-enter & {
+      .show-enter &,
+      .show-asc-enter & {
         opacity: 0;
+      }
+      .show-enter & {
         transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
-      .show-enter-to & {
+      .show-asc-enter & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .show-enter-to &,
+      .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-delay: .8s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
-      .show-leave-to & {
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transition-duration: .6s;
         transition-delay: 0s;
         transition-timing-function: $easeInQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .view-asc-leave-to &,
+      .show-asc-leave-to & {
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
     }
     &__title {
@@ -170,23 +193,39 @@
       // Transition
       transition-property: opacity, transform;
       transform-origin: left center;
-      .show-enter & {
+      .show-enter &,
+      .show-asc-enter & {
         opacity: 0;
+      }
+      .show-enter & {
         transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
-      .show-enter-to & {
+      .show-asc-enter & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .show-enter-to &,
+      .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-delay: .9s;
         transition-timing-function: $easeOutCubic;
       }
       .view-leave-to &,
-      .show-leave-to & {
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transition-duration: .6s;
         transition-delay: 0.04s;
         transition-timing-function: $easeInQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .view-asc-leave-to &,
+      .show-asc-leave-to & {
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
     }
     &__content-wrap {
@@ -211,24 +250,40 @@
       // Transition
       transition-property: opacity, transform;
       transform-origin: bottom;
-      .show-enter & {
+      .show-enter &,
+      .show-asc-enter & {
         opacity: 0;
+      }
+      .show-enter & {
         transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
-      .show-enter-to & {
+      .show-asc-enter & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .show-enter-to &,
+      .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-delay: 1s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
-      .show-leave-to & {
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transform-origin: top;
         transition-duration: .6s;
         transition-delay: 0.08s;
         transition-timing-function: $easeInQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .view-asc-leave-to &,
+      .show-asc-leave-to & {
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
     }
     &__credit {
@@ -248,24 +303,40 @@
       // Transition
       transition-property: opacity, transform;
       transform-origin: bottom;
-      .show-enter & {
+      .show-enter &,
+      .show-asc-enter & {
         opacity: 0;
+      }
+      .show-enter & {
         transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
-      .show-enter-to & {
+      .show-asc-enter & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .show-enter-to &,
+      .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-delay: 1.1s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
-      .show-leave-to & {
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
         opacity: 0;
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
         transform-origin: top;
         transition-duration: .6s;
         transition-delay: 0.12s;
         transition-timing-function: $easeInQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+      }
+      .view-asc-leave-to &,
+      .show-asc-leave-to & {
+        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
     }
     &__link-wrap {
@@ -288,17 +359,21 @@
       transition-duration: .7s;
       transition-property: width, transform, opacity;
       transition-timing-function: $easeOutCirc;
-      .show-enter & {
+      .show-enter &,
+      .show-asc-enter & {
         transform: scaleX(0);
         transform-origin: left;
       }
-      .show-enter-to & {
+      .show-enter-to &,
+      .show-asc-enter-to & {
         transform: scaleX(1);
         transform-origin: left;
         transition-delay: 1.1s;
       }
       .view-leave-to &,
-      .show-leave-to & {
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
         transform: scaleX(0);
         transform-origin: right;
         transition-delay: 0.2s;
@@ -316,17 +391,21 @@
 
       // Transition
       transition-property: opacity;
-      .show-enter & {
+      .show-enter &,
+      .show-asc-enter & {
         opacity: 0;
       }
-      .show-enter-to & {
+      .show-enter-to &,
+      .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
         transition-delay: 1.3s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
-      .show-leave-to & {
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
         opacity: 0;
         transition-duration: .6s;
         transition-delay: 0.2s;

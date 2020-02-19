@@ -9,14 +9,21 @@
   letter-spacing: 0.15em;
 
   // Transition
-  &.view-enter-active, &.view-leave-active {
+  &.view-enter-active,
+  &.view-asc-enter-active,
+  &.view-leave-active,
+  &.view-asc-leave-active {
     transition-duration: 2s;
     transition-property: opacity;
   }
-  &.view-enter, &.view-leave-to {
+  &.view-enter,
+  &.view-asc-enter,
+  &.view-leave-to,
+  &.view-asc-leave-to {
     opacity: 0.999;
   }
-  &.view-leave-to {
+  &.view-leave-to,
+  &.view-asc-leave-to {
     pointer-events: none;
   }
 }

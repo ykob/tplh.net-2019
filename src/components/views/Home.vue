@@ -2,6 +2,8 @@
   import normalizeWheel from 'normalize-wheel';
   import sleep from 'js-util/sleep'
 
+  import store from '@/store'
+
   export default {
     name: 'Home',
     metaInfo: {
@@ -11,6 +13,12 @@
           content: 'I am a Front-End & Creative Developer in Japan.'
         }
       ]
+    },
+    beforeRouteEnter(to, from, next) {
+      store.commit('transit', {
+        globalId: 0,
+      });
+      next();
     },
     created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
@@ -23,9 +31,6 @@
         direction: -1
       });
       this.$store.commit('showWhoIAmObjs', false);
-      this.$store.commit('transit', {
-        globalId: 0,
-      });
       await sleep(5000);
       this.$store.commit('showUI');
     },

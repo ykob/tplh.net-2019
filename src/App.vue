@@ -21,12 +21,6 @@
       Preloader,
       Guide,
     },
-    data: function() {
-      return {
-        wheelTimer: null,
-        isWheeling: false,
-      }
-    },
     async created() {
       const { canvas, webgl } = this.$store.state;
 
@@ -47,7 +41,11 @@
       this.update();
       webgl.start(canvas, this.$store);
     },
-    computed: {},
+    computed: {
+      transitionName() {
+        return this.$store.state.isTransitionDescend === true ? 'view' : 'view-asc';
+      },
+    },
     methods: {
       update() {
         const { mouse, webgl, preloadMax, preloadProgress, isLoaded } = this.$store.state;
@@ -101,7 +99,7 @@
     UtilityNavi
     WorksNavi
     transition(
-      name = 'view'
+      :name = 'transitionName'
       appear
       v-if = '$store.state.isShowView === true'
       )

@@ -30,6 +30,7 @@ export default new Vuex.Store({
     isLoaded: false,
     isShowView: false,
     isShownUI: false,
+    isTransitionDescend: false,
     isTransitionInWorks: false,
     isWheeling: false,
   },
@@ -56,6 +57,11 @@ export default new Vuex.Store({
       state.isShownUI = true;
     },
     transit (state, opts) {
+      if (state.globalId !== opts.globalId) {
+        state.isTransitionDescend = state.globalId <= opts.globalId
+      } else {
+        state.isTransitionDescend = state.currentWorksId <= opts.currentWorksId
+      }
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
       state.isTransitionInWorks = state.globalId === 1 && opts.globalId === 1;

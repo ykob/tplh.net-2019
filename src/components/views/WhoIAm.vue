@@ -3,6 +3,7 @@
   import MathEx from 'js-util/MathEx'
   import normalizeWheel from 'normalize-wheel';
 
+  import store from '@/store'
   import WhoIAmContent from '@/components/atoms/WhoIAmContent.vue'
   import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue'
   import WhoIAmThanks from '@/components/atoms/WhoIAmThanks.vue'
@@ -41,6 +42,12 @@
         }
       }
     },
+    beforeRouteEnter(to, from, next) {
+      store.commit('transit', {
+        globalId: 50,
+      });
+      next();
+    },
     async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
       window.addEventListener('resize', this.resize);
@@ -56,9 +63,6 @@
         direction: 1
       });
       this.$store.commit('showWhoIAmObjs', true);
-      this.$store.commit('transit', {
-        globalId: 50,
-      });
       await sleep(500);
       this.$store.commit('showUI');
       this.isRendering = true;

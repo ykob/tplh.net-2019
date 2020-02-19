@@ -3,6 +3,7 @@
   import normalizeWheel from 'normalize-wheel';
   import sleep from 'js-util/sleep'
 
+  import store from '@/store'
   import WorkOutline from '@/components/organisms/WorkOutline.vue';
 
   export default {
@@ -18,6 +19,19 @@
     },
     components: {
       WorkOutline
+    },
+    beforeRouteEnter(to, from, next) {
+      const index = _.findIndex(
+        store.state.works,
+        { key: to.params.key }
+      );
+
+      store.commit('transit', {
+        globalId: 1,
+        currentWorksId: index
+      });
+
+      next();
     },
     created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
@@ -35,10 +49,7 @@
         direction: 0
       });
       this.$store.commit('showWhoIAmObjs', false);
-      this.$store.commit('transit', {
-        globalId: 1,
-        currentWorksId: index
-      });
+
       await sleep(500);
       this.$store.commit('showUI');
     },
@@ -60,6 +71,11 @@
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
+    },
+    computed: {
+      transitionName() {
+        return (this.$store.state.isTransitionDescend === true) ? 'show' : 'show-asc';
+      }
     },
     methods: {
       wheel(e) {
@@ -96,7 +112,7 @@
 
 <template lang="pug">
   transition-group.p-view-wrap(
-    name = 'show'
+    :name = 'transitionName'
     appear
     tag = 'div'
     )
