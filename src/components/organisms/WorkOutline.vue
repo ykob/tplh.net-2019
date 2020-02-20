@@ -146,17 +146,22 @@
         opacity: 0;
       }
       .show-enter & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
       }
       .show-asc-enter & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
       }
       .show-enter-to &,
       .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: .8s;
         transition-timing-function: $easeOutQuad;
+      }
+      .show-enter-to & {
+        transition-delay: .8s;
+      }
+      .show-asc-enter-to & {
+        transition-delay: 1.1s;
       }
       .view-leave-to &,
       .view-asc-leave-to &,
@@ -164,16 +169,17 @@
       .show-asc-leave-to & {
         opacity: 0;
         transition-duration: .6s;
-        transition-delay: 0s;
         transition-timing-function: $easeInQuad;
       }
       .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
+        transition-delay: 0s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
+        transition-delay: 0.12s;
       }
     }
     &__title {
@@ -198,17 +204,22 @@
         opacity: 0;
       }
       .show-enter & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
       }
       .show-asc-enter & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
       }
       .show-enter-to &,
       .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: .9s;
         transition-timing-function: $easeOutCubic;
+      }
+      .show-enter-to & {
+        transition-delay: 0.9s;
+      }
+      .show-asc-enter-to & {
+        transition-delay: 1s;
       }
       .view-leave-to &,
       .view-asc-leave-to &,
@@ -216,16 +227,17 @@
       .show-asc-leave-to & {
         opacity: 0;
         transition-duration: .6s;
-        transition-delay: 0.04s;
         transition-timing-function: $easeInQuad;
       }
       .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
+        transition-delay: 0.04s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
+        transition-delay: 0.08s;
       }
     }
     &__content-wrap {
@@ -255,17 +267,22 @@
         opacity: 0;
       }
       .show-enter & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
       }
       .show-asc-enter & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
       }
       .show-enter-to &,
       .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1s;
         transition-timing-function: $easeOutQuad;
+      }
+      .show-enter-to & {
+        transition-delay: 1s;
+      }
+      .show-asc-enter-to & {
+        transition-delay: 0.9s;
       }
       .view-leave-to &,
       .view-asc-leave-to &,
@@ -274,16 +291,17 @@
         opacity: 0;
         transform-origin: top;
         transition-duration: .6s;
-        transition-delay: 0.08s;
         transition-timing-function: $easeInQuad;
       }
       .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
+        transition-delay: 0.08s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
+        transition-delay: 0.04s;
       }
     }
     &__credit {
@@ -308,17 +326,22 @@
         opacity: 0;
       }
       .show-enter & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
       }
       .show-asc-enter & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
       }
       .show-enter-to &,
       .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1.1s;
         transition-timing-function: $easeOutQuad;
+      }
+      .show-enter-to & {
+        transition-delay: 1.1s;
+      }
+      .show-asc-enter-to & {
+        transition-delay: .8s;
       }
       .view-leave-to &,
       .view-asc-leave-to &,
@@ -327,16 +350,17 @@
         opacity: 0;
         transform-origin: top;
         transition-duration: .6s;
-        transition-delay: 0.12s;
         transition-timing-function: $easeInQuad;
       }
       .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
+        transition-delay: 0.12s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
+        transition-delay: 0s;
       }
     }
     &__link-wrap {
