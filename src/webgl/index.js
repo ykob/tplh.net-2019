@@ -11,6 +11,7 @@ import PetalFloatGroup from '@/webgl/PetalFloatGroup';
 import PetalRotateGroup from '@/webgl/PetalRotateGroup';
 import Image from '@/webgl/Image';
 import WorksText from '@/webgl/WorksText';
+import WhoIamText from '@/webgl/WhoIamText';
 import Background from '@/webgl/Background';
 import Intersector from '@/webgl/Intersector';
 import PostEffectBright from '@/webgl/PostEffectBright';
@@ -51,6 +52,7 @@ const petalRotateGroup = new PetalRotateGroup();
 const petalFloatGroup = new PetalFloatGroup();
 const image = new Image();
 const worksText = new WorksText();
+const whoiamText = new WhoIamText();
 const bg = new Background();
 const intersector = new Intersector();
 
@@ -110,6 +112,7 @@ export default class WebGLContent {
       require(`@/assets/img/webgl/noise.${webpExe}`),
       require(`@/assets/img/webgl/noise_burn.${webpExe}`),
       require(`@/assets/img/webgl/works_text.${webpExe}`),
+      require(`@/assets/img/webgl/whoiam_text.${webpExe}`),
       require('@/assets/img/webgl/thumb_blank.png'),
       require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`),
       require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`),
@@ -136,7 +139,8 @@ export default class WebGLContent {
       const noiseTex = response[3];
       const noiseBurnTex = response[4];
       const worksTextTex = response[5];
-      const imgTexes = response.slice(6);
+      const whoiamTextTex = response[6];
+      const imgTexes = response.slice(7);
 
       noiseTex.wrapS = THREE.RepeatWrapping;
       noiseTex.wrapT = THREE.RepeatWrapping;
@@ -152,6 +156,7 @@ export default class WebGLContent {
       scene.add(petalRotateGroup);
       scene.add(image);
       scene.add(worksText);
+      scene.add(whoiamText);
       scene.add(bg);
       scene.add(intersector);
 
@@ -164,6 +169,7 @@ export default class WebGLContent {
       petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       image.start(noiseBurnTex, imgTexes);
       worksText.start(worksTextTex);
+      whoiamText.start(whoiamTextTex);
       bg.start(noiseTex);
 
       // show the dat.gui.
@@ -227,6 +233,7 @@ export default class WebGLContent {
     title.update(time);
     image.update(time);
     worksText.update(time);
+    whoiamText.update(time);
     bg.update(time);
 
     // Render the main scene to frame buffer.
