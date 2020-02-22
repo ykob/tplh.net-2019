@@ -6,9 +6,9 @@ import vs from '@/webgl/glsl/WhoIamText.vs';
 import fs from '@/webgl/glsl/WhoIamText.fs';
 
 const WIDTH = 39;
-const DURATION_SHOW = 3;
-const DELAY_SHOW = 2;
-const DURATION_HIDE = 0.7;
+const DURATION_SHOW = 4;
+const DELAY_SHOW = 1.4;
+const DURATION_HIDE = 1.6;
 const DELAY_HIDE = 0;
 
 export default class WhoIamText extends THREE.Mesh {
@@ -77,7 +77,7 @@ export default class WhoIamText extends THREE.Mesh {
     }
 
     const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeInCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
+    const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
   }
 }
