@@ -48,14 +48,14 @@
     },
     methods: {
       update() {
-        const { mouse, webgl, preloadMax, preloadProgress, isLoaded } = this.$store.state;
+        const { webgl, preloadMax, preloadProgress, isLoaded } = this.$store.state;
         if (isLoaded === false) {
           this.$store.commit('updatePreloadProgress');
           if (preloadProgress / preloadMax > 0.999) {
             this.loaded();
           }
         } else {
-          webgl.update(mouse);
+          webgl.update(this.$store.state);
         }
         requestAnimationFrame(this.update);
       },

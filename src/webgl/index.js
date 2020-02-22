@@ -211,7 +211,7 @@ export default class WebGLContent {
       whoiamText.hide();
     }
   }
-  update(mouse) {
+  update({ mouse, scrollProgress }) {
     // When the clock is stopped, it stops the all rendering too.
     const time = (clock.running === true) ? clock.getDelta() : 0;
 
@@ -235,7 +235,7 @@ export default class WebGLContent {
     title.update(time);
     image.update(time);
     worksText.update(time);
-    whoiamText.update(time);
+    whoiamText.update(time, scrollProgress);
     bg.update(time);
 
     // Render the main scene to frame buffer.

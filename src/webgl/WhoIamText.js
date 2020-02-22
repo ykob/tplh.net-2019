@@ -46,7 +46,6 @@ export default class WhoIamText extends THREE.Mesh {
     this.isActive = false;
     this.isShown = false;
     this.isHidden = false;
-    this.position.y = -10;
   }
   start(tex) {
     this.isActive = true;
@@ -62,9 +61,12 @@ export default class WhoIamText extends THREE.Mesh {
     this.isShown = false;
     this.isHidden = true;
   }
-  update(time) {
+  update(time, scrollProgress) {
     if (this.isActive === false) return;
     this.material.uniforms.time.value += time;
+
+    // Scrolling
+    this.position.y = -10 + scrollProgress * 15;
 
     // for the showing effect.
     if (this.isShown === true) {
