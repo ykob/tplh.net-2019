@@ -205,8 +205,10 @@ export default class WebGLContent {
   showWhoIAmObjs(bool) {
     if (bool === true) {
       petalFloatGroup.show();
+      whoiamText.show();
     } else {
       petalFloatGroup.hide();
+      whoiamText.hide();
     }
   }
   update(mouse) {

@@ -44,7 +44,6 @@ export default class Title extends THREE.Mesh {
     super(geometry, material);
     this.name = 'Title';
     this.size = new THREE.Vector3();
-    this.time = 0;
     this.alphaStart = 0;
     this.alphaEnd = 0;
     this.isActive = false;
@@ -69,7 +68,6 @@ export default class Title extends THREE.Mesh {
     } else {
       this.timeShow = 0;
     }
-
   }
   hide() {
     this.isShown = false;
