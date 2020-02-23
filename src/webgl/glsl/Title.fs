@@ -18,5 +18,9 @@ void main() {
   vec3 hsv2 = vec3(0.09, 0.7, 0.2);
   vec3 rgb = mix(convertHsvToRgb(hsv1), convertHsvToRgb(hsv2), noise);
 
+  if (opacity < 0.01) {
+    discard;
+  }
+
   gl_FragColor = vec4(rgb, opacity);
 }
