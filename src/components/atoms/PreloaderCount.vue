@@ -46,9 +46,9 @@
     overflow: hidden;
     &__col {
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
       position: absolute;
-      bottom: 0;
+      top: 0;
       &:nth-of-type(1) {
         left: 0;
       }
@@ -97,7 +97,7 @@
     &__col {
       transform: translate3d(0, 0, 0);
       .preloader-enter & {
-        transform: translate3d(0, -1.5em, 0);
+        transform: translate3d(0, 1.5em, 0);
       }
       .preloader-enter-to & {
         transform: translate3d(0, 0, 0);
@@ -105,7 +105,7 @@
         @include iterateTransitionDelay(4, 0.08, 0);
       }
       .preloader-leave-to & {
-        transform: translate3d(0, calc(100% - 1.5em), 0);
+        transform: translate3d(0, calc(-100% + 1.5em), 0);
         transition-duration: 1s;
         transition-timing-function: $easeInOutExpo;
         @include iterateTransitionDelay(4, 0.08, 0);
