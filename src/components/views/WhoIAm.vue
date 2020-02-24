@@ -57,8 +57,8 @@
     },
     async mounted() {
       this.$store.commit('changeBackground', true);
-      this.$store.commit('showSkull', false);
-      this.$store.commit('showWorksImage', {
+      this.$store.commit('showHomeObjs', false);
+      this.$store.commit('showWorksObjs', {
         index: 0,
         direction: 1
       });

@@ -187,7 +187,7 @@ export default class WebGLContent {
   changeBackground (bool) {
     bg.change(bool);
   }
-  showSkull(bool) {
+  showHomeObjs(bool) {
     if (bool === true) {
       skull.show();
       title.show();
@@ -198,7 +198,7 @@ export default class WebGLContent {
       petalRotateGroup.hide();
     }
   }
-  showWorksImage(index, direction, prevPosFromWorks) {
+  showWorksObjs(index, direction, prevPosFromWorks) {
     image.change(index, direction + prevPosFromWorks);
     worksText.change(index, direction, prevPosFromWorks);
   }

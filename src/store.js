@@ -62,18 +62,18 @@ export default new Vuex.Store({
       } else {
         state.isTransitionDescend = state.currentWorksId <= opts.currentWorksId
       }
+      state.isTransitionInWorks = state.globalId === 1 && opts.globalId === 1;
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
-      state.isTransitionInWorks = state.globalId === 1 && opts.globalId === 1;
     },
     changeBackground (state, bool) {
       state.webgl.changeBackground(bool);
     },
-    showSkull (state, bool) {
-      state.webgl.showSkull(bool);
+    showHomeObjs (state, bool) {
+      state.webgl.showHomeObjs(bool);
     },
-    showWorksImage (state, { index, direction }) {
-      state.webgl.showWorksImage(index, direction, state.positionFromWorks);
+    showWorksObjs (state, { index, direction }) {
+      state.webgl.showWorksObjs(index, direction, state.positionFromWorks);
       state.positionFromWorks = direction;
     },
     showWhoIAmObjs (state, bool) {

@@ -43,8 +43,8 @@
       );
 
       this.$store.commit('changeBackground', true);
-      this.$store.commit('showSkull', false);
-      this.$store.commit('showWorksImage', {
+      this.$store.commit('showHomeObjs', false);
+      this.$store.commit('showWorksObjs', {
         index: index + 1,
         direction: 0
       });
@@ -59,7 +59,7 @@
           this.$store.state.works,
           { key: key }
         );
-        this.$store.commit('showWorksImage', {
+        this.$store.commit('showWorksObjs', {
           index: index + 1,
           direction: 0
         });
