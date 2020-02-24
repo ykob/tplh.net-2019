@@ -6,10 +6,10 @@ import vs from '@/webgl/glsl/WhoIamText.vs';
 import fs from '@/webgl/glsl/WhoIamText.fs';
 
 const WIDTH = 39;
-const DURATION_SHOW = 2.2;
+const DURATION_SHOW = 6;
 const DELAY_SHOW = 0.4;
-const DURATION_HIDE = 1.4;
-const DELAY_HIDE = 0.4;
+const DURATION_HIDE = 4;
+const DELAY_HIDE = 0.1;
 const DURATION_TRANSITION_SHOW = 2.6;
 const DELAY_TRANSITION_SHOW = 0;
 const DURATION_TRANSITION_HIDE = 1.8;
@@ -82,8 +82,8 @@ export default class WhoIamText extends THREE.Mesh {
       this.timeHide += time;
     }
 
-    const alphaShow = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
-    const alphaHide = MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0);
+    const alphaShow = easeOutCubic(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
+    const alphaHide = easeOutCubic(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
     const alphaTransitionShow = easeOutCubic(MathEx.clamp((this.timeShow - DELAY_TRANSITION_SHOW) / DURATION_TRANSITION_SHOW, 0.0, 1.0));
     const alphaTransitionHide = easeInCubic(MathEx.clamp((this.timeHide- DELAY_TRANSITION_HIDE) / DURATION_TRANSITION_HIDE, 0.0, 1.0));
     const alphaTransition = alphaTransitionShow * (1.0 - alphaTransitionHide);

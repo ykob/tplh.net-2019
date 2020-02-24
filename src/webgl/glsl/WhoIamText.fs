@@ -11,7 +11,7 @@ void main() {
   vec4 texColor = texture2D(tex, vUv);
 
   float textMask = texColor.r;
-  float alphaDelay = 1.0 - (texColor.g * 0.8 + 0.2 + texColor.b * 0.5) / 1.5;
+  float alphaDelay = (1.0 - (texColor.g + texColor.b) / 2.0) * 0.8;
 
   vec3 color = vec3(0.0);
   float opacity = textMask * 0.4
