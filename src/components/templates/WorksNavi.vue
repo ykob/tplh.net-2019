@@ -162,7 +162,7 @@
     }
     &__typo {
       // Interaction
-      transform: translate3d(1.01em, 0 ,0);
+      transform: translate3d(1.05em, 0 ,0);
       transition-duration: 1s;
       transition-property: transform;
       .is-shown & {
