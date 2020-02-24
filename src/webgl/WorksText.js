@@ -9,7 +9,7 @@ import WORKS from '@/const/WORKS';
 
 const WIDTH = 90;
 const DURATION_TRANSITION = 1;
-const DELAY_SHOW = 0.5;
+const DELAY_SHOW = 0.8;
 
 export default class WorksText extends THREE.Mesh {
   constructor() {

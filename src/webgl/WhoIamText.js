@@ -9,7 +9,7 @@ const WIDTH = 39;
 const DURATION_SHOW = 6;
 const DELAY_SHOW = 0.4;
 const DURATION_HIDE = 4;
-const DELAY_HIDE = 0.1;
+const DELAY_HIDE = 0.2;
 const DURATION_TRANSITION_SHOW = 2.6;
 const DELAY_TRANSITION_SHOW = 0;
 const DURATION_TRANSITION_HIDE = 1.8;
@@ -90,7 +90,7 @@ export default class WhoIamText extends THREE.Mesh {
 
     this.material.uniforms.alphaShow.value = alphaShow;
     this.material.uniforms.alphaHide.value = alphaHide;
-    this.positionYBase = -10 - (1 - alphaTransition) * 20;
+    this.positionYBase = -10 - (1 - alphaTransition) * 30;
 
     // Scrolling
     this.position.y = this.positionYBase + scrollProgress * 15;

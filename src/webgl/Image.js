@@ -57,8 +57,8 @@ export default class Image extends THREE.Group {
 
     if (index > 0 && this.currentIndex === 0) {
       this.easeFuncRise = easeOutExpo;
-      this.delayRise = 0.5;
-      this.delayChange = 0.5;
+      this.delayRise = 0.8;
+      this.delayChange = 0.8;
       this.transitionStart = direction * 24;
       this.transitionEnd = 0;
     } else if (index === 0 && this.currentIndex > 0) {
