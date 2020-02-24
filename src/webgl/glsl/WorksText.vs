@@ -15,7 +15,7 @@ void main(void) {
   vec2 uvNoise = vec2(
     uv.x - time * 0.1,
     uv.y / maxIndex * 5.0
-    );
+    ) * 4.0;
   float noise = smoothstep(0.2, 0.8, texture2D(tex, uvNoise).b);
 
   // Calculate the virtical gradation.
@@ -24,8 +24,8 @@ void main(void) {
   // coordinate transformation
   vec3 noisePosition = vec3(
     0.0,
-    (noise * 2.0 - 1.0) * 10.0 * gradation,
-    noise * 6.0 * gradation
+    noise * 8.0 * gradation * position.y / abs(position.y),
+    noise * 12.0 * gradation
   );
   vec4 mPosition = modelMatrix * vec4(position + noisePosition, 1.0);
 
