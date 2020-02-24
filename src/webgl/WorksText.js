@@ -14,7 +14,7 @@ const DELAY_SHOW = 0.5;
 export default class WorksText extends THREE.Mesh {
   constructor() {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(WIDTH, 3 / 16 * WIDTH);
+    const geometry = new THREE.PlaneBufferGeometry(WIDTH, 5 / 16 * WIDTH, 256, 80);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
