@@ -7,7 +7,7 @@ import Camera from '@/webgl/Camera';
 import SkullAuraCamera from '@/webgl/SkullAuraCamera';
 import Skull from '@/webgl/Skull';
 import Title from '@/webgl/Title';
-import PetalFloatGroup from '@/webgl/PetalFloatGroup';
+import PetalFallGroup from '@/webgl/PetalFallGroup';
 import PetalRotateGroup from '@/webgl/PetalRotateGroup';
 import Image from '@/webgl/Image';
 import WorksText from '@/webgl/WorksText';
@@ -49,7 +49,7 @@ const cameraPE = new THREE.OrthographicCamera(-1, 1, 1, -1, 1, 2);
 const skull = new Skull();
 const title = new Title();
 const petalRotateGroup = new PetalRotateGroup();
-const petalFloatGroup = new PetalFloatGroup();
+const petalFallGroup = new PetalFallGroup();
 const image = new Image();
 const worksText = new WorksText();
 const whoiamText = new WhoIamText();
@@ -152,7 +152,7 @@ export default class WebGLContent {
       // Add the webgl objects to the scene.
       scene.add(skull);
       scene.add(title);
-      scene.add(petalFloatGroup);
+      scene.add(petalFallGroup);
       scene.add(petalRotateGroup);
       scene.add(image);
       scene.add(worksText);
@@ -165,7 +165,7 @@ export default class WebGLContent {
       skullAuraCamera.start();
       skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
       title.start(titleTex, noiseTex);
-      petalFloatGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
+      petalFallGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
       image.start(noiseBurnTex, imgTexes);
       worksText.start(worksTextTex);
@@ -204,10 +204,10 @@ export default class WebGLContent {
   }
   showWhoIAmObjs(bool) {
     if (bool === true) {
-      petalFloatGroup.show();
+      petalFallGroup.show();
       whoiamText.show();
     } else {
-      petalFloatGroup.hide();
+      petalFallGroup.hide();
       whoiamText.hide();
     }
   }
@@ -230,7 +230,7 @@ export default class WebGLContent {
 
     // Update each objects.
     skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
-    petalFloatGroup.update(time);
+    petalFallGroup.update(time, scrollProgress);
     petalRotateGroup.update(time);
     title.update(time);
     image.update(time);

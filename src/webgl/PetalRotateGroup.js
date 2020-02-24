@@ -36,7 +36,7 @@ export default class PetalRotateGroup extends THREE.Group {
       this.petals[i].hide();
     }
   }
-  update(time, renderer, camera, sceneAura, cameraAura) {
+  update(time) {
     if (this.isActive === false) return;
     for (var i = 0; i < this.petals.length; i++) {
       this.petals[i].update(time);

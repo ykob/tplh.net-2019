@@ -1,14 +1,14 @@
 import * as THREE from 'three';
 import MathEx from 'js-util/MathEx';
 
-import PetalRotate from '@/webgl/PetalRotate';
+import PetalFall from '@/webgl/PetalFall';
 
-const PETAL_NUM = 24;
+const PETAL_NUM = 48;
 
-export default class PetalFloatGroup extends THREE.Group {
+export default class PetalFallGroup extends THREE.Group {
   constructor() {
     super();
-    this.name = 'PetalRotateGroup';
+    this.name = 'PetalFallGroup';
     this.petals = Array(PETAL_NUM);
     this.time = 0;
     this.isActive = false;
@@ -17,7 +17,7 @@ export default class PetalFloatGroup extends THREE.Group {
   start(geometryPetal1, geometryPetal2, noiseTex, hsv1, hsv2, hsv3) {
     for (var i = 0; i < this.petals.length; i++) {
       const geometry = (i % 2 === 1) ? geometryPetal1 : geometryPetal2;
-      this.petals[i] = new PetalRotate(geometry, hsv1, hsv2, hsv3);
+      this.petals[i] = new PetalFall(geometry, hsv1, hsv2, hsv3);
       this.add(this.petals[i]);
       this.petals[i].start(noiseTex);
     }
@@ -36,10 +36,10 @@ export default class PetalFloatGroup extends THREE.Group {
       this.petals[i].hide();
     }
   }
-  update(time, renderer, camera, sceneAura, cameraAura) {
+  update(time, scrollProgress) {
     if (this.isActive === false) return;
     for (var i = 0; i < this.petals.length; i++) {
-      this.petals[i].update(time);
+      this.petals[i].update(time, scrollProgress);
     }
   }
 }
