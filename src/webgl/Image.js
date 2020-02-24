@@ -71,7 +71,7 @@ export default class Image extends THREE.Group {
       this.delayRise = 0;
       this.delayChange = 0;
       this.transitionStart = this.position.y;
-      this.transitionEnd = this.position.y;
+      this.transitionEnd = 0;
     }
 
     this.currentIndex = index;
