@@ -2,19 +2,21 @@ precision highp float;
 
 uniform float time;
 uniform sampler2D tex;
-uniform float alpha;
+uniform float alphaShow;
+uniform float alphaHide;
 
 varying vec2 vUv;
 
 void main() {
-  vec4 texColor1 = texture2D(tex, vUv);
-  vec4 texColor2 = texture2D(tex, vUv + vec2(0.0, time));
+  vec4 texColor = texture2D(tex, vUv);
 
-  float textMask = texColor1.r;
-  float alphaDelay = (1.0 - texColor1.g + smoothstep(0.3, 0.7, texColor2.b)) / 2.0;
+  float textMask = texColor.r;
+  float alphaDelay = 1.0 - (texColor.g * 0.8 + 0.2 + texColor.b * 0.5) / 1.5;
 
   vec3 color = vec3(0.0);
-  float opacity = textMask * 0.4 * clamp(alpha * 2.0 - alphaDelay, 0.0, 1.0);
+  float opacity = textMask * 0.4
+    * smoothstep(0.0, 0.2, alphaShow - alphaDelay)
+    * (1.0 - smoothstep(0.0, 0.2, alphaHide - alphaDelay));
 
   if (opacity < 0.01) {
     discard;
