@@ -63,6 +63,7 @@ export default class WorksText extends THREE.Mesh {
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
+      side: THREE.DoubleSide
     });
 
     // Create Object3D
