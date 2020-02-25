@@ -1,5 +1,5 @@
 <script>
-  import _ from 'lodash';
+  import { debounce } from 'lodash';
   import sleep from 'js-util/sleep'
 
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
@@ -32,7 +32,7 @@
       `;
 
       // On global events.
-      window.addEventListener('resize', _.debounce(this.resize, 100));
+      window.addEventListener('resize', debounce(this.resize, 100));
       window.addEventListener('mousemove', this.mousemove);
       document.addEventListener('mouseleave', this.mouseleave);
 
