@@ -43,8 +43,16 @@
     },
     data() {
       return {
+        headingHeight: 0,
         isOvered: false
       }
+    },
+    mounted() {
+      this.resize();
+      window.addEventListener('resize', this.resize);
+    },
+    destroyed() {
+      window.removeEventListener('resize', this.resize);
     },
     computed: {
       getNumber() {
@@ -54,6 +62,11 @@
         return {
           'is-overed': this.isOvered === true
         }
+      },
+      linkWrapStyles() {
+        return {
+          top: `${this.headingHeight}px`
+        }
       }
     },
     methods: {
@@ -62,6 +75,9 @@
       },
       leave() {
         this.isOvered = false;
+      },
+      resize() {
+        this.headingHeight = this.$refs['work-outline-heading'].clientHeight;
       }
     }
   };
@@ -69,30 +85,33 @@
 
 <template lang="pug">
   .p-work-outline
-    .p-work-outline__number(
+    .p-work-outline__content
+      .p-work-outline__heading(
+        ref = 'work-outline-heading'
+        )
+        .p-work-outline__number.p-work-outline__elm
+          |{{ getNumber }}
+        h1.p-work-outline__title.p-work-outline__elm
+          |{{ title }}
+      .p-work-outline__description.p-work-outline__elm
+        |{{ description }}
+      .p-work-outline__credit.p-work-outline__elm
+        |Credits
+        br
+        |{{ credit }}
+    .p-work-outline__link-wrap(
+      :style = 'linkWrapStyles'
       )
-      |{{ getNumber }}
-    h1.p-work-outline__title
-      |{{ title }}
-    .p-work-outline__content-wrap
-      .p-work-outline__content
-        .p-work-outline__description
-          |{{ description }}
-        .p-work-outline__credit
-          |Credits
-          br
-          |{{ credit }}
-      .p-work-outline__link-wrap
-        .p-work-outline__link-line(
-          :class = 'linkLineClassnames'
-          )
-        a.p-work-outline__link(
-          :href = 'href'
-          target = '_blank'
-          @mouseenter = 'enter'
-          @mouseleave = 'leave'
-          )
-          |Launch
+      .p-work-outline__link-line(
+        :class = 'linkLineClassnames'
+        )
+      a.p-work-outline__link(
+        :href = 'href'
+        target = '_blank'
+        @mouseenter = 'enter'
+        @mouseleave = 'leave'
+        )
+        |Launch
 </template>
 
 <style lang="scss">
@@ -127,6 +146,83 @@
       pointer-events: none;
     }
 
+    &__content {
+      box-sizing: border-box;
+      @include l-more-than-mobile {
+        width: 50%;
+        padding-right: 20px;
+      }
+      @include l-mobile {
+      }
+
+      // Transition
+      transition-property: transform;
+      transform-origin: center left;
+      .show-enter & {
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.5, 10deg);
+      }
+      .show-asc-enter & {
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.5, -10deg);
+      }
+      .show-enter-to &,
+      .show-asc-enter-to & {
+        transition-duration: 1.3s;
+        transition-delay: 0.8s;
+        transition-timing-function: $easeOutQuad;
+      }
+      .view-leave-to &,
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
+        transform-origin: top;
+        transition-duration: .72s;
+        transition-timing-function: $easeInQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.5, -10deg);
+      }
+      .view-asc-leave-to &,
+      .show-asc-leave-to & {
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.5, 10deg);
+      }
+    }
+    &__elm {
+      // Transition
+      transition-property: opacity, transform;
+      .show-enter &,
+      .show-asc-enter & {
+        opacity: 0;
+      }
+      .show-enter & {
+        transform: translate3d(0, 100px, 0);
+      }
+      .show-asc-enter & {
+        transform: translate3d(0, -100px, 0);
+      }
+      .show-enter-to &,
+      .show-asc-enter-to & {
+        opacity: 1;
+        transition-duration: 1s;
+        transition-timing-function: $easeOutQuad;
+      }
+      .view-leave-to &,
+      .view-asc-leave-to &,
+      .show-leave-to &,
+      .show-asc-leave-to & {
+        opacity: 0;
+        transition-duration: .6s;
+        transition-timing-function: $easeInQuad;
+      }
+      .view-leave-to &,
+      .show-leave-to & {
+        transform: translate3d(0, -100px, 0);
+      }
+      .view-asc-leave-to &,
+      .show-asc-leave-to & {
+        transform: translate3d(0, 100px, 0);
+      }
+    }
     &__number {
       line-height: 1;
       @include fontSizeAll(20, 20, 20);
@@ -139,24 +235,6 @@
       }
 
       // Transition
-      transition-property: opacity, transform;
-      transform-origin: left bottom;
-      .show-enter &,
-      .show-asc-enter & {
-        opacity: 0;
-      }
-      .show-enter & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
-      }
-      .show-asc-enter & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
-      }
-      .show-enter-to &,
-      .show-asc-enter-to & {
-        opacity: 1;
-        transition-duration: 1s;
-        transition-timing-function: $easeOutQuad;
-      }
       .show-enter-to & {
         transition-delay: .8s;
       }
@@ -164,21 +242,11 @@
         transition-delay: 1.1s;
       }
       .view-leave-to &,
-      .view-asc-leave-to &,
-      .show-leave-to &,
-      .show-asc-leave-to & {
-        opacity: 0;
-        transition-duration: .6s;
-        transition-timing-function: $easeInQuad;
-      }
-      .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
         transition-delay: 0s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
         transition-delay: 0.12s;
       }
     }
@@ -189,32 +257,13 @@
       @include fontSizeAll(28, 28, 28);
       letter-spacing: 0.14em;
       @include l-more-than-mobile {
-        width: 50%;
-        margin-bottom: 25px;
+        padding-bottom: 25px;
       }
       @include l-mobile {
-        margin-bottom: 15px;
+        padding-bottom: 15px;
       }
 
       // Transition
-      transition-property: opacity, transform;
-      transform-origin: left center;
-      .show-enter &,
-      .show-asc-enter & {
-        opacity: 0;
-      }
-      .show-enter & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
-      }
-      .show-asc-enter & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
-      }
-      .show-enter-to &,
-      .show-asc-enter-to & {
-        opacity: 1;
-        transition-duration: 1s;
-        transition-timing-function: $easeOutCubic;
-      }
       .show-enter-to & {
         transition-delay: 0.9s;
       }
@@ -222,62 +271,18 @@
         transition-delay: 1s;
       }
       .view-leave-to &,
-      .view-asc-leave-to &,
-      .show-leave-to &,
-      .show-asc-leave-to & {
-        opacity: 0;
-        transition-duration: .6s;
-        transition-timing-function: $easeInQuad;
-      }
-      .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
         transition-delay: 0.04s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
         transition-delay: 0.08s;
-      }
-    }
-    &__content-wrap {
-      @include l-more-than-mobile {
-        display: flex;
-      }
-      @include l-mobile {
-      }
-    }
-    &__content {
-      box-sizing: border-box;
-      @include l-more-than-mobile {
-        width: 50%;
-        padding-right: 20px;
-      }
-      @include l-mobile {
       }
     }
     &__description {
       white-space: pre-wrap;
 
       // Transition
-      transition-property: opacity, transform;
-      transform-origin: bottom;
-      .show-enter &,
-      .show-asc-enter & {
-        opacity: 0;
-      }
-      .show-enter & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
-      }
-      .show-asc-enter & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
-      }
-      .show-enter-to &,
-      .show-asc-enter-to & {
-        opacity: 1;
-        transition-duration: 1s;
-        transition-timing-function: $easeOutQuad;
-      }
       .show-enter-to & {
         transition-delay: 1s;
       }
@@ -285,22 +290,11 @@
         transition-delay: 0.9s;
       }
       .view-leave-to &,
-      .view-asc-leave-to &,
-      .show-leave-to &,
-      .show-asc-leave-to & {
-        opacity: 0;
-        transform-origin: top;
-        transition-duration: .6s;
-        transition-timing-function: $easeInQuad;
-      }
-      .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
         transition-delay: 0.08s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
         transition-delay: 0.04s;
       }
     }
@@ -319,24 +313,6 @@
       }
 
       // Transition
-      transition-property: opacity, transform;
-      transform-origin: bottom;
-      .show-enter &,
-      .show-asc-enter & {
-        opacity: 0;
-      }
-      .show-enter & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
-      }
-      .show-asc-enter & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
-      }
-      .show-enter-to &,
-      .show-asc-enter-to & {
-        opacity: 1;
-        transition-duration: 1s;
-        transition-timing-function: $easeOutQuad;
-      }
       .show-enter-to & {
         transition-delay: 1.1s;
       }
@@ -344,29 +320,21 @@
         transition-delay: .8s;
       }
       .view-leave-to &,
-      .view-asc-leave-to &,
-      .show-leave-to &,
-      .show-asc-leave-to & {
-        opacity: 0;
-        transform-origin: top;
-        transition-duration: .6s;
-        transition-timing-function: $easeInQuad;
-      }
-      .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.333, -10deg);
         transition-delay: 0.12s;
       }
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.333, 10deg);
         transition-delay: 0s;
       }
     }
     &__link-wrap {
-      position: relative;
+      position: absolute;
+      backface-visibility: hidden;
       @include l-more-than-mobile {
         width: 50%;
+        top: 0;
+        right: 0;
       }
       @include l-mobile {
       }
@@ -375,24 +343,23 @@
       width: calc(100% - 110px);
       height: 1px;
       position: absolute;
-      top: calc(25 / 12 * 0.5em - 2px);
+      top: calc(25 / 12 * 0.5em);
       left: 0;
       background-color: rgba($color-text, 0.5);
 
       // Transition
+      transform-origin: left;
       transition-duration: .7s;
       transition-property: width, transform, opacity;
       transition-timing-function: $easeOutCirc;
       .show-enter &,
       .show-asc-enter & {
         transform: scaleX(0);
-        transform-origin: left;
       }
       .show-enter-to &,
       .show-asc-enter-to & {
         transform: scaleX(1);
-        transform-origin: left;
-        transition-delay: 1.1s;
+        transition-delay: 1.6s;
       }
       .view-leave-to &,
       .view-asc-leave-to &,
@@ -400,7 +367,7 @@
       .show-asc-leave-to & {
         transform: scaleX(0);
         transform-origin: right;
-        transition-delay: 0.2s;
+        transition-delay: 0s;
       }
       &.is-overed {
         width: calc(100% + 10px);
@@ -423,7 +390,7 @@
       .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1.3s;
+        transition-delay: 1.8s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
@@ -432,7 +399,7 @@
       .show-asc-leave-to & {
         opacity: 0;
         transition-duration: .6s;
-        transition-delay: 0.2s;
+        transition-delay: 0s;
       }
     }
   }
