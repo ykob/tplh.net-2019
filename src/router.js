@@ -5,6 +5,7 @@ import Meta from 'vue-meta'
 import Home from './components/views/Home.vue'
 import Works from './components/views/Works.vue'
 import WhoIAm from './components/views/WhoIAm.vue'
+import Error404 from './components/views/Error404.vue'
 
 Vue.use(Router)
 Vue.use(Meta)
@@ -27,6 +28,11 @@ export default new Router({
       path: '/who-i-am',
       name: 'who-i-am',
       component: WhoIAm
+    },
+    {
+      path: '*',
+      name: 'error-404',
+      component: Error404
     },
   ]
 })
