@@ -39,8 +39,8 @@
 </script>
 
 <template lang="pug">
-.p-view-wrap
-  |404
+  .p-view-wrap
+    |404
 </template>
 
 <style lang="scss">

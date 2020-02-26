@@ -1,12 +1,12 @@
 <script>
-import LinkListItem from '@/components/organisms/LinkListItem'
+  import LinkListItem from '@/components/organisms/LinkListItem'
 
-export default {
-  name: 'WhoIAmLinks',
-  components: {
-    LinkListItem
+  export default {
+    name: 'WhoIAmLinks',
+    components: {
+      LinkListItem
+    }
   }
-}
 </script>
 
 <template lang="pug">
@@ -30,41 +30,41 @@ export default {
 </template>
 
 <style lang="scss">
-.p-whoiam-links {
-  @include l-more-than-mobile {
-    width: 500 / 1360 * 100%;
-    position: absolute;
-    top: 270px;
-    left: 180 / 1360 * 100%;
-  }
-  &__items {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 30px;
-    &:first-child {
-      margin-top: 0;
+  .p-whoiam-links {
+    @include l-more-than-mobile {
+      width: 500 / 1360 * 100%;
+      position: absolute;
+      top: 270px;
+      left: 180 / 1360 * 100%;
+    }
+    &__items {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 30px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    // Transition
+    transition-property: opacity;
+    .view-enter &,
+    .view-asc-enter & {
+      opacity: 0;
+    }
+    .view-enter-to &,
+    .view-asc-enter-to & {
+      opacity: 1;
+      transition-duration: 1s;
+      transition-delay: 1.2s;
+      transition-timing-function: $easeOutQuad;
+    }
+    .view-leave-to &,
+    .view-asc-leave-to & {
+      opacity: 0;
+      transition-duration: .6s;
+      transition-delay: 0s;
     }
   }
-
-  // Transition
-  transition-property: opacity;
-  .view-enter &,
-  .view-asc-enter & {
-    opacity: 0;
-  }
-  .view-enter-to &,
-  .view-asc-enter-to & {
-    opacity: 1;
-    transition-duration: 1s;
-    transition-delay: 1.2s;
-    transition-timing-function: $easeOutQuad;
-  }
-  .view-leave-to &,
-  .view-asc-leave-to & {
-    opacity: 0;
-    transition-duration: .6s;
-    transition-delay: 0s;
-  }
-}
 </style>
