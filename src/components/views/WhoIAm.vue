@@ -34,6 +34,12 @@
         isRendering: false
       }
     },
+    watch: {
+      async '$store.state.resolution.y'() {
+        await sleep(10);
+        this.resize();
+      }
+    },
     computed: {
       styles() {
         return {
@@ -50,7 +56,6 @@
     },
     async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
-      window.addEventListener('resize', this.resize);
       this.scrollY = 0;
       this.anchorY = 0;
       this.$store.commit('setScrollProgress', 0);
@@ -71,7 +76,6 @@
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
-      window.removeEventListener('resize', this.resize);
       this.isRendering = false;
     },
     methods: {
@@ -127,7 +131,6 @@
       WhoIAmSection(
         :num = '1'
         :scrollY = 'scrollY'
-        :clientHeight = 'clientHeight'
         :parallaxRatio = '10'
         )
         h2
@@ -144,9 +147,6 @@
           |The Japanese web industry is very rough and sloppy. There is still plenty of room for an empty-handed human like me. I was able to blend into the industry, and gradually acquire skills in business. Although I'm still not an expert in a particular genre, I've fully benefited from such an environment and still work as a front-end development handyman in many different types of work.
       WhoIAmSection(
         :num = '2'
-        :scrollY = 'scrollY'
-        :clientHeight = 'clientHeight'
-        :parallaxRatio = '20'
         )
         h2
           |Expressing my identity
@@ -159,7 +159,6 @@
       WhoIAmSection(
         :num = '3'
         :scrollY = 'scrollY'
-        :clientHeight = 'clientHeight'
         :parallaxRatio = '10'
         )
         p

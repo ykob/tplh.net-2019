@@ -1,115 +1,101 @@
 <script>
-export default {
-  name: 'WhoIAmSection',
-  props: {
-    num: {
-      type: Number,
-      default: 0
+  import ParallaxBlock from '@/components/atoms/ParallaxBlock'
+
+  export default {
+    name: 'WhoIAmSection',
+    components: {
+      ParallaxBlock
     },
-    scrollY: {
-      type: Number,
-      default: 0
+    props: {
+      num: {
+        type: Number,
+        default: 0
+      },
+      scrollY: {
+        type: Number,
+        default: 0
+      },
+      parallaxRatio: {
+        type: Number,
+        default: 0
+      }
     },
-    clientHeight: {
-      type: Number,
-      default: 0
-    },
-    parallaxRatio: {
-      type: Number,
-      default: 0
-    }
-  },
-  data() {
-    return {
-      center: 0,
-    }
-  },
-  mounted() {
-    const rect = this.$el.getBoundingClientRect();
-    this.center = rect.top + rect.height * 0.5;
-  },
-  computed: {
-    classnames() {
-      return [
-        `p-whoiam-section--${this.num}`
-      ]
-    },
-    styles() {
-      const windowCenter = this.scrollY + this.$store.state.resolution.y * 0.5;
-      const diff = (this.center - windowCenter) / -this.parallaxRatio
-      return {
-        transform: `translate3d(0, ${diff}px, 0)`
+    computed: {
+      classnames() {
+        return [
+          `p-whoiam-section--${this.num}`
+        ]
       }
     }
   }
-}
 </script>
 
 <template lang="pug">
-  .p-whoiam-section(
+  ParallaxBlock.p-whoiam-section(
     :class = 'classnames'
-    :style = 'styles'
+    :scrollY = 'scrollY'
+    :parallaxRatio = 'parallaxRatio'
     )
     slot
 </template>
 
 <style lang="scss">
-.p-whoiam-section {
-  text-align: justify;
-  @include l-more-than-mobile {
-    width: 500 / 1360 * 100%;
-  }
-  &--1 {
+  .p-whoiam-section {
+    text-align: justify;
     @include l-more-than-mobile {
-      margin-left: 50%;
-      margin-bottom: 120px;
+      width: 500 / 1360 * 100%;
     }
-  }
-  &--2 {
-    @include l-more-than-mobile {
-      margin-left: 360 / 1360 * 100%;
-      margin-bottom: 120px;
+    &--1 {
+      @include l-more-than-mobile {
+        margin-left: 50%;
+        margin-bottom: 120px;
+      }
     }
-  }
-  &--3 {
-    @include l-more-than-mobile {
-      margin-left: 500 / 1360 * 100%;
-      margin-bottom: 300px;
+    &--2 {
+      @include l-more-than-mobile {
+        margin-left: 360 / 1360 * 100%;
+        margin-bottom: 120px;
+      }
     }
-  }
-  h2 {
-    line-height: (30 / 18);
-    margin-top: 0;
-    @include fontSizeAll(18, 18, 18);
-    @include l-more-than-mobile {
-      margin-bottom: 35px;
+    &--3 {
+      @include l-more-than-mobile {
+        margin-left: 500 / 1360 * 100%;
+        margin-bottom: 180px;
+      }
     }
-    @include l-mobile {
+    h2 {
+      line-height: (30 / 18);
+      margin-top: 0;
+      @include fontSizeAll(18, 18, 18);
+      @include l-more-than-mobile {
+        margin-bottom: 35px;
+      }
+      @include l-mobile {
+      }
     }
-  }
-  p {
-    margin-top: 0;
-    margin-bottom: 20px;
-  }
+    p {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
 
-  // Transition
-  transition-property: opacity;
-  .view-enter &,
-  .view-asc-enter & {
-    opacity: 0;
+    // Transition
+    transition-property: opacity;
+    .view-enter &,
+    .view-asc-enter & {
+      opacity: 0;
+    }
+    .view-enter-to &,
+    .view-asc-enter-to & {
+      opacity: 1;
+      transition-duration: 1s;
+      transition-delay: 1.2s;
+      transition-timing-function: $easeOutQuad;
+    }
+    .view-leave-to &,
+    .view-asc-leave-to & {
+      opacity: 0;
+      transition-duration: .6s;
+      transition-delay: 0s;
+    }
   }
-  .view-enter-to &,
-  .view-asc-enter-to & {
-    opacity: 1;
-    transition-duration: 1s;
-    transition-delay: 1.2s;
-    transition-timing-function: $easeOutQuad;
-  }
-  .view-leave-to &,
-  .view-asc-leave-to & {
-    opacity: 0;
-    transition-duration: .6s;
-    transition-delay: 0s;
-  }
-}
 </style>
