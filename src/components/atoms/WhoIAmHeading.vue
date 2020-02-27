@@ -19,8 +19,8 @@
     @include fontSizeAll(60, 60, 60);
     letter-spacing: 0.15em;
     @include l-more-than-mobile {
-      margin-bottom: 125px;
-      margin-left: 50%;
+      margin-bottom: 145px;
+      margin-left: 45%;
     }
     @include l-mobile {
     }

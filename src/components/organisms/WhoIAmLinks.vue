@@ -1,16 +1,31 @@
 <script>
+  import ParallaxBlock from '@/components/atoms/ParallaxBlock'
   import LinkListItem from '@/components/organisms/LinkListItem'
 
   export default {
     name: 'WhoIAmLinks',
     components: {
+      ParallaxBlock,
       LinkListItem
+    },
+    props: {
+      scrollY: {
+        type: Number,
+        default: 0
+      },
+      parallaxRatio: {
+        type: Number,
+        default: 0
+      }
     }
   }
 </script>
 
 <template lang="pug">
-  .p-whoiam-links
+  ParallaxBlock.p-whoiam-links(
+    :scrollY = 'scrollY'
+    :parallaxRatio = 'parallaxRatio'
+    )
     .p-whoiam-links__items
       LinkListItem.p-whoiam-links__item(
         href = 'https://twitter.com/ykob0123'

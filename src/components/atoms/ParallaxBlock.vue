@@ -31,7 +31,7 @@
       styles() {
         if (this.parallaxRatio === 0) return;
         const windowCenter = this.scrollY + this.$store.state.resolution.y * 0.5;
-        const diff = (this.center - windowCenter) / -this.parallaxRatio;
+        const diff = (this.center - windowCenter) * -this.parallaxRatio;
         return {
           transform: `translate3d(0, ${diff}px, 0)`
         }

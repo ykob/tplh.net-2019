@@ -131,7 +131,7 @@
       WhoIAmSection(
         :num = '1'
         :scrollY = 'scrollY'
-        :parallaxRatio = '10'
+        :parallaxRatio = '0.1'
         )
         h2
           |I'm a Web Developer.
@@ -159,13 +159,16 @@
       WhoIAmSection(
         :num = '3'
         :scrollY = 'scrollY'
-        :parallaxRatio = '10'
+        :parallaxRatio = '0.1'
         )
         p
           |I have selected skull and flower objects as motifs for prosperity and death. To make them more ephemeral and vacuity, I colored these in brilliant golden color. The development way is composite with three.js and Vue-CLI. By these means, I'm proud that I have been able to reflect my innerness, generation, and physicality on this site.
         p
           |Initially, I planned to develop this site alone, but fortunately, I was able to get the help of my friend and designer Shunsuke Iseki, who has world-class skills. I was able to experience his art direction skills up close and was impressed by his precise work. I appreciate his great performance.
-      WhoIAmLinks
+      WhoIAmLinks(
+        :scrollY = 'scrollY'
+        :parallaxRatio = '0.05'
+        )
       WhoIAmThanks
 </template>
 
