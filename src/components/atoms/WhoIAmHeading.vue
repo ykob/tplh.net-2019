@@ -34,10 +34,12 @@
       .view-asc-enter & {
         opacity: 0;
       }
-      .view-enter & {
+      .view-enter &,
+      .view-asc-leave-to & {
         transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
-      .view-asc-enter & {
+      .view-asc-enter &,
+      .view-leave-to & {
         transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
       }
       .view-enter-to &,
@@ -52,14 +54,8 @@
         opacity: 0;
         transform-origin: top;
         transition-duration: .6s;
-        transition-timing-function: $easeInQuad;
+        transition-timing-function: $easeInCubic;
         @include iterateTransitionDelay(2, 0.05, 0.04);
-      }
-      .view-leave-to & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
-      }
-      .view-asc-leave-to & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
       }
     }
   }

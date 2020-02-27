@@ -50,23 +50,32 @@
     }
 
     // Transition
-    transition-property: opacity;
+    transition-property: opacity, transform;
     .view-enter &,
     .view-asc-enter & {
       opacity: 0;
+    }
+    .view-enter &,
+    .view-asc-leave-to & {
+      transform: translate3d(0, 60px, 0);
+    }
+    .view-asc-enter &,
+    .view-leave-to & {
+      transform: translate3d(0, -60px, 0);
     }
     .view-enter-to &,
     .view-asc-enter-to & {
       opacity: 1;
       transition-duration: 1s;
-      transition-delay: 1.2s;
-      transition-timing-function: $easeOutQuad;
+      transition-delay: 1.3s;
+      transition-timing-function: $easeOutCubic;
     }
     .view-leave-to &,
     .view-asc-leave-to & {
       opacity: 0;
       transition-duration: .6s;
-      transition-delay: 0s;
+      transition-delay: 0.1s;
+      transition-timing-function: $easeInCubic;
     }
   }
 </style>
