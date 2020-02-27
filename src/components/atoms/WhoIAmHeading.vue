@@ -6,10 +6,11 @@
 
 <template lang="pug">
   h1.p-whoiam-heading
-    span.p-whoiam-heading__row
-      |Yoichi
-    span.p-whoiam-heading__row
-      |Kobayashi
+    span.p-whoiam-heading__in
+      span.p-whoiam-heading__row
+        |Yoichi
+      span.p-whoiam-heading__row
+        |Kobayashi
 </template>
 
 <style lang="scss">
@@ -24,38 +25,63 @@
     }
     @include l-mobile {
     }
+    &__in {
+      display: block;
+
+      // Transition
+      transition-property: transform;
+      transform-origin: center left;
+      .view-enter &,
+      .view-asc-leave-to & {
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.5, 10deg);
+      }
+      .view-asc-enter &,
+      .view-leave-to & {
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.5, -10deg);
+      }
+      .view-enter-to &,
+      .view-asc-enter-to & {
+        transition-duration: 1.1s;
+        transition-delay: 0.8s;
+        transition-timing-function: $easeOutQuad;
+      }
+      .view-leave-to &,
+      .view-asc-leave-to & {
+        transition-duration: .65s;
+        transition-timing-function: $easeInQuad;
+      }
+    }
     &__row {
       display: block;
 
       // Transition
       transition-property: opacity, transform;
-      transform-origin: left bottom;
+      transform-origin: center left;
       .view-enter &,
       .view-asc-enter & {
         opacity: 0;
       }
       .view-enter &,
       .view-asc-leave-to & {
-        transform: translate3d(0, 60px, 30px) rotate3d(1, 0, 0.25, 20deg);
+        transform: translate3d(0, 100px, 0);
       }
       .view-asc-enter &,
       .view-leave-to & {
-        transform: translate3d(0, -60px, 30px) rotate3d(1, 0, 0.25, -20deg);
+        transform: translate3d(0, -100px, 0);
       }
       .view-enter-to &,
       .view-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-timing-function: $easeOutCubic;
-        @include iterateTransitionDelay(2, 0.1, 0.9);
+        transition-timing-function: $easeOutQuad;
+        @include iterateTransitionDelay(2, 0.1, 0.8);
       }
       .view-leave-to &,
       .view-asc-leave-to & {
         opacity: 0;
-        transform-origin: top;
         transition-duration: .6s;
-        transition-timing-function: $easeInCubic;
-        @include iterateTransitionDelay(2, 0.05, 0.04);
+        transition-timing-function: $easeInQuad;
+        @include iterateTransitionDelay(2, -0.1, 0.1);
       }
     }
   }
