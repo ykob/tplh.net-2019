@@ -21,7 +21,7 @@
     letter-spacing: 0.15em;
     @include l-more-than-mobile {
       margin-bottom: 145px;
-      margin-left: 45%;
+      margin-left: 40%;
     }
     @include l-mobile {
     }

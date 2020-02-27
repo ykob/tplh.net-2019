@@ -53,7 +53,7 @@
     }
     &--2 {
       @include l-more-than-mobile {
-        margin-left: 16%;
+        margin-left: 20%;
         margin-bottom: 120px;
       }
     }
