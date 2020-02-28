@@ -184,8 +184,8 @@ export default class WebGLContent {
   pause() {
     clock.stop();
   }
-  changeBackground (bool) {
-    bg.change(bool);
+  changeBackground (isHome, hasDelay) {
+    bg.change(isHome, hasDelay);
   }
   showHomeObjs(bool) {
     if (bool === true) {

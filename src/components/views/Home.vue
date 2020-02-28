@@ -24,7 +24,10 @@
       window.addEventListener('wheel', this.wheel, { passive: false });
     },
     async mounted() {
-      this.$store.commit('changeBackground', false);
+      this.$store.commit('changeBackground', {
+        isHome: true,
+        hasDelay: true
+      });
       this.$store.commit('showHomeObjs', true);
       this.$store.commit('showWorksObjs', {
         index: 0,

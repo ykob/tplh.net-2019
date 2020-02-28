@@ -59,25 +59,25 @@ export default class Background extends THREE.Mesh {
     this.isActive = true;
     this.material.uniforms.noiseTex.value = noiseTex;
   }
-  change(isHome) {
+  change(isHome, hasDelay) {
     this.isChanged = true;
 
     if (this.isShownFirst === false) {
       this.isShownFirst = true;
-      if (isHome === true) {
+      if (isHome === false) {
         this.material.uniforms.alpha.value = 1;
         this.alphaStart = 1;
         this.alphaEnd = 1;
         this.timeShowFirst = 0;
       } else {
-        this.timeShowFirst = -5.5;
+        this.timeShowFirst = (hasDelay === true) ? -5.5 : 0;
       }
     } else {
       if (this.timeShowFirst < 0) {
         this.timeShowFirst = 0;
       }
       this.alphaStart = this.material.uniforms.alpha.value;
-      this.alphaEnd = (isHome === true) ? 1 : 0;
+      this.alphaEnd = (isHome === true) ? 0 : 1;
       this.time = 0;
     }
   }

@@ -61,7 +61,10 @@
       this.$store.commit('setScrollProgress', 0);
     },
     async mounted() {
-      this.$store.commit('changeBackground', true);
+      this.$store.commit('changeBackground', {
+        isHome: false,
+        hasDelay: false
+      });
       this.$store.commit('showHomeObjs', false);
       this.$store.commit('showWorksObjs', {
         index: 0,

@@ -27,7 +27,10 @@
       next();
     },
     async mounted() {
-      this.$store.commit('changeBackground', false);
+      this.$store.commit('changeBackground', {
+        isHome: true,
+        hasDelay: false
+      });
       this.$store.commit('showHomeObjs', false);
       this.$store.commit('showWorksObjs', {
         index: 0,

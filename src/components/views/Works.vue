@@ -42,7 +42,10 @@
         { key: this.$route.params.key }
       );
 
-      this.$store.commit('changeBackground', true);
+      this.$store.commit('changeBackground', {
+        isHome: false,
+        hasDelay: false
+      });
       this.$store.commit('showHomeObjs', false);
       this.$store.commit('showWorksObjs', {
         index: index + 1,

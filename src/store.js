@@ -68,8 +68,8 @@ export default new Vuex.Store({
       state.globalId = opts.globalId;
       state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
     },
-    changeBackground (state, bool) {
-      state.webgl.changeBackground(bool);
+    changeBackground (state, { isHome, hasDelay }) {
+      state.webgl.changeBackground(isHome, hasDelay);
     },
     showHomeObjs (state, bool) {
       state.webgl.showHomeObjs(bool);
