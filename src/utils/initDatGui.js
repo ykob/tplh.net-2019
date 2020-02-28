@@ -30,8 +30,8 @@ export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
     hsv2h: skullAuraUniforms.hsv2.value.x,
     hsv2s: skullAuraUniforms.hsv2.value.y,
     hsv2v: skullAuraUniforms.hsv2.value.z,
-    strength: skullAuraUniforms.strength.value,
-    colorRangeMin: skullAuraUniforms.colorRangeMin.value,
+    strength: skull.aura.strengthBase,
+    colorRangeMin: skull.aura.colorRangeMinBase,
     colorRangeMax: skullAuraUniforms.colorRangeMax.value,
     opacityRangeMin: skullAuraUniforms.opacityRangeMin.value,
     opacityRangeMax: skullAuraUniforms.opacityRangeMax.value,
@@ -57,10 +57,10 @@ export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
     skull.aura.material.uniforms.hsv2.value.setZ(response)
   });
   guiSkullAura.add(skullAuraObj, 'strength', 1, 3, 0.01).onChange((response) => {
-    skull.aura.material.uniforms.strength.value = response
+    skull.aura.strengthBase = response
   });
   guiSkullAura.add(skullAuraObj, 'colorRangeMin', 0, 1, 0.01).onChange((response) => {
-    skull.aura.material.uniforms.colorRangeMin.value = response
+    skull.aura.colorRangeMinBase = response
   });
   guiSkullAura.add(skullAuraObj, 'colorRangeMax', 0, 1, 0.01).onChange((response) => {
     skull.aura.material.uniforms.colorRangeMax.value = response
