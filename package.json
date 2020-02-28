@@ -32,6 +32,7 @@
     "@vue/cli-service": "^3.12.1",
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
+    "hard-source-webpack-plugin": "^0.13.1",
     "node-sass": "^4.13.0",
     "raw-loader": "^3.1.0",
     "sass-loader": "^7.1.0",

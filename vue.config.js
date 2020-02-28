@@ -1,3 +1,5 @@
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -52,6 +54,9 @@ module.exports = {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new HardSourceWebpackPlugin()
+    ]
   }
 }
