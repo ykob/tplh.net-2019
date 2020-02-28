@@ -97,8 +97,14 @@ export default class SkullAura extends THREE.Mesh {
 
     if (this.isShown === true) {
       this.timeShow += time;
-      this.material.uniforms.alpha.value = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8;
+      const alpha = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
+      this.material.uniforms.alpha.value = easeOutCirc(alpha);
+      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8 + (1 - alpha) * 4.0;
+      this.scale.set(
+        1 + (1 - alpha) * 0.1,
+        1 + (1 - alpha) * 0.1,
+        1
+      );
     }
   }
 }
