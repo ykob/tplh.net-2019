@@ -9,7 +9,7 @@ import SkullPoints from '@/webgl/SkullPoints';
 
 const DURATION_SHOW = 2;
 const DELAY_SHOW = 1;
-const DURATION_HIDE = 1.2;
+const DURATION_HIDE = 1.6;
 const DELAY_HIDE = 0;
 
 export default class Skull extends THREE.Group {

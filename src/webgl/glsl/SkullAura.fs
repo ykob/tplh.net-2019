@@ -24,9 +24,10 @@ const float blurIteration = 12.0;
 #pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb)
 
 void main() {
+  vec2 p = vUv * 2.0 - 1.0;
   vec4 texColor1 = texture2D(postEffectTex, vUv);
-  vec4 texColor2 = texture2D(postEffectTex, vUv * vec2(0.7, 0.65) + vec2(0.15, 0.125));
-  vec4 texColor3 = texture2D(postEffectTex, vUv * vec2(0.55, 0.45) + vec2(0.225, 0.175));
+  vec4 texColor2 = texture2D(postEffectTex, vUv * vec2(0.7, 0.65) + vec2(0.15, 0.135));
+  vec4 texColor3 = texture2D(postEffectTex, vUv * vec2(0.55, 0.45) + vec2(0.225, 0.185));
 
   float noise1 = texture2D(noiseTex, vUv - vec2(0.0, time * 0.6)).r;
   float noise2 = texture2D(noiseTex, vUv * 2.0 - vec2(0.0, time * 0.7)).g;

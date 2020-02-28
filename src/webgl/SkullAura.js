@@ -11,7 +11,7 @@ const DELAY_SHOW = 2.6;
 export default class SkullAura extends THREE.Mesh {
   constructor() {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(25, 25);
+    const geometry = new THREE.PlaneBufferGeometry(35, 35);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
@@ -99,7 +99,7 @@ export default class SkullAura extends THREE.Mesh {
       this.timeShow += time;
       const alpha = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
       this.material.uniforms.alpha.value = easeOutCirc(alpha);
-      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8 + (1 - alpha) * 4.0;
+      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8 + (1 - alpha) * 5.0;
       this.scale.set(
         1 + (1 - alpha) * 0.1,
         1 + (1 - alpha) * 0.1,

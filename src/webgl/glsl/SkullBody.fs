@@ -46,5 +46,5 @@ void main() {
     discard;
   }
 
-  gl_FragColor = vec4((color + colorOutline) * (1.0 - dissolve) + dissolveColor, opacity);
+  gl_FragColor = vec4(color * (1.0 - dissolve) + dissolveColor + colorOutline, opacity);
 }
