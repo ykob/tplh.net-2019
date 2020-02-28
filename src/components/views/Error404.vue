@@ -4,6 +4,7 @@
   import normalizeWheel from 'normalize-wheel';
 
   import store from '@/store'
+  import ErrorMessage from '@/components/atoms/ErrorMessage.vue';
 
   export default {
     name: 'error-404',
@@ -17,6 +18,7 @@
       ]
     },
     components: {
+      ErrorMessage
     },
     beforeRouteEnter(to, from, next) {
       store.commit('transit', {
@@ -40,7 +42,7 @@
 
 <template lang="pug">
   .p-view-wrap
-    |404
+    ErrorMessage
 </template>
 
 <style lang="scss">

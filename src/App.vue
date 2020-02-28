@@ -65,7 +65,7 @@
         if (this.$route.name === 'home') {
           await sleep(800);
         } else {
-          await sleep(1400);
+          await sleep(2400);
         }
         this.$store.state.webgl.play();
         this.$store.commit('showView');
