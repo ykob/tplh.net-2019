@@ -13,7 +13,7 @@ export default class SkullAuraPostEffect extends THREE.Mesh {
       uniforms: {
         resolution: {
           type: 'v2',
-          value: new THREE.Vector2(512, 512),
+          value: new THREE.Vector2(1024, 1024),
         },
         direction: {
           type: 'v2',

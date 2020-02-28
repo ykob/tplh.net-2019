@@ -17,6 +17,8 @@ export default new Vuex.Store({
     canvas: document.createElement('canvas'),
     resolution: new THREE.Vector2(),
     mouse: new THREE.Vector2(),
+    mousePrev: new THREE.Vector2(),
+    mouseForce: new THREE.Vector2(),
     webgl: new WebGL(),
     works: WORKS,
     currentWorksId: 0,

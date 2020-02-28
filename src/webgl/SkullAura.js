@@ -75,6 +75,7 @@ export default class SkullAura extends THREE.Mesh {
     super(geometry, material);
     this.name = 'SkullAura';
     this.timeShow = 0;
+    this.force = 0;
     this.isActive = false;
     this.isShown = false;
     this.position.set(0, 0, 8);
@@ -90,21 +91,23 @@ export default class SkullAura extends THREE.Mesh {
       this.timeShow = DURATION_SHOW + DELAY_SHOW;
     }
   }
-  update(time, camera, fluctuation) {
+  update(time, camera, fluctuation, mouseForce) {
     if (this.isActive === false) return;
     this.rotation.copy(camera.rotation);
     this.material.uniforms.time.value += time;
+    this.force = Math.min(this.force + mouseForce.length() * 1.4, 1.4);
+    this.force = Math.floor((this.force + (0 - this.force) / 15) * 100) / 100;
 
     if (this.isShown === true) {
       this.timeShow += time;
-      const alpha = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
-      this.material.uniforms.alpha.value = easeOutCirc(alpha);
-      this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8 + (1 - alpha) * 5.0;
-      this.scale.set(
-        1 + (1 - alpha) * 0.1,
-        1 + (1 - alpha) * 0.1,
-        1
-      );
     }
+    const alpha = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
+    this.material.uniforms.alpha.value = easeOutCirc(alpha);
+    this.material.uniforms.strength.value = 2.2 + fluctuation * 0.8 + (1 - alpha) * 4.0 + this.force;
+    this.scale.set(
+      1 + (1 - alpha) * 0.3 + this.force * 0.02,
+      1 + (1 - alpha) * 0.3 + this.force * 0.02,
+      1
+    );
   }
 }

@@ -69,7 +69,7 @@ export default class Skull extends THREE.Group {
     this.lookAnchor.copy(lookV).multiplyScalar(-0.3);
     this.body.lookMouse(lookV);
   }
-  update(time, renderer, camera, sceneAura, cameraAura) {
+  update(time, renderer, camera, sceneAura, cameraAura, mouseForce) {
     if (this.isActive === false) return;
 
     // update the attributes of this group.
@@ -107,7 +107,7 @@ export default class Skull extends THREE.Group {
 
     // update children.
     this.body.update(time, camera, fluctuation);
-    this.aura.update(time, camera, fluctuation);
+    this.aura.update(time, camera, fluctuation, mouseForce);
     this.points.update(time);
 
     // processing before rendering the aura as texture.

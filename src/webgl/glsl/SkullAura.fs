@@ -29,9 +29,9 @@ void main() {
   vec4 texColor2 = texture2D(postEffectTex, vUv * vec2(0.7, 0.65) + vec2(0.15, 0.135));
   vec4 texColor3 = texture2D(postEffectTex, vUv * vec2(0.55, 0.45) + vec2(0.225, 0.185));
 
-  float noise1 = texture2D(noiseTex, vUv - vec2(0.0, time * 0.6)).r;
-  float noise2 = texture2D(noiseTex, vUv * 2.0 - vec2(0.0, time * 0.7)).g;
-  float noise3 = texture2D(noiseTex, vUv * 3.0 - vec2(0.0, time * 0.8)).b;
+  float noise1 = texture2D(noiseTex, vUv * 1.4 - vec2(0.0, time * 0.8)).r;
+  float noise2 = texture2D(noiseTex, vUv * 2.8 - vec2(0.0, time * 0.9)).g;
+  float noise3 = texture2D(noiseTex, vUv * 4.2 - vec2(0.0, time * 1.0)).b;
   float noise = (noise1 * 0.65 + noise2 * 0.3 + noise3 * 0.05);
 
   float mask1 = (texColor1.r + noise * 2.0) / 3.0;

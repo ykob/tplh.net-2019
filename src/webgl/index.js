@@ -211,7 +211,7 @@ export default class WebGLContent {
       whoiamText.hide();
     }
   }
-  update({ mouse, scrollProgress }) {
+  update({ mouse, mouseForce, scrollProgress }) {
     // When the clock is stopped, it stops the all rendering too.
     const time = (clock.running === true) ? clock.getDelta() : 0;
 
@@ -229,7 +229,7 @@ export default class WebGLContent {
     }
 
     // Update each objects.
-    skull.update(time, renderer, camera, sceneAura, skullAuraCamera);
+    skull.update(time, renderer, camera, sceneAura, skullAuraCamera, mouseForce);
     petalFallGroup.update(time, scrollProgress);
     petalRotateGroup.update(time);
     title.update(time);

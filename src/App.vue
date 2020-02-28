@@ -80,14 +80,24 @@
       },
       mousemove(e) {
         if (this.$store.state.isShownUI === false) return;
-        const { resolution, mouse } = this.$store.state;
+        const { resolution, mouse, mousePrev, mouseForce } = this.$store.state;
+        if (mousePrev.length() !== 0) {
+          mousePrev.copy(mouse);
+        }
         mouse.set(
           (e.clientX / resolution.x) * 2 - 1,
           -(e.clientY / resolution.y) * 2 + 1
         );
+        if (mousePrev.length() === 0) {
+          mousePrev.copy(mouse);
+        }
+        mouseForce.copy(mouse.clone().sub(mousePrev))
       },
       mouseleave() {
-        this.$store.state.mouse.set(0, 0);
+        const { mouse, mousePrev, mouseForce } = this.$store.state;
+        mouse.set(0, 0);
+        mousePrev.set(0, 0);
+        mouseForce.set(0, 0);
       }
     },
   }
