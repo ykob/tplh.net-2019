@@ -35,6 +35,7 @@
     },
     created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
+      window.addEventListener('touchmove', this.touchmove);
     },
     async mounted() {
       const index = _.findIndex(
@@ -56,6 +57,10 @@
       await sleep(500);
       this.$store.commit('showUI');
     },
+    destroyed () {
+      window.removeEventListener('wheel', this.wheel, { passive: false });
+      window.removeEventListener('touchmove', this.touchmove);
+    },
     watch: {
       '$route.params.key': function(key) {
         const index = _.findIndex(
@@ -71,9 +76,6 @@
           currentWorksId: index
         });
       }
-    },
-    destroyed () {
-      window.removeEventListener('wheel', this.wheel, { passive: false });
     },
     computed: {
       transitionName() {
@@ -93,6 +95,7 @@
           this.$store.commit('startWheeling');
 
           if (n.pixelY > 0) {
+            // go to the next page.
             if (this.$store.state.currentWorksId < works.length - 1) {
               const i = this.$store.state.currentWorksId + 1;
               this.$router.push(`/works/${works[i].key}/`);
@@ -100,12 +103,37 @@
               this.$router.push(`/who-i-am/`);
             }
           } else {
+            // go to the previous page.
             if (this.$store.state.currentWorksId > 0) {
               const i = this.$store.state.currentWorksId - 1;
               this.$router.push(`/works/${works[i].key}/`);
             } else {
               this.$router.push(`/`);
             }
+          }
+        }
+      },
+      touchmove() {
+        const { works, touchMove, isSwipingY } = this.$store.state
+        if (isSwipingY === true) {
+          if (touchMove.y < -10) {
+            // go to the next page.
+            if (this.$store.state.currentWorksId < works.length - 1) {
+              const i = this.$store.state.currentWorksId + 1;
+              this.$router.push(`/works/${works[i].key}/`);
+            } else {
+              this.$router.push(`/who-i-am/`);
+            }
+            this.$store.commit('touchEnd');
+          } else if (touchMove.y > 10) {
+            // go to the previous page.
+            if (this.$store.state.currentWorksId > 0) {
+              const i = this.$store.state.currentWorksId - 1;
+              this.$router.push(`/works/${works[i].key}/`);
+            } else {
+              this.$router.push(`/`);
+            }
+            this.$store.commit('touchEnd');
           }
         }
       }

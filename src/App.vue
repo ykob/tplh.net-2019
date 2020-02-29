@@ -1,5 +1,6 @@
 <script>
   import { debounce } from 'lodash';
+  import * as THREE from 'three';
   import sleep from 'js-util/sleep'
 
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
@@ -21,6 +22,14 @@
       Preloader,
       Guide,
     },
+    data() {
+      return {
+        vTouchStart: new THREE.Vector2(),
+        vTouchMoveStart: new THREE.Vector2(),
+        vTouchMove: new THREE.Vector2(),
+        isTouchMoving: false,
+      }
+    },
     async created() {
       const { canvas, webgl } = this.$store.state;
 
@@ -36,6 +45,8 @@
       window.addEventListener('mousemove', this.mousemove);
       document.addEventListener('mouseleave', this.mouseleave);
       document.addEventListener('touchstart', this.touchstart);
+      document.addEventListener('touchmove', this.touchmove);
+      document.addEventListener('touchend', this.touchend);
 
       await sleep(500);
       this.$store.commit('showPreloader');
@@ -106,8 +117,63 @@
         mousePrev.set(0, 0);
         mouseForce.set(0, 0);
       },
-      touchstart() {
-        this.$store.commit('setEnabledTouch', true);
+      touchstart(e) {
+        const { commit } = this.$store;
+        commit('setEnabledTouch', true);
+        commit('touchStart');
+        this.vTouchStart.set(
+          e.touches[0].clientX,
+          e.touches[0].clientY
+        );
+        this.vTouchMove.set(
+          e.touches[0].clientX,
+          e.touches[0].clientY
+        );
+      },
+      touchmove(e) {
+        const { state, commit } = this.$store;
+
+        if (state.isTouchStarted === false) return;
+
+        this.vTouchMove.set(
+          e.touches[0].clientX,
+          e.touches[0].clientY
+        );
+
+        if (
+          // judge whether the swipe direction is X or Y.
+          this.isTouchMoving === true
+          && state.isSwipingX === false
+          && state.isSwipingY === false
+        ) {
+          if (Math.abs(this.vTouchMoveStart.x - this.vTouchMove.x) > 3) {
+            commit('startSwipeX');
+          } else if (Math.abs(this.vTouchMoveStart.y - this.vTouchMove.y) > 3) {
+            commit('startSwipeY');
+          }
+        } else if (
+          // Swiping
+          state.isSwipingX === true
+          || state.isSwipingY === true
+        ) {
+          commit('touchMove', {
+            x: this.vTouchMove.x - this.vTouchMoveStart.x,
+            y: this.vTouchMove.y - this.vTouchMoveStart.y
+          });
+        } else {
+          // judge whether the touch is a swipe or a single tap.
+          if (this.vTouchStart.clone().sub(this.vTouchMove).length() > 3) {
+            this.vTouchMoveStart.set(
+              e.touches[0].clientX,
+              e.touches[0].clientY
+            );
+            this.isTouchMoving = true;
+          }
+        }
+      },
+      touchend() {
+        this.isTouchMoving = false;
+        this.$store.commit('touchEnd');
       }
     },
   }

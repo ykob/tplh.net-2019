@@ -56,6 +56,7 @@
     },
     async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
+      window.addEventListener('touchmove', this.touchmove);
       this.scrollY = 0;
       this.anchorY = 0;
       this.$store.commit('setScrollProgress', 0);
@@ -79,6 +80,7 @@
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
+      window.removeEventListener('touchmove', this.touchmove);
       this.isRendering = false;
     },
     methods: {
@@ -108,6 +110,23 @@
             0,
             this.clientHeight - this.$store.state.resolution.y
           );
+        }
+      },
+      touchmove() {
+        const { works, touchMove, isSwipingY } = this.$store.state
+        if (isSwipingY === true) {
+          if (this.scrollY < 1 && touchMove.y > 10) {
+            // Go to the previous page.
+            this.$router.push(`/works/${works[works.length - 1].key}/`);
+            this.$store.commit('touchEnd');
+          } else {
+            // Scroll the content of the current page.
+            this.anchorY = MathEx.clamp(
+              this.anchorY + -touchMove.y * 0.2,
+              0,
+              this.clientHeight - this.$store.state.resolution.y
+            );
+          }
         }
       },
       resize() {

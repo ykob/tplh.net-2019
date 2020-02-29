@@ -22,6 +22,7 @@
     },
     created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
+      window.addEventListener('touchmove', this.touchmove);
     },
     async mounted() {
       this.$store.commit('changeBackground', {
@@ -39,6 +40,7 @@
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
+      window.removeEventListener('touchmove', this.touchmove);
     },
     methods: {
       wheel(e) {
@@ -54,6 +56,15 @@
 
           if (n.pixelY > 0) {
             this.$router.push(`/works/${works[0].key}/`);
+          }
+        }
+      },
+      touchmove() {
+        const { works, touchMove, isSwipingY } = this.$store.state
+        if (isSwipingY === true) {
+          if (touchMove.y < -10) {
+            this.$router.push(`/works/${works[0].key}/`);
+            this.$store.commit('touchEnd');
           }
         }
       }

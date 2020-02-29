@@ -19,6 +19,7 @@ export default new Vuex.Store({
     mouse: new THREE.Vector2(),
     mousePrev: new THREE.Vector2(),
     mouseForce: new THREE.Vector2(),
+    touchMove: new THREE.Vector2(),
     webgl: new WebGL(),
     works: WORKS,
     currentWorksId: 0,
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     isWheeling: false,
     isMobile: false,
     isEnabledTouch: false,
+    isSwipingX: false,
+    isSwipingY: false,
+    isTouchMoving: false,
   },
   mutations: {
     showPreloader (state) {
@@ -99,7 +103,27 @@ export default new Vuex.Store({
     },
     setEnabledTouch (state, bool) {
       state.isEnabledTouch = bool
-    }
+    },
+    touchStart (state) {
+      state.isTouchStarted = true
+    },
+    startSwipeX (state) {
+      state.isSwipingX = true
+      state.isSwipingY = false
+    },
+    startSwipeY (state) {
+      state.isSwipingX = false
+      state.isSwipingY = true
+    },
+    touchMove (state, { x, y }) {
+      state.touchMove.set(x, y);
+    },
+    touchEnd (state) {
+      state.touchMove.set(0, 0);
+      state.isSwipingX = false
+      state.isSwipingY = false
+      state.isTouchStarted = false
+    },
   },
   actions: {
     // transit (context, opts) {
