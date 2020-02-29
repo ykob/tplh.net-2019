@@ -58,9 +58,9 @@
       .view-asc-enter-to & {
         opacity: 1;
         transform: scale(1);
-        transition-duration: 1.4s;
-        transition-delay: 0.8s;
-        transition-timing-function: $easeOutCirc;
+        transition-duration: 1.5s;
+        transition-delay: 1.5s;
+        transition-timing-function: $easeOutQuad;
         transition-property: opacity, transform;
       }
     }
@@ -102,15 +102,15 @@
         transform: translate3d(0, 0, 0);
         transition-duration: 1s;
         transition-property: transform;
-        transition-timing-function: $easeOutCirc;
+        transition-timing-function: $easeOutQuad;
         &--1 {
-          transition-delay: 1s;
+          transition-delay: .8s;
         }
         &--2 {
-          transition-delay: 1.1s;
+          transition-delay: .9s;
         }
         &--3 {
-          transition-delay: 1.2s;
+          transition-delay: 1s;
         }
       }
     }
