@@ -10,7 +10,7 @@ export default [
   {
     key: 'warpdrive',
     title: 'WarpDrive',
-    description: 'It is the Chrome Extension, a data visualization of a user\'s active history on the browser. I was responsible for one of the contents named REQUEST VIEWER. I devised how to mix 2D and 3D user interfaces here.',
+    description: 'The Chrome Extension, a data visualization of user\'s activity on a chrome browser. I was responsible for a content named REQUEST VIEWER and devised how to mix 2D and 3D user interfaces.',
     credit: 'Client : KDDI CORPORATION, NICT\nAgency : THE STRIPPERS Co.\nDeveloper : Yoichi Kobayashi',
     href: 'https://warpdrive-project.jp/',
     textWidth: 700
@@ -18,7 +18,7 @@ export default [
   {
     key: 'hassyadai',
     title: 'HASSYADAI Inc.',
-    description: 'I created a website of the temp agency in Japan made with various WebGL effects. Also I got CSSDA WOTD for the first time by making this site.',
+    description: 'The website of the temp agency in Japan made with various WebGL effects. Also, I got CSSDA WOTD for the first time by making this site.',
     credit: 'Client : HASSYADAI Inc.\nAgency : BEES/HONEY INC\nDeveloper : Yoichi Kobayashi',
     href: 'https://hassyadai.com',
     textWidth: 940
@@ -34,7 +34,7 @@ export default [
   {
     key: 'best-film-2018',
     title: 'Filmarks Best Film of 2018',
-    description: 'A special site launched at the end of the year of 2018 by Japanese film review service Filmarks.\n* This site is already closed.',
+    description: 'The special site launched at the end of the year of 2018 by Japanese film review service Filmarks.\n* This site is already closed.',
     credit: 'Client : TSUMIKI INC.\nDeveloper : Yoichi Kobayashi',
     href: 'https://thefwa.com/cases/filmarks-best-film-of-2018-p2',
     textWidth: 1720
