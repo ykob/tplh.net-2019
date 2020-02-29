@@ -24,7 +24,7 @@ export default class SkullPoints extends THREE.Points {
     const baStartY = new THREE.BufferAttribute(new Float32Array(NUM), 1);
     for (var i = 0, ul = NUM; i < ul; i++) {
       const radian = MathEx.radians(Math.random() * 360);
-      const radius = Math.random() * 4 + 1;
+      const radius = Math.random() * 5 + 1;
       baPositions.setXYZ(
         i,
         Math.cos(radian) * radius,
