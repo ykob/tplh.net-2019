@@ -34,7 +34,7 @@ export default class SkullAura extends THREE.Mesh {
         },
         hsv1: {
           type: 'v3',
-          value: new THREE.Vector3(0.15, 0.9, 1)
+          value: new THREE.Vector3()
         },
         hsv2: {
           type: 'v3',
@@ -76,6 +76,7 @@ export default class SkullAura extends THREE.Mesh {
     this.name = 'SkullAura';
     this.timeShow = 0;
     this.mouseForce = 0;
+    this.hsv1Base = new THREE.Vector3(0.15, 0.9, 1);
     this.strengthBase = 2.2;
     this.colorRangeMinBase = 0.3;
     this.isActive = false;
@@ -97,7 +98,7 @@ export default class SkullAura extends THREE.Mesh {
     if (this.isActive === false) return;
     this.rotation.copy(camera.rotation);
     this.material.uniforms.time.value += time;
-    this.mouseForce = Math.min(this.mouseForce + mouseForce.length() * 1.5, 1);
+    this.mouseForce = Math.min(this.mouseForce + mouseForce.length() * 0.5, 1);
     this.mouseForce = Math.floor((this.mouseForce + (0 - this.mouseForce) / 15) * 100) / 100;
 
     if (this.isShown === true) {
@@ -105,6 +106,11 @@ export default class SkullAura extends THREE.Mesh {
     }
     const alpha = MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0);
     this.material.uniforms.alpha.value = easeOutCirc(alpha);
+    this.material.uniforms.hsv1.value.set(
+      this.hsv1Base.x - (1 - alpha) * 0.05 - this.mouseForce * 0.05,
+      this.hsv1Base.y,
+      this.hsv1Base.z
+    );
     this.material.uniforms.strength.value = this.strengthBase + fluctuation * 0.8 + (1 - alpha) * 4.0 + this.mouseForce;
     this.material.uniforms.colorRangeMin.value = this.colorRangeMinBase + (1 - alpha) * 0.2 + this.mouseForce * 0.2;
     this.scale.set(

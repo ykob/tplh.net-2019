@@ -24,9 +24,9 @@ export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
 
   const skullAuraUniforms = skull.aura.material.uniforms;
   const skullAuraObj = {
-    hsv1h: skullAuraUniforms.hsv1.value.x,
-    hsv1s: skullAuraUniforms.hsv1.value.y,
-    hsv1v: skullAuraUniforms.hsv1.value.z,
+    hsv1h: skull.aura.hsv1Base.x,
+    hsv1s: skull.aura.hsv1Base.y,
+    hsv1v: skull.aura.hsv1Base.z,
     hsv2h: skullAuraUniforms.hsv2.value.x,
     hsv2s: skullAuraUniforms.hsv2.value.y,
     hsv2v: skullAuraUniforms.hsv2.value.z,
@@ -39,13 +39,13 @@ export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
   }
   const guiSkullAura = gui.addFolder('SkullAura');
   guiSkullAura.add(skullAuraObj, 'hsv1h', 0, 1, 0.01).onChange((response) => {
-    skull.aura.material.uniforms.hsv1.value.setX(response)
+    skull.aura.hsv1Base.setX(response)
   });
   guiSkullAura.add(skullAuraObj, 'hsv1s', 0, 1, 0.01).onChange((response) => {
-    skull.aura.material.uniforms.hsv1.value.setY(response)
+    skull.aura.hsv1Base.setY(response)
   });
   guiSkullAura.add(skullAuraObj, 'hsv1v', 0, 1, 0.01).onChange((response) => {
-    skull.aura.material.uniforms.hsv1.value.setZ(response)
+    skull.aura.hsv1Base.setZ(response)
   });
   guiSkullAura.add(skullAuraObj, 'hsv2h', 0, 1, 0.01).onChange((response) => {
     skull.aura.material.uniforms.hsv2.value.setX(response)
