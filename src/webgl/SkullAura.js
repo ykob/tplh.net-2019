@@ -98,8 +98,8 @@ export default class SkullAura extends THREE.Mesh {
     if (this.isActive === false) return;
     this.rotation.copy(camera.rotation);
     this.material.uniforms.time.value += time;
-    this.mouseForce = Math.min(this.mouseForce + mouseForce.length() * 0.5, 1);
-    this.mouseForce = Math.floor((this.mouseForce + (0 - this.mouseForce) / 15) * 100) / 100;
+    this.mouseForce = Math.min(this.mouseForce + mouseForce.length() * 0.3, 1);
+    this.mouseForce = Math.floor((this.mouseForce + (0 - this.mouseForce) / 20) * 100) / 100;
 
     if (this.isShown === true) {
       this.timeShow += time;
