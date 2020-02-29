@@ -38,13 +38,17 @@
       }
     }
     &__heading {
-      width: 140 / 1000 * 100%;
-      position: absolute;
-      top: 0;
-      left: 360 / 1360 * 100%;
       margin: 0;
+      @include fontSizeAll(12, 12, 9);
       font-weight: 400;
-      @include fontSizeAll(12, 12, 12);
+      @include l-more-than-mobile {
+        width: 140 / 1000 * 100%;
+        position: absolute;
+        top: 0;
+        left: 360 / 1360 * 100%;
+      }
+      @include l-mobile {
+      }
     }
     &__text {
     }

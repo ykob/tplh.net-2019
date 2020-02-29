@@ -35,6 +35,7 @@
       window.addEventListener('resize', debounce(this.resize, 100));
       window.addEventListener('mousemove', this.mousemove);
       document.addEventListener('mouseleave', this.mouseleave);
+      document.addEventListener('touchstart', this.touchstart);
 
       await sleep(500);
       this.$store.commit('showPreloader');
@@ -76,10 +77,16 @@
         resolution.set(document.body.clientWidth, window.innerHeight);
         canvas.width = resolution.x;
         canvas.height = resolution.y;
-        webgl.resize(resolution);
+        this.$store.commit('changeMediaQuery', resolution.x < 768);
+        webgl.resize(resolution, this.$store.state.isMobile);
       },
       mousemove(e) {
-        if (this.$store.state.isShownUI === false) return;
+        if (
+          this.$store.state.isShownUI === false
+          || this.$store.state.isEnabledTouch === true
+        ) {
+          return;
+        }
         const { resolution, mouse, mousePrev, mouseForce } = this.$store.state;
         if (mousePrev.length() !== 0) {
           mousePrev.copy(mouse);
@@ -98,6 +105,9 @@
         mouse.set(0, 0);
         mousePrev.set(0, 0);
         mouseForce.set(0, 0);
+      },
+      touchstart() {
+        this.$store.commit('setEnabledTouch', true);
       }
     },
   }
@@ -122,6 +132,7 @@
 
 <style lang="scss">
   @import '@/assets/scss/foundation/font.scss';
+
   @import '@/assets/scss/foundation/normalize.scss';
   @import '@/assets/scss/foundation/global.scss';
   @import '@/assets/scss/object/project/view-wrap.scss';

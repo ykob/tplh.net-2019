@@ -183,6 +183,9 @@
       padding-bottom: 300px;
     }
     @include l-mobile {
+      margin-right: 44px;
+      margin-left: 44px;
+      padding-bottom: 44px;
     }
     &__in {
       position: relative;

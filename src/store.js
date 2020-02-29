@@ -35,6 +35,8 @@ export default new Vuex.Store({
     isTransitionDescend: false,
     isTransitionInWorks: false,
     isWheeling: false,
+    isMobile: false,
+    isEnabledTouch: false,
   },
   mutations: {
     showPreloader (state) {
@@ -91,6 +93,12 @@ export default new Vuex.Store({
     },
     setScrollProgress (state, ratio) {
       state.scrollProgress = MathEx.clamp(ratio, 0, 1);
+    },
+    changeMediaQuery (state, bool) {
+      state.isMobile = bool;
+    },
+    setEnabledTouch (state, bool) {
+      state.isEnabledTouch = bool
     }
   },
   actions: {

@@ -52,6 +52,9 @@
       top: 270px;
       left: 180 / 1360 * 100%;
     }
+    @include l-mobile {
+      margin-bottom: 50px;
+    }
     &__items {
       display: flex;
       flex-direction: column;

@@ -260,8 +260,8 @@ export default class WebGLContent {
     renderer.render(scenePE, cameraPE);
     scenePE.remove(postEffectBloom);
   }
-  resize(resolution) {
-    camera.resize(resolution);
+  resize(resolution, isMobile) {
+    camera.resize(resolution, isMobile);
     skull.resize(resolution);
     image.resize(resolution);
     bg.resize(camera, resolution);

@@ -17,13 +17,14 @@
   .p-whoiam-heading {
     perspective: 500px;
     line-height: (70 / 60);
-    @include fontSizeAll(60, 60, 60);
+    @include fontSizeAll(60, 60, 30);
     letter-spacing: 0.15em;
     @include l-more-than-mobile {
       margin-bottom: 145px;
       margin-left: 40%;
     }
     @include l-mobile {
+      margin-bottom: 50px;
     }
     &__in {
       display: block;

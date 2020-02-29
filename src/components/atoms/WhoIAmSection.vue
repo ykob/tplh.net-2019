@@ -45,6 +45,9 @@
     @include l-more-than-mobile {
       width: 500 / 1360 * 100%;
     }
+    @include l-mobile {
+      margin-bottom: 50px;
+    }
     &--1 {
       @include l-more-than-mobile {
         margin-left: 50%;
@@ -66,7 +69,7 @@
     h2 {
       line-height: (30 / 18);
       margin-top: 0;
-      @include fontSizeAll(18, 18, 18);
+      @include fontSizeAll(18, 18, 12);
       @include l-more-than-mobile {
         margin-bottom: 35px;
       }

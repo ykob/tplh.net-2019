@@ -40,7 +40,8 @@
       top: 55px;
     }
     @include l-mobile {
-      top: 24px;
+      top: 22px;
+      width: 44px;
     }
     &__wrap {
       cursor: pointer;
@@ -50,7 +51,7 @@
     &__typo {
       display: block;
       overflow: hidden;
-      @include fontSizeAll(24, 24, 24);
+      @include fontSizeAll(24, 24, 20);
       &--1 {
         transform: rotate(180deg);
       }

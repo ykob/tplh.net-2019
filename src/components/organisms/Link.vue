@@ -26,6 +26,7 @@
     },
     methods: {
       enter() {
+        if (this.$store.state.isEnabledTouch === true) return;
         this.isOvered = true;
       },
       leave() {

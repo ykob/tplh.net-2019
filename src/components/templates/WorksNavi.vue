@@ -38,6 +38,7 @@
     },
     methods: {
       enter() {
+        if (this.$store.state.isEnabledTouch === true) return;
         this.isOvered = true;
       },
       leave() {
@@ -138,12 +139,15 @@
       bottom: 50px;
     }
     @include l-mobile {
+      width: 44px;
+      top: 22px;
+      bottom: 22px;
     }
     &__label {
       position: absolute;
       top: calc(50% - (1em * 5 + 0.3em * 4) / 2);
       right: calc(50% - 0.55em);
-      @include fontSizeAll(12, 12, 12);
+      @include fontSizeAll(12, 12, 9);
       line-height: 1;
       text-decoration: none;
       letter-spacing: 0.3em;
@@ -195,9 +199,14 @@
             height: 0;
           }
           &.is-next {
-            height: calc(50% - 60px);
-            &.is-overed {
-              height: calc(50% + 60px);
+            @include l-more-than-mobile {
+              height: calc(50% - 60px);
+              &.is-overed {
+                height: calc(50% + 60px);
+              }
+            }
+            @include l-mobile {
+              height: calc(50% - 40px);
             }
           }
         }
@@ -211,9 +220,14 @@
             height: calc(100% + 10px);
           }
           &.is-previous {
-            height: calc(50% - 60px);
-            &.is-overed {
-              height: calc(50% + 60px);
+            @include l-more-than-mobile {
+              height: calc(50% - 60px);
+              &.is-overed {
+                height: calc(50% + 60px);
+              }
+            }
+            @include l-mobile {
+              height: calc(50% - 40px);
             }
           }
           &.is-next {
@@ -297,7 +311,7 @@
     &__anchor-label {
       height: 20em;
       position: absolute;
-      @include fontSizeAll(12, 12, 12);
+      @include fontSizeAll(12, 12, 9);
       text-align: center;
       writing-mode: vertical-rl;
       letter-spacing: 0.15em;
@@ -305,6 +319,7 @@
         left: 25px;
       }
       @include l-mobile {
+        display: none;
       }
 
       // Interaction

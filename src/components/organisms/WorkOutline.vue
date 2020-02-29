@@ -65,12 +65,13 @@
       },
       linkWrapStyles() {
         return {
-          top: `${this.headingHeight}px`
+          top: (this.$store.state.isMobile === true) ? 0 : `${this.headingHeight}px`
         }
       }
     },
     methods: {
       enter() {
+        if (this.$store.state.isEnabledTouch === true) return;
         this.isOvered = true;
       },
       leave() {
@@ -125,6 +126,9 @@
       bottom: 50px;
     }
     @include l-mobile {
+      right: 44px;
+      left: 44px;
+      bottom: 22px;
     }
 
     // Transition
@@ -217,7 +221,7 @@
     }
     &__number {
       line-height: 1;
-      @include fontSizeAll(20, 20, 20);
+      @include fontSizeAll(20, 20, 13);
       text-transform: uppercase;
       @include l-more-than-mobile {
         margin-bottom: 20px;
@@ -246,7 +250,7 @@
       line-height: 1.2;
       margin-top: 0;
       margin-bottom: 0;
-      @include fontSizeAll(28, 28, 28);
+      @include fontSizeAll(28, 28, 18);
       letter-spacing: 0.14em;
       @include l-more-than-mobile {
         padding-bottom: 25px;
@@ -293,7 +297,7 @@
     &__credit {
       line-height: 2;
       white-space: pre-wrap;
-      @include fontSizeAll(10, 10, 10);
+      @include fontSizeAll(10, 10, 7);
       &:before {
         width: 5px;
         height: 1px;
@@ -321,23 +325,31 @@
       }
     }
     &__link-wrap {
-      position: absolute;
-      backface-visibility: hidden;
+      height: (25 / 12) * 1em;
+      @include fontSizeAll(12, 12, 9);
       @include l-more-than-mobile {
+        position: absolute;
         width: 50%;
         top: 0;
         right: 0;
       }
       @include l-mobile {
+        position: relative;
+        margin-top: 15px;
       }
     }
     &__link-line {
-      width: calc(100% - 110px);
       height: 1px;
       position: absolute;
       top: calc(25 / 12 * 0.5em);
       left: 0;
       background-color: rgba($color-text, 0.5);
+      @include l-more-than-mobile {
+        width: calc(100% - 110px);
+      }
+      @include l-mobile {
+        width: 143px;
+      }
 
       // Transition
       transform-origin: left;
@@ -369,8 +381,12 @@
       line-height: (25 / 12);
       position: absolute;
       top: 0;
-      right: 0;
-      @include fontSizeAll(12, 12, 12);
+      @include l-more-than-mobile {
+        right: 0;
+      }
+      @include l-mobile {
+        left: 163px;
+      }
 
       // Transition
       transition-property: opacity;

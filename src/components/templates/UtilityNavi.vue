@@ -33,6 +33,7 @@
     },
     methods: {
       enter() {
+        if (this.$store.state.isEnabledTouch === true) return;
         this.isOvered = true;
       },
       leave() {
@@ -70,19 +71,20 @@
 <style lang="scss">
   .p-utility-navi {
     position: absolute;
+    top: 50%;
     left: 0;
     z-index: 100;
     line-height: 1;
     letter-spacing: 0.15em;
+    @include fontSizeAll(12, 12, 9);
     text-align: right;
-    @include fontSizeAll(12, 12, 12);
     @include l-more-than-mobile {
       width: 7.5%;
-      top: 50%;
       bottom: 50px;
     }
     @include l-mobile {
-      bottom: 20px;
+      width: 44px;
+      bottom: 22px;
     }
     &__label {
       position: absolute;
@@ -90,7 +92,6 @@
       right: calc(50% - 0.55em);
       line-height: 1;
       white-space: nowrap;
-      @include fontSizeAll(12, 12, 12);
       text-decoration: none;
       letter-spacing: 0.3em;
       writing-mode: vertical-rl;
