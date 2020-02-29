@@ -87,12 +87,12 @@
         e.preventDefault();
 
         const n = normalizeWheel(e);
-        const { state } = this.$store
+        const { state, commit } = this.$store
 
         // Run at the first wheel event only.
         if (state.isWheeling === false) {
           if (Math.abs(n.pixelY) < 10) return;
-          this.$store.commit('startWheeling');
+          commit('startWheeling');
 
           if (n.pixelY > 0) {
             // go to the next page.

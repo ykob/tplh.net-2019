@@ -132,7 +132,6 @@
       },
       touchmove(e) {
         const { state, commit } = this.$store;
-        console.log(state.isTouchStarted)
 
         if (state.isTouchStarted === false) return;
 

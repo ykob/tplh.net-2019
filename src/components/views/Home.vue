@@ -47,25 +47,25 @@
         e.preventDefault();
 
         const n = normalizeWheel(e);
-        const { works, isWheeling } = this.$store.state;
+        const { state, commit } = this.$store;
 
         // Run at the first wheel event only.
-        if (isWheeling === false) {
+        if (state.isWheeling === false) {
           if (Math.abs(n.pixelY) < 10) return;
-          this.$store.commit('startWheeling');
+          commit('startWheeling');
 
           if (n.pixelY > 0) {
-            this.$router.push(`/works/${works[0].key}/`);
+            this.$router.push(`/works/${state.works[0].key}/`);
           }
         }
       },
       touchmove() {
-        const { state } = this.$store
-        
+        const { state, commit } = this.$store;
+
         if (state.isTouchMoving === true) {
           if (state.touchMove.y < -10) {
             this.$router.push(`/works/${state.works[0].key}/`);
-            this.$store.commit('touchEnd');
+            commit('touchEnd');
           }
         }
       }
