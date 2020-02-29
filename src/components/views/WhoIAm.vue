@@ -56,9 +56,11 @@
     },
     async created () {
       window.addEventListener('wheel', this.wheel, { passive: false });
+      window.addEventListener('touchstart', this.touchstart);
       window.addEventListener('touchmove', this.touchmove);
       this.scrollY = 0;
       this.anchorY = 0;
+      this.anchorYPrev = 0;
       this.$store.commit('setScrollProgress', 0);
     },
     async mounted() {
@@ -80,6 +82,7 @@
     },
     destroyed () {
       window.removeEventListener('wheel', this.wheel, { passive: false });
+      window.removeEventListener('touchstart', this.touchstart);
       window.removeEventListener('touchmove', this.touchmove);
       this.isRendering = false;
     },
@@ -112,6 +115,9 @@
           );
         }
       },
+      touchstart() {
+        this.anchorYPrev = this.anchorY;
+      },
       touchmove() {
         const { state, commit } = this.$store;
 
@@ -123,7 +129,7 @@
           } else {
             // Scroll the content of the current page.
             this.anchorY = MathEx.clamp(
-              this.anchorY + -state.touchMove.y * 0.2,
+              this.anchorYPrev - state.touchMove.y * 1.5,
               0,
               this.clientHeight - state.resolution.y
             );
