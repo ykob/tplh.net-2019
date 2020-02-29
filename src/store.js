@@ -40,6 +40,7 @@ export default new Vuex.Store({
     isEnabledTouch: false,
     isSwipingX: false,
     isSwipingY: false,
+    isTouchStarted: false,
     isTouchMoving: false,
   },
   mutations: {
@@ -104,8 +105,11 @@ export default new Vuex.Store({
     setEnabledTouch (state, bool) {
       state.isEnabledTouch = bool
     },
-    touchStart (state) {
+    startTouch (state) {
       state.isTouchStarted = true
+    },
+    startTouchMove (state) {
+      state.isTouchMoving = true
     },
     startSwipeX (state) {
       state.isSwipingX = true
@@ -123,6 +127,7 @@ export default new Vuex.Store({
       state.isSwipingX = false
       state.isSwipingY = false
       state.isTouchStarted = false
+      state.isTouchMoving = false
     },
   },
   actions: {

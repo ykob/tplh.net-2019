@@ -60,10 +60,11 @@
         }
       },
       touchmove() {
-        const { works, touchMove, isSwipingY } = this.$store.state
-        if (isSwipingY === true) {
-          if (touchMove.y < -10) {
-            this.$router.push(`/works/${works[0].key}/`);
+        const { state } = this.$store
+        
+        if (state.isTouchMoving === true) {
+          if (state.touchMove.y < -10) {
+            this.$router.push(`/works/${state.works[0].key}/`);
             this.$store.commit('touchEnd');
           }
         }

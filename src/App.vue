@@ -120,7 +120,7 @@
       touchstart(e) {
         const { commit } = this.$store;
         commit('setEnabledTouch', true);
-        commit('touchStart');
+        commit('startTouch');
         this.vTouchStart.set(
           e.touches[0].clientX,
           e.touches[0].clientY
@@ -132,6 +132,7 @@
       },
       touchmove(e) {
         const { state, commit } = this.$store;
+        console.log(state.isTouchStarted)
 
         if (state.isTouchStarted === false) return;
 
@@ -140,39 +141,24 @@
           e.touches[0].clientY
         );
 
-        if (
-          // judge whether the swipe direction is X or Y.
-          this.isTouchMoving === true
-          && state.isSwipingX === false
-          && state.isSwipingY === false
-        ) {
-          if (Math.abs(this.vTouchMoveStart.x - this.vTouchMove.x) > 3) {
-            commit('startSwipeX');
-          } else if (Math.abs(this.vTouchMoveStart.y - this.vTouchMove.y) > 3) {
-            commit('startSwipeY');
-          }
-        } else if (
-          // Swiping
-          state.isSwipingX === true
-          || state.isSwipingY === true
-        ) {
-          commit('touchMove', {
-            x: this.vTouchMove.x - this.vTouchMoveStart.x,
-            y: this.vTouchMove.y - this.vTouchMoveStart.y
-          });
-        } else {
+        if (state.isTouchMoving === false) {
           // judge whether the touch is a swipe or a single tap.
           if (this.vTouchStart.clone().sub(this.vTouchMove).length() > 3) {
             this.vTouchMoveStart.set(
               e.touches[0].clientX,
               e.touches[0].clientY
             );
-            this.isTouchMoving = true;
+            commit('startTouchMove');
           }
+        } else {
+          // judge whether the swipe direction is X or Y.
+          commit('touchMove', {
+            x: this.vTouchMove.x - this.vTouchMoveStart.x,
+            y: this.vTouchMove.y - this.vTouchMoveStart.y
+          });
         }
       },
       touchend() {
-        this.isTouchMoving = false;
         this.$store.commit('touchEnd');
       }
     },

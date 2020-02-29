@@ -96,13 +96,14 @@
 
         const n = normalizeWheel(e);
         const { works, isWheeling } = this.$store.state;
+        const { state } = this.$store;
 
         if (isWheeling === true) return;
 
         if (this.scrollY < 1 && n.pixelY < 0) {
           // Go to the previous page.
           this.$store.commit('startWheeling');
-          this.$router.push(`/works/${works[works.length - 1].key}/`);
+          this.$router.push(`/works/${state.works[works.length - 1].key}/`);
         } else {
           // Scroll the content of the current page.
           this.anchorY = MathEx.clamp(
@@ -113,16 +114,17 @@
         }
       },
       touchmove() {
-        const { works, touchMove, isSwipingY } = this.$store.state
-        if (isSwipingY === true) {
-          if (this.scrollY < 1 && touchMove.y > 10) {
+        const { state } = this.$store;
+
+        if (state.isTouchMoving === true) {
+          if (this.scrollY < 1 && state.touchMove.y > 10) {
             // Go to the previous page.
-            this.$router.push(`/works/${works[works.length - 1].key}/`);
+            this.$router.push(`/works/${state.works[state.works.length - 1].key}/`);
             this.$store.commit('touchEnd');
           } else {
             // Scroll the content of the current page.
             this.anchorY = MathEx.clamp(
-              this.anchorY + -touchMove.y * 0.2,
+              this.anchorY + -state.touchMove.y * 0.2,
               0,
               this.clientHeight - this.$store.state.resolution.y
             );

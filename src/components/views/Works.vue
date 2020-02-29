@@ -87,26 +87,26 @@
         e.preventDefault();
 
         const n = normalizeWheel(e);
-        const { works, isWheeling } = this.$store.state;
+        const { state } = this.$store
 
         // Run at the first wheel event only.
-        if (isWheeling === false) {
+        if (state.isWheeling === false) {
           if (Math.abs(n.pixelY) < 10) return;
           this.$store.commit('startWheeling');
 
           if (n.pixelY > 0) {
             // go to the next page.
-            if (this.$store.state.currentWorksId < works.length - 1) {
-              const i = this.$store.state.currentWorksId + 1;
-              this.$router.push(`/works/${works[i].key}/`);
+            if (state.currentWorksId < state.works.length - 1) {
+              const i = state.currentWorksId + 1;
+              this.$router.push(`/works/${state.works[i].key}/`);
             } else {
               this.$router.push(`/who-i-am/`);
             }
           } else {
             // go to the previous page.
-            if (this.$store.state.currentWorksId > 0) {
-              const i = this.$store.state.currentWorksId - 1;
-              this.$router.push(`/works/${works[i].key}/`);
+            if (state.currentWorksId > 0) {
+              const i = state.currentWorksId - 1;
+              this.$router.push(`/works/${state.works[i].key}/`);
             } else {
               this.$router.push(`/`);
             }
@@ -114,26 +114,27 @@
         }
       },
       touchmove() {
-        const { works, touchMove, isSwipingY } = this.$store.state
-        if (isSwipingY === true) {
-          if (touchMove.y < -10) {
+        const { state, commit } = this.$store;
+
+        if (state.isTouchMoving === true) {
+          if (state.touchMove.y < -10) {
             // go to the next page.
-            if (this.$store.state.currentWorksId < works.length - 1) {
-              const i = this.$store.state.currentWorksId + 1;
-              this.$router.push(`/works/${works[i].key}/`);
+            if (state.currentWorksId < state.works.length - 1) {
+              const i = state.currentWorksId + 1;
+              this.$router.push(`/works/${state.works[i].key}/`);
             } else {
               this.$router.push(`/who-i-am/`);
             }
-            this.$store.commit('touchEnd');
-          } else if (touchMove.y > 10) {
+            commit('touchEnd');
+          } else if (state.touchMove.y > 10) {
             // go to the previous page.
-            if (this.$store.state.currentWorksId > 0) {
-              const i = this.$store.state.currentWorksId - 1;
-              this.$router.push(`/works/${works[i].key}/`);
+            if (state.currentWorksId > 0) {
+              const i = state.currentWorksId - 1;
+              this.$router.push(`/works/${state.works[i].key}/`);
             } else {
               this.$router.push(`/`);
             }
-            this.$store.commit('touchEnd');
+            commit('touchEnd');
           }
         }
       }
