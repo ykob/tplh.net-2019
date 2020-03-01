@@ -3,7 +3,7 @@ import MathEx from 'js-util/MathEx';
 
 import PetalRotate from '@/webgl/PetalRotate';
 
-const PETAL_NUM = 24;
+const PETAL_NUM = 36;
 
 export default class PetalRotateGroup extends THREE.Group {
   constructor() {

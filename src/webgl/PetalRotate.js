@@ -15,18 +15,20 @@ export default class PetalRotate extends Petal {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
     this.name = 'PetalRotate';
-    this.durationRise = (1 - this.mass) * 20 + Math.random() * 5 + 10;
-    this.delayRise = this.durationRise * Math.random();
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;
-    this.radius = Math.random() * Math.random() * Math.random() * 18 + 7;
-    this.radian = MathEx.radians((Math.random() * 2 - 1) * 90);
+    this.radian = MathEx.radians((Math.random() * 2 - 1) * 180);
     this.timeRise = 0;
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = false;
     this.isShownFirst = false;
     this.isHidden = false;
+    
+    this.durationRise = (1 - this.mass) * 5 + Math.random() * 5 + 5;
+    this.delayRise = this.durationRise * Math.random();
+    this.radiusBase = Math.random() * Math.random() * Math.random() * 5 + 5;
+    this.radiusAdd = Math.random() * 16;
   }
   show(isShownFirst) {
     this.timeShow = 0;
@@ -45,7 +47,7 @@ export default class PetalRotate extends Petal {
     this.isHidden = true;
   }
   update(time) {
-    super.update(time);
+    super.update(time * 2);
     this.timeRise += time;
 
     // for the showing effect.
@@ -66,13 +68,14 @@ export default class PetalRotate extends Petal {
     // calculation the alpha.
     const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - this.delayShow) / DURATION_SHOW, 0.0, 1.0));
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0));
+    const alphaRize = easeOutCirc((this.timeRise - this.delayRise) / this.durationRise % 1, 0.0, 1.0);
+    const radius = this.radiusBase + this.radiusAdd * alphaRize;
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
-    const additiveRadian = MathEx.radians(Math.sin(this.timeRise * 0.4 + this.delayShow * 2) * (25 - this.radius + 10));
     this.position.set(
-      Math.sin(this.radian + additiveRadian) * this.radius,
-      ((this.timeRise + this.delayRise) / this.durationRise % 1 * 2 - 1) * 20,
-      Math.cos(this.radian + additiveRadian) * this.radius
+      Math.sin(this.radian + this.timeRise * 0.4) * radius,
+      (alphaRize * 2 - 1) * 20,
+      Math.cos(this.radian + this.timeRise * 0.4) * radius
     );
   }
 }
