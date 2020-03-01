@@ -44,8 +44,9 @@
       leave() {
         this.isOvered = false;
       },
-      getWorksUrl(i) {
-        return `/works/${this.$store.state.works[i].key}/`;
+      transit(i) {
+        const { state, dispatch } = this.$store;
+        dispatch('debounceRouterPush', `/works/${state.works[i].key}/`);
       },
       anchorEnter(i) {
         this.isOveredAnchor = i;
@@ -85,9 +86,9 @@
 
 <template lang="pug">
   .p-works-navi
-    router-link.p-works-navi__label(
-      :to = 'getWorksUrl(0)'
+    .p-works-navi__label(
       :class = 'classnames'
+      @click = 'transit(0)'
       @mouseenter.native = 'enter'
       @mouseleave.native = 'leave'
       )
@@ -112,11 +113,11 @@
     .p-works-navi__point.p-works-navi__point--lower(
       :class = 'classnames'
       )
-    router-link.p-works-navi__anchor(
+    .p-works-navi__anchor(
       v-for = 'anchor, index in $store.state.works'
-      :to = 'getWorksUrl(index)'
       :style = 'anchorStyles(index)'
       :class = 'anchorClassnames(index)'
+      @click = 'transit(index)'
       @mouseenter.native = 'anchorEnter(index)'
       @mouseleave.native = 'anchorLeave'
       )
@@ -144,6 +145,7 @@
       bottom: 22px;
     }
     &__label {
+      cursor: pointer;
       position: absolute;
       top: calc(50% - (1em * 5 + 0.3em * 4) / 2);
       right: calc(50% - 0.55em);
@@ -274,6 +276,7 @@
     &__anchor {
       width: 41px;
       height: 41px;
+      cursor: pointer;
       position: absolute;
       right: 50%;
       opacity: 0;

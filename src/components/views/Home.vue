@@ -60,11 +60,11 @@
         }
       },
       touchmove() {
-        const { state, commit } = this.$store;
+        const { state, commit, dispatch } = this.$store;
 
         if (state.isTouchMoving === true) {
           if (state.touchMove.y < -10) {
-            this.$router.push(`/works/${state.works[0].key}/`);
+            dispatch('debounceRouterPush', `/works/${state.works[0].key}/`);
             commit('touchEnd');
           }
         }

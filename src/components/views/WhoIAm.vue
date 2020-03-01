@@ -119,12 +119,12 @@
         this.anchorYPrev = this.anchorY;
       },
       touchmove() {
-        const { state, commit } = this.$store;
+        const { state, commit, dispatch } = this.$store;
 
         if (state.isTouchMoving === true) {
           if (this.scrollY < 1 && state.touchMove.y > 10) {
             // Go to the previous page.
-            this.$router.push(`/works/${state.works[state.works.length - 1].key}/`);
+            dispatch('debounceRouterPush', `/works/${state.works[state.works.length - 1].key}/`);
             commit('touchEnd');
           } else {
             // Scroll the content of the current page.

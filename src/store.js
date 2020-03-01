@@ -3,11 +3,12 @@ import Vuex from 'vuex';
 import * as THREE from 'three';
 import MathEx from 'js-util/MathEx'
 
+import router from '@/router'
 import WebGL from '@/webgl/';
 
 import WORKS from '@/const/WORKS';
 
-const INTERVAL_TO_FIRE_WHEEL = 1000;
+const INTERVAL_TO_FIRE_WHEEL = 1800;
 
 Vue.use(Vuex)
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     isLoaded: false,
     isShowView: false,
     isShownUI: false,
+    isTransition: false,
     isTransitionDescend: false,
     isTransitionInWorks: false,
     isWheeling: false,
@@ -64,6 +66,12 @@ export default new Vuex.Store({
     },
     showUI (state) {
       state.isShownUI = true;
+    },
+    startTransition (state) {
+      state.isTransition = true;
+    },
+    endTransition (state) {
+      state.isTransition = false;
     },
     transit (state, opts) {
       if (state.globalId !== opts.globalId) {
@@ -134,5 +142,13 @@ export default new Vuex.Store({
     // transit (context, opts) {
     //   context.commit('transit', opts);
     // },
+    debounceRouterPush (context, url) {
+      if (context.state.isTransition === true) return;
+      context.commit('startTransition');
+      router.push(url);
+      setTimeout(() => {
+        context.commit('endTransition');
+      }, INTERVAL_TO_FIRE_WHEEL)
+    }
   }
 })

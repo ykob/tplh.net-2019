@@ -114,25 +114,25 @@
         }
       },
       touchmove() {
-        const { state, commit } = this.$store;
+        const { state, commit, dispatch } = this.$store;
 
         if (state.isTouchMoving === true) {
           if (state.touchMove.y < -10) {
             // go to the next page.
             if (state.currentWorksId < state.works.length - 1) {
               const i = state.currentWorksId + 1;
-              this.$router.push(`/works/${state.works[i].key}/`);
+              dispatch('debounceRouterPush', `/works/${state.works[i].key}/`)
             } else {
-              this.$router.push(`/who-i-am/`);
+              dispatch('debounceRouterPush', `/who-i-am/`)
             }
             commit('touchEnd');
           } else if (state.touchMove.y > 10) {
             // go to the previous page.
             if (state.currentWorksId > 0) {
               const i = state.currentWorksId - 1;
-              this.$router.push(`/works/${state.works[i].key}/`);
+              dispatch('debounceRouterPush', `/works/${state.works[i].key}/`);
             } else {
-              this.$router.push(`/`);
+              dispatch('debounceRouterPush', `/`);
             }
             commit('touchEnd');
           }
