@@ -72,9 +72,9 @@ export default class PetalRotate extends Petal {
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
     this.position.set(
-      Math.sin(this.radian + this.timeRise * 0.4) * radius,
+      Math.sin(this.radian + this.timeRise * 1.4) * radius,
       (alphaRize * 2 - 1) * 20,
-      Math.cos(this.radian + this.timeRise * 0.4) * radius
+      Math.cos(this.radian + this.timeRise * 1.4) * radius
     );
   }
 }
