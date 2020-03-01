@@ -10,6 +10,7 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec2 vUv;
 varying mat4 vInvertMatrix;
+varying float vOpacity;
 
 #pragma glslify: inverse = require(glsl-inverse);
 
@@ -21,6 +22,7 @@ void main(void) {
   vNormal = normal;
   vUv = uv;
   vInvertMatrix = inverse(modelMatrix);
+  vOpacity = 1.0 - clamp(-mPosition.z / 10.0, 0.0, 1.0);
 
   gl_Position = projectionMatrix * viewMatrix * mPosition;
 }

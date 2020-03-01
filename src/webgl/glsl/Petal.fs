@@ -12,6 +12,7 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec2 vUv;
 varying mat4 vInvertMatrix;
+varying float vOpacity;
 
 #pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb)
 
@@ -28,7 +29,7 @@ void main() {
     0.0,
     0.01,
     (alphaShow * 2.0 - noise1) / 2.0
-    );
+    ) * vOpacity;
   float edge = 1.0 - smoothstep(
     0.09,
     0.1,

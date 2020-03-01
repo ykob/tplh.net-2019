@@ -15,8 +15,12 @@ export default class PetalRotate extends Petal {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
     this.name = 'PetalRotate';
+    this.durationRise = (1 - this.mass) * 5 + Math.random() * 8 + 4;
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;
+    this.delayRise = this.durationRise * Math.random();
+    this.radiusBase = Math.random() * Math.random() * Math.random() * 6 + 2;
+    this.radiusAdd = Math.random() * 18;
     this.radian = MathEx.radians((Math.random() * 2 - 1) * 180);
     this.timeRise = 0;
     this.timeShow = 0;
@@ -24,11 +28,6 @@ export default class PetalRotate extends Petal {
     this.isShown = false;
     this.isShownFirst = false;
     this.isHidden = false;
-    
-    this.durationRise = (1 - this.mass) * 5 + Math.random() * 5 + 5;
-    this.delayRise = this.durationRise * Math.random();
-    this.radiusBase = Math.random() * Math.random() * Math.random() * 5 + 5;
-    this.radiusAdd = Math.random() * 16;
   }
   show(isShownFirst) {
     this.timeShow = 0;
@@ -47,7 +46,7 @@ export default class PetalRotate extends Petal {
     this.isHidden = true;
   }
   update(time) {
-    super.update(time * 2);
+    super.update(time * 3);
     this.timeRise += time;
 
     // for the showing effect.
