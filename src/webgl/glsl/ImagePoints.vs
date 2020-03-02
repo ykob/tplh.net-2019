@@ -5,7 +5,9 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform float time;
-uniform float easeTransition;
+uniform float easeTransition1;
+uniform float easeTransition2;
+uniform float easeTransition3;
 uniform vec2 resolution;
 uniform vec2 imgRatio;
 uniform sampler2D noiseTex;
@@ -29,10 +31,15 @@ void main(void) {
   float noiseG = texture2D(noiseTex, updateUv * 1.4 + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, updateUv * vec2(0.99) + 0.005).b;
 
-  float height = (easeTransition - slide) * 6.0 * (slide * 0.5 + 0.5);
+  float height1 = (easeTransition1 - slide) * 6.0 * (slide * 0.5 + 0.5);
+  float height2 = (easeTransition2 - slide) * 6.0 * (slide * 0.5 + 0.5);
+  float height3 = (easeTransition3 - slide) * 6.0 * (slide * 0.5 + 0.5);
   float opacity =
-    smoothstep(0.2, 0.4, easeTransition * 2.1 - slide)
-    * (1.0 - smoothstep(0.7, 1.0, easeTransition * 2.1 - slide))
+    (
+      smoothstep(0.2, 0.4, easeTransition1 * 2.1 - slide) * (1.0 - smoothstep(0.7, 1.0, easeTransition1 * 2.1 - slide))
+      + smoothstep(0.2, 0.4, easeTransition2 * 2.1 - slide) * (1.0 - smoothstep(0.7, 1.0, easeTransition2 * 2.1 - slide))
+      + smoothstep(0.2, 0.4, easeTransition3 * 2.1 - slide) * (1.0 - smoothstep(0.7, 1.0, easeTransition3 * 2.1 - slide))
+      )
     * 0.8;
 
   // coordinate transformation
@@ -40,7 +47,7 @@ void main(void) {
   vec3 slidePosition = vec3(
     cos(radians(noiseR * 360.0 + time * 200.0)) * (2.0 + 2.0 * slide),
     sin(radians(noiseG * 360.0 + time * 200.0)) * (2.0 + 2.0 * slide),
-    height
+    height1 + height2 + height3
     );
   vec3 updatePosition = position + wavePosition + slidePosition;
   vec4 mPosition = modelMatrix * vec4(updatePosition, 1.0);

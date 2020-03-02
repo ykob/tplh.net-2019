@@ -7,7 +7,7 @@ import ImageFire from '@/webgl/ImageFire';
 import ImagePoints from '@/webgl/ImagePoints';
 
 const DURATION_RISE = 1.8;
-const DURATION_CHANGE = 1.8;
+const DURATION_CHANGE = 1.5;
 
 export default class Image extends THREE.Group {
   constructor() {
@@ -29,7 +29,9 @@ export default class Image extends THREE.Group {
     this.currentIndex = 0;
     this.changeIndex = 0;
     this.delayTranslate = 0;
-    this.delayChange = 0;
+    this.delayChange1 = 0;
+    this.delayChange2 = 0;
+    this.delayChange3 = 0;
     this.isTranslating = false;
     this.isChanging1 = false;
     this.isChanging2 = false;
@@ -45,19 +47,29 @@ export default class Image extends THREE.Group {
   start(noiseTex, imgTexes) {
     const width = 20;
     const imagePlane = new ImagePlane(width);
-    const imageFire = new ImageFire(width);
+    const imageFire1 = new ImageFire(width);
+    const imageFire2 = new ImageFire(width);
+    const imageFire3 = new ImageFire(width);
     const imagePoints = new ImagePoints(width);
 
     imagePlane.start(noiseTex, imgTexes);
-    imageFire.start(noiseTex);
+    imageFire1.start(noiseTex);
+    imageFire2.start(noiseTex);
+    imageFire3.start(noiseTex);
     imagePoints.start(noiseTex);
 
-    imageFire.renderOrder = 10;
-    imageFire.position.z = 2;
+    imageFire1.renderOrder = 10;
+    imageFire1.position.z = 2;
+    imageFire2.renderOrder = 10;
+    imageFire2.position.z = 2;
+    imageFire3.renderOrder = 10;
+    imageFire3.position.z = 2;
     imagePoints.position.z = 2;
 
     this.add(imagePlane);
-    this.add(imageFire);
+    this.add(imageFire1);
+    this.add(imageFire2);
+    this.add(imageFire3);
     this.add(imagePoints);
   }
   change(index, direction) {
@@ -66,18 +78,24 @@ export default class Image extends THREE.Group {
     if (index > 0 && this.currentIndex === 0) {
       this.easeFuncTranslate = easeOutExpo;
       this.delayTranslate = 0.8;
-      this.delayChange = 0.8;
+      this.delayChange1 = (this.changeIndex === 0) ? 0.8 : 0;
+      this.delayChange2 = (this.changeIndex === 1) ? 0.8 : 0;
+      this.delayChange3 = (this.changeIndex === 2) ? 0.8 : 0;
       this.transitionStart = direction * 24;
       this.transitionEnd = 0;
     } else if (index === 0 && this.currentIndex > 0) {
       this.easeFuncTranslate = easeInOutExpo;
       this.delayTranslate = 0;
-      this.delayChange = 0.3;
+      this.delayChange1 = (this.changeIndex === 0) ? 0.3 : 0;
+      this.delayChange2 = (this.changeIndex === 1) ? 0.3 : 0;
+      this.delayChange3 = (this.changeIndex === 2) ? 0.3 : 0;
       this.transitionStart = this.position.y;
       this.transitionEnd = direction * 24;
     } else {
       this.delayTranslate = 0;
-      this.delayChange = 0;
+      this.delayChange1 = 0;
+      this.delayChange2 = 0;
+      this.delayChange3 = 0;
       this.transitionStart = this.position.y;
       this.transitionEnd = 0;
     }
@@ -85,15 +103,21 @@ export default class Image extends THREE.Group {
       case 0:
       default:
         this.timeChange1 = 0;
+        this.timeChange2 = 0;
         this.isChanging1 = true;
+        this.isChanging2 = false;
         break;
       case 1:
         this.timeChange2 = 0;
+        this.timeChange3 = 0;
         this.isChanging2 = true;
+        this.isChanging3 = false;
         break;
       case 2:
         this.timeChange3 = 0;
+        this.timeChange1 = 0;
         this.isChanging3 = true;
+        this.isChanging1 = false;
         break;
     }
 
@@ -102,8 +126,10 @@ export default class Image extends THREE.Group {
     this.isTranslating = true;
     this.children[0].changeTex(index, this.changeIndex);
     this.children[0].update(0, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
-    this.children[1].update(0, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
-    this.children[2].update(0, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
+    this.children[1].update(0, this.easeStepChange1);
+    this.children[2].update(0, this.easeStepChange2);
+    this.children[3].update(0, this.easeStepChange3);
+    this.children[4].update(0, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
 
     this.changeIndex = (this.changeIndex >= 2)
       ? 0
@@ -116,23 +142,25 @@ export default class Image extends THREE.Group {
     }
     if (this.isChanging1 === true) {
       this.timeChange1 += time;
-      this.easeStepChange1 = easeOutQuad(MathEx.clamp((this.timeChange1 - this.delayChange) / DURATION_CHANGE, 0.0, 1.0));
     }
     if (this.isChanging2 === true) {
       this.timeChange2 += time;
-      this.easeStepChange2 = easeOutQuad(MathEx.clamp((this.timeChange2 - this.delayChange) / DURATION_CHANGE, 0.0, 1.0));
     }
     if (this.isChanging3 === true) {
       this.timeChange3 += time;
-      this.easeStepChange3 = easeOutQuad(MathEx.clamp((this.timeChange3 - this.delayChange) / DURATION_CHANGE, 0.0, 1.0));
     }
+    this.easeStepChange1 = easeOutQuad(MathEx.clamp((this.timeChange1 - this.delayChange1) / DURATION_CHANGE, 0.0, 1.0));
+    this.easeStepChange2 = easeOutQuad(MathEx.clamp((this.timeChange2 - this.delayChange2) / DURATION_CHANGE, 0.0, 1.0));
+    this.easeStepChange3 = easeOutQuad(MathEx.clamp((this.timeChange3 - this.delayChange3) / DURATION_CHANGE, 0.0, 1.0));
 
     this.position.y = this.transitionStart + this.easeStepTranslate * (this.transitionEnd - this.transitionStart);
     this.children[0].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
-    this.children[1].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
-    this.children[2].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
+    this.children[1].update(time, this.easeStepChange1);
+    this.children[2].update(time, this.easeStepChange2);
+    this.children[3].update(time, this.easeStepChange3);
+    this.children[4].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
   }
   resize(resolution) {
-    this.children[2].resize(resolution);
+    this.children[4].resize(resolution);
   }
 }

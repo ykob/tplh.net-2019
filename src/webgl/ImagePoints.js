@@ -21,7 +21,15 @@ export default class ImagePoints extends THREE.Points {
           type: 'f',
           value: 0
         },
-        easeTransition: {
+        easeTransition1: {
+          type: 'f',
+          value: 0
+        },
+        easeTransition2: {
+          type: 'f',
+          value: 0
+        },
+        easeTransition3: {
           type: 'f',
           value: 0
         },
@@ -56,9 +64,11 @@ export default class ImagePoints extends THREE.Points {
   start(noiseTex) {
     this.material.uniforms.noiseTex.value = noiseTex;
   }
-  update(time, easeStep) {
+  update(time, easeStep1, easeStep2, easeStep3) {
     this.material.uniforms.time.value += time;
-    this.material.uniforms.easeTransition.value = easeStep;
+    this.material.uniforms.easeTransition1.value = easeStep1;
+    this.material.uniforms.easeTransition2.value = easeStep2;
+    this.material.uniforms.easeTransition3.value = easeStep3;
   }
   resize(resolution) {
     this.material.uniforms.resolution.value.copy(resolution);
