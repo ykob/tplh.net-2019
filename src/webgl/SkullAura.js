@@ -42,7 +42,7 @@ export default class SkullAura extends THREE.Mesh {
         },
         strength: {
           type: 'f',
-          value: 2.2
+          value: 1.8
         },
         colorRangeMin: {
           type: 'f',
@@ -77,7 +77,7 @@ export default class SkullAura extends THREE.Mesh {
     this.timeShow = 0;
     this.mouseForce = 0;
     this.hsv1Base = new THREE.Vector3(0.15, 0.62, 1);
-    this.strengthBase = 2.2;
+    this.strengthBase = 1.8;
     this.colorRangeMinBase = 0.3;
     this.isActive = false;
     this.isShown = false;
