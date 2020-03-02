@@ -15,9 +15,12 @@ uniform float alphaShow3;
 uniform float alphaHide1;
 uniform float alphaHide2;
 uniform float alphaHide3;
-uniform float direction1;
-uniform float direction2;
-uniform float direction3;
+uniform float directionShow1;
+uniform float directionShow2;
+uniform float directionShow3;
+uniform float directionHide1;
+uniform float directionHide2;
+uniform float directionHide3;
 
 varying vec2 vUv;
 
@@ -27,19 +30,19 @@ void main() {
   // Calculate the mask of text.
   vec2 uvText1 = vec2(
     mod(vUv.x + time * 0.02, tex1MaxUvX),
-    (clamp((1.0 - vUv.y) * 5.0 - (1.0 - alphaShow1) * direction1 * CHANGE_DIST + alphaHide1 * direction1 * CHANGE_DIST, 2.0, 3.0) + (maxIndex - tex1Index - 3.0)) / maxIndex
+    (clamp((1.0 - vUv.y) * 5.0 - (1.0 - alphaShow1) * directionShow1 * CHANGE_DIST + alphaHide1 * directionHide1 * CHANGE_DIST, 2.0, 3.0) + (maxIndex - tex1Index - 3.0)) / maxIndex
     );
   float textMask1 = texture2D(tex, uvText1).r;
 
   vec2 uvText2 = vec2(
     mod(vUv.x + time * 0.02, tex2MaxUvX),
-    (clamp((1.0 - vUv.y) * 5.0 - (1.0 - alphaShow2) * direction2 * CHANGE_DIST + alphaHide2 * direction2 * CHANGE_DIST, 2.0, 3.0) + (maxIndex - tex2Index - 3.0)) / maxIndex
+    (clamp((1.0 - vUv.y) * 5.0 - (1.0 - alphaShow2) * directionShow2 * CHANGE_DIST + alphaHide2 * directionHide2 * CHANGE_DIST, 2.0, 3.0) + (maxIndex - tex2Index - 3.0)) / maxIndex
     );
   float textMask2 = texture2D(tex, uvText2).r;
 
   vec2 uvText3 = vec2(
     mod(vUv.x + time * 0.02, tex3MaxUvX),
-    (clamp((1.0 - vUv.y) * 5.0 - (1.0 - alphaShow3) * direction3 * CHANGE_DIST + alphaHide3 * direction3 * CHANGE_DIST, 2.0, 3.0) + (maxIndex - tex3Index - 3.0)) / maxIndex
+    (clamp((1.0 - vUv.y) * 5.0 - (1.0 - alphaShow3) * directionShow3 * CHANGE_DIST + alphaHide3 * directionHide3 * CHANGE_DIST, 2.0, 3.0) + (maxIndex - tex3Index - 3.0)) / maxIndex
     );
   float textMask3 = texture2D(tex, uvText3).r;
 

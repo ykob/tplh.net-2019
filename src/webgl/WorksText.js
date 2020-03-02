@@ -79,15 +79,27 @@ export default class WorksText extends THREE.Mesh {
           type: 'f',
           value: 0
         },
-        direction1: {
+        directionShow1: {
           type: 'f',
           value: 1
         },
-        direction2: {
+        directionHide1: {
           type: 'f',
           value: 1
         },
-        direction3: {
+        directionShow2: {
+          type: 'f',
+          value: 1
+        },
+        directionHide2: {
+          type: 'f',
+          value: 1
+        },
+        directionShow3: {
+          type: 'f',
+          value: 1
+        },
+        directionHide3: {
           type: 'f',
           value: 1
         }
@@ -123,7 +135,7 @@ export default class WorksText extends THREE.Mesh {
   }
   change(index, dir, prevPosFromWorks) {
     if (this.changeIndex === 0) {
-      const { tex1Index, tex1MaxUvX, tex2Index, tex2MaxUvX, direction1, direction2 } = this.material.uniforms;
+      const { tex1Index, tex1MaxUvX, tex2Index, tex2MaxUvX, directionHide1, directionShow2 } = this.material.uniforms;
       tex2Index.value = index;
       tex2MaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
       this.timeHide1 = 0;
@@ -133,17 +145,16 @@ export default class WorksText extends THREE.Mesh {
       this.isShown2 = true;
       this.isHidden2 = false;
 
-      console.log(tex1Index.value)
       if (index === 0) {
-        direction1.value = direction2.value = dir;
+        directionHide1.value = directionShow2.value = dir;
       } else if (tex1Index.value === 0) {
-        direction1.value = direction2.value = -prevPosFromWorks;
+        directionHide1.value = directionShow2.value = -prevPosFromWorks;
       } else {
         const diff = tex2Index.value - tex1Index.value;
-        direction1.value = direction2.value = diff / Math.abs(diff);
+        directionHide1.value = directionShow2.value = diff / Math.abs(diff);
       }
     } else if (this.changeIndex === 1) {
-      const { tex2Index, tex2MaxUvX, tex3Index, tex3MaxUvX, direction2, direction3 } = this.material.uniforms;
+      const { tex2Index, tex2MaxUvX, tex3Index, tex3MaxUvX, directionHide2, directionShow3 } = this.material.uniforms;
       tex3Index.value = index;
       tex3MaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
       this.timeHide2 = 0;
@@ -153,17 +164,16 @@ export default class WorksText extends THREE.Mesh {
       this.isShown3 = true;
       this.isHidden3 = false;
 
-      console.log(tex2Index.value)
       if (index === 0) {
-        direction2.value = direction3.value = dir;
+        directionHide2.value = directionShow3.value = dir;
       } else if (tex2Index.value === 0) {
-        direction2.value = direction3.value = -prevPosFromWorks;
+        directionHide2.value = directionShow3.value = -prevPosFromWorks;
       } else {
         const diff = tex3Index.value - tex2Index.value;
-        direction2.value = direction3.value = diff / Math.abs(diff);
+        directionHide2.value = directionShow3.value = diff / Math.abs(diff);
       }
     } else if (this.changeIndex === 2) {
-      const { tex3Index, tex3MaxUvX, tex1Index, tex1MaxUvX, direction3, direction1 } = this.material.uniforms;
+      const { tex3Index, tex3MaxUvX, tex1Index, tex1MaxUvX, directionHide3, directionShow1 } = this.material.uniforms;
       tex1Index.value = index;
       tex1MaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
       this.timeHide3 = 0;
@@ -173,14 +183,13 @@ export default class WorksText extends THREE.Mesh {
       this.isShown1 = true;
       this.isHidden1 = false;
 
-      console.log(tex3Index.value)
       if (index === 0) {
-        direction3.value = direction1.value = dir;
+        directionHide3.value = directionShow1.value = dir;
       } else if (tex3Index.value === 0) {
-        direction3.value = direction1.value = -prevPosFromWorks;
+        directionHide3.value = directionShow1.value = -prevPosFromWorks;
       } else {
         const diff = tex1Index.value - tex3Index.value;
-        direction3.value = direction1.value = diff / Math.abs(diff);
+        directionHide3.value = directionShow1.value = diff / Math.abs(diff);
       }
     }
 
