@@ -15,14 +15,15 @@ export default class PetalRotate extends Petal {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
     this.name = 'PetalRotate';
-    this.durationRise = (1 - this.mass) * 5 + Math.random() * 8 + 4;
+    this.durationRise = (1 - this.mass) * 5 + Math.random() * 4 + 8;
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;
     this.delayRise = this.durationRise * Math.random();
-    this.radiusBase = Math.random() * Math.random() * Math.random() * 6 + 2;
-    this.radiusAdd = Math.random() * 18;
+    this.radiusBase = Math.random() * Math.random() * 8 + 4;
+    this.radiusAdd = Math.random() * Math.random() * 48;
     this.radian = MathEx.radians((Math.random() * 2 - 1) * 180);
     this.timeRise = 0;
+    this.timeRotate = 0;
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = false;
@@ -48,6 +49,7 @@ export default class PetalRotate extends Petal {
   update(time) {
     super.update(time * 3);
     this.timeRise += time;
+    this.timeRotate += time * (1.1 - (this.radiusBase + this.radiusAdd) / 60);
 
     // for the showing effect.
     if (this.isShown === true) {
@@ -69,12 +71,12 @@ export default class PetalRotate extends Petal {
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0));
     const alphaRize = easeOutCirc((this.timeRise - this.delayRise) / this.durationRise % 1, 0.0, 1.0);
     const radius = this.radiusBase + this.radiusAdd * alphaRize;
-    this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
+    this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
     this.position.set(
-      Math.sin(this.radian + this.timeRise * 1.4) * radius,
+      Math.sin(this.radian + this.timeRotate) * radius,
       (alphaRize * 2 - 1) * 20,
-      Math.cos(this.radian + this.timeRise * 1.4) * radius
+      Math.cos(this.radian + this.timeRotate) * radius
     );
   }
 }
