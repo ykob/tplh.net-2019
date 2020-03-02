@@ -78,24 +78,24 @@ export default class Image extends THREE.Group {
     if (index > 0 && this.currentIndex === 0) {
       this.easeFuncTranslate = easeOutExpo;
       this.delayTranslate = 0.8;
-      this.delayChange1 = (this.changeIndex === 0) ? 0.8 : 0;
-      this.delayChange2 = (this.changeIndex === 1) ? 0.8 : 0;
-      this.delayChange3 = (this.changeIndex === 2) ? 0.8 : 0;
+      if (this.changeIndex === 0) this.delayChange1 = 0.6;
+      if (this.changeIndex === 1) this.delayChange2 = 0.6;
+      if (this.changeIndex === 2) this.delayChange3 = 0.6;
       this.transitionStart = direction * 24;
       this.transitionEnd = 0;
     } else if (index === 0 && this.currentIndex > 0) {
       this.easeFuncTranslate = easeInOutExpo;
       this.delayTranslate = 0;
-      this.delayChange1 = (this.changeIndex === 0) ? 0.3 : 0;
-      this.delayChange2 = (this.changeIndex === 1) ? 0.3 : 0;
-      this.delayChange3 = (this.changeIndex === 2) ? 0.3 : 0;
+      if (this.changeIndex === 0) this.delayChange1 = 0.3;
+      if (this.changeIndex === 1) this.delayChange2 = 0.3;
+      if (this.changeIndex === 2) this.delayChange3 = 0.3;
       this.transitionStart = this.position.y;
       this.transitionEnd = direction * 24;
     } else {
       this.delayTranslate = 0;
-      this.delayChange1 = 0;
-      this.delayChange2 = 0;
-      this.delayChange3 = 0;
+      if (this.changeIndex === 0) this.delayChange1 = 0;
+      if (this.changeIndex === 1) this.delayChange2 = 0;
+      if (this.changeIndex === 2) this.delayChange3 = 0;
       this.transitionStart = this.position.y;
       this.transitionEnd = 0;
     }
