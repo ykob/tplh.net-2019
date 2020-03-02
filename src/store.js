@@ -8,7 +8,7 @@ import WebGL from '@/webgl/';
 
 import WORKS from '@/const/WORKS';
 
-const INTERVAL_TO_FIRE_WHEEL = 1800;
+const INTERVAL_TO_FIRE_WHEEL = 1000;
 
 Vue.use(Vuex)
 
