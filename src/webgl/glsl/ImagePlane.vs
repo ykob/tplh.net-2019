@@ -5,14 +5,18 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform float time;
-uniform float easeTransition;
+uniform float easeTransition1;
+uniform float easeTransition2;
+uniform float easeTransition3;
 uniform vec2 imgRatio;
 uniform sampler2D noiseTex;
 
 varying vec3 vPosition;
 varying vec2 vUv;
 varying vec2 vUpdateUv;
-varying float vTime;
+varying float vTime1;
+varying float vTime2;
+varying float vTime3;
 
 void main(void) {
   vec2 updateUv = uv * imgRatio + vec2(
@@ -30,10 +34,19 @@ void main(void) {
   float noiseG = texture2D(noiseTex, updateUv + vec2(time * 0.2, 0.0)).g;
   float slide = texture2D(noiseTex, uv * vec2(0.998) + 0.001).b;
 
-  float mask = easeTransition * 2.0 - slide;
-  float maskPrev = smoothstep(0.0, 0.5, mask);
-  float maskNext = 1.0 - smoothstep(0.5, 1.0, mask);
-  float height = maskPrev * maskNext * 8.0 * (slide * 0.5 + 0.5);
+  float mask1 = easeTransition1 * 2.0 - slide;
+  float maskPrev1 = smoothstep(0.0, 0.5, mask1);
+  float maskNext1 = 1.0 - smoothstep(0.5, 1.0, mask1);
+
+  float mask2 = easeTransition2 * 2.0 - slide;
+  float maskPrev2 = smoothstep(0.0, 0.5, mask2);
+  float maskNext2 = 1.0 - smoothstep(0.5, 1.0, mask2);
+
+  float mask3 = easeTransition3 * 2.0 - slide;
+  float maskPrev3 = smoothstep(0.0, 0.5, mask3);
+  float maskNext3 = 1.0 - smoothstep(0.5, 1.0, mask3);
+
+  float height = (maskPrev1 * maskNext1 + maskPrev2 * maskNext2 + maskPrev3 * maskNext3) * 8.0 * (slide * 0.5 + 0.5);
 
   // coordinate transformation
   vec3 wavePosition = vec3(0.0, 0.0, wave);
@@ -44,7 +57,9 @@ void main(void) {
   vPosition = position;
   vUv = uv;
   vUpdateUv = updateUv;
-  vTime = easeTransition;
+  vTime1 = easeTransition1;
+  vTime2 = easeTransition2;
+  vTime3 = easeTransition3;
 
   gl_Position = projectionMatrix * viewMatrix * mPosition;
 }

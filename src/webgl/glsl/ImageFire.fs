@@ -8,7 +8,6 @@ uniform sampler2D noiseTex;
 varying vec3 vPosition;
 varying vec2 vUv;
 varying float vOpacity;
-varying float vTime;
 
 #pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb);
 
