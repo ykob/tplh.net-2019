@@ -61,7 +61,7 @@
           this.$store.state.works,
           { key: key }
         );
-        this.updateMeta(index)
+
         this.$store.commit('showWorksObjs', {
           index: index + 1,
           direction: 0
