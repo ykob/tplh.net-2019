@@ -76,7 +76,7 @@
     z-index: 100;
     line-height: 1;
     letter-spacing: 0.15em;
-    @include fontSizeAll(12, 12, 9);
+    @include fontSizeAll(12, 12, 10);
     text-align: right;
     @include l-more-than-mobile {
       width: 7.5%;

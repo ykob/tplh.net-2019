@@ -39,7 +39,7 @@
     }
     &__heading {
       margin: 0;
-      @include fontSizeAll(12, 12, 9);
+      @include fontSizeAll(12, 12, 10);
       font-weight: 400;
       @include l-more-than-mobile {
         width: 140 / 1000 * 100%;
