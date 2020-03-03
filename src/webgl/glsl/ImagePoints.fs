@@ -10,10 +10,14 @@ void main() {
 
   // Draw circle
   float radius = length(p);
-  float opacity = (1.0 - smoothstep(0.5, 1.0, radius));
+  float opacity = (1.0 - smoothstep(0.5, 1.0, radius)) * vOpacity;
 
   // Define Colors
   vec3 rgb = convertHsvToRgb(vec3(0.11, 0.4, 0.95));
 
-  gl_FragColor = vec4(rgb, opacity * vOpacity);
+  if (opacity < 0.01) {
+    discard;
+  }
+
+  gl_FragColor = vec4(rgb, opacity);
 }

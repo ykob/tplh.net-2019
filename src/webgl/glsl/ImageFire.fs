@@ -21,6 +21,11 @@ void main() {
   float noiseG = texture2D(noiseTex, updateUv + vec2(time * 0.2, 0.0)).g;
 
   vec3 rgb = convertHsvToRgb(vec3(0.1, 0.5, 0.75));
+  float opacity = vOpacity * smoothstep(0.4, 0.6, noiseR);
 
-  gl_FragColor = vec4(rgb, vOpacity * smoothstep(0.4, 0.6, noiseR));
+  if (opacity < 0.01) {
+    discard;
+  }
+
+  gl_FragColor = vec4(rgb, opacity);
 }
