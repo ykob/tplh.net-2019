@@ -9,13 +9,7 @@
   export default {
     name: 'Works',
     metaInfo: {
-      title: 'Works / ',
-      meta: [
-        {
-          name: 'description',
-          content: 'it is works page.'
-        }
-      ]
+      title: 'Works / '
     },
     components: {
       WorkOutline
@@ -67,6 +61,7 @@
           this.$store.state.works,
           { key: key }
         );
+        this.updateMeta(index)
         this.$store.commit('showWorksObjs', {
           index: index + 1,
           direction: 0

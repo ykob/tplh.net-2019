@@ -12,13 +12,7 @@
   export default {
     name: 'WhoIAm',
     metaInfo: {
-      title: 'Who I am / ',
-      meta: [
-        {
-          name: 'description',
-          content: 'it is about page.'
-        }
-      ]
+      title: 'Who I am / '
     },
     components: {
       WhoIAmSection,

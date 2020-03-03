@@ -7,12 +7,7 @@
   export default {
     name: 'Home',
     metaInfo: {
-      meta: [
-        {
-          name: 'description',
-          content: 'I am a Front-End & Creative Developer in Japan.'
-        }
-      ]
+      title: ''
     },
     beforeRouteEnter(to, from, next) {
       store.commit('transit', {

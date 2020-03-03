@@ -13,7 +13,13 @@
     name: 'App',
     metaInfo: {
       title: '',
-      titleTemplate: '%sYoichi Kobayashi / tplh.net',
+      titleTemplate: '%sYoichi Kobayashi',
+      meta: [
+        {
+          name: 'description',
+          content: 'I\'m a Web Developer.Just love World-Wide-Web.'
+        }
+      ]
     },
     components: {
       GlobalTitle,
