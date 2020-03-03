@@ -7,7 +7,7 @@ import ImageFire from '@/webgl/ImageFire';
 import ImagePoints from '@/webgl/ImagePoints';
 
 const DURATION_RISE = 1.8;
-const DURATION_CHANGE = 1.5;
+const DURATION_CHANGE = 1.8;
 
 export default class Image extends THREE.Group {
   constructor() {
@@ -65,6 +65,7 @@ export default class Image extends THREE.Group {
     imageFire2.position.z = 2;
     imageFire3.renderOrder = 10;
     imageFire3.position.z = 2;
+    imagePoints.renderOrder = 10;
     imagePoints.position.z = 2;
 
     this.add(imagePlane);
