@@ -1,6 +1,6 @@
 import * as dat from 'dat.gui';
 
-export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
+export default function(skull, petalRotate, petalHsv1, petalHsv2, petalHsv3) {
   const gui = new dat.GUI();
   const elm = document.body.querySelector('.dg.ac');
   elm.style.zIndex = 100000;
@@ -76,6 +76,7 @@ export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
   });
 
   const petalObj = {
+    hide: petalRotate.visible,
     hsv1h: petalHsv1.x,
     hsv1s: petalHsv1.y,
     hsv1v: petalHsv1.z,
@@ -87,6 +88,9 @@ export default function(skull, petalHsv1, petalHsv2, petalHsv3) {
     hsv_dissolve_v: petalHsv3.z,
   }
   const guiPetal = gui.addFolder('Petal');
+  guiPetal.add(petalObj, 'hide').onChange((response) => {
+    petalRotate.visible = response
+  });
   guiPetal.add(petalObj, 'hsv1h', 0, 1, 0.01).onChange((response) => {
     petalHsv1.setX(response)
   });
