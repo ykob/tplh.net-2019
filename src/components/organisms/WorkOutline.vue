@@ -302,7 +302,7 @@
     }
     &__link-wrap {
       height: (25 / 12) * 1em;
-      @include fontSizeAll(12, 12, 10);
+      @include fontSizeAll(12, 12, 9);
       @include l-more-than-mobile {
         position: absolute;
         width: 50%;

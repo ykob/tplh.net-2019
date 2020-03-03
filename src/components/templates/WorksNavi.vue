@@ -151,7 +151,7 @@
       position: absolute;
       top: calc(50% - (1em * 5 + 0.3em * 4) / 2);
       right: calc(50% - 0.55em);
-      @include fontSizeAll(12, 12, 10);
+      @include fontSizeAll(12, 12, 9);
       line-height: 1;
       text-decoration: none;
       letter-spacing: 0.3em;
@@ -332,7 +332,7 @@
     &__anchor-label {
       height: 20em;
       position: absolute;
-      @include fontSizeAll(12, 12, 10);
+      @include fontSizeAll(12, 12, 9);
       text-align: center;
       writing-mode: vertical-rl;
       letter-spacing: 0.15em;
