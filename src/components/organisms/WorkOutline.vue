@@ -162,34 +162,6 @@
       }
       @include l-mobile {
       }
-
-      // Transition
-      transition-property: transform;
-      transform-origin: center left;
-      .show-enter &,
-      .view-asc-leave-to &,
-      .show-asc-leave-to & {
-        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.5, 10deg);
-      }
-      .show-asc-enter &,
-      .view-leave-to &,
-      .show-leave-to & {
-        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.5, -10deg);
-      }
-      .show-enter-to &,
-      .show-asc-enter-to & {
-        transition-duration: $baseDurationShow + $delayStepShow * 3;
-        transition-delay: $baseDelayShow;
-        transition-timing-function: $easeOutQuad;
-      }
-      .view-leave-to &,
-      .view-asc-leave-to &,
-      .show-leave-to &,
-      .show-asc-leave-to & {
-        transform-origin: top;
-        transition-duration: .72s;
-        transition-timing-function: $easeInQuad;
-      }
     }
     &__elm {
       // Transition
@@ -201,12 +173,12 @@
       .show-enter &,
       .view-asc-leave-to &,
       .show-asc-leave-to & {
-        transform: translate3d(0, 100px, 0);
+        transform: translate3d(0, 100px, 30px) rotate3d(1, 0, 0.5, 10deg);
       }
       .show-asc-enter &,
       .view-leave-to &,
       .show-leave-to & {
-        transform: translate3d(0, -100px, 0);
+        transform: translate3d(0, -100px, 30px) rotate3d(1, 0, 0.5, -10deg);
       }
       .show-enter-to &,
       .show-asc-enter-to & {
