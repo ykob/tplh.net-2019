@@ -10,7 +10,7 @@
     "build:dev": "vue-cli-service build --mode development"
   },
   "dependencies": {
-    "core-js": "^2.6.11",
+    "core-js": "^3.6.4",
     "dat.gui": "^0.7.6",
     "easing-js": "git://github.com/danro/easing-js.git",
     "glsl-inverse": "^1.0.0",
@@ -20,23 +20,23 @@
     "js-util": "git://github.com/ykob/js-util.git",
     "lodash": "^4.17.15",
     "normalize-wheel": "^1.0.1",
-    "three": "^0.109.0",
+    "three": "^0.114.0",
     "ua-parser-js": "^0.7.21",
-    "vue": "^2.6.10",
-    "vue-meta": "^2.3.1",
-    "vue-router": "^3.0.3",
+    "vue": "^2.6.11",
+    "vue-meta": "^2.3.3",
+    "vue-router": "^3.1.6",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.12.1",
-    "@vue/cli-service": "^3.12.1",
+    "@vue/cli-plugin-babel": "^4.2.3",
+    "@vue/cli-service": "^4.2.3",
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
-    "node-sass": "^4.13.0",
-    "raw-loader": "^3.1.0",
-    "sass-loader": "^7.1.0",
+    "node-sass": "^4.13.1",
+    "raw-loader": "^4.0.0",
+    "sass-loader": "^8.0.2",
     "vue-cli-plugin-pug": "^1.0.7",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.11"
   },
   "postcss": {
     "plugins": {
