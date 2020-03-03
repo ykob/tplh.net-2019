@@ -21,7 +21,7 @@
     position: absolute;
     top: calc(50% - 1em);
     left: calc(50% - 0.5em);
-    @include fontSizeAll(24, 24, 24);
+    @include fontSizeAll(24, 24, 14);
     text-align: center;
     &__typo {
       display: block;

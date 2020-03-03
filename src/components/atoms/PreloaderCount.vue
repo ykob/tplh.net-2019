@@ -38,12 +38,19 @@
 
 <style lang="scss">
   .preloader-counter {
-    width: 112px;
     height: 1.5em;
     position: absolute;
     top: calc(50% - 0.75em);
-    left: calc(50% - 56px);
     overflow: hidden;
+    @include fontSizeAll(16, 16, 10);
+    @include l-more-than-mobile {
+      width: 112px;
+      left: calc(50% - 56px);
+    }
+    @include l-mobile {
+      width: 68px;
+      left: calc(50% - 34px);
+    }
     &__col {
       display: flex;
       flex-direction: column;
@@ -69,7 +76,6 @@
       justify-content: center;
       align-items: center;
       line-height: 1;
-      @include fontSizeAll(16, 16, 16);
     }
 
     //

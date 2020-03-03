@@ -48,20 +48,35 @@
 
 <style lang="scss">
   .preloader-progress {
-    width: 252px;
-    height: 252px;
     position: absolute;
-    top: calc(50% - 126px);
-    left: calc(50% - 126px);
-
-    svg {
+    @include l-more-than-mobile {
       width: 252px;
       height: 252px;
+      top: calc(50% - 126px);
+      left: calc(50% - 126px);
+    }
+    @include l-mobile {
+      width: 150px;
+      height: 150px;
+      top: calc(50% - 75px);
+      left: calc(50% - 75px);
+    }
+
+    svg {
       display: block;
+      backface-visibility: hidden;
       animation-name: rotate;
       animation-duration: 20s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
+      @include l-more-than-mobile {
+        width: 252px;
+        height: 252px;
+      }
+      @include l-mobile {
+        width: 150px;
+        height: 150px;
+      }
     }
     .mask-rotate-group {
       transform: rotate(34deg);
