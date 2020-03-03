@@ -116,6 +116,10 @@
 </template>
 
 <style lang="scss">
+  $baseDelayShow: 1.1s;
+  $baseDurationShow: .8s;
+  $delayStepShow: 0.07s;
+
   .p-work-outline {
     perspective: 500px;
     position: absolute;
@@ -174,8 +178,8 @@
       }
       .show-enter-to &,
       .show-asc-enter-to & {
-        transition-duration: 1.3s;
-        transition-delay: 0.8s;
+        transition-duration: $baseDurationShow + $delayStepShow * 3;
+        transition-delay: $baseDelayShow;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
@@ -207,7 +211,7 @@
       .show-enter-to &,
       .show-asc-enter-to & {
         opacity: 1;
-        transition-duration: 1s;
+        transition-duration: $baseDurationShow;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
@@ -232,10 +236,10 @@
 
       // Transition
       .show-enter-to & {
-        transition-delay: .8s;
+        transition-delay: $baseDelayShow + $delayStepShow * 0;
       }
       .show-asc-enter-to & {
-        transition-delay: 1.1s;
+        transition-delay: $baseDelayShow + $delayStepShow * 3;
       }
       .view-leave-to &,
       .show-leave-to & {
@@ -261,10 +265,10 @@
 
       // Transition
       .show-enter-to & {
-        transition-delay: 0.9s;
+        transition-delay: $baseDelayShow + $delayStepShow * 1;
       }
       .show-asc-enter-to & {
-        transition-delay: 1s;
+        transition-delay: $baseDelayShow + $delayStepShow * 2;
       }
       .view-leave-to &,
       .show-leave-to & {
@@ -280,10 +284,10 @@
 
       // Transition
       .show-enter-to & {
-        transition-delay: 1s;
+        transition-delay: $baseDelayShow + $delayStepShow * 2;
       }
       .show-asc-enter-to & {
-        transition-delay: 0.9s;
+        transition-delay: $baseDelayShow + $delayStepShow * 1;
       }
       .view-leave-to &,
       .show-leave-to & {
@@ -310,10 +314,10 @@
 
       // Transition
       .show-enter-to & {
-        transition-delay: 1.1s;
+        transition-delay: $baseDelayShow + $delayStepShow * 3;
       }
       .show-asc-enter-to & {
-        transition-delay: .8s;
+        transition-delay: $baseDelayShow + $delayStepShow * 0;
       }
       .view-leave-to &,
       .show-leave-to & {
@@ -358,17 +362,20 @@
       transition-timing-function: $easeOutCirc;
       .show-enter &,
       .show-asc-enter & {
+        opacity: 0;
         transform: scaleX(0);
       }
       .show-enter-to &,
       .show-asc-enter-to & {
+        opacity: 1;
         transform: scaleX(1);
-        transition-delay: 1.6s;
+        transition-delay: $baseDelayShow + 0.4s;
       }
       .view-leave-to &,
       .view-asc-leave-to &,
       .show-leave-to &,
       .show-asc-leave-to & {
+        opacity: 0;
         transform: scaleX(0);
         transform-origin: right;
         transition-delay: 0s;
@@ -398,7 +405,7 @@
       .show-asc-enter-to & {
         opacity: 1;
         transition-duration: 1s;
-        transition-delay: 1.8s;
+        transition-delay: $baseDelayShow + 0.5s;
         transition-timing-function: $easeOutQuad;
       }
       .view-leave-to &,
