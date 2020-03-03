@@ -128,7 +128,6 @@ export default class WorksText extends THREE.Mesh {
     this.isHidden1 = false;
     this.isHidden2 = false;
     this.isHidden3 = false;
-    this.position.z = -0.1;
     this.renderOrder = 10;
   }
   start(tex) {
