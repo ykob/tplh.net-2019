@@ -15,7 +15,7 @@
       WorkOutline
     },
     beforeRouteEnter(to, from, next) {
-      const index = _.findIndex(
+      const index = findIndex(
         store.state.works,
         { key: to.params.key }
       );
@@ -32,7 +32,7 @@
       window.addEventListener('touchmove', this.touchmove);
     },
     async mounted() {
-      const index = _.findIndex(
+      const index = findIndex(
         this.$store.state.works,
         { key: this.$route.params.key }
       );
@@ -57,7 +57,7 @@
     },
     watch: {
       '$route.params.key': function(key) {
-        const index = _.findIndex(
+        const index = findIndex(
           this.$store.state.works,
           { key: key }
         );
