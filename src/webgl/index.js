@@ -3,21 +3,6 @@ import sleep from 'js-util/sleep';
 
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
 import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
-import Camera from '@/webgl/Camera';
-import SkullAuraCamera from '@/webgl/SkullAuraCamera';
-import Skull from '@/webgl/Skull';
-import Title from '@/webgl/Title';
-import PetalFallGroup from '@/webgl/PetalFallGroup';
-import PetalRotateGroup from '@/webgl/PetalRotateGroup';
-import Image from '@/webgl/Image';
-import WorksText from '@/webgl/WorksText';
-import WhoIamText from '@/webgl/WhoIamText';
-import Background from '@/webgl/Background';
-import Intersector from '@/webgl/Intersector';
-import PostEffectBright from '@/webgl/PostEffectBright';
-import PostEffectBlur from '@/webgl/PostEffectBlur';
-import PostEffectBloom from '@/webgl/PostEffectBloom';
-
 import checkWebpFeature from '@/utils/checkWebpFeature';
 import initDatGui from '@/utils/initDatGui';
 
@@ -28,12 +13,10 @@ import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 //
 let renderer;
 const scene = new THREE.Scene();
-const camera = new Camera();
 const clock = new THREE.Clock({
   autoStart: false
 });
 const sceneAura = new THREE.Scene();
-const skullAuraCamera = new SkullAuraCamera();
 const raycaster = new THREE.Raycaster();
 
 // For the post effect.
@@ -42,25 +25,6 @@ const renderTarget2 = new THREE.WebGLRenderTarget();
 const renderTarget3 = new THREE.WebGLRenderTarget();
 const scenePE = new THREE.Scene();
 const cameraPE = new THREE.OrthographicCamera(-1, 1, 1, -1, 1, 2);
-
-// ==========
-// Define unique variables
-//
-const skull = new Skull();
-const title = new Title();
-const petalRotateGroup = new PetalRotateGroup();
-const petalFallGroup = new PetalFallGroup();
-const image = new Image();
-const worksText = new WorksText();
-const whoiamText = new WhoIamText();
-const bg = new Background();
-const intersector = new Intersector();
-
-// For the post effect.
-const postEffectBright = new PostEffectBright();
-const postEffectBlurX = new PostEffectBlur();
-const postEffectBlurY = new PostEffectBlur();
-const postEffectBloom = new PostEffectBloom();
 
 const petalHsv1 = new THREE.Vector3(0.09, 0.7, 0.35);
 const petalHsv2 = new THREE.Vector3(0.09, 0.46, 0.1);
@@ -71,6 +35,21 @@ const petalHsv3 = new THREE.Vector3(0.09, 0.72, 0.18);
 //
 export default class WebGLContent {
   constructor() {
+    this.camera;
+    this.skullAuraCamera;
+    this.skull;
+    this.title;
+    this.petalRotateGroup;
+    this.petalFallGroup;
+    this.image;
+    this.worksText;
+    this.whoiamText;
+    this.bg;
+    this.intersector;
+    this.postEffectBright;
+    this.postEffectBlurX;
+    this.postEffectBlurY;
+    this.postEffectBloom;
   }
   async start(canvas, store) {
     // Check whether the webp format is enabled.
@@ -83,6 +62,53 @@ export default class WebGLContent {
         webpExe = 'jpg';
       });
 
+    // import modules
+    await Promise.all([
+      import('@/webgl/Camera').then(module => {
+        this.camera = new module.default();
+      }),
+      import('@/webgl/SkullAuraCamera').then(module => {
+        this.skullAuraCamera = new module.default();
+      }),
+      import('@/webgl/Skull').then(module => {
+        this.skull = new module.default();
+      }),
+      import('@/webgl/Title').then(module => {
+        this.title = new module.default();
+      }),
+      import('@/webgl/PetalFallGroup').then(module => {
+        this.petalFallGroup = new module.default();
+      }),
+      import('@/webgl/PetalRotateGroup').then(module => {
+        this.petalRotateGroup = new module.default();
+      }),
+      import('@/webgl/Image').then(module => {
+        this.image = new module.default();
+      }),
+      import('@/webgl/WorksText').then(module => {
+        this.worksText = new module.default();
+      }),
+      import('@/webgl/WhoIamText').then(module => {
+        this.whoiamText = new module.default();
+      }),
+      import('@/webgl/Background').then(module => {
+        this.bg = new module.default();
+      }),
+      import('@/webgl/Intersector').then(module => {
+        this.intersector = new module.default();
+      }),
+      import('@/webgl/PostEffectBright').then(module => {
+        this.postEffectBright = new module.default();
+      }),
+      import('@/webgl/PostEffectBlur').then(module => {
+        this.postEffectBlurX = new module.default();
+        this.postEffectBlurY = new module.default();
+      }),
+      import('@/webgl/PostEffectBloom').then(module => {
+        this.postEffectBloom = new module.default();
+      }),
+    ])
+
     // Initialize the WebGL renderer.
     renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -93,10 +119,10 @@ export default class WebGLContent {
     renderer.setClearColor(0x1b191c, 0.0);
 
     // For the Post Effect.
-    postEffectBright.start(renderTarget1.texture);
-    postEffectBlurX.start(renderTarget2.texture, 1, 0);
-    postEffectBlurY.start(renderTarget3.texture, 0, 1);
-    postEffectBloom.start(renderTarget1.texture, renderTarget2.texture);
+    this.postEffectBright.start(renderTarget1.texture);
+    this.postEffectBlurX.start(renderTarget2.texture, 1, 0);
+    this.postEffectBlurY.start(renderTarget3.texture, 0, 1);
+    this.postEffectBloom.start(renderTarget1.texture, renderTarget2.texture);
 
     // Loading all assets for WebGL.
     const updateProgressAnchor = (result) => {
@@ -150,31 +176,37 @@ export default class WebGLContent {
       worksTextTex.wrapT = THREE.RepeatWrapping;
 
       // Add the webgl objects to the scene.
-      scene.add(skull);
-      scene.add(title);
-      scene.add(petalFallGroup);
-      scene.add(petalRotateGroup);
-      scene.add(image);
-      scene.add(worksText);
-      scene.add(whoiamText);
-      scene.add(bg);
-      scene.add(intersector);
+      scene.add(this.skull);
+      scene.add(this.title);
+      scene.add(this.petalFallGroup);
+      scene.add(this.petalRotateGroup);
+      scene.add(this.image);
+      scene.add(this.worksText);
+      scene.add(this.whoiamText);
+      scene.add(this.bg);
+      scene.add(this.intersector);
 
       // Start all updating.
-      camera.start();
-      skullAuraCamera.start();
-      skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
-      title.start(titleTex, noiseTex);
-      petalFallGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
-      petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
-      image.start(noiseBurnTex, imgTexes);
-      worksText.start(worksTextTex);
-      whoiamText.start(whoiamTextTex);
-      bg.start(noiseTex);
+      this.camera.start();
+      this.skullAuraCamera.start();
+      this.skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
+      this.title.start(titleTex, noiseTex);
+      this.petalFallGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
+      this.petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
+      this.image.start(noiseBurnTex, imgTexes);
+      this.worksText.start(worksTextTex);
+      this.whoiamText.start(whoiamTextTex);
+      this.bg.start(noiseTex);
 
       // show the dat.gui.
       if (process.env.VUE_APP_MODE === 'development') {
-        initDatGui(skull, petalRotateGroup, petalHsv1, petalHsv2, petalHsv3);
+        initDatGui(
+          this.skull,
+          this.petalRotateGroup,
+          petalHsv1,
+          petalHsv2,
+          petalHsv3
+        );
       }
     });
   }
@@ -185,30 +217,30 @@ export default class WebGLContent {
     clock.stop();
   }
   changeBackground (isHome, hasDelay) {
-    bg.change(isHome, hasDelay);
+    this.bg.change(isHome, hasDelay);
   }
   showHomeObjs(bool) {
     if (bool === true) {
-      skull.show();
-      title.show();
-      petalRotateGroup.show();
+      this.skull.show();
+      this.title.show();
+      this.petalRotateGroup.show();
     } else {
-      skull.hide();
-      title.hide();
-      petalRotateGroup.hide();
+      this.skull.hide();
+      this.title.hide();
+      this.petalRotateGroup.hide();
     }
   }
   showWorksObjs(index, direction, prevPosFromWorks) {
-    image.change(index, direction + prevPosFromWorks);
-    worksText.change(index, direction, prevPosFromWorks);
+    this.image.change(index, direction + prevPosFromWorks);
+    this.worksText.change(index, direction, prevPosFromWorks);
   }
   showWhoIAmObjs(bool) {
     if (bool === true) {
-      petalFallGroup.show();
-      whoiamText.show();
+      this.petalFallGroup.show();
+      this.whoiamText.show();
     } else {
-      petalFallGroup.hide();
-      whoiamText.hide();
+      this.petalFallGroup.hide();
+      this.whoiamText.hide();
     }
   }
   update({ mouse, mouseForce, scrollProgress }) {
@@ -218,61 +250,61 @@ export default class WebGLContent {
     // Calculate msec for this frame.
 
     // Update Camera.
-    camera.update(time);
-    skullAuraCamera.update(camera);
+    this.camera.update(time);
+    this.skullAuraCamera.update(this.camera);
 
     // Raycast
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects([intersector]);
+    raycaster.setFromCamera(mouse, this.camera);
+    const intersects = raycaster.intersectObjects([this.intersector]);
     if (intersects.length > 0) {
-      skull.lookMouse(intersects[0].point)
+      this.skull.lookMouse(intersects[0].point)
     }
 
     // Update each objects.
-    skull.update(time, renderer, camera, sceneAura, skullAuraCamera, mouseForce);
-    petalFallGroup.update(time, scrollProgress);
-    petalRotateGroup.update(time);
-    title.update(time);
-    image.update(time);
-    worksText.update(time);
-    whoiamText.update(time, scrollProgress);
-    bg.update(time);
+    this.skull.update(time, renderer, this.camera, sceneAura, this.skullAuraCamera, mouseForce);
+    this.petalFallGroup.update(time, scrollProgress);
+    this.petalRotateGroup.update(time);
+    this.title.update(time);
+    this.image.update(time);
+    this.worksText.update(time);
+    this.whoiamText.update(time, scrollProgress);
+    this.bg.update(time);
 
     // Render the main scene to frame buffer.
     renderer.setRenderTarget(renderTarget1);
-    renderer.render(scene, camera);
+    renderer.render(scene, this.camera);
 
     // // Render the post effect.
-    scenePE.add(postEffectBright);
+    scenePE.add(this.postEffectBright);
     renderer.setRenderTarget(renderTarget2);
     renderer.render(scenePE, cameraPE);
-    scenePE.remove(postEffectBright);
-    scenePE.add(postEffectBlurX);
+    scenePE.remove(this.postEffectBright);
+    scenePE.add(this.postEffectBlurX);
     renderer.setRenderTarget(renderTarget3);
     renderer.render(scenePE, cameraPE);
-    scenePE.remove(postEffectBlurX);
-    scenePE.add(postEffectBlurY);
+    scenePE.remove(this.postEffectBlurX);
+    scenePE.add(this.postEffectBlurY);
     renderer.setRenderTarget(renderTarget2);
     renderer.render(scenePE, cameraPE);
-    scenePE.remove(postEffectBlurY);
-    scenePE.add(postEffectBloom);
+    scenePE.remove(this.postEffectBlurY);
+    scenePE.add(this.postEffectBloom);
     renderer.setRenderTarget(null);
     renderer.render(scenePE, cameraPE);
-    scenePE.remove(postEffectBloom);
+    scenePE.remove(this.postEffectBloom);
   }
   resize(resolution, isMobile) {
-    camera.resize(resolution, isMobile);
-    skull.resize(resolution);
-    image.resize(resolution);
-    bg.resize(camera, resolution);
-    intersector.resize(camera, resolution);
+    this.camera.resize(resolution, isMobile);
+    this.skull.resize(resolution);
+    this.image.resize(resolution);
+    this.bg.resize(this.camera, resolution);
+    this.intersector.resize(this.camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
 
     // For the Post Effect.
     renderTarget1.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     renderTarget2.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     renderTarget3.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
-    postEffectBlurY.resize(resolution.x / 3, resolution.y / 3);
-    postEffectBlurX.resize(resolution.x / 3, resolution.y / 3);
+    this.postEffectBlurY.resize(resolution.x / 3, resolution.y / 3);
+    this.postEffectBlurX.resize(resolution.x / 3, resolution.y / 3);
   }
 }

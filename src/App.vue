@@ -37,10 +37,10 @@
       }
     },
     async created() {
-      const { canvas, webgl } = this.$store.state;
+      const { state, commit, dispatch } = this.$store;
 
-      document.body.append(canvas);
-      canvas.style = `
+      document.body.append(state.canvas);
+      state.canvas.style = `
         position: absolute;
         top: 0;
         left: 0;
@@ -57,7 +57,8 @@
       await sleep(500);
       this.$store.commit('showPreloader');
       this.update();
-      webgl.start(canvas, this.$store);
+      await dispatch('initWebGL');
+      state.webgl.start(state.canvas, this.$store);
     },
     computed: {
       transitionName() {
@@ -175,12 +176,13 @@
     GlobalTitle
     UtilityNavi
     WorksNavi
-    transition(
-      :name = 'transitionName'
-      appear
-      v-if = '$store.state.isShowView === true'
-      )
-      router-view
+    main
+      transition(
+        :name = 'transitionName'
+        appear
+        v-if = '$store.state.isShowView === true'
+        )
+        router-view
     Preloader
     Guide(
       v-if = 'false'

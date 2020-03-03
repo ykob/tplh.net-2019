@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import MathEx from 'js-util/MathEx'
 
 import router from '@/router'
-import WebGL from '@/webgl/';
 
 import WORKS from '@/const/WORKS';
 
@@ -21,7 +20,7 @@ export default new Vuex.Store({
     mousePrev: new THREE.Vector2(),
     mouseForce: new THREE.Vector2(),
     touchMove: new THREE.Vector2(),
-    webgl: new WebGL(),
+    webgl: null,
     works: WORKS,
     currentWorksId: 0,
     positionFromWorks: -2,
@@ -46,6 +45,9 @@ export default new Vuex.Store({
     isTouchMoving: false,
   },
   mutations: {
+    initWebGL (state, webgl) {
+      state.webgl = webgl;
+    },
     showPreloader (state) {
       state.isShownPreloader = true;
     },
@@ -142,6 +144,12 @@ export default new Vuex.Store({
     // transit (context, opts) {
     //   context.commit('transit', opts);
     // },
+    async initWebGL (context) {
+      await import('@/webgl/').then((module) => {
+        const webgl = new module.default();
+        context.commit('initWebGL', webgl);
+      });
+    },
     debounceRouterPush (context, url) {
       if (context.state.isTransition === true) return;
       context.commit('startTransition');
