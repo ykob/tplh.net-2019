@@ -58,6 +58,7 @@ export default class Image extends THREE.Group {
     imageFire3.start(noiseTex);
     imagePoints.start(noiseTex);
 
+    imagePlane.renderOrder = 2;
     imageFire1.renderOrder = 10;
     imageFire1.position.z = 2;
     imageFire2.renderOrder = 10;
