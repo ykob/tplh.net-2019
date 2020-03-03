@@ -1,3 +1,5 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -52,7 +54,10 @@ module.exports = {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new BundleAnalyzerPlugin()
+    ]
   },
   chainWebpack(config) {
     config.plugins.delete('prefetch');
