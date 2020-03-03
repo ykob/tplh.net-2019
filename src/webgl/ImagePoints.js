@@ -11,8 +11,8 @@ export default class ImagePoints extends THREE.Points {
     const baseGeometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 24, 24);
     const geometry = new THREE.BufferGeometry();
 
-    geometry.addAttribute('position', baseGeometry.attributes.position);
-    geometry.addAttribute('uv', baseGeometry.attributes.uv);
+    geometry.setAttribute('position', baseGeometry.attributes.position);
+    geometry.setAttribute('uv', baseGeometry.attributes.uv);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({

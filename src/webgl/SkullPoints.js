@@ -34,9 +34,9 @@ export default class SkullPoints extends THREE.Points {
       baDelays.setX(i, Math.random() * DURATION);
       baStartY.setX(i, Math.random() * 4);
     }
-    geometry.addAttribute('position', baPositions);
-    geometry.addAttribute('delay', baDelays);
-    geometry.addAttribute('startY', baStartY);
+    geometry.setAttribute('position', baPositions);
+    geometry.setAttribute('delay', baDelays);
+    geometry.setAttribute('startY', baStartY);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
