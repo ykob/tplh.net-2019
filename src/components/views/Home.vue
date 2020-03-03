@@ -70,7 +70,14 @@
 
 <template lang="pug">
   .p-view-wrap
+    h1
+      |Yoichi Kobayashi
+      br
+      |Front-end &amp; Creative Developer
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  h1 {
+    display: none;
+  }
 </style>
