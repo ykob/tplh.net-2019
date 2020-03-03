@@ -18,7 +18,7 @@
   }
 
   export default {
-    name: 'ContactTitle',
+    name: 'WorkOutline',
     props: {
       index: {
         type: Number,
