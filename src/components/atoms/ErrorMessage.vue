@@ -28,11 +28,19 @@
 
 <style lang="scss">
   .p-error-message {
-    width: 196px;
-    height: 196px;
     position: absolute;
-    top: calc(50% - 98px);
-    left: calc(50% - 98px);
+    @include l-more-than-mobile {
+      width: 196px;
+      height: 196px;
+      top: calc(50% - 98px);
+      left: calc(50% - 98px);
+    }
+    @include l-mobile {
+      width: 118px;
+      height: 118px;
+      top: calc(50% - 59px);
+      left: calc(50% - 59px);
+    }
 
     // Transition
     .view-leave-to &,
@@ -71,14 +79,28 @@
       animation-duration: 20s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
+      @include l-more-than-mobile {
+        width: 196px;
+        height: 196px;
+      }
+      @include l-mobile {
+        width: 118px;
+        height: 118px;
+      }
+
     }
     &__text {
       width: 1em;
       height: (30 / 26) * 3em;
       position: absolute;
       top: calc(50% - 30 / 26 * 1.5em - 2px);
-      left: calc(50% - 0.5em + 4px);
-      @include fontSizeAll(26, 26, 26);
+      @include fontSizeAll(26, 26, 16);
+      @include l-more-than-mobile {
+        left: calc(50% - 0.5em + 4px);
+      }
+      @include l-mobile {
+        left: calc(50% - 0.5em + 3px);
+      }
     }
     &__typo {
       overflow: hidden;
