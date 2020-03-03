@@ -4,10 +4,10 @@
   import normalizeWheel from 'normalize-wheel';
 
   import store from '@/store'
-  import WhoIAmSection from '@/components/atoms/WhoIAmSection.vue'
-  import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue'
-  import WhoIAmThanks from '@/components/atoms/WhoIAmThanks.vue'
-  import WhoIAmLinks from '@/components/organisms/WhoIAmLinks.vue'
+  const WhoIAmSection = () => import('@/components/atoms/WhoIAmSection.vue')
+  const WhoIAmHeading = () => import('@/components/atoms/WhoIAmHeading.vue')
+  const WhoIAmThanks = () => import('@/components/atoms/WhoIAmThanks.vue')
+  const WhoIAmLinks = () => import('@/components/organisms/WhoIAmLinks.vue')
 
   export default {
     name: 'WhoIAm',

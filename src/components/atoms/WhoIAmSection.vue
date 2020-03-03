@@ -1,5 +1,5 @@
 <script>
-  import ParallaxBlock from '@/components/atoms/ParallaxBlock'
+  const ParallaxBlock = () => import('@/components/atoms/ParallaxBlock')
 
   export default {
     name: 'WhoIAmSection',

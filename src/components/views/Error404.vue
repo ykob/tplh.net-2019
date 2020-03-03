@@ -4,7 +4,7 @@
   import normalizeWheel from 'normalize-wheel';
 
   import store from '@/store'
-  import ErrorMessage from '@/components/atoms/ErrorMessage.vue';
+  const ErrorMessage = () => import('@/components/atoms/ErrorMessage.vue');
 
   export default {
     name: 'error-404',

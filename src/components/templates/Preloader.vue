@@ -1,7 +1,7 @@
 <script>
-  import PreloaderCount from '@/components/atoms/PreloaderCount.vue'
-  import PreloaderInitial from '@/components/atoms/PreloaderInitial.vue'
-  import PreloaderProgress from '@/components/atoms/PreloaderProgress.vue'
+  const PreloaderCount = () => import('@/components/atoms/PreloaderCount.vue')
+  const PreloaderInitial = () => import('@/components/atoms/PreloaderInitial.vue')
+  const PreloaderProgress = () => import('@/components/atoms/PreloaderProgress.vue')
 
   export default {
     name: 'Preloader',

@@ -1,6 +1,6 @@
 <script>
-  import ParallaxBlock from '@/components/atoms/ParallaxBlock'
-  import LinkListItem from '@/components/organisms/LinkListItem'
+  const ParallaxBlock = () => import('@/components/atoms/ParallaxBlock')
+  const LinkListItem = () => import('@/components/organisms/LinkListItem')
 
   export default {
     name: 'WhoIAmLinks',

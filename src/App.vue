@@ -3,11 +3,11 @@
   import * as THREE from 'three';
   import sleep from 'js-util/sleep'
 
-  import GlobalTitle from '@/components/templates/GlobalTitle.vue';
-  import UtilityNavi from '@/components/templates/UtilityNavi.vue';
-  import WorksNavi from '@/components/templates/WorksNavi.vue';
-  import Preloader from '@/components/templates/Preloader.vue';
-  import Guide from '@/components/templates/Guide.vue';
+  const GlobalTitle = () => import('@/components/templates/GlobalTitle.vue');
+  const UtilityNavi = () => import('@/components/templates/UtilityNavi.vue');
+  const WorksNavi = () => import('@/components/templates/WorksNavi.vue');
+  const Preloader = () => import('@/components/templates/Preloader.vue');
+  const Guide = () => import('@/components/templates/Guide.vue');
 
   export default {
     name: 'App',

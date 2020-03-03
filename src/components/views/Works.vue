@@ -4,7 +4,7 @@
   import sleep from 'js-util/sleep'
 
   import store from '@/store'
-  import WorkOutline from '@/components/organisms/WorkOutline.vue';
+  const WorkOutline = () => import('@/components/organisms/WorkOutline.vue')
 
   export default {
     name: 'Works',
