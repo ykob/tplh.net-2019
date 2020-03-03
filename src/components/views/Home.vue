@@ -70,14 +70,14 @@
 
 <template lang="pug">
   .p-view-wrap
-    h1
+    h1.p-home-heading
       |Yoichi Kobayashi
       br
       |Front-end &amp; Creative Developer
 </template>
 
-<style lang="scss" scoped>
-  h1 {
+<style lang="scss">
+  .p-home-heading {
     display: none;
   }
 </style>
