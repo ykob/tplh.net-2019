@@ -52,7 +52,6 @@ export default class ImagePlane extends THREE.Mesh {
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
-      depthTest: false,
     });
 
     // Create Object3D
@@ -60,6 +59,7 @@ export default class ImagePlane extends THREE.Mesh {
     this.name = 'ImagePlane';
     this.imgIndexPrev = 0;
     this.imgIndexNext = 0;
+    this.renderOrder = 5;
   }
   start(noiseTex, imgTexes) {
     this.imgTexes = imgTexes;

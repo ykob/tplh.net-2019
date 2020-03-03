@@ -107,7 +107,8 @@ export default class WorksText extends THREE.Mesh {
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      depthTest: false,
     });
 
     // Create Object3D
@@ -128,7 +129,7 @@ export default class WorksText extends THREE.Mesh {
     this.isHidden1 = false;
     this.isHidden2 = false;
     this.isHidden3 = false;
-    this.renderOrder = 5;
+    this.renderOrder = 2;
   }
   start(tex) {
     this.isActive = true;
