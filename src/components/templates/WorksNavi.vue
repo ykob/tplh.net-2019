@@ -56,7 +56,9 @@
       },
       anchorStyles(i) {
         return {
-          top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px)`,
+          top: (this.$store.state.isMobile === true)
+            ? `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 25}px)`
+            : `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px)`,
           transitionDelay: (this.$store.state.positionFromWorks === 0)
             ? `${i * 0.06 + 0.6}s`
             : `${i * 0.06}s`
@@ -274,31 +276,47 @@
       }
     }
     &__anchor {
-      width: 41px;
-      height: 41px;
       cursor: pointer;
       position: absolute;
       right: 50%;
       opacity: 0;
-      margin-top: -20px;
-      margin-right: -20px;
       transition-duration: .6s;
       transition-property: transform, opacity;
       transform: scale(0);
+      @include l-more-than-mobile {
+        width: 41px;
+        height: 41px;
+        margin-top: -20px;
+        margin-right: -20px;
+      }
+      @include l-mobile {
+        width: 25px;
+        height: 25px;
+        margin-top: -12px;
+        margin-right: -12px;
+      }
       &:before {
-        width: 7px;
-        height: 7px;
         backface-visibility: hidden;
         content: '';
         display: block;
         box-sizing: border-box;
         position: absolute;
-        top: 17px;
-        left: 17px;
         border: 1px solid rgba($color-text, 0.5);
         transform: rotate(45deg);
         transition-duration: .6s;
         transition-property: border-color, background-color;
+        @include l-more-than-mobile {
+          width: 7px;
+          height: 7px;
+          top: 17px;
+          left: 17px;
+        }
+        @include l-mobile {
+          width: 5px;
+          height: 5px;
+          top: 10px;
+          left: 10px;
+        }
       }
       &.is-shown {
         opacity: 1;
