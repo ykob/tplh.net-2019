@@ -1,7 +1,7 @@
 <script>
-  import { debounce } from 'lodash';
   import * as THREE from 'three';
   import sleep from 'js-util/sleep'
+  import debounce from 'js-util/debounce'
 
   import GlobalTitle from '@/components/templates/GlobalTitle.vue';
   import UtilityNavi from '@/components/templates/UtilityNavi.vue';

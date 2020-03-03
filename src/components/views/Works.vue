@@ -1,5 +1,5 @@
 <script>
-  import _ from 'lodash';
+  import findIndex from 'lodash/findIndex';
   import normalizeWheel from 'normalize-wheel';
   import sleep from 'js-util/sleep'
 
