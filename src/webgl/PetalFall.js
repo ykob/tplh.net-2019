@@ -14,7 +14,7 @@ export default class PetalFall extends Petal {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
     this.name = 'PetalFall';
-    this.durationFall = (1 - this.mass) * 20 + Math.random() * 5 + 10;
+    this.durationFall = (1 - this.mass) * 10 + Math.random() * 5 + 5;
     this.delayFall = this.durationFall * Math.random();
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;
@@ -25,8 +25,11 @@ export default class PetalFall extends Petal {
     this.isShownFirst = false;
     this.isHidden = false;
 
-    this.position.x = (Math.random() * 2 - 1) * 40;
-    this.position.z = Math.random() * 20 + 5;
+    this.basePosition = new THREE.Vector3(
+      (Math.random() * 2 - 1) * 40,
+      0,
+      Math.random() * 20 + 5
+    );
   }
   show(isShownFirst) {
     this.timeShow = 0;
@@ -61,6 +64,10 @@ export default class PetalFall extends Petal {
     const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0));
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
-    this.position.y = (((this.timeFall + this.delayFall) / this.durationFall - scrollProgress * 0.4) % 1 * 2 - 1) * -20;
+    this.position.set(
+      this.basePosition.x + Math.sin((this.timeFall + this.delayFall) * 0.3) * 1.5,
+      (((this.timeFall + this.delayFall) / this.durationFall - scrollProgress * 0.4) % 1 * 2 - 1) * -20,
+      this.basePosition.z
+    );
   }
 }

@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    position: absolute;
     left: 0;
     z-index: 100;
     line-height: 1;

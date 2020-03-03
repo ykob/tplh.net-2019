@@ -174,7 +174,7 @@ export default class WebGLContent {
 
       // show the dat.gui.
       if (process.env.VUE_APP_MODE === 'development') {
-        initDatGui(skull, petalHsv1, petalHsv2, petalHsv3);
+        initDatGui(skull, petalRotateGroup, petalHsv1, petalHsv2, petalHsv3);
       }
     });
   }

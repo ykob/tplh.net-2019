@@ -57,6 +57,11 @@ void main() {
   vec4 color2 = img2 * maskNext1 * maskPrev2;
   vec4 color3 = img3 * maskNext2 * maskPrev3;
   vec3 color4 = edgeColor * (maskEdge1 + maskEdge2 + maskEdge3);
+  float opacity = (color1.a + color2.a + color3.a) * (0.5 + maskEdge1 * 0.5);
 
-  gl_FragColor = vec4(color1.rgb + color2.rgb + color3.rgb + color4, (color1.a + color2.a + color3.a) * (0.5 + maskEdge1 * 0.5));
+  if (opacity < 0.01) {
+    discard;
+  }
+
+  gl_FragColor = vec4(color1.rgb + color2.rgb + color3.rgb + color4, opacity);
 }
