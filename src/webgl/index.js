@@ -224,6 +224,7 @@ export default class WebGLContent {
       this.skull.show();
       this.title.show();
       this.petalRotateGroup.show();
+      this.postEffectBloom.shake();
     } else {
       this.skull.hide();
       this.title.hide();
@@ -269,6 +270,7 @@ export default class WebGLContent {
     this.worksText.update(time);
     this.whoiamText.update(time, scrollProgress);
     this.bg.update(time);
+    this.postEffectBloom.update(time);
 
     // Render the main scene to frame buffer.
     renderer.setRenderTarget(renderTarget1);
