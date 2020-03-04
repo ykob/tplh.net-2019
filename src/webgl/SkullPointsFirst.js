@@ -6,9 +6,9 @@ import fs from '@/webgl/glsl/SkullPointsFirst.fs';
 
 import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
-const DURATION = 1.2;
-const DELAY_SHOW = 2.8;
-const NUM = 720;
+const DURATION = 1.4;
+const DELAY_SHOW = 2.75;
+const NUM = 800;
 
 export default class SkullPointsFirst extends THREE.Points {
   constructor() {
@@ -28,7 +28,7 @@ export default class SkullPointsFirst extends THREE.Points {
         0,
         Math.sin(radian) * radius
       );
-      baDelays.setX(i, Math.random() * DURATION * 0.8 + DELAY_SHOW);
+      baDelays.setX(i, Math.random() * DURATION * 0.6 + DELAY_SHOW);
       baStartY.setX(i, Math.random() * 10);
     }
     geometry.setAttribute('position', baPositions);

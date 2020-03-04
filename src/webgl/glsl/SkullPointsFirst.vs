@@ -19,7 +19,7 @@ varying float vAlpha;
 void main() {
   // Coordinate transformation
   float alpha = clamp((time - delay) / duration, 0.0, 1.0);
-  vec3 risePosition = vec3(0.0, alpha * 10.0 - 7.0 + startY, 0.0);
+  vec3 risePosition = vec3(0.0, alpha * 14.0 - 8.0 + startY, 0.0);
 
   float noiseR = texture2D(
     noiseTex,
@@ -33,7 +33,7 @@ void main() {
     noiseTex,
     position.xy * 0.4 - time * 0.02
     ).b * 2.0 - 1.0;
-  vec3 noisePosition = vec3(noiseR, noiseG, noiseB) * alpha * 12.0;
+  vec3 noisePosition = vec3(noiseR, noiseG, noiseB) * alpha * 22.0;
 
   vec4 mvPosition = viewMatrix * modelMatrix * vec4(position + noisePosition + risePosition, 1.0);
   float distanceFromCamera = length(mvPosition.xyz);
