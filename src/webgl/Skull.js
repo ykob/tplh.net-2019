@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { easeInOutCirc, easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
+import store from '@/store'
+
 import SkullBody from '@/webgl/SkullBody';
 import SkullAuraPostEffect from '@/webgl/SkullAuraPostEffect';
 import SkullAura from '@/webgl/SkullAura';
@@ -25,14 +27,13 @@ export default class Skull extends THREE.Group {
     this.time = 0;
     this.timeShow = 0;
     this.timeHide = 0;
+    this.positionBase = new THREE.Vector3(0, 0, -3);
     this.lookV = new THREE.Vector3();
     this.lookA = new THREE.Vector3();
     this.lookAnchor = new THREE.Vector3();
     this.isActive = false;
     this.isShown = false;
     this.isHidden = false;
-
-    this.position.set(0, 0, -3);
   }
   start(geometry1, geometry2, noiseTex) {
     this.body = new SkullBody(geometry1, geometry2);
@@ -95,7 +96,11 @@ export default class Skull extends THREE.Group {
 
     // add all translates to this position..
     this.position
-      .set(0, (alphaShow + alphaHide - 1) * 6, 0)
+      .set(
+        this.positionBase.x,
+        this.positionBase.y + (alphaShow + alphaHide - 1) * 6,
+        this.positionBase.z
+      )
       .add(this.lookV);
 
     // calculate the fluctuation of the color
@@ -142,7 +147,8 @@ export default class Skull extends THREE.Group {
     this.add(this.body);
     this.body.material.uniforms.renderOutline.value = 0;
   }
-  resize(resolution) {
+  resize() {
+    const { resolution } = store.state;
     this.points.resize(resolution);
   }
 }

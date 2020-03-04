@@ -294,7 +294,8 @@ export default class WebGLContent {
   }
   resize(resolution, isMobile) {
     this.camera.resize(resolution, isMobile);
-    this.skull.resize(resolution);
+    this.skull.resize();
+    this.title.resize();
     this.image.resize(resolution);
     this.bg.resize(this.camera, resolution);
     this.intersector.resize(this.camera, resolution);
