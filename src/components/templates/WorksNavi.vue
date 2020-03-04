@@ -27,10 +27,9 @@
         return {
           height:
             (state.positionFromWorks === 0 && state.isShownUI)
-              ?
-                `calc(50% + ${
-                  (state.currentWorksId - (state.works.length - 1) / 2) * 50
-                }px + 10px)`
+              ? (this.$store.state.isMobile === true)
+                ? `calc(50% + ${(state.currentWorksId - (state.works.length - 1) / 2) * 25}px + 10px)`
+                : `calc(50% + ${(state.currentWorksId - (state.works.length - 1) / 2) * 50}px + 10px)`
               : undefined,
           transitionDelay: `${(state.isTransitionInWorks === true || state.positionFromWorks != 0) ? 0 : 0.6}s`,
         }
