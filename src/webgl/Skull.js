@@ -8,6 +8,7 @@ import SkullBody from '@/webgl/SkullBody';
 import SkullAuraPostEffect from '@/webgl/SkullAuraPostEffect';
 import SkullAura from '@/webgl/SkullAura';
 import SkullPoints from '@/webgl/SkullPoints';
+import SkullPointsFirst from '@/webgl/SkullPointsFirst';
 
 const DURATION_SHOW = 2;
 const DELAY_SHOW = 1;
@@ -40,14 +41,17 @@ export default class Skull extends THREE.Group {
     this.auraPostEffect = new SkullAuraPostEffect();
     this.aura = new SkullAura();
     this.points = new SkullPoints();
+    this.pointsFirst = new SkullPointsFirst();
 
     this.add(this.body);
     this.add(this.aura);
     this.add(this.points);
+    this.add(this.pointsFirst);
 
     this.body.start();
     this.aura.start(this.renderTarget1.texture, noiseTex);
     this.points.start(noiseTex);
+    this.pointsFirst.start(noiseTex);
 
     this.isActive = true;
   }
@@ -59,6 +63,7 @@ export default class Skull extends THREE.Group {
     this.body.show();
     this.aura.show();
     this.points.show();
+    this.pointsFirst.show();
   }
   hide() {
     this.isShown = false;
@@ -114,6 +119,7 @@ export default class Skull extends THREE.Group {
     this.body.update(time, camera, fluctuation);
     this.aura.update(time, camera, fluctuation, mouseForce);
     this.points.update(time);
+    this.pointsFirst.update(time);
 
     // processing before rendering the aura as texture.
     renderer.setRenderTarget(this.renderTarget1);
@@ -150,6 +156,7 @@ export default class Skull extends THREE.Group {
   resize() {
     const { resolution, isMobile } = store.state;
     this.points.resize(resolution);
+    this.pointsFirst.resize(resolution);
     if (isMobile === true && resolution.y > resolution.x) {
       this.scale.set(1.1, 1.1, 1.1);
     } else {
