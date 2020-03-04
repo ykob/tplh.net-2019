@@ -148,7 +148,12 @@ export default class Skull extends THREE.Group {
     this.body.material.uniforms.renderOutline.value = 0;
   }
   resize() {
-    const { resolution } = store.state;
+    const { resolution, isMobile } = store.state;
     this.points.resize(resolution);
+    if (isMobile === true && resolution.y > resolution.x) {
+      this.scale.set(1.1, 1.1, 1.1);
+    } else {
+      this.scale.set(1, 1, 1);
+    }
   }
 }

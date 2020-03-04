@@ -108,9 +108,10 @@ export default class Title extends THREE.Mesh {
     );
   }
   resize() {
-    if (store.state.isMobile === true) {
+    const { resolution, isMobile } = store.state;
+    if (isMobile === true && resolution.y > resolution.x) {
       this.positionBase.y = -9;
-      this.scale.set(1.2, 1.2, 1.2);
+      this.scale.set(1.3, 1.3, 1.3);
       this.material.uniforms.isMobile.value = 1;
     } else {
       this.positionBase.y = -7;
