@@ -14,7 +14,7 @@ void main() {
   float sin2 = sin(time * 10000.0 + radians(p.x * resolution.x * 0.8));
   vec2 noise = vec2(
     0.0,
-    (sin1 * 0.8 + sin2 * 0.2) * 0.007 * alpha
+    (sin1 * 0.8 + sin2 * 0.2) * 0.0055 * alpha
   );
   vec2 rgbSplit = vec2(
     alpha * 0.003,
