@@ -9,10 +9,8 @@ uniform float easeTransition;
 uniform vec2 imgRatio;
 uniform sampler2D noiseTex;
 
-varying vec3 vPosition;
 varying vec2 vUv;
 varying float vOpacity;
-varying float vTime;
 
 void main(void) {
   vec2 p = uv * 2.0 - 1.0;
@@ -51,10 +49,8 @@ void main(void) {
 
   float opacity = smoothstep(0.0, 0.1, h1) * (1.0 - smoothstep(1.0, 4.8, h1)) * (1.0 - pow(edge, 2.0));
 
-  vPosition = mPosition.xyz;
   vUv = uv;
   vOpacity = opacity;
-  vTime = easeTransition;
 
   gl_Position = projectionMatrix * viewMatrix * mPosition;
 }

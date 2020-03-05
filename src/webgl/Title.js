@@ -15,7 +15,7 @@ const DELAY_HIDE = 0;
 export default class Title extends THREE.Mesh {
   constructor() {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(16, 4, 64, 16);
+    const geometry = new THREE.PlaneBufferGeometry(16, 4, 32, 8);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({

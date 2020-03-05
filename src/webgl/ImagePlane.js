@@ -7,7 +7,7 @@ import fs from '@/webgl/glsl/ImagePlane.fs';
 export default class ImagePlane extends THREE.Mesh {
   constructor(width) {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 64, 64);
+    const geometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 48, 32);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({

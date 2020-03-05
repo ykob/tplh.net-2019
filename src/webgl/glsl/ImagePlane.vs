@@ -11,7 +11,6 @@ uniform float easeTransition3;
 uniform vec2 imgRatio;
 uniform sampler2D noiseTex;
 
-varying vec3 vPosition;
 varying vec2 vUv;
 varying vec2 vUpdateUv;
 varying float vTime1;
@@ -54,7 +53,6 @@ void main(void) {
   vec3 updatePosition = position + wavePosition + slidePosition;
   vec4 mPosition = modelMatrix * vec4(updatePosition, 1.0);
 
-  vPosition = position;
   vUv = uv;
   vUpdateUv = updateUv;
   vTime1 = easeTransition1;

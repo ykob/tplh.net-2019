@@ -18,7 +18,7 @@ const DELAY_TRANSITION_HIDE = 0;
 export default class WhoIamText extends THREE.Mesh {
   constructor() {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(WIDTH, WIDTH, 128, 128);
+    const geometry = new THREE.PlaneBufferGeometry(WIDTH, WIDTH, 64, 64);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({

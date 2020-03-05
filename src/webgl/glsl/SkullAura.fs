@@ -16,7 +16,6 @@ uniform float opacityRangeMin;
 uniform float opacityRangeMax;
 uniform float opacityBase;
 
-varying vec3 vPosition;
 varying vec2 vUv;
 
 const float blurIteration = 12.0;

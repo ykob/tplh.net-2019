@@ -5,7 +5,6 @@ uniform float duration;
 uniform vec2 imgRatio;
 uniform sampler2D noiseTex;
 
-varying vec3 vPosition;
 varying vec2 vUv;
 varying float vOpacity;
 

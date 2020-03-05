@@ -10,7 +10,6 @@ uniform sampler2D imgTex1;
 uniform sampler2D imgTex2;
 uniform sampler2D imgTex3;
 
-varying vec3 vPosition;
 varying vec2 vUv;
 varying vec2 vUpdateUv;
 varying float vTime1;

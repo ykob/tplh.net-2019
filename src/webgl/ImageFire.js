@@ -7,7 +7,7 @@ import fs from '@/webgl/glsl/ImageFire.fs';
 export default class ImageFire extends THREE.Mesh {
   constructor(width) {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 128, 128);
+    const geometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 64, 64);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
