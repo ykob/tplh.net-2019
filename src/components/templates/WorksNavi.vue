@@ -10,6 +10,8 @@
       return {
         isOvered: false,
         isOveredAnchor: -1,
+        hasAnchorDelay: true,
+        timerAnchorEnter: null,
       }
     },
     computed: {
@@ -35,6 +37,16 @@
         }
       }
     },
+    watch: {
+      '$store.state.positionFromWorks'() {
+        if (this.$store.state.positionFromWorks === 0) {
+          this.hasAnchorDelay = true;
+          setTimeout(() => {
+            this.hasAnchorDelay = false;
+          }, 1000)
+        }
+      }
+    },
     methods: {
       enter() {
         if (this.$store.state.isEnabledTouch === true) return;
@@ -48,10 +60,19 @@
         dispatch('debounceRouterPush', `/works/${state.works[i].key}/`);
       },
       anchorEnter(i) {
-        this.isOveredAnchor = i;
+        if (this.$store.state.isEnabledTouch === true) return;
+        if (this.isOveredAnchor === i) return;
+        clearTimeout(this.timerAnchorEnter);
+        this.timerAnchorEnter = setTimeout(() => {
+          this.isOveredAnchor = i;
+          this.hasAnchorDelay = false;
+        }, 50)
       },
       anchorLeave() {
-        this.isOveredAnchor = -1;
+        clearTimeout(this.timerAnchorEnter);
+        this.timerAnchorEnter = setTimeout(() => {
+          this.isOveredAnchor = -1;
+        }, 50)
       },
       anchorStyles(i) {
         return {
@@ -66,21 +87,36 @@
       anchorClassnames(i) {
         return {
           'is-shown': this.$store.state.positionFromWorks === 0 && this.$store.state.isShownUI,
+          'is-overed': this.isOveredAnchor === i,
           'is-current': this.$store.state.works[i].key === this.$route.params.key,
         }
       },
       anchorLabelStyles(i) {
         const strLength = this.$store.state.works[i].title.length;
+        const height = strLength + (strLength - 1) * 0.15;
         return {
-          height: `${strLength}em`,
-          top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px - ${strLength / 2}em)`,
+          height: `${height}em`,
+          top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) * 50}px - ${height / 2}em)`,
         }
       },
       anchorLabelClassnames(i) {
+        const { state } = this.$store;
         return {
           'is-overed': this.isOveredAnchor === i,
+          'is-current': state.works[i].key === this.$route.params.key && this.isOveredAnchor === -1 && state.isShownUI,
         }
       },
+      isShownAnchor(i) {
+        const { state } = this.$store;
+        return (
+          this.isOveredAnchor === i
+          || (
+            state.works[i].key === this.$route.params.key
+            && this.isOveredAnchor === -1
+            && state.isShownUI
+          )
+        )
+      }
     }
   };
 </script>
@@ -119,15 +155,23 @@
       :style = 'anchorStyles(index)'
       :class = 'anchorClassnames(index)'
       @click = 'transit(index)'
-      @mouseenter.native = 'anchorEnter(index)'
-      @mouseleave.native = 'anchorLeave'
+      @mouseenter = 'anchorEnter(index)'
+      @mouseleave = 'anchorLeave'
       )
     .p-works-navi__anchor-label(
       v-for = 'anchor, index in $store.state.works'
       :style = 'anchorLabelStyles(index)'
-      :class = 'anchorLabelClassnames(index)'
       )
-      |{{ anchor.title }}
+      transition(
+        name = 'anchor'
+        )
+        SplitStr.p-works-navi__anchor-label-in(
+          v-if = 'isShownAnchor(index)'
+          :label = 'anchor.shortTitle'
+          :step = '2'
+          :base = 'hasAnchorDelay === true ? 80 : 0'
+          childClassname = 'p-works-navi__anchor-typo'
+          )
 </template>
 
 <style lang="scss">
@@ -321,33 +365,49 @@
         opacity: 1;
         transform: scale(1);
       }
+      &.is-overed,
       &.is-current {
         &:before {
           border: 1px solid rgba($color-text, 1);
           background-color: rgba($color-text, 1);
         }
       }
+      &.is-current {
+        pointer-events: none;
+      }
     }
     &__anchor-label {
       height: 20em;
+      overflow: hidden;
       position: absolute;
+      pointer-events: none;
       @include fontSizeAll(12, 12, 9);
       text-align: center;
       writing-mode: vertical-rl;
+      white-space: nowrap;
       letter-spacing: 0.15em;
       @include l-more-than-mobile {
-        left: 25px;
+        left: 20px;
       }
-      @include l-mobile {
-        display: none;
+    }
+    &__anchor-label-in {
+      &.anchor-enter-to,
+      &.anchor-leave-to {
+        transition-duration: 2s;
       }
-
+    }
+    &__anchor-typo {
       // Interaction
-      opacity: 0;
-      transition-duration: .6s;
-      transition-property: opacity;
-      &.is-overed {
-        opacity: 1;
+      transition-duration: 0.2s;
+      transition-property: transform;
+      .anchor-enter & {
+        transform: translate3d(1.1em, 0 ,0);
+      }
+      .anchor-enter-to & {
+        transform: translate3d(0, 0 ,0);
+      }
+      .anchor-leave-to & {
+        transform: translate3d(1.1em, 0 ,0);
       }
     }
   }
