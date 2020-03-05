@@ -63,8 +63,9 @@
     // Transition
     &__typo-in {
       // Interaction
-      transition-duration: 1s;
+      transition-duration: 0.6s;
       transition-property: transform;
+      transition-property: $easeOutCirc;
       &--1 {
         transform: translate3d(1.01em, 0 ,0);
       }

@@ -46,6 +46,8 @@ order deny,allow
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  RewriteCond %{HTTP_HOST} ^dev\.tplh\.co\.jp
+  RewriteRule (.*) https://www.dev.tplh.jp/$1 [R=301,L]
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
 

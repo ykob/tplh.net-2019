@@ -214,8 +214,9 @@
     &__typo {
       // Interaction
       transform: translate3d(1.1em, 0 ,0);
-      transition-duration: 1s;
+      transition-duration: 0.6s;
       transition-property: transform;
+      transition-property: $easeOutCirc;
       .is-shown & {
         transform: translate3d(0, 0 ,0);
       }
@@ -389,6 +390,9 @@
       @include l-more-than-mobile {
         left: 20px;
       }
+      @include l-mobile {
+        display: none;
+      }
     }
     &__anchor-label-in {
       &.anchor-enter-to,
@@ -398,8 +402,9 @@
     }
     &__anchor-typo {
       // Interaction
-      transition-duration: 0.2s;
+      transition-duration: 0.6s;
       transition-property: transform;
+      transition-property: $easeOutCirc;
       .anchor-enter & {
         transform: translate3d(1.1em, 0 ,0);
       }

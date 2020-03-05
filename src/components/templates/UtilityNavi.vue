@@ -107,9 +107,10 @@
     }
     &__typo {
       // Interaction
-      transform: translate3d(-1.01em, 0 ,0);
-      transition-duration: 1s;
+      transform: translate3d(-1.1em, 0 ,0);
+      transition-duration: 0.6s;
       transition-property: transform;
+      transition-property: $easeOutCirc;
       .is-shown & {
         transform: translate3d(0, 0 ,0);
       }
