@@ -61,7 +61,7 @@ export default class PostEffectBloom extends THREE.Mesh {
     this.isShaking = true;
   }
   fadeOut() {
-    this.isFadeOut = true;
+    this.isFadeOut = this.isShaking;
   }
   update(time) {
     this.material.uniforms.time.value += time;

@@ -85,7 +85,7 @@ export default class SkullPointsFirst extends THREE.Points {
     this.isShown = true;
   }
   hide() {
-    this.isHidden = true;
+    this.isHidden = this.isShown;
   }
   update(t) {
     if (this.isShown === false) return;
