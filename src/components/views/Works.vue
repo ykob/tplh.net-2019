@@ -70,6 +70,9 @@
           globalId: 1,
           currentWorksId: index
         });
+
+        // send google analytics
+        gtag('config', 'UA-568033-1', {'page_path': this.$route.path});
       }
     },
     computed: {

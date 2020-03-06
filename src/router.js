@@ -10,7 +10,7 @@ const Error404 = () => import('./components/views/Error404.vue')
 Vue.use(Router)
 Vue.use(Meta)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -36,3 +36,9 @@ export default new Router({
     },
   ]
 })
+
+router.afterEach((to, from) => {
+  gtag('config', 'UA-568033-1', {'page_path': to.path});
+})
+
+export default router
