@@ -70,6 +70,7 @@ export default class Skull extends THREE.Group {
     this.isHidden = true;
     this.body.hide();
     this.points.hide();
+    this.pointsFirst.hide();
   }
   lookMouse(lookV) {
     this.lookAnchor.copy(lookV).multiplyScalar(-0.3);

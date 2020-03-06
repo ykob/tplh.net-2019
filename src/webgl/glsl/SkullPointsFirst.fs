@@ -1,5 +1,7 @@
 precision highp float;
 
+uniform float alpha;
+
 varying vec3 vColor;
 varying float vAlpha;
 
@@ -16,5 +18,5 @@ void main() {
   // Define Colors
   vec3 color = vColor;
 
-  gl_FragColor = vec4(color, opacity);
+  gl_FragColor = vec4(color, opacity * alpha);
 }

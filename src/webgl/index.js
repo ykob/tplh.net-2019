@@ -229,6 +229,7 @@ export default class WebGLContent {
       this.skull.hide();
       this.title.hide();
       this.petalRotateGroup.hide();
+      this.postEffectBloom.fadeOut();
     }
   }
   showWorksObjs(index, direction, prevPosFromWorks) {

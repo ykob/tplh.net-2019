@@ -9,6 +9,7 @@ import fs from '@/webgl/glsl/PostEffectBloom.fs';
 
 const DURATION1 = 0.2;
 const DURATION2 = 1.8;
+const DURATION3 = 1;
 const DELAY = 2.7;
 
 export default class PostEffectBloom extends THREE.Mesh {
@@ -48,7 +49,9 @@ export default class PostEffectBloom extends THREE.Mesh {
     super(geometry, material);
     this.name = 'PostEffectBloom';
     this.timeShake = 0;
+    this.timeFadeOut = 0;
     this.isShaking = false;
+    this.isFadeOut = false;
   }
   start(texture1, texture2) {
     this.material.uniforms.texture1.value = texture1;
@@ -57,15 +60,22 @@ export default class PostEffectBloom extends THREE.Mesh {
   shake() {
     this.isShaking = true;
   }
+  fadeOut() {
+    this.isFadeOut = true;
+  }
   update(time) {
     this.material.uniforms.time.value += time;
 
     if (this.isShaking === true) {
       this.timeShake += time;
     }
+    if (this.isFadeOut === true) {
+      this.timeFadeOut += time;
+    }
 
     const alpha1 = easeOutCirc(MathEx.clamp((this.timeShake - DELAY) / DURATION1, 0.0, 1.0));
     const alpha2 = easeInOutCubic(MathEx.clamp((this.timeShake - DELAY - DURATION1) / DURATION2, 0.0, 1.0));
-    this.material.uniforms.alpha.value = alpha1 * (1.0 - alpha2);
+    const alpha3 = easeOutCirc(MathEx.clamp((this.timeFadeOut) / DURATION3, 0.0, 1.0));
+    this.material.uniforms.alpha.value = alpha1 * (1.0 - alpha2) * (1.0 - alpha3);
   }
 }

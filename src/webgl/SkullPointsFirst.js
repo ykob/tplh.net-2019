@@ -8,6 +8,7 @@ import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
 const DURATION = 1.4;
 const DELAY_SHOW = 2.75;
+const DURATION_HIDE = 1;
 const NUM = 800;
 
 export default class SkullPointsFirst extends THREE.Points {
@@ -58,6 +59,10 @@ export default class SkullPointsFirst extends THREE.Points {
           type: 't',
           value: null
         },
+        alpha: {
+          type: 'f',
+          value: 0
+        },
       },
       vertexShader: vs,
       fragmentShader: fs,
@@ -69,7 +74,9 @@ export default class SkullPointsFirst extends THREE.Points {
     // Create Object3D
     super(geometry, material);
     this.name = 'SkullPointsFirst';
+    this.timeHide = 0;
     this.isShown = false;
+    this.isHidden = false;
   }
   start(noiseTex) {
     this.material.uniforms.noiseTex.value = noiseTex;
@@ -77,18 +84,31 @@ export default class SkullPointsFirst extends THREE.Points {
   show() {
     this.isShown = true;
   }
+  hide() {
+    this.isHidden = true;
+  }
   update(t) {
     if (this.isShown === false) return;
+
     const { time } = this.material.uniforms;
+
     time.value += t;
     this.rotation.set(
       0,
       time.value * 0.2,
       0
     );
+
     if (time.value >= DURATION * 1.8 + DELAY_SHOW) {
       this.visible = false
     }
+
+    // calculation the hidding alpha.
+    if (this.isHidden === true) {
+      this.timeHide += time;
+    }
+    const alphaHide = MathEx.clamp((this.timeHide) / DURATION_HIDE, 0.0, 1.0);
+    this.material.uniforms.alpha.value = (1.0 - alphaHide);
   }
   resize(resolution) {
     this.material.uniforms.resolution.value.copy(resolution);
