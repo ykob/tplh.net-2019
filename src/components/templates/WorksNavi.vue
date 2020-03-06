@@ -126,8 +126,8 @@
     .p-works-navi__label(
       :class = 'classnames'
       @click = 'transit(0)'
-      @mouseenter.native = 'enter'
-      @mouseleave.native = 'leave'
+      @mouseenter = 'enter'
+      @mouseleave = 'leave'
       )
       SplitStr(
         label = 'Works'
