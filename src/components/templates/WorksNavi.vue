@@ -92,7 +92,7 @@
         }
       },
       anchorLabelStyles(i) {
-        const strLength = this.$store.state.works[i].title.length;
+        const strLength = this.$store.state.works[i].shortTitle.length;
         const height = strLength + (strLength - 1) * 0.15;
         return {
           height: `${height}em`,
@@ -379,6 +379,7 @@
     }
     &__anchor-label {
       height: 20em;
+      line-height: 1.1;
       overflow: hidden;
       position: absolute;
       pointer-events: none;
@@ -388,7 +389,7 @@
       white-space: nowrap;
       letter-spacing: 0.15em;
       @include l-more-than-mobile {
-        left: 20px;
+        left: calc(25% - 1.1em);
       }
       @include l-mobile {
         display: none;
