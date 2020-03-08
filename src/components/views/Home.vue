@@ -3,11 +3,15 @@
   import sleep from 'js-util/sleep'
 
   import store from '@/store'
+  import HomeHeading from '@/components/atoms/HomeHeading.vue'
 
   export default {
     name: 'Home',
     metaInfo: {
       title: ''
+    },
+    components: {
+      HomeHeading,
     },
     beforeRouteEnter(to, from, next) {
       store.commit('transit', {
@@ -70,14 +74,8 @@
 
 <template lang="pug">
   .p-view-wrap
-    h1.p-home-heading
-      |Yoichi Kobayashi
-      br
-      |Front-end &amp; Creative Developer
+    HomeHeading
 </template>
 
 <style lang="scss">
-  .p-home-heading {
-    display: none;
-  }
 </style>
