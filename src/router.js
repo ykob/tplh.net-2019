@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
 
-const Home = () => import('./components/views/Home.vue')
-const Works = () => import('./components/views/Works.vue')
-const WhoIAm = () => import('./components/views/WhoIAm.vue')
-const Error404 = () => import('./components/views/Error404.vue')
+import Home from './components/views/Home.vue'
+import Works from './components/views/Works.vue'
+import WhoIAm from './components/views/WhoIAm.vue'
+import Error404 from './components/views/Error404.vue'
 
 Vue.use(Router)
 Vue.use(Meta)
