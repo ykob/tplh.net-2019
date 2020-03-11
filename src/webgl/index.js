@@ -300,7 +300,7 @@ export default class WebGLContent {
     this.skull.resize();
     this.title.resize();
     this.image.resize(resolution);
-    this.bg.resize(this.camera, resolution);
+    this.bg.resize(this.camera);
     this.intersector.resize(this.camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
 
