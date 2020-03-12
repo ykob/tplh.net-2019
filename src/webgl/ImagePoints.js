@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+import store from '@/store'
 import vs from '@/webgl/glsl/ImagePoints.vs';
 import fs from '@/webgl/glsl/ImagePoints.fs';
 
@@ -70,7 +71,9 @@ export default class ImagePoints extends THREE.Points {
     this.material.uniforms.easeTransition2.value = easeStep2;
     this.material.uniforms.easeTransition3.value = easeStep3;
   }
-  resize(resolution) {
+  resize() {
+    const { resolution } = store.state;
+
     this.material.uniforms.resolution.value.copy(resolution);
   }
 }

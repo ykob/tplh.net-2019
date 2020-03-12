@@ -296,10 +296,10 @@ export default class WebGLContent {
     scenePE.remove(this.postEffectBloom);
   }
   resize(resolution, isMobile) {
-    this.camera.resize(resolution, isMobile);
+    this.camera.resize();
     this.skull.resize();
     this.title.resize();
-    this.image.resize(resolution);
+    this.image.resize();
     this.bg.resize(this.camera);
     this.intersector.resize(this.camera, resolution);
     renderer.setSize(resolution.x, resolution.y);
