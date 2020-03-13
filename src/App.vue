@@ -96,7 +96,7 @@
         canvas.width = resolution.x;
         canvas.height = resolution.y;
         this.$store.commit('changeMediaQuery', resolution.x < 768);
-        webgl.resize(resolution, this.$store.state.isMobile);
+        webgl.resize();
       },
       mousemove(e) {
         if (

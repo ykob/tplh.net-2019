@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import sleep from 'js-util/sleep';
 
+import store from '@/store'
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
 import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import checkWebpFeature from '@/utils/checkWebpFeature';
@@ -295,13 +296,15 @@ export default class WebGLContent {
     renderer.render(scenePE, cameraPE);
     scenePE.remove(this.postEffectBloom);
   }
-  resize(resolution, isMobile) {
+  resize() {
+    const { resolution } = store.state;
+
     this.camera.resize();
     this.skull.resize();
     this.title.resize();
     this.image.resize();
     this.bg.resize(this.camera);
-    this.intersector.resize(this.camera, resolution);
+    this.intersector.resize(this.camera);
     renderer.setSize(resolution.x, resolution.y);
 
     // For the Post Effect.
