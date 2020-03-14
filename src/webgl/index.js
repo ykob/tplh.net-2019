@@ -311,7 +311,7 @@ export default class WebGLContent {
     renderTarget1.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     renderTarget2.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     renderTarget3.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
-    this.postEffectBlurY.resize(resolution.x / 3, resolution.y / 3);
-    this.postEffectBlurX.resize(resolution.x / 3, resolution.y / 3);
+    this.postEffectBlurY.resize();
+    this.postEffectBlurX.resize();
   }
 }
