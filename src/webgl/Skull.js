@@ -118,7 +118,7 @@ export default class Skull extends THREE.Group {
 
     // update children.
     this.body.update(time, camera, fluctuation);
-    this.aura.update(time, camera, fluctuation, mouseForce);
+    this.aura.update(time, camera, fluctuation);
     this.points.update(time);
     this.pointsFirst.update(time);
 

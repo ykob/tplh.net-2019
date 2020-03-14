@@ -74,7 +74,7 @@
             this.loaded();
           }
         } else {
-          webgl.update(this.$store.state);
+          webgl.update();
         }
         requestAnimationFrame(this.update);
       },
