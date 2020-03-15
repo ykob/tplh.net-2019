@@ -5,7 +5,6 @@ import store from '@/store'
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
 import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import checkWebpFeature from '@/utils/checkWebpFeature';
-import initDatGui from '@/utils/initDatGui';
 
 import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
@@ -198,18 +197,20 @@ export default class WebGLContent {
       this.worksText.start(worksTextTex);
       this.whoiamText.start(whoiamTextTex);
       this.bg.start(noiseTex);
-
-      // show the dat.gui.
-      if (process.env.VUE_APP_MODE === 'development') {
-        initDatGui(
-          this.skull,
-          this.petalRotateGroup,
-          petalHsv1,
-          petalHsv2,
-          petalHsv3
-        );
-      }
     });
+
+    // show the dat.gui.
+    if (process.env.VUE_APP_MODE === 'development') {
+      const initDatGui = await import('@/utils/initDatGui');
+
+      initDatGui.default(
+        this.skull,
+        this.petalRotateGroup,
+        petalHsv1,
+        petalHsv2,
+        petalHsv3
+      );
+    }
   }
   play() {
     clock.start();
