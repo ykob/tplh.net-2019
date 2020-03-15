@@ -268,12 +268,12 @@ export default class WebGLContent {
 
     // Update each objects.
     this.skull.update(time, renderer, this.camera, sceneAura, this.skullAuraCamera);
-    this.petalFallGroup.update(time, scrollProgress);
+    this.petalFallGroup.update(time);
     this.petalRotateGroup.update(time);
     this.title.update(time);
     this.image.update(time);
     this.worksText.update(time);
-    this.whoiamText.update(time, scrollProgress);
+    this.whoiamText.update(time);
     this.bg.update(time);
     this.postEffectBloom.update(time);
 
