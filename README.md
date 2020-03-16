@@ -1,29 +1,9 @@
 # tplh.net-2019
 
-## Project setup
-```
-npm install
-```
+## License
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Copyright (c) 2020 Yoichi Kobayashi
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Misc
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Follow Yoichi Kobayashi: [Web](http://www.tplh.net/), [Twitter](https://twitter.com/ykob0123)
