@@ -2,7 +2,8 @@
 
 # tplh.net-2019
 
-I'm a Web Developer. Just love World-Wide-Web. I explored what my identity was and tried to express it as much as possible using whatever technology I have now.
+I'm a Web Developer. Just love World-Wide-Web.  
+I explored what my identity was and tried to express it as much as possible using whatever technology I have now.
 
 ## License
 
