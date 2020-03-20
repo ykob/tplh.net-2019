@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import MathEx from 'js-util/MathEx';
 
+import store from '@/store'
 import PetalFall from '@/webgl/PetalFall';
 
 const PETAL_NUM = 48;
@@ -36,8 +37,11 @@ export default class PetalFallGroup extends THREE.Group {
       this.petals[i].hide();
     }
   }
-  update(time, scrollProgress) {
+  update(time) {
     if (this.isActive === false) return;
+
+    const { scrollProgress } = store.state;
+
     for (var i = 0; i < this.petals.length; i++) {
       this.petals[i].update(time, scrollProgress);
     }

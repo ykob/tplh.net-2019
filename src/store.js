@@ -141,9 +141,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    // transit (context, opts) {
-    //   context.commit('transit', opts);
-    // },
     async initWebGL (context) {
       await import('@/webgl/').then((module) => {
         const webgl = new module.default();

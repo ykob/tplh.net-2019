@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+import store from '@/store'
 import vs from '@/webgl/glsl/PostEffect.vs';
 import fs from '@/webgl/glsl/PostEffectBlur.fs';
 
@@ -36,7 +37,8 @@ export default class PostEffectBlur extends THREE.Mesh {
     this.material.uniforms.texture.value = texture;
     this.material.uniforms.direction.value.set(x, y);
   }
-  resize(x, y) {
-    this.material.uniforms.resolution.value.set(x, y);
+  resize() {
+    const { resolution } = store.state;
+    this.material.uniforms.resolution.value.set(resolution.x / 3, resolution.y / 3);
   }
 }

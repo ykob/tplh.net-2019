@@ -1,29 +1,14 @@
+![ogp image](https://github.com/ykob/tplh.net-2019/blob/master/public/img/ogp_image.png)
+
 # tplh.net-2019
 
-## Project setup
-```
-npm install
-```
+I'm a Web Developer. Just love World-Wide-Web.  
+I explored what my identity was and tried to express it as much as possible using whatever technology I have now.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## License
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Copyright (c) 2020 Yoichi Kobayashi
 
-### Run your tests
-```
-npm run test
-```
+## Misc
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Follow Yoichi Kobayashi: [Web](http://www.tplh.net/), [Twitter](https://twitter.com/ykob0123)

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { easeOutCirc } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
+import store from '@/store'
 import vs from '@/webgl/glsl/SkullAura.vs';
 import fs from '@/webgl/glsl/SkullAura.fs';
 
@@ -94,7 +95,9 @@ export default class SkullAura extends THREE.Mesh {
       this.timeShow = DURATION_SHOW + DELAY_SHOW;
     }
   }
-  update(time, camera, fluctuation, mouseForce) {
+  update(time, camera, fluctuation) {
+    const { mouseForce } = store.state;
+
     if (this.isActive === false) return;
     this.rotation.copy(camera.rotation);
     this.material.uniforms.time.value += time;

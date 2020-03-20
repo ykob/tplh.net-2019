@@ -76,7 +76,7 @@ export default class Skull extends THREE.Group {
     this.lookAnchor.copy(lookV).multiplyScalar(-0.3);
     this.body.lookMouse(lookV);
   }
-  update(time, renderer, camera, sceneAura, cameraAura, mouseForce) {
+  update(time, renderer, camera, sceneAura, cameraAura) {
     if (this.isActive === false) return;
 
     // update the attributes of this group.
@@ -118,7 +118,7 @@ export default class Skull extends THREE.Group {
 
     // update children.
     this.body.update(time, camera, fluctuation);
-    this.aura.update(time, camera, fluctuation, mouseForce);
+    this.aura.update(time, camera, fluctuation);
     this.points.update(time);
     this.pointsFirst.update(time);
 
@@ -156,8 +156,8 @@ export default class Skull extends THREE.Group {
   }
   resize() {
     const { resolution, isMobile } = store.state;
-    this.points.resize(resolution);
-    this.pointsFirst.resize(resolution);
+    this.points.resize();
+    this.pointsFirst.resize();
     if (isMobile === true && resolution.y > resolution.x) {
       this.scale.set(1.1, 1.1, 1.1);
     } else {

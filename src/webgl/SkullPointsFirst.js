@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import MathEx from 'js-util/MathEx';
 
+import store from '@/store'
 import vs from '@/webgl/glsl/SkullPointsFirst.vs';
 import fs from '@/webgl/glsl/SkullPointsFirst.fs';
 
@@ -110,7 +111,8 @@ export default class SkullPointsFirst extends THREE.Points {
     const alphaHide = MathEx.clamp((this.timeHide) / DURATION_HIDE, 0.0, 1.0);
     this.material.uniforms.alpha.value = (1.0 - alphaHide);
   }
-  resize(resolution) {
+  resize() {
+    const { resolution } = store.state;
     this.material.uniforms.resolution.value.copy(resolution);
   }
 }

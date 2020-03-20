@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { easeOutCubic, easeInOutCubic } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
+import store from '@/store'
 import vs from '@/webgl/glsl/Background.vs';
 import fs from '@/webgl/glsl/Background.fs';
 
@@ -104,7 +105,8 @@ export default class Background extends THREE.Mesh {
 
     this.material.uniforms.time.value += time;
   }
-  resize(camera, resolution) {
+  resize(camera) {
+    const { resolution } = store.state;
     const height = Math.abs(
       (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
     );

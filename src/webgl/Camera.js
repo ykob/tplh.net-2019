@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+import store from '@/store'
+
 export default class Camera extends THREE.PerspectiveCamera {
   constructor(fov, aspect, near, far) {
     super(fov, aspect, near, far);
@@ -18,7 +20,9 @@ export default class Camera extends THREE.PerspectiveCamera {
     if (this.isActive === false) return;
     this.time += time;
   }
-  resize(resolution, isMobile) {
+  resize() {
+    const { resolution, isMobile } = store.state;
+
     this.aspect = resolution.x / resolution.y;
     this.updateProjectionMatrix();
     if (resolution.x < resolution.y && isMobile === true) {

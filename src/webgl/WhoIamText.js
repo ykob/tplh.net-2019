@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { easeInCubic, easeOutCubic } from 'easing-js';
 import MathEx from 'js-util/MathEx';
 
+import store from '@/store'
 import vs from '@/webgl/glsl/WhoIamText.vs';
 import fs from '@/webgl/glsl/WhoIamText.fs';
 
@@ -68,7 +69,9 @@ export default class WhoIamText extends THREE.Mesh {
   hide() {
     this.isHidden = true;
   }
-  update(time, scrollProgress) {
+  update(time) {
+    const { scrollProgress } = store.state;
+
     if (this.isActive === false) return;
     this.material.uniforms.time.value += time;
 

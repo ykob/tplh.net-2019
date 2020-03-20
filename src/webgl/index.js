@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import sleep from 'js-util/sleep';
 
+import store from '@/store'
 import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
 import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
 import checkWebpFeature from '@/utils/checkWebpFeature';
-import initDatGui from '@/utils/initDatGui';
 
 import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
@@ -197,18 +197,20 @@ export default class WebGLContent {
       this.worksText.start(worksTextTex);
       this.whoiamText.start(whoiamTextTex);
       this.bg.start(noiseTex);
-
-      // show the dat.gui.
-      if (process.env.VUE_APP_MODE === 'development') {
-        initDatGui(
-          this.skull,
-          this.petalRotateGroup,
-          petalHsv1,
-          petalHsv2,
-          petalHsv3
-        );
-      }
     });
+
+    // show the dat.gui.
+    if (process.env.VUE_APP_MODE === 'development') {
+      const initDatGui = await import('@/utils/initDatGui');
+
+      initDatGui.default(
+        this.skull,
+        this.petalRotateGroup,
+        petalHsv1,
+        petalHsv2,
+        petalHsv3
+      );
+    }
   }
   play() {
     clock.start();
@@ -245,7 +247,9 @@ export default class WebGLContent {
       this.whoiamText.hide();
     }
   }
-  update({ mouse, mouseForce, scrollProgress }) {
+  update() {
+    const { mouse, scrollProgress } = store.state;
+
     // When the clock is stopped, it stops the all rendering too.
     const time = (clock.running === true) ? clock.getDelta() : 0;
 
@@ -263,13 +267,13 @@ export default class WebGLContent {
     }
 
     // Update each objects.
-    this.skull.update(time, renderer, this.camera, sceneAura, this.skullAuraCamera, mouseForce);
-    this.petalFallGroup.update(time, scrollProgress);
+    this.skull.update(time, renderer, this.camera, sceneAura, this.skullAuraCamera);
+    this.petalFallGroup.update(time);
     this.petalRotateGroup.update(time);
     this.title.update(time);
     this.image.update(time);
     this.worksText.update(time);
-    this.whoiamText.update(time, scrollProgress);
+    this.whoiamText.update(time);
     this.bg.update(time);
     this.postEffectBloom.update(time);
 
@@ -295,20 +299,22 @@ export default class WebGLContent {
     renderer.render(scenePE, cameraPE);
     scenePE.remove(this.postEffectBloom);
   }
-  resize(resolution, isMobile) {
-    this.camera.resize(resolution, isMobile);
+  resize() {
+    const { resolution } = store.state;
+
+    this.camera.resize();
     this.skull.resize();
     this.title.resize();
-    this.image.resize(resolution);
-    this.bg.resize(this.camera, resolution);
-    this.intersector.resize(this.camera, resolution);
+    this.image.resize();
+    this.bg.resize(this.camera);
+    this.intersector.resize(this.camera);
     renderer.setSize(resolution.x, resolution.y);
 
     // For the Post Effect.
     renderTarget1.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     renderTarget2.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
     renderTarget3.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
-    this.postEffectBlurY.resize(resolution.x / 3, resolution.y / 3);
-    this.postEffectBlurX.resize(resolution.x / 3, resolution.y / 3);
+    this.postEffectBlurY.resize();
+    this.postEffectBlurX.resize();
   }
 }

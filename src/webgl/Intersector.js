@@ -22,7 +22,7 @@ export default class Intersector extends THREE.Mesh {
 
     this.position.set(0, 0, 30);
   }
-  resize(camera, resolution) {
+  resize(camera) {
     const height = Math.abs(
       (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
     );

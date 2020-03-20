@@ -162,7 +162,7 @@ export default class Image extends THREE.Group {
     this.children[3].update(time, this.easeStepChange3);
     this.children[4].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
   }
-  resize(resolution) {
-    this.children[4].resize(resolution);
+  resize() {
+    this.children[4].resize();
   }
 }
