@@ -1,20 +1,20 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import * as THREE from 'three';
-import MathEx from 'js-util/MathEx'
+import Vue from "vue";
+import Vuex from "vuex";
+import * as THREE from "three";
+import MathEx from "js-util/MathEx";
 
-import router from '@/router'
+import router from "@/router";
 
-import WORKS from '@/const/WORKS';
+import WORKS from "@/const/WORKS";
 
 const INTERVAL_TO_FIRE_WHEEL = 1000;
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     globalId: 0,
-    canvas: document.createElement('canvas'),
+    canvas: document.createElement("canvas"),
     resolution: new THREE.Vector2(),
     mouse: new THREE.Vector2(),
     mousePrev: new THREE.Vector2(),
@@ -42,63 +42,64 @@ export default new Vuex.Store({
     isSwipingX: false,
     isSwipingY: false,
     isTouchStarted: false,
-    isTouchMoving: false,
+    isTouchMoving: false
   },
   mutations: {
-    initWebGL (state, webgl) {
+    initWebGL(state, webgl) {
       state.webgl = webgl;
     },
-    showPreloader (state) {
+    showPreloader(state) {
       state.isShownPreloader = true;
     },
-    setPreloadMax (state, num) {
+    setPreloadMax(state, num) {
       state.preloadMax = num;
     },
-    updatePreloadAnchor (state) {
+    updatePreloadAnchor(state) {
       state.preloadAnchor++;
     },
-    updatePreloadProgress (state) {
-      state.preloadProgress += (state.preloadAnchor - state.preloadProgress) / 14;
+    updatePreloadProgress(state) {
+      state.preloadProgress +=
+        (state.preloadAnchor - state.preloadProgress) / 14;
     },
-    loaded (state) {
+    loaded(state) {
       state.isLoaded = true;
     },
-    showView (state) {
+    showView(state) {
       state.isShowView = true;
     },
-    showUI (state) {
+    showUI(state) {
       state.isShownUI = true;
     },
-    startTransition (state) {
+    startTransition(state) {
       state.isTransition = true;
     },
-    endTransition (state) {
+    endTransition(state) {
       state.isTransition = false;
     },
-    transit (state, opts) {
+    transit(state, opts) {
       if (state.globalId !== opts.globalId) {
-        state.isTransitionDescend = state.globalId <= opts.globalId
+        state.isTransitionDescend = state.globalId <= opts.globalId;
       } else {
-        state.isTransitionDescend = state.currentWorksId <= opts.currentWorksId
+        state.isTransitionDescend = state.currentWorksId <= opts.currentWorksId;
       }
       state.isTransitionInWorks = state.globalId === 1 && opts.globalId === 1;
       state.globalId = opts.globalId;
-      state.currentWorksId = (opts.currentWorksId) ? opts.currentWorksId : 0;
+      state.currentWorksId = opts.currentWorksId ? opts.currentWorksId : 0;
     },
-    changeBackground (state, { isHome, hasDelay }) {
+    changeBackground(state, { isHome, hasDelay }) {
       state.webgl.changeBackground(isHome, hasDelay);
     },
-    showHomeObjs (state, bool) {
+    showHomeObjs(state, bool) {
       state.webgl.showHomeObjs(bool);
     },
-    showWorksObjs (state, { index, direction }) {
+    showWorksObjs(state, { index, direction }) {
       state.webgl.showWorksObjs(index, direction, state.positionFromWorks);
       state.positionFromWorks = direction;
     },
-    showWhoIAmObjs (state, bool) {
+    showWhoIAmObjs(state, bool) {
       state.webgl.showWhoIAmObjs(bool);
     },
-    startWheeling (state) {
+    startWheeling(state) {
       state.isWheeling = true;
 
       // Prevent repeated wheel events fire with a timer.
@@ -106,54 +107,54 @@ export default new Vuex.Store({
         state.isWheeling = false;
       }, INTERVAL_TO_FIRE_WHEEL);
     },
-    setScrollProgress (state, ratio) {
+    setScrollProgress(state, ratio) {
       state.scrollProgress = MathEx.clamp(ratio, 0, 1);
     },
-    changeMediaQuery (state, bool) {
+    changeMediaQuery(state, bool) {
       state.isMobile = bool;
     },
-    setEnabledTouch (state, bool) {
-      state.isEnabledTouch = bool
+    setEnabledTouch(state, bool) {
+      state.isEnabledTouch = bool;
     },
-    startTouch (state) {
-      state.isTouchStarted = true
+    startTouch(state) {
+      state.isTouchStarted = true;
     },
-    startTouchMove (state) {
-      state.isTouchMoving = true
+    startTouchMove(state) {
+      state.isTouchMoving = true;
     },
-    startSwipeX (state) {
-      state.isSwipingX = true
-      state.isSwipingY = false
+    startSwipeX(state) {
+      state.isSwipingX = true;
+      state.isSwipingY = false;
     },
-    startSwipeY (state) {
-      state.isSwipingX = false
-      state.isSwipingY = true
+    startSwipeY(state) {
+      state.isSwipingX = false;
+      state.isSwipingY = true;
     },
-    touchMove (state, { x, y }) {
+    touchMove(state, { x, y }) {
       state.touchMove.set(x, y);
     },
-    touchEnd (state) {
+    touchEnd(state) {
       state.touchMove.set(0, 0);
-      state.isSwipingX = false
-      state.isSwipingY = false
-      state.isTouchStarted = false
-      state.isTouchMoving = false
-    },
+      state.isSwipingX = false;
+      state.isSwipingY = false;
+      state.isTouchStarted = false;
+      state.isTouchMoving = false;
+    }
   },
   actions: {
-    async initWebGL (context) {
-      await import('@/webgl/').then((module) => {
+    async initWebGL(context) {
+      await import("@/webgl/").then(module => {
         const webgl = new module.default();
-        context.commit('initWebGL', webgl);
+        context.commit("initWebGL", webgl);
       });
     },
-    debounceRouterPush (context, url) {
+    debounceRouterPush(context, url) {
       if (context.state.isTransition === true) return;
-      context.commit('startTransition');
+      context.commit("startTransition");
       router.push(url);
       setTimeout(() => {
-        context.commit('endTransition');
-      }, INTERVAL_TO_FIRE_WHEEL)
+        context.commit("endTransition");
+      }, INTERVAL_TO_FIRE_WHEEL);
     }
   }
-})
+});

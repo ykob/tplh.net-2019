@@ -1,11 +1,11 @@
-import * as THREE from 'three';
-import { easeInCirc, easeOutCirc } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeInCirc, easeOutCirc } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import store from '@/store'
+import store from "@/store";
 
-import vs from '@/webgl/glsl/Title.vs';
-import fs from '@/webgl/glsl/Title.fs';
+import vs from "@/webgl/glsl/Title.vs";
+import fs from "@/webgl/glsl/Title.fs";
 
 const DURATION_SHOW = 3;
 const DELAY_SHOW = 2;
@@ -21,34 +21,34 @@ export default class Title extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaTex: {
-          type: 't',
+          type: "t",
           value: null
         },
         noiseTex: {
-          type: 't',
+          type: "t",
           value: null
         },
         alpha: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         isMobile: {
-          type: 'f',
+          type: "f",
           value: 0
-        },
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,
-      transparent: true,
+      transparent: true
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'Title';
+    this.name = "Title";
     this.size = new THREE.Vector3();
     this.positionBase = new THREE.Vector3(0, -7, 0);
     this.alphaStart = 0;
@@ -93,8 +93,12 @@ export default class Title extends THREE.Mesh {
     }
 
     // calculation the alpha.
-    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeInCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
+    const alphaShow = easeOutCirc(
+      MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0)
+    );
+    const alphaHide = easeInCirc(
+      MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0)
+    );
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
     this.position.set(
       this.positionBase.x,

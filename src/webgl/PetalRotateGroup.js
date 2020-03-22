@@ -1,14 +1,13 @@
-import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
 
-import PetalRotate from '@/webgl/PetalRotate';
+import PetalRotate from "@/webgl/PetalRotate";
 
 const PETAL_NUM = 60;
 
 export default class PetalRotateGroup extends THREE.Group {
   constructor() {
     super();
-    this.name = 'PetalRotateGroup';
+    this.name = "PetalRotateGroup";
     this.petals = Array(PETAL_NUM);
     this.time = 0;
     this.isActive = false;
@@ -16,7 +15,7 @@ export default class PetalRotateGroup extends THREE.Group {
   }
   start(geometryPetal1, geometryPetal2, noiseTex, hsv1, hsv2, hsv3) {
     for (var i = 0; i < this.petals.length; i++) {
-      const geometry = (i % 2 === 1) ? geometryPetal1 : geometryPetal2;
+      const geometry = i % 2 === 1 ? geometryPetal1 : geometryPetal2;
       this.petals[i] = new PetalRotate(geometry, hsv1, hsv2, hsv3);
       this.add(this.petals[i]);
       this.petals[i].start(noiseTex);

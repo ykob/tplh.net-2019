@@ -1,14 +1,14 @@
-import * as THREE from 'three';
-import { easeInOutCirc, easeOutCirc } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeInOutCirc, easeOutCirc } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import store from '@/store'
+import store from "@/store";
 
-import SkullBody from '@/webgl/SkullBody';
-import SkullAuraPostEffect from '@/webgl/SkullAuraPostEffect';
-import SkullAura from '@/webgl/SkullAura';
-import SkullPoints from '@/webgl/SkullPoints';
-import SkullPointsFirst from '@/webgl/SkullPointsFirst';
+import SkullBody from "@/webgl/SkullBody";
+import SkullAuraPostEffect from "@/webgl/SkullAuraPostEffect";
+import SkullAura from "@/webgl/SkullAura";
+import SkullPoints from "@/webgl/SkullPoints";
+import SkullPointsFirst from "@/webgl/SkullPointsFirst";
 
 const DURATION_SHOW = 2;
 const DELAY_SHOW = 1;
@@ -18,7 +18,7 @@ const DELAY_HIDE = 0;
 export default class Skull extends THREE.Group {
   constructor() {
     super();
-    this.name = 'Skull';
+    this.name = "Skull";
     this.body;
     this.auraPostEffect;
     this.aura;
@@ -93,12 +93,19 @@ export default class Skull extends THREE.Group {
     }
 
     // move with a mouse coordinate.
-    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(36);
+    this.lookA
+      .copy(this.lookAnchor)
+      .sub(this.lookV)
+      .divideScalar(36);
     this.lookV.add(this.lookA);
 
     // rising first.
-    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeInOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
+    const alphaShow = easeOutCirc(
+      MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0)
+    );
+    const alphaHide = easeInOutCirc(
+      MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0)
+    );
 
     // add all translates to this position..
     this.position
@@ -110,11 +117,12 @@ export default class Skull extends THREE.Group {
       .add(this.lookV);
 
     // calculate the fluctuation of the color
-    const fluctuation = (
-      Math.sin(this.time) * 0.5
-      + Math.sin(this.time * 2.4) * 0.3
-      + Math.sin(this.time * 4.2) * 0.2
-    ) * 0.5 + 0.5;
+    const fluctuation =
+      (Math.sin(this.time) * 0.5 +
+        Math.sin(this.time * 2.4) * 0.3 +
+        Math.sin(this.time * 4.2) * 0.2) *
+        0.5 +
+      0.5;
 
     // update children.
     this.body.update(time, camera, fluctuation);

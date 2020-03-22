@@ -1,11 +1,11 @@
-import * as THREE from 'three';
-import { easeOutCirc, easeInOutCubic } from 'easing-js';
-import MathEx from 'js-util/MathEx'
+import * as THREE from "three";
+import { easeOutCirc, easeInOutCubic } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import store from '@/store'
+import store from "@/store";
 
-import vs from '@/webgl/glsl/PostEffect.vs';
-import fs from '@/webgl/glsl/PostEffectBloom.fs';
+import vs from "@/webgl/glsl/PostEffect.vs";
+import fs from "@/webgl/glsl/PostEffectBloom.fs";
 
 const DURATION1 = 0.2;
 const DURATION2 = 1.8;
@@ -21,33 +21,33 @@ export default class PostEffectBloom extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alpha: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         resolution: {
-          type: 'v2',
+          type: "v2",
           value: store.state.resolution
         },
         texture1: {
-          type: 't',
+          type: "t",
           value: null
         },
         texture2: {
-          type: 't',
+          type: "t",
           value: null
-        },
+        }
       },
       vertexShader: vs,
-      fragmentShader: fs,
+      fragmentShader: fs
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'PostEffectBloom';
+    this.name = "PostEffectBloom";
     this.timeShake = 0;
     this.timeFadeOut = 0;
     this.isShaking = false;
@@ -73,9 +73,16 @@ export default class PostEffectBloom extends THREE.Mesh {
       this.timeFadeOut += time;
     }
 
-    const alpha1 = easeOutCirc(MathEx.clamp((this.timeShake - DELAY) / DURATION1, 0.0, 1.0));
-    const alpha2 = easeInOutCubic(MathEx.clamp((this.timeShake - DELAY - DURATION1) / DURATION2, 0.0, 1.0));
-    const alpha3 = easeOutCirc(MathEx.clamp((this.timeFadeOut) / DURATION3, 0.0, 1.0));
-    this.material.uniforms.alpha.value = alpha1 * (1.0 - alpha2) * (1.0 - alpha3);
+    const alpha1 = easeOutCirc(
+      MathEx.clamp((this.timeShake - DELAY) / DURATION1, 0.0, 1.0)
+    );
+    const alpha2 = easeInOutCubic(
+      MathEx.clamp((this.timeShake - DELAY - DURATION1) / DURATION2, 0.0, 1.0)
+    );
+    const alpha3 = easeOutCirc(
+      MathEx.clamp(this.timeFadeOut / DURATION3, 0.0, 1.0)
+    );
+    this.material.uniforms.alpha.value =
+      alpha1 * (1.0 - alpha2) * (1.0 - alpha3);
   }
 }

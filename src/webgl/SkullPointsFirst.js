@@ -1,11 +1,11 @@
-import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import MathEx from "js-util/MathEx";
 
-import store from '@/store'
-import vs from '@/webgl/glsl/SkullPointsFirst.vs';
-import fs from '@/webgl/glsl/SkullPointsFirst.fs';
+import store from "@/store";
+import vs from "@/webgl/glsl/SkullPointsFirst.vs";
+import fs from "@/webgl/glsl/SkullPointsFirst.fs";
 
-import PIXEL_RATIO from '@/const/PIXEL_RATIO';
+import PIXEL_RATIO from "@/const/PIXEL_RATIO";
 
 const DURATION = 1.4;
 const DELAY_SHOW = 2.75;
@@ -33,48 +33,48 @@ export default class SkullPointsFirst extends THREE.Points {
       baDelays.setX(i, Math.random() * DURATION * 0.6 + DELAY_SHOW);
       baStartY.setX(i, Math.random() * 10);
     }
-    geometry.setAttribute('position', baPositions);
-    geometry.setAttribute('delay', baDelays);
-    geometry.setAttribute('startY', baStartY);
+    geometry.setAttribute("position", baPositions);
+    geometry.setAttribute("delay", baDelays);
+    geometry.setAttribute("startY", baStartY);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         duration: {
-          type: 'f',
+          type: "f",
           value: DURATION
         },
         resolution: {
-          type: 'v2',
+          type: "v2",
           value: new THREE.Vector2()
         },
         pixelRatio: {
-          type: 'f',
+          type: "f",
           value: PIXEL_RATIO
         },
         noiseTex: {
-          type: 't',
+          type: "t",
           value: null
         },
         alpha: {
-          type: 'f',
+          type: "f",
           value: 0
-        },
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      depthWrite: false,
+      depthWrite: false
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'SkullPointsFirst';
+    this.name = "SkullPointsFirst";
     this.timeHide = 0;
     this.isShown = false;
     this.isHidden = false;
@@ -94,22 +94,18 @@ export default class SkullPointsFirst extends THREE.Points {
     const { time } = this.material.uniforms;
 
     time.value += t;
-    this.rotation.set(
-      0,
-      time.value * 0.2,
-      0
-    );
+    this.rotation.set(0, time.value * 0.2, 0);
 
     if (time.value >= DURATION * 1.8 + DELAY_SHOW) {
-      this.visible = false
+      this.visible = false;
     }
 
     // calculation the hidding alpha.
     if (this.isHidden === true) {
       this.timeHide += time;
     }
-    const alphaHide = MathEx.clamp((this.timeHide) / DURATION_HIDE, 0.0, 1.0);
-    this.material.uniforms.alpha.value = (1.0 - alphaHide);
+    const alphaHide = MathEx.clamp(this.timeHide / DURATION_HIDE, 0.0, 1.0);
+    this.material.uniforms.alpha.value = 1.0 - alphaHide;
   }
   resize() {
     const { resolution } = store.state;

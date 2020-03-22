@@ -1,7 +1,7 @@
 <script>
-  export default {
-    name: 'HomeHeading',
-  }
+export default {
+  name: "HomeHeading"
+};
 </script>
 
 <template lang="pug">
@@ -12,7 +12,7 @@
 </template>
 
 <style lang="scss">
-  .p-home-heading {
-    display: none;
-  }
+.p-home-heading {
+  display: none;
+}
 </style>

@@ -1,12 +1,11 @@
-import * as THREE from 'three';
-import sleep from 'js-util/sleep';
+import * as THREE from "three";
 
-import store from '@/store'
-import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
-import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
-import checkWebpFeature from '@/utils/checkWebpFeature';
+import store from "@/store";
+import PromiseOBJLoader from "@/webgl/PromiseOBJLoader";
+import PromiseTextureLoader from "@/webgl/PromiseTextureLoader";
+import checkWebpFeature from "@/utils/checkWebpFeature";
 
-import PIXEL_RATIO from '@/const/PIXEL_RATIO';
+import PIXEL_RATIO from "@/const/PIXEL_RATIO";
 
 // ==========
 // Define common variables
@@ -53,67 +52,67 @@ export default class WebGLContent {
   }
   async start(canvas, store) {
     // Check whether the webp format is enabled.
-    let webpExe = '';
-    await checkWebpFeature('lossy')
+    let webpExe = "";
+    await checkWebpFeature("lossy")
       .then(() => {
-        webpExe = 'webp';
+        webpExe = "webp";
       })
       .catch(() => {
-        webpExe = 'jpg';
+        webpExe = "jpg";
       });
 
     // import modules
     await Promise.all([
-      import('@/webgl/Camera').then(module => {
+      import("@/webgl/Camera").then(module => {
         this.camera = new module.default();
       }),
-      import('@/webgl/SkullAuraCamera').then(module => {
+      import("@/webgl/SkullAuraCamera").then(module => {
         this.skullAuraCamera = new module.default();
       }),
-      import('@/webgl/Skull').then(module => {
+      import("@/webgl/Skull").then(module => {
         this.skull = new module.default();
       }),
-      import('@/webgl/Title').then(module => {
+      import("@/webgl/Title").then(module => {
         this.title = new module.default();
       }),
-      import('@/webgl/PetalFallGroup').then(module => {
+      import("@/webgl/PetalFallGroup").then(module => {
         this.petalFallGroup = new module.default();
       }),
-      import('@/webgl/PetalRotateGroup').then(module => {
+      import("@/webgl/PetalRotateGroup").then(module => {
         this.petalRotateGroup = new module.default();
       }),
-      import('@/webgl/Image').then(module => {
+      import("@/webgl/Image").then(module => {
         this.image = new module.default();
       }),
-      import('@/webgl/WorksText').then(module => {
+      import("@/webgl/WorksText").then(module => {
         this.worksText = new module.default();
       }),
-      import('@/webgl/WhoIamText').then(module => {
+      import("@/webgl/WhoIamText").then(module => {
         this.whoiamText = new module.default();
       }),
-      import('@/webgl/Background').then(module => {
+      import("@/webgl/Background").then(module => {
         this.bg = new module.default();
       }),
-      import('@/webgl/Intersector').then(module => {
+      import("@/webgl/Intersector").then(module => {
         this.intersector = new module.default();
       }),
-      import('@/webgl/PostEffectBright').then(module => {
+      import("@/webgl/PostEffectBright").then(module => {
         this.postEffectBright = new module.default();
       }),
-      import('@/webgl/PostEffectBlur').then(module => {
+      import("@/webgl/PostEffectBlur").then(module => {
         this.postEffectBlurX = new module.default();
         this.postEffectBlurY = new module.default();
       }),
-      import('@/webgl/PostEffectBloom').then(module => {
+      import("@/webgl/PostEffectBloom").then(module => {
         this.postEffectBloom = new module.default();
-      }),
-    ])
+      })
+    ]);
 
     // Initialize the WebGL renderer.
     renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: false,
-      canvas: canvas,
+      canvas: canvas
     });
     renderer.setPixelRatio(PIXEL_RATIO);
     renderer.setClearColor(0x1b191c, 0.0);
@@ -125,37 +124,37 @@ export default class WebGLContent {
     this.postEffectBloom.start(renderTarget1.texture, renderTarget2.texture);
 
     // Loading all assets for WebGL.
-    const updateProgressAnchor = (result) => {
-      store.commit('updatePreloadAnchor');
-      return result
-    }
+    const updateProgressAnchor = result => {
+      store.commit("updatePreloadAnchor");
+      return result;
+    };
     const assetsObj = [
-      require('@/assets/obj/SkullHead.obj'),
-      require('@/assets/obj/CherryBlossom.obj')
-    ]
+      require("@/assets/obj/SkullHead.obj"),
+      require("@/assets/obj/CherryBlossom.obj")
+    ];
     const assetsImgs = [
       require(`@/assets/img/webgl/title.${webpExe}`),
       require(`@/assets/img/webgl/noise.${webpExe}`),
       require(`@/assets/img/webgl/noise_burn.${webpExe}`),
       require(`@/assets/img/webgl/works_text.${webpExe}`),
       require(`@/assets/img/webgl/whoiam_text.${webpExe}`),
-      require('@/assets/img/webgl/thumb_blank.png'),
+      require("@/assets/img/webgl/thumb_blank.png"),
       require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`),
       require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`),
       require(`@/assets/img/webgl/thumb_hassyadai.${webpExe}`),
       require(`@/assets/img/webgl/thumb_imago.${webpExe}`),
-      require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`),
-    ]
-    store.commit('setPreloadMax', assetsObj.length + assetsImgs.length);
+      require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`)
+    ];
+    store.commit("setPreloadMax", assetsObj.length + assetsImgs.length);
 
     await Promise.all([
-      ...(assetsObj.map(o => {
-        return PromiseOBJLoader(o).then(updateProgressAnchor)
-      })),
-      ...(assetsImgs.map(o => {
-        return PromiseTextureLoader(o).then(updateProgressAnchor)
-      }))
-    ]).then((response) => {
+      ...assetsObj.map(o => {
+        return PromiseOBJLoader(o).then(updateProgressAnchor);
+      }),
+      ...assetsImgs.map(o => {
+        return PromiseTextureLoader(o).then(updateProgressAnchor);
+      })
+    ]).then(response => {
       // Initialize all instance on WebGL scene.
       const geometrySkullHead = response[0].children[1].geometry;
       const geometrySkullJaw = response[0].children[0].geometry;
@@ -191,8 +190,22 @@ export default class WebGLContent {
       this.skullAuraCamera.start();
       this.skull.start(geometrySkullHead, geometrySkullJaw, noiseTex);
       this.title.start(titleTex, noiseTex);
-      this.petalFallGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
-      this.petalRotateGroup.start(geometryPetal1, geometryPetal2, noiseTex, petalHsv1, petalHsv2, petalHsv3);
+      this.petalFallGroup.start(
+        geometryPetal1,
+        geometryPetal2,
+        noiseTex,
+        petalHsv1,
+        petalHsv2,
+        petalHsv3
+      );
+      this.petalRotateGroup.start(
+        geometryPetal1,
+        geometryPetal2,
+        noiseTex,
+        petalHsv1,
+        petalHsv2,
+        petalHsv3
+      );
       this.image.start(noiseBurnTex, imgTexes);
       this.worksText.start(worksTextTex);
       this.whoiamText.start(whoiamTextTex);
@@ -200,8 +213,8 @@ export default class WebGLContent {
     });
 
     // show the dat.gui.
-    if (process.env.VUE_APP_MODE === 'development') {
-      const initDatGui = await import('@/utils/initDatGui');
+    if (process.env.VUE_APP_MODE === "development") {
+      const initDatGui = await import("@/utils/initDatGui");
 
       initDatGui.default(
         this.skull,
@@ -218,7 +231,7 @@ export default class WebGLContent {
   pause() {
     clock.stop();
   }
-  changeBackground (isHome, hasDelay) {
+  changeBackground(isHome, hasDelay) {
     this.bg.change(isHome, hasDelay);
   }
   showHomeObjs(bool) {
@@ -248,10 +261,10 @@ export default class WebGLContent {
     }
   }
   update() {
-    const { mouse, scrollProgress } = store.state;
+    const { mouse } = store.state;
 
     // When the clock is stopped, it stops the all rendering too.
-    const time = (clock.running === true) ? clock.getDelta() : 0;
+    const time = clock.running === true ? clock.getDelta() : 0;
 
     // Calculate msec for this frame.
 
@@ -263,11 +276,17 @@ export default class WebGLContent {
     raycaster.setFromCamera(mouse, this.camera);
     const intersects = raycaster.intersectObjects([this.intersector]);
     if (intersects.length > 0) {
-      this.skull.lookMouse(intersects[0].point)
+      this.skull.lookMouse(intersects[0].point);
     }
 
     // Update each objects.
-    this.skull.update(time, renderer, this.camera, sceneAura, this.skullAuraCamera);
+    this.skull.update(
+      time,
+      renderer,
+      this.camera,
+      sceneAura,
+      this.skullAuraCamera
+    );
     this.petalFallGroup.update(time);
     this.petalRotateGroup.update(time);
     this.title.update(time);
@@ -311,9 +330,18 @@ export default class WebGLContent {
     renderer.setSize(resolution.x, resolution.y);
 
     // For the Post Effect.
-    renderTarget1.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
-    renderTarget2.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
-    renderTarget3.setSize(resolution.x * PIXEL_RATIO, resolution.y * PIXEL_RATIO);
+    renderTarget1.setSize(
+      resolution.x * PIXEL_RATIO,
+      resolution.y * PIXEL_RATIO
+    );
+    renderTarget2.setSize(
+      resolution.x * PIXEL_RATIO,
+      resolution.y * PIXEL_RATIO
+    );
+    renderTarget3.setSize(
+      resolution.x * PIXEL_RATIO,
+      resolution.y * PIXEL_RATIO
+    );
     this.postEffectBlurY.resize();
     this.postEffectBlurX.resize();
   }

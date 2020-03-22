@@ -1,6 +1,6 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 
-import store from '@/store'
+import store from "@/store";
 
 export default class Camera extends THREE.PerspectiveCamera {
   constructor(fov, aspect, near, far) {

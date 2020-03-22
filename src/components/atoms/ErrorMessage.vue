@@ -1,7 +1,7 @@
 <script>
-  export default {
-    name: 'ErrorMessage',
-  }
+export default {
+  name: "ErrorMessage"
+};
 </script>
 
 <template lang="pug">
@@ -27,114 +27,113 @@
 </template>
 
 <style lang="scss">
-  .p-error-message {
+.p-error-message {
+  position: absolute;
+  @include l-more-than-mobile {
+    width: 196px;
+    height: 196px;
+    top: calc(50% - 98px);
+    left: calc(50% - 98px);
+  }
+  @include l-mobile {
+    width: 118px;
+    height: 118px;
+    top: calc(50% - 59px);
+    left: calc(50% - 59px);
+  }
+
+  // Transition
+  .view-leave-to &,
+  .view-asc-leave-to & {
+    opacity: 0;
+    transform: scale(1.8);
+    transition-duration: 1s;
+    transition-timing-function: $easeInExpo;
+    transition-property: opacity, transform;
+  }
+  &__circle {
     position: absolute;
+    top: 0;
+    left: 0;
+
+    // Transition
+    .view-enter &,
+    .view-asc-enter & {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    .view-enter-to &,
+    .view-asc-enter-to & {
+      opacity: 1;
+      transform: scale(1);
+      transition-duration: 1.5s;
+      transition-delay: 1.5s;
+      transition-timing-function: $easeOutQuad;
+      transition-property: opacity, transform;
+    }
+  }
+  &__svg {
+    fill: $color-text;
+    display: block;
+    animation-name: rotate;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
     @include l-more-than-mobile {
       width: 196px;
       height: 196px;
-      top: calc(50% - 98px);
-      left: calc(50% - 98px);
     }
     @include l-mobile {
       width: 118px;
       height: 118px;
-      top: calc(50% - 59px);
-      left: calc(50% - 59px);
     }
+  }
+  &__text {
+    width: 1em;
+    height: (30 / 26) * 3em;
+    position: absolute;
+    top: calc(50% - 30 / 26 * 1.5em - 2px);
+    @include fontSizeAll(26, 26, 16);
+    @include l-more-than-mobile {
+      left: calc(50% - 0.5em + 4px);
+    }
+    @include l-mobile {
+      left: calc(50% - 0.5em + 3px);
+    }
+  }
+  &__typo {
+    overflow: hidden;
+    transform: rotateY(180deg);
+  }
+  &__typo-in {
+    width: 1em;
+    height: (30 / 26) * 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: (30 / 26);
 
     // Transition
-    .view-leave-to &,
-    .view-asc-leave-to & {
-      opacity: 0;
-      transform: scale(1.8);
+    .view-enter &,
+    .view-asc-enter & {
+      transform: translate3d(1.01em, 0, 0);
+    }
+    .view-enter-to &,
+    .view-asc-enter-to & {
+      transform: translate3d(0, 0, 0);
       transition-duration: 1s;
-      transition-timing-function: $easeInExpo;
-      transition-property: opacity, transform;
-    }
-    &__circle {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      // Transition
-      .view-enter &,
-      .view-asc-enter & {
-        opacity: 0;
-        transform: scale(0.6);
+      transition-property: transform;
+      transition-timing-function: $easeOutQuad;
+      &--1 {
+        transition-delay: 0.8s;
       }
-      .view-enter-to &,
-      .view-asc-enter-to & {
-        opacity: 1;
-        transform: scale(1);
-        transition-duration: 1.5s;
-        transition-delay: 1.5s;
-        transition-timing-function: $easeOutQuad;
-        transition-property: opacity, transform;
+      &--2 {
+        transition-delay: 0.9s;
       }
-    }
-    &__svg {
-      fill: $color-text;
-      display: block;
-      animation-name: rotate;
-      animation-duration: 20s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      @include l-more-than-mobile {
-        width: 196px;
-        height: 196px;
-      }
-      @include l-mobile {
-        width: 118px;
-        height: 118px;
-      }
-
-    }
-    &__text {
-      width: 1em;
-      height: (30 / 26) * 3em;
-      position: absolute;
-      top: calc(50% - 30 / 26 * 1.5em - 2px);
-      @include fontSizeAll(26, 26, 16);
-      @include l-more-than-mobile {
-        left: calc(50% - 0.5em + 4px);
-      }
-      @include l-mobile {
-        left: calc(50% - 0.5em + 3px);
-      }
-    }
-    &__typo {
-      overflow: hidden;
-      transform: rotateY(180deg);
-    }
-    &__typo-in {
-      width: 1em;
-      height: (30 / 26) * 1em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: (30 / 26);
-
-      // Transition
-      .view-enter &,
-      .view-asc-enter & {
-        transform: translate3d(1.01em, 0, 0);
-      }
-      .view-enter-to &,
-      .view-asc-enter-to & {
-        transform: translate3d(0, 0, 0);
-        transition-duration: 1s;
-        transition-property: transform;
-        transition-timing-function: $easeOutQuad;
-        &--1 {
-          transition-delay: .8s;
-        }
-        &--2 {
-          transition-delay: .9s;
-        }
-        &--3 {
-          transition-delay: 1s;
-        }
+      &--3 {
+        transition-delay: 1s;
       }
     }
   }
+}
 </style>
