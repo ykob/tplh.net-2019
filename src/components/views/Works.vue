@@ -145,7 +145,7 @@ export default {
     WorkOutline(
       v-for = 'item, index in $store.state.works'
       v-if = 'item.key === $route.params.key'
-      :key = 'index'
+      :key = 'item.key'
       :index = 'index'
       :title = 'item.title'
       :description = 'item.description'
