@@ -1,11 +1,11 @@
-import * as THREE from 'three';
-import { easeInCirc, easeOutCirc } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeInCirc, easeOutCirc } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import vs from '@/webgl/glsl/WorksText.vs';
-import fs from '@/webgl/glsl/WorksText.fs';
+import vs from "@/webgl/glsl/WorksText.vs";
+import fs from "@/webgl/glsl/WorksText.fs";
 
-import WORKS from '@/const/WORKS';
+import WORKS from "@/const/WORKS";
 
 const WIDTH = 90;
 const DURATION_TRANSITION = 1;
@@ -14,93 +14,98 @@ const DELAY_SHOW = 0.8;
 export default class WorksText extends THREE.Mesh {
   constructor() {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(WIDTH, 5 / 16 * WIDTH, 128, 39);
+    const geometry = new THREE.PlaneBufferGeometry(
+      WIDTH,
+      (5 / 16) * WIDTH,
+      128,
+      39
+    );
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex: {
-          type: 't',
+          type: "t",
           value: null
         },
         tex1Index: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex1MaxUvX: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex2Index: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex2MaxUvX: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex3Index: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex3MaxUvX: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         maxIndex: {
-          type: 'f',
+          type: "f",
           value: 16
         },
         alphaShow1: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaHide1: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaShow2: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaHide2: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaShow3: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaHide3: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         directionShow1: {
-          type: 'f',
+          type: "f",
           value: 1
         },
         directionHide1: {
-          type: 'f',
+          type: "f",
           value: 1
         },
         directionShow2: {
-          type: 'f',
+          type: "f",
           value: 1
         },
         directionHide2: {
-          type: 'f',
+          type: "f",
           value: 1
         },
         directionShow3: {
-          type: 'f',
+          type: "f",
           value: 1
         },
         directionHide3: {
-          type: 'f',
+          type: "f",
           value: 1
         }
       },
@@ -108,12 +113,12 @@ export default class WorksText extends THREE.Mesh {
       fragmentShader: fs,
       transparent: true,
       side: THREE.DoubleSide,
-      depthTest: false,
+      depthTest: false
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'WorksText';
+    this.name = "WorksText";
     this.time = 0;
     this.timeShow1 = 0;
     this.timeShow2 = 0;
@@ -137,9 +142,16 @@ export default class WorksText extends THREE.Mesh {
   }
   change(index, dir, prevPosFromWorks) {
     if (this.changeIndex === 0) {
-      const { tex1Index, tex1MaxUvX, tex2Index, tex2MaxUvX, directionHide1, directionShow2 } = this.material.uniforms;
+      const {
+        tex1Index,
+        tex2Index,
+        tex2MaxUvX,
+        directionHide1,
+        directionShow2
+      } = this.material.uniforms;
       tex2Index.value = index;
-      tex2MaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
+      tex2MaxUvX.value =
+        index > 0 ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
       this.timeHide1 = 0;
       this.isHidden1 = true;
       this.timeShow2 = 0;
@@ -156,9 +168,16 @@ export default class WorksText extends THREE.Mesh {
         directionHide1.value = directionShow2.value = diff / Math.abs(diff);
       }
     } else if (this.changeIndex === 1) {
-      const { tex2Index, tex2MaxUvX, tex3Index, tex3MaxUvX, directionHide2, directionShow3 } = this.material.uniforms;
+      const {
+        tex2Index,
+        tex3Index,
+        tex3MaxUvX,
+        directionHide2,
+        directionShow3
+      } = this.material.uniforms;
       tex3Index.value = index;
-      tex3MaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
+      tex3MaxUvX.value =
+        index > 0 ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
       this.timeHide2 = 0;
       this.isHidden2 = true;
       this.timeShow3 = 0;
@@ -175,9 +194,16 @@ export default class WorksText extends THREE.Mesh {
         directionHide2.value = directionShow3.value = diff / Math.abs(diff);
       }
     } else if (this.changeIndex === 2) {
-      const { tex3Index, tex3MaxUvX, tex1Index, tex1MaxUvX, directionHide3, directionShow1 } = this.material.uniforms;
+      const {
+        tex3Index,
+        tex1Index,
+        tex1MaxUvX,
+        directionHide3,
+        directionShow1
+      } = this.material.uniforms;
       tex1Index.value = index;
-      tex1MaxUvX.value = (index > 0) ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
+      tex1MaxUvX.value =
+        index > 0 ? (WORKS[index - 1].textWidth + 40) / 2048 : 0;
       this.timeHide3 = 0;
       this.isHidden3 = true;
       this.timeShow1 = 0;
@@ -195,9 +221,7 @@ export default class WorksText extends THREE.Mesh {
       }
     }
 
-    this.changeIndex = (this.changeIndex >= 2)
-      ? 0
-      : this.changeIndex + 1;
+    this.changeIndex = this.changeIndex >= 2 ? 0 : this.changeIndex + 1;
   }
   update(t) {
     if (this.isActive === false) return;
@@ -234,11 +258,35 @@ export default class WorksText extends THREE.Mesh {
       this.timeHide3 += t;
     }
 
-    alphaShow1.value = easeOutCirc(MathEx.clamp((this.timeShow1 - DELAY_SHOW) / DURATION_TRANSITION, 0.0, 1.0));
-    alphaShow2.value = easeOutCirc(MathEx.clamp((this.timeShow2 - DELAY_SHOW) / DURATION_TRANSITION, 0.0, 1.0));
-    alphaShow3.value = easeOutCirc(MathEx.clamp((this.timeShow3 - DELAY_SHOW) / DURATION_TRANSITION, 0.0, 1.0));
-    alphaHide1.value = easeInCirc(MathEx.clamp(this.timeHide1 / DURATION_TRANSITION, 0.0, 1.0));
-    alphaHide2.value = easeInCirc(MathEx.clamp(this.timeHide2 / DURATION_TRANSITION, 0.0, 1.0));
-    alphaHide3.value = easeInCirc(MathEx.clamp(this.timeHide3 / DURATION_TRANSITION, 0.0, 1.0));
+    alphaShow1.value = easeOutCirc(
+      MathEx.clamp(
+        (this.timeShow1 - DELAY_SHOW) / DURATION_TRANSITION,
+        0.0,
+        1.0
+      )
+    );
+    alphaShow2.value = easeOutCirc(
+      MathEx.clamp(
+        (this.timeShow2 - DELAY_SHOW) / DURATION_TRANSITION,
+        0.0,
+        1.0
+      )
+    );
+    alphaShow3.value = easeOutCirc(
+      MathEx.clamp(
+        (this.timeShow3 - DELAY_SHOW) / DURATION_TRANSITION,
+        0.0,
+        1.0
+      )
+    );
+    alphaHide1.value = easeInCirc(
+      MathEx.clamp(this.timeHide1 / DURATION_TRANSITION, 0.0, 1.0)
+    );
+    alphaHide2.value = easeInCirc(
+      MathEx.clamp(this.timeHide2 / DURATION_TRANSITION, 0.0, 1.0)
+    );
+    alphaHide3.value = easeInCirc(
+      MathEx.clamp(this.timeHide3 / DURATION_TRANSITION, 0.0, 1.0)
+    );
   }
 }

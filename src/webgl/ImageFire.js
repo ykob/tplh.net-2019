@@ -1,43 +1,47 @@
-import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
 
-import vs from '@/webgl/glsl/ImageFire.vs';
-import fs from '@/webgl/glsl/ImageFire.fs';
+import vs from "@/webgl/glsl/ImageFire.vs";
+import fs from "@/webgl/glsl/ImageFire.fs";
 
 export default class ImageFire extends THREE.Mesh {
   constructor(width) {
     // Define Geometry
-    const geometry = new THREE.PlaneBufferGeometry(width, width * 0.666, 64, 64);
+    const geometry = new THREE.PlaneBufferGeometry(
+      width,
+      width * 0.666,
+      64,
+      64
+    );
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         easeTransition: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         noiseTex: {
-          type: 't',
+          type: "t",
           value: null
         },
         imgRatio: {
-          type: 'v2',
+          type: "v2",
           value: new THREE.Vector2(1, 0.666)
-        },
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.AdditiveBlending
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'ImageFire';
+    this.name = "ImageFire";
   }
   start(noiseTex) {
     this.material.uniforms.noiseTex.value = noiseTex;

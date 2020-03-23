@@ -1,11 +1,8 @@
-import * as THREE from 'three';
-import { easeOutExpo } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import MathEx from "js-util/MathEx";
 
-import vs from '@/webgl/glsl/Petal.vs';
-import fs from '@/webgl/glsl/Petal.fs';
-
-const DURATION = 3;
+import vs from "@/webgl/glsl/Petal.vs";
+import fs from "@/webgl/glsl/Petal.fs";
 
 export default class Petal extends THREE.Mesh {
   constructor(geometry, hsv1, hsv2, hsv3) {
@@ -13,31 +10,31 @@ export default class Petal extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         noiseTex: {
-          type: 't',
+          type: "t",
           value: null
         },
         alphaShow: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaColor: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         hsv1: {
-          type: 'v3',
+          type: "v3",
           value: hsv1
         },
         hsv2: {
-          type: 'v3',
+          type: "v3",
           value: hsv2
         },
         hsv3: {
-          type: 'v3',
+          type: "v3",
           value: hsv3
         }
       },
@@ -45,12 +42,12 @@ export default class Petal extends THREE.Mesh {
       fragmentShader: fs,
       flatShading: true,
       side: THREE.DoubleSide,
-      transparent: true,
+      transparent: true
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'Petal';
+    this.name = "Petal";
     this.mass = Math.random();
     this.rotateDirection = Math.round(Math.random()) * 2 - 1;
     this.scale.set(
@@ -58,12 +55,14 @@ export default class Petal extends THREE.Mesh {
       this.mass * 1.2 + 0.7,
       this.mass * 1.2 + 0.7
     );
-   this.rotation.set(
+    this.rotation.set(
       MathEx.radians((Math.random() * 2 - 1) * 60),
       0,
       MathEx.radians((Math.random() * 2 - 1) * 60)
     );
-    this.axisBodyRotate = new THREE.Vector3().copy(this.up).applyEuler(this.rotation);
+    this.axisBodyRotate = new THREE.Vector3()
+      .copy(this.up)
+      .applyEuler(this.rotation);
     this.quaternionPrev = new THREE.Quaternion();
     this.isActive = false;
   }
@@ -76,10 +75,12 @@ export default class Petal extends THREE.Mesh {
 
     // rotate with a quaternion.
     this.quaternionPrev.copy(this.quaternion);
-    this.quaternion.setFromAxisAngle(
-      this.axisBodyRotate,
-      time * this.rotateDirection * (1 - this.mass + 0.5) * 1.4
-    ).multiply(this.quaternionPrev);
+    this.quaternion
+      .setFromAxisAngle(
+        this.axisBodyRotate,
+        time * this.rotateDirection * (1 - this.mass + 0.5) * 1.4
+      )
+      .multiply(this.quaternionPrev);
 
     this.material.uniforms.time.value += time;
   }

@@ -1,17 +1,15 @@
-import * as THREE from 'three';
-import { easeOutCirc, easeInOutCubic } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeOutCirc, easeInOutCubic } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import vs from '@/webgl/glsl/SkullBody.vs';
-import fs from '@/webgl/glsl/SkullBody.fs';
+import vs from "@/webgl/glsl/SkullBody.vs";
+import fs from "@/webgl/glsl/SkullBody.fs";
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1;
 const DURATION_HIDE = 1.2;
 const DELAY_HIDE = 0.4;
 const DURATION_SCREAM = 2.5;
 const DELAY_SCREAM = 2.5;
-const DURATION_EDGE = 1.2;
-const DELAY_EDGE = 2.8;
 
 export default class SkullBody extends THREE.Group {
   constructor(geometry1, geometry2) {
@@ -22,30 +20,30 @@ export default class SkullBody extends THREE.Group {
     this.material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         rotateMatrix: {
-          type: 'm4',
+          type: "m4",
           value: new THREE.Matrix4()
         },
         renderOutline: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alpha: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         hsv1: {
-          type: 'v3',
+          type: "v3",
           value: new THREE.Vector3(0.09, 0.7, 0.3)
         }
       },
       vertexShader: vs,
       fragmentShader: fs,
       transparent: true,
-      flatShading: true,
+      flatShading: true
     });
 
     this.head = new THREE.Mesh(geometry1, this.material);
@@ -54,7 +52,7 @@ export default class SkullBody extends THREE.Group {
     this.add(this.head);
     this.add(this.jaw);
 
-    this.name = 'SkullBody';
+    this.name = "SkullBody";
     this.timeShow = 0;
     this.timeHide = 0;
     this.timeScream = 0;
@@ -105,31 +103,52 @@ export default class SkullBody extends THREE.Group {
     }
 
     // calculation the alpha.
-    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
+    const alphaShow = easeOutCirc(
+      MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0)
+    );
+    const alphaHide = easeOutCirc(
+      MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0)
+    );
     this.material.uniforms.alpha.value = alphaShow * (1.0 - alphaHide);
 
     // scream
     const alphaScream = easeInOutCubic(
-      MathEx.smoothstep(DELAY_SCREAM, DELAY_SCREAM + DURATION_SCREAM * 0.2, this.timeScream)
-      * (1 - MathEx.smoothstep(DELAY_SCREAM + DURATION_SCREAM * 0.15, DELAY_SCREAM + DURATION_SCREAM, this.timeScream))
+      MathEx.smoothstep(
+        DELAY_SCREAM,
+        DELAY_SCREAM + DURATION_SCREAM * 0.2,
+        this.timeScream
+      ) *
+        (1 -
+          MathEx.smoothstep(
+            DELAY_SCREAM + DURATION_SCREAM * 0.15,
+            DELAY_SCREAM + DURATION_SCREAM,
+            this.timeScream
+          ))
     );
 
     // Frist rotate
-    const alphaRaise = easeOutCirc(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW * 2, 0.0, 1.0));
+    const alphaRaise = easeOutCirc(
+      MathEx.clamp(((this.timeShow - DELAY_SHOW) / DURATION_SHOW) * 2, 0.0, 1.0)
+    );
 
     // Move to look at a mouse coordinate.
     // rotate
-    this.lookA.copy(this.lookAnchor).sub(this.lookV).divideScalar(24);
+    this.lookA
+      .copy(this.lookAnchor)
+      .sub(this.lookV)
+      .divideScalar(24);
     this.lookV.add(this.lookA);
     this.lookAt(this.lookV);
     this.lookEuler.copy(this.rotation);
     this.rotation.set(
-      this.lookEuler.x + MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
+      this.lookEuler.x +
+        MathEx.radians(5 + (1.0 - alphaRaise) * 70 + alphaScream * -20),
       this.lookEuler.y + MathEx.radians(0),
       this.lookEuler.z + MathEx.radians(0)
     );
-    this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(this.rotation);
+    this.material.uniforms.rotateMatrix.value.makeRotationFromEuler(
+      this.rotation
+    );
 
     const shake = alphaScream * 0.035;
     const shakeRadian = MathEx.radians(Math.random() * 360);
@@ -142,11 +161,15 @@ export default class SkullBody extends THREE.Group {
     // loop animation
     const loopDegree = (Math.sin(this.timeLoop) * 0.5 + 0.5) * 8;
 
-    this.head.rotation.set(MathEx.radians(alphaScream * -24 - loopDegree), 0, 0);
+    this.head.rotation.set(
+      MathEx.radians(alphaScream * -24 - loopDegree),
+      0,
+      0
+    );
     this.jaw.rotation.set(MathEx.radians(alphaScream * 24 + loopDegree), 0, 0);
 
     // calculation the scale.
-    const scale = ((alphaShow * 0.3 + 0.7) + (alphaHide * 0.1) + alphaScream * 0.2);
+    const scale = alphaShow * 0.3 + 0.7 + alphaHide * 0.1 + alphaScream * 0.2;
     this.scale.set(scale, scale, scale);
 
     // fluctuation of the color

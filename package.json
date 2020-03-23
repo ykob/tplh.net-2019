@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
     "build:dev": "vue-cli-service build --mode development",
     "dev": "vue-cli-service serve --mode development",
     "start": "npm run dev"
@@ -30,11 +31,18 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.3",
+    "@vue/cli-plugin-eslint": "^4.2.3",
     "@vue/cli-plugin-pwa": "^4.2.3",
     "@vue/cli-service": "^4.2.3",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^6.1.2",
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
     "node-sass": "^4.13.1",
+    "prettier": "^1.19.1",
     "raw-loader": "^4.0.0",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-pug": "^1.0.7",

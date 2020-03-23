@@ -1,8 +1,7 @@
-import * as THREE from 'three';
-import { easeOutCirc } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import { easeOutCirc } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import Petal from '@/webgl/Petal';
+import Petal from "@/webgl/Petal";
 
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1.2;
@@ -14,7 +13,7 @@ export default class PetalRotate extends Petal {
   constructor(geometry, hsv1, hsv2, hsv3) {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
-    this.name = 'PetalRotate';
+    this.name = "PetalRotate";
     this.durationRise = (1 - this.mass) * 5 + Math.random() * 4 + 8;
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;
@@ -67,9 +66,17 @@ export default class PetalRotate extends Petal {
     }
 
     // calculation the alpha.
-    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - this.delayShow) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0));
-    const alphaRize = easeOutCirc((this.timeRise - this.delayRise) / this.durationRise % 1, 0.0, 1.0);
+    const alphaShow = easeOutCirc(
+      MathEx.clamp((this.timeShow - this.delayShow) / DURATION_SHOW, 0.0, 1.0)
+    );
+    const alphaHide = easeOutCirc(
+      MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0)
+    );
+    const alphaRize = easeOutCirc(
+      ((this.timeRise - this.delayRise) / this.durationRise) % 1,
+      0.0,
+      1.0
+    );
     const radius = this.radiusBase + this.radiusAdd * alphaRize;
 
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);

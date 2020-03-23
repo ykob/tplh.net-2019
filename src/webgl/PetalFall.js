@@ -1,8 +1,8 @@
-import * as THREE from 'three';
-import { easeOutCirc } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeOutCirc } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import Petal from '@/webgl/Petal';
+import Petal from "@/webgl/Petal";
 
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1.2;
@@ -13,7 +13,7 @@ export default class PetalFall extends Petal {
   constructor(geometry, hsv1, hsv2, hsv3) {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
-    this.name = 'PetalFall';
+    this.name = "PetalFall";
     this.durationFall = (1 - this.mass) * 10 + Math.random() * 5 + 5;
     this.delayFall = this.durationFall * Math.random();
     this.delayShow = DELAY_SHOW + Math.random();
@@ -31,7 +31,7 @@ export default class PetalFall extends Petal {
       Math.random() * 20 + 5
     );
   }
-  show(isShownFirst) {
+  show() {
     this.timeShow = 0;
     this.timeHide = 0;
     this.isShown = true;
@@ -60,13 +60,23 @@ export default class PetalFall extends Petal {
     }
 
     // calculation the alpha.
-    const alphaShow = easeOutCirc(MathEx.clamp((this.timeShow - this.delayShow) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeOutCirc(MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0));
+    const alphaShow = easeOutCirc(
+      MathEx.clamp((this.timeShow - this.delayShow) / DURATION_SHOW, 0.0, 1.0)
+    );
+    const alphaHide = easeOutCirc(
+      MathEx.clamp((this.timeHide - this.delayHide) / DURATION_HIDE, 0.0, 1.0)
+    );
     this.material.uniforms.alphaShow.value = alphaShow * (1.0 - alphaHide);
 
     this.position.set(
-      this.basePosition.x + Math.sin((this.timeFall + this.delayFall) * 0.3) * 1.5,
-      (((this.timeFall + this.delayFall) / this.durationFall - scrollProgress * 0.4) % 1 * 2 - 1) * -20,
+      this.basePosition.x +
+        Math.sin((this.timeFall + this.delayFall) * 0.3) * 1.5,
+      ((((this.timeFall + this.delayFall) / this.durationFall -
+        scrollProgress * 0.4) %
+        1) *
+        2 -
+        1) *
+        -20,
       this.basePosition.z
     );
   }

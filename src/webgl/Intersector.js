@@ -1,8 +1,8 @@
-import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import MathEx from "js-util/MathEx";
 
-import vs from '@/webgl/glsl/Intersector.vs';
-import fs from '@/webgl/glsl/Intersector.fs';
+import vs from "@/webgl/glsl/Intersector.vs";
+import fs from "@/webgl/glsl/Intersector.fs";
 
 export default class Intersector extends THREE.Mesh {
   constructor() {
@@ -12,19 +12,21 @@ export default class Intersector extends THREE.Mesh {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       vertexShader: vs,
-      fragmentShader: fs,
+      fragmentShader: fs
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'Intersector';
+    this.name = "Intersector";
     this.size = new THREE.Vector3();
 
     this.position.set(0, 0, 30);
   }
   resize(camera) {
     const height = Math.abs(
-      (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
+      (camera.position.z - this.position.z) *
+        Math.tan(MathEx.radians(camera.fov) / 2) *
+        2
     );
     const width = height * camera.aspect;
 

@@ -1,10 +1,10 @@
-import * as THREE from 'three';
-import { easeInCubic, easeOutCubic } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeInCubic, easeOutCubic } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import store from '@/store'
-import vs from '@/webgl/glsl/WhoIamText.vs';
-import fs from '@/webgl/glsl/WhoIamText.fs';
+import store from "@/store";
+import vs from "@/webgl/glsl/WhoIamText.vs";
+import fs from "@/webgl/glsl/WhoIamText.fs";
 
 const WIDTH = 39;
 const DURATION_SHOW = 6;
@@ -25,30 +25,30 @@ export default class WhoIamText extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         tex: {
-          type: 't',
+          type: "t",
           value: null
         },
         alphaShow: {
-          type: 'f',
+          type: "f",
           value: 0
         },
         alphaHide: {
-          type: 'f',
+          type: "f",
           value: 0
-        },
+        }
       },
       vertexShader: vs,
       fragmentShader: fs,
-      transparent: true,
+      transparent: true
     });
 
     // Create Object3D
     super(geometry, material);
-    this.name = 'WhoIamText';
+    this.name = "WhoIamText";
     this.time = 0;
     this.timeShow = 0;
     this.timeHide = 0;
@@ -85,10 +85,26 @@ export default class WhoIamText extends THREE.Mesh {
       this.timeHide += time;
     }
 
-    const alphaShow = easeOutCubic(MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0));
-    const alphaHide = easeOutCubic(MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0));
-    const alphaTransitionShow = easeOutCubic(MathEx.clamp((this.timeShow - DELAY_TRANSITION_SHOW) / DURATION_TRANSITION_SHOW, 0.0, 1.0));
-    const alphaTransitionHide = easeInCubic(MathEx.clamp((this.timeHide- DELAY_TRANSITION_HIDE) / DURATION_TRANSITION_HIDE, 0.0, 1.0));
+    const alphaShow = easeOutCubic(
+      MathEx.clamp((this.timeShow - DELAY_SHOW) / DURATION_SHOW, 0.0, 1.0)
+    );
+    const alphaHide = easeOutCubic(
+      MathEx.clamp((this.timeHide - DELAY_HIDE) / DURATION_HIDE, 0.0, 1.0)
+    );
+    const alphaTransitionShow = easeOutCubic(
+      MathEx.clamp(
+        (this.timeShow - DELAY_TRANSITION_SHOW) / DURATION_TRANSITION_SHOW,
+        0.0,
+        1.0
+      )
+    );
+    const alphaTransitionHide = easeInCubic(
+      MathEx.clamp(
+        (this.timeHide - DELAY_TRANSITION_HIDE) / DURATION_TRANSITION_HIDE,
+        0.0,
+        1.0
+      )
+    );
     const alphaTransition = alphaTransitionShow * (1.0 - alphaTransitionHide);
 
     this.material.uniforms.alphaShow.value = alphaShow;

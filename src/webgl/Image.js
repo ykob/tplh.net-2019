@@ -1,10 +1,10 @@
-import * as THREE from 'three';
-import { easeOutQuad, easeInOutExpo, easeOutExpo } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import * as THREE from "three";
+import { easeOutQuad, easeInOutExpo, easeOutExpo } from "easing-js";
+import MathEx from "js-util/MathEx";
 
-import ImagePlane from '@/webgl/ImagePlane';
-import ImageFire from '@/webgl/ImageFire';
-import ImagePoints from '@/webgl/ImagePoints';
+import ImagePlane from "@/webgl/ImagePlane";
+import ImageFire from "@/webgl/ImageFire";
+import ImagePoints from "@/webgl/ImagePoints";
 
 const DURATION_RISE = 1.8;
 const DURATION_CHANGE = 1.8;
@@ -12,7 +12,7 @@ const DURATION_CHANGE = 1.8;
 export default class Image extends THREE.Group {
   constructor() {
     super();
-    this.name = 'ImageGroup';
+    this.name = "ImageGroup";
     this.size = new THREE.Vector3();
     this.margin = new THREE.Vector2();
     this.timeTranslate = 0;
@@ -42,7 +42,7 @@ export default class Image extends THREE.Group {
       MathEx.radians(-22),
       MathEx.radians(0),
       MathEx.radians(-8)
-    )
+    );
   }
   start(noiseTex, imgTexes) {
     const width = 20;
@@ -127,20 +127,34 @@ export default class Image extends THREE.Group {
     this.timeTranslate = 0;
     this.isTranslating = true;
     this.children[0].changeTex(index, this.changeIndex);
-    this.children[0].update(0, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
+    this.children[0].update(
+      0,
+      this.easeStepChange1,
+      this.easeStepChange2,
+      this.easeStepChange3
+    );
     this.children[1].update(0, this.easeStepChange1);
     this.children[2].update(0, this.easeStepChange2);
     this.children[3].update(0, this.easeStepChange3);
-    this.children[4].update(0, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
+    this.children[4].update(
+      0,
+      this.easeStepChange1,
+      this.easeStepChange2,
+      this.easeStepChange3
+    );
 
-    this.changeIndex = (this.changeIndex >= 2)
-      ? 0
-      : this.changeIndex + 1;
+    this.changeIndex = this.changeIndex >= 2 ? 0 : this.changeIndex + 1;
   }
   update(time) {
     if (this.isTranslating === true) {
       this.timeTranslate += time;
-      this.easeStepTranslate = this.easeFuncTranslate(MathEx.clamp((this.timeTranslate - this.delayTranslate) / DURATION_RISE, 0.0, 1.0));
+      this.easeStepTranslate = this.easeFuncTranslate(
+        MathEx.clamp(
+          (this.timeTranslate - this.delayTranslate) / DURATION_RISE,
+          0.0,
+          1.0
+        )
+      );
     }
     if (this.isChanging1 === true) {
       this.timeChange1 += time;
@@ -151,16 +165,46 @@ export default class Image extends THREE.Group {
     if (this.isChanging3 === true) {
       this.timeChange3 += time;
     }
-    this.easeStepChange1 = easeOutQuad(MathEx.clamp((this.timeChange1 - this.delayChange1) / DURATION_CHANGE, 0.0, 1.0));
-    this.easeStepChange2 = easeOutQuad(MathEx.clamp((this.timeChange2 - this.delayChange2) / DURATION_CHANGE, 0.0, 1.0));
-    this.easeStepChange3 = easeOutQuad(MathEx.clamp((this.timeChange3 - this.delayChange3) / DURATION_CHANGE, 0.0, 1.0));
+    this.easeStepChange1 = easeOutQuad(
+      MathEx.clamp(
+        (this.timeChange1 - this.delayChange1) / DURATION_CHANGE,
+        0.0,
+        1.0
+      )
+    );
+    this.easeStepChange2 = easeOutQuad(
+      MathEx.clamp(
+        (this.timeChange2 - this.delayChange2) / DURATION_CHANGE,
+        0.0,
+        1.0
+      )
+    );
+    this.easeStepChange3 = easeOutQuad(
+      MathEx.clamp(
+        (this.timeChange3 - this.delayChange3) / DURATION_CHANGE,
+        0.0,
+        1.0
+      )
+    );
 
-    this.position.y = this.transitionStart + this.easeStepTranslate * (this.transitionEnd - this.transitionStart);
-    this.children[0].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
+    this.position.y =
+      this.transitionStart +
+      this.easeStepTranslate * (this.transitionEnd - this.transitionStart);
+    this.children[0].update(
+      time,
+      this.easeStepChange1,
+      this.easeStepChange2,
+      this.easeStepChange3
+    );
     this.children[1].update(time, this.easeStepChange1);
     this.children[2].update(time, this.easeStepChange2);
     this.children[3].update(time, this.easeStepChange3);
-    this.children[4].update(time, this.easeStepChange1, this.easeStepChange2, this.easeStepChange3);
+    this.children[4].update(
+      time,
+      this.easeStepChange1,
+      this.easeStepChange2,
+      this.easeStepChange3
+    );
   }
   resize() {
     this.children[4].resize();
