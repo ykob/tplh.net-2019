@@ -8,6 +8,7 @@ I explored what my identity was and tried to express it as much as possible usin
 ## License
 
 Copyright (c) 2020 Yoichi Kobayashi
+You can refer to these codes and materials, but can't use or quote these for your projects.
 
 ## Credits
 
