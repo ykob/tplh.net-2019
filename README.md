@@ -17,7 +17,7 @@ Copyright (c) 2020 Yoichi Kobayashi
 - Design : Shunsuke Iseki
 - Development : Yoichi Kobayashi
 
-## Awards-Winning
+## Award-Winning
 
 - [FWA FOTD / March 14th, 2020](https://thefwa.com/cases/yoichi-kobayashi)
 - [Awwwards SOTD / March 23rd, 2020](https://www.awwwards.com/sites/yoichi-kobayashi)
