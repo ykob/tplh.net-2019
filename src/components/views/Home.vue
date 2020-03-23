@@ -1,45 +1,45 @@
 <script>
-import normalizeWheel from "normalize-wheel";
-import sleep from "js-util/sleep";
+import normalizeWheel from 'normalize-wheel';
+import sleep from 'js-util/sleep';
 
-import store from "@/store";
-import HomeHeading from "@/components/atoms/HomeHeading.vue";
+import store from '@/store';
+import HomeHeading from '@/components/atoms/HomeHeading.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   metaInfo: {
-    title: ""
+    title: ''
   },
   components: {
     HomeHeading
   },
   beforeRouteEnter(to, from, next) {
-    store.commit("transit", {
+    store.commit('transit', {
       globalId: 0
     });
     next();
   },
   created() {
-    window.addEventListener("wheel", this.wheel, { passive: false });
-    window.addEventListener("touchmove", this.touchmove);
+    window.addEventListener('wheel', this.wheel, { passive: false });
+    window.addEventListener('touchmove', this.touchmove);
   },
   async mounted() {
-    this.$store.commit("changeBackground", {
+    this.$store.commit('changeBackground', {
       isHome: true,
       hasDelay: true
     });
-    this.$store.commit("showHomeObjs", true);
-    this.$store.commit("showWorksObjs", {
+    this.$store.commit('showHomeObjs', true);
+    this.$store.commit('showWorksObjs', {
       index: 0,
       direction: -1
     });
-    this.$store.commit("showWhoIAmObjs", false);
+    this.$store.commit('showWhoIAmObjs', false);
     await sleep(5000);
-    this.$store.commit("showUI");
+    this.$store.commit('showUI');
   },
   destroyed() {
-    window.removeEventListener("wheel", this.wheel, { passive: false });
-    window.removeEventListener("touchmove", this.touchmove);
+    window.removeEventListener('wheel', this.wheel, { passive: false });
+    window.removeEventListener('touchmove', this.touchmove);
   },
   methods: {
     wheel(e) {
@@ -51,7 +51,7 @@ export default {
       // Run at the first wheel event only.
       if (state.isWheeling === false) {
         if (Math.abs(n.pixelY) < 10) return;
-        commit("startWheeling");
+        commit('startWheeling');
 
         if (n.pixelY > 0) {
           this.$router.push(`/works/${state.works[0].key}/`);
@@ -63,8 +63,8 @@ export default {
 
       if (state.isTouchMoving === true) {
         if (state.touchMove.y < -10) {
-          dispatch("debounceRouterPush", `/works/${state.works[0].key}/`);
-          commit("touchEnd");
+          dispatch('debounceRouterPush', `/works/${state.works[0].key}/`);
+          commit('touchEnd');
         }
       }
     }

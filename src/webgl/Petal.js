@@ -1,8 +1,8 @@
-import * as THREE from "three";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import MathEx from 'js-util/MathEx';
 
-import vs from "@/webgl/glsl/Petal.vs";
-import fs from "@/webgl/glsl/Petal.fs";
+import vs from '@/webgl/glsl/Petal.vs';
+import fs from '@/webgl/glsl/Petal.fs';
 
 export default class Petal extends THREE.Mesh {
   constructor(geometry, hsv1, hsv2, hsv3) {
@@ -10,31 +10,31 @@ export default class Petal extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: "t",
+          type: 't',
           value: null
         },
         alphaShow: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaColor: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         hsv1: {
-          type: "v3",
+          type: 'v3',
           value: hsv1
         },
         hsv2: {
-          type: "v3",
+          type: 'v3',
           value: hsv2
         },
         hsv3: {
-          type: "v3",
+          type: 'v3',
           value: hsv3
         }
       },
@@ -47,7 +47,7 @@ export default class Petal extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "Petal";
+    this.name = 'Petal';
     this.mass = Math.random();
     this.rotateDirection = Math.round(Math.random()) * 2 - 1;
     this.scale.set(

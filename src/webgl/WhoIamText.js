@@ -1,10 +1,10 @@
-import * as THREE from "three";
-import { easeInCubic, easeOutCubic } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeInCubic, easeOutCubic } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import store from "@/store";
-import vs from "@/webgl/glsl/WhoIamText.vs";
-import fs from "@/webgl/glsl/WhoIamText.fs";
+import store from '@/store';
+import vs from '@/webgl/glsl/WhoIamText.vs';
+import fs from '@/webgl/glsl/WhoIamText.fs';
 
 const WIDTH = 39;
 const DURATION_SHOW = 6;
@@ -25,19 +25,19 @@ export default class WhoIamText extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex: {
-          type: "t",
+          type: 't',
           value: null
         },
         alphaShow: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaHide: {
-          type: "f",
+          type: 'f',
           value: 0
         }
       },
@@ -48,7 +48,7 @@ export default class WhoIamText extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "WhoIamText";
+    this.name = 'WhoIamText';
     this.time = 0;
     this.timeShow = 0;
     this.timeHide = 0;

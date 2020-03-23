@@ -1,4 +1,4 @@
-const THREE = require("three");
+const THREE = require('three');
 
 /**
  * @author mrdoob / http://mrdoob.com/
@@ -34,16 +34,16 @@ THREE.OBJLoader = (function() {
         }
 
         var previousMaterial =
-          this.object && typeof this.object.currentMaterial === "function"
+          this.object && typeof this.object.currentMaterial === 'function'
             ? this.object.currentMaterial()
             : undefined;
 
-        if (this.object && typeof this.object._finalize === "function") {
+        if (this.object && typeof this.object._finalize === 'function') {
           this.object._finalize(true);
         }
 
         this.object = {
-          name: name || "",
+          name: name || '',
           fromDeclaration: fromDeclaration !== false,
 
           geometry: {
@@ -66,11 +66,11 @@ THREE.OBJLoader = (function() {
 
             var material = {
               index: this.materials.length,
-              name: name || "",
+              name: name || '',
               mtllib:
                 Array.isArray(libraries) && libraries.length > 0
                   ? libraries[libraries.length - 1]
-                  : "",
+                  : '',
               smooth: previous !== undefined ? previous.smooth : this.smooth,
               groupStart: previous !== undefined ? previous.groupEnd : 0,
               groupEnd: -1,
@@ -79,7 +79,7 @@ THREE.OBJLoader = (function() {
 
               clone: function(index) {
                 var cloned = {
-                  index: typeof index === "number" ? index : this.index,
+                  index: typeof index === 'number' ? index : this.index,
                   name: this.name,
                   mtllib: this.mtllib,
                   smooth: this.smooth,
@@ -127,7 +127,7 @@ THREE.OBJLoader = (function() {
             // Guarantee at least one empty material, this makes the creation later more straight forward.
             if (end && this.materials.length === 0) {
               this.materials.push({
-                name: "",
+                name: '',
                 smooth: this.smooth
               });
             }
@@ -145,7 +145,7 @@ THREE.OBJLoader = (function() {
         if (
           previousMaterial &&
           previousMaterial.name &&
-          typeof previousMaterial.clone === "function"
+          typeof previousMaterial.clone === 'function'
         ) {
           var declared = previousMaterial.clone(0);
           declared.inherited = true;
@@ -156,7 +156,7 @@ THREE.OBJLoader = (function() {
       },
 
       finalize: function() {
-        if (this.object && typeof this.object._finalize === "function") {
+        if (this.object && typeof this.object._finalize === 'function') {
           this.object._finalize(true);
         }
       },
@@ -262,7 +262,7 @@ THREE.OBJLoader = (function() {
       },
 
       addLineGeometry: function(vertices, uvs) {
-        this.object.geometry.type = "Line";
+        this.object.geometry.type = 'Line';
 
         var vLen = this.vertices.length;
         var uvLen = this.uvs.length;
@@ -277,7 +277,7 @@ THREE.OBJLoader = (function() {
       }
     };
 
-    state.startObject("", false);
+    state.startObject('', false);
 
     return state;
   }
@@ -322,24 +322,24 @@ THREE.OBJLoader = (function() {
     parse: function(text) {
       var state = new ParserState();
 
-      if (text.indexOf("\r\n") !== -1) {
+      if (text.indexOf('\r\n') !== -1) {
         // This is faster than String.split with regex that splits on both
-        text = text.replace(/\r\n/g, "\n");
+        text = text.replace(/\r\n/g, '\n');
       }
 
-      if (text.indexOf("\\\n") !== -1) {
+      if (text.indexOf('\\\n') !== -1) {
         // join lines separated by a line continuation character (\)
-        text = text.replace(/\\\n/g, "");
+        text = text.replace(/\\\n/g, '');
       }
 
-      var lines = text.split("\n");
-      var line = "",
-        lineFirstChar = "";
+      var lines = text.split('\n');
+      var line = '',
+        lineFirstChar = '';
       var lineLength = 0;
       var result = [];
 
       // Faster to just trim left side of the line. Use if available.
-      var trimLeft = typeof "".trimLeft === "function";
+      var trimLeft = typeof ''.trimLeft === 'function';
 
       for (var i = 0, l = lines.length; i < l; i++) {
         line = lines[i];
@@ -353,13 +353,13 @@ THREE.OBJLoader = (function() {
         lineFirstChar = line.charAt(0);
 
         // @todo invoke passed in handler if any
-        if (lineFirstChar === "#") continue;
+        if (lineFirstChar === '#') continue;
 
-        if (lineFirstChar === "v") {
+        if (lineFirstChar === 'v') {
           var data = line.split(/\s+/);
 
           switch (data[0]) {
-            case "v":
+            case 'v':
               state.vertices.push(
                 parseFloat(data[1]),
                 parseFloat(data[2]),
@@ -373,18 +373,18 @@ THREE.OBJLoader = (function() {
                 );
               }
               break;
-            case "vn":
+            case 'vn':
               state.normals.push(
                 parseFloat(data[1]),
                 parseFloat(data[2]),
                 parseFloat(data[3])
               );
               break;
-            case "vt":
+            case 'vt':
               state.uvs.push(parseFloat(data[1]), parseFloat(data[2]));
               break;
           }
-        } else if (lineFirstChar === "f") {
+        } else if (lineFirstChar === 'f') {
           var lineData = line.substr(1).trim();
           var vertexData = lineData.split(/\s+/);
           var faceVertices = [];
@@ -395,7 +395,7 @@ THREE.OBJLoader = (function() {
             var vertex = vertexData[j];
 
             if (vertex.length > 0) {
-              var vertexParts = vertex.split("/");
+              var vertexParts = vertex.split('/');
               faceVertices.push(vertexParts);
             }
           }
@@ -420,22 +420,22 @@ THREE.OBJLoader = (function() {
               v3[2]
             );
           }
-        } else if (lineFirstChar === "l") {
+        } else if (lineFirstChar === 'l') {
           var lineParts = line
             .substring(1)
             .trim()
-            .split(" ");
+            .split(' ');
           var lineVertices = [],
             lineUVs = [];
 
-          if (line.indexOf("/") === -1) {
+          if (line.indexOf('/') === -1) {
             lineVertices = lineParts;
           } else {
             for (var li = 0, llen = lineParts.length; li < llen; li++) {
-              var parts = lineParts[li].split("/");
+              var parts = lineParts[li].split('/');
 
-              if (parts[0] !== "") lineVertices.push(parts[0]);
-              if (parts[1] !== "") lineUVs.push(parts[1]);
+              if (parts[0] !== '') lineVertices.push(parts[0]);
+              if (parts[1] !== '') lineUVs.push(parts[1]);
             }
           }
           state.addLineGeometry(lineVertices, lineUVs);
@@ -446,7 +446,7 @@ THREE.OBJLoader = (function() {
 
           // WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
           // var name = result[ 0 ].substr( 1 ).trim();
-          var name = (" " + result[0].substr(1).trim()).substr(1);
+          var name = (' ' + result[0].substr(1).trim()).substr(1);
 
           state.startObject(name);
         } else if (material_use_pattern.test(line)) {
@@ -460,8 +460,8 @@ THREE.OBJLoader = (function() {
           // mtl file
 
           state.materialLibraries.push(line.substring(7).trim());
-        } else if (lineFirstChar === "s") {
-          result = line.split(" ");
+        } else if (lineFirstChar === 's') {
+          result = line.split(' ');
 
           // smooth shading
 
@@ -485,7 +485,7 @@ THREE.OBJLoader = (function() {
            */
           if (result.length > 1) {
             var value = result[1].trim().toLowerCase();
-            state.object.smooth = value !== "0" && value !== "off";
+            state.object.smooth = value !== '0' && value !== 'off';
           } else {
             // ZBrush can produce "s" lines #11707
             state.object.smooth = true;
@@ -494,7 +494,7 @@ THREE.OBJLoader = (function() {
           if (material) material.smooth = state.object.smooth;
         } else {
           // Handle null terminated files without exception
-          if (line === "\0") continue;
+          if (line === '\0') continue;
 
           throw new Error('THREE.OBJLoader: Unexpected line: "' + line + '"');
         }
@@ -509,7 +509,7 @@ THREE.OBJLoader = (function() {
         var object = state.objects[k];
         var geometry = object.geometry;
         var materials = object.materials;
-        var isLine = geometry.type === "Line";
+        var isLine = geometry.type === 'Line';
 
         // Skip o/g line declarations that did not follow with any faces
         if (geometry.vertices.length === 0) continue;
@@ -517,13 +517,13 @@ THREE.OBJLoader = (function() {
         var buffergeometry = new THREE.BufferGeometry();
 
         buffergeometry.setAttribute(
-          "position",
+          'position',
           new THREE.Float32BufferAttribute(geometry.vertices, 3)
         );
 
         if (geometry.normals.length > 0) {
           buffergeometry.setAttribute(
-            "normal",
+            'normal',
             new THREE.Float32BufferAttribute(geometry.normals, 3)
           );
         } else {
@@ -532,14 +532,14 @@ THREE.OBJLoader = (function() {
 
         if (geometry.colors.length > 0) {
           buffergeometry.setAttribute(
-            "color",
+            'color',
             new THREE.Float32BufferAttribute(geometry.colors, 3)
           );
         }
 
         if (geometry.uvs.length > 0) {
           buffergeometry.setAttribute(
-            "uv",
+            'uv',
             new THREE.Float32BufferAttribute(geometry.uvs, 2)
           );
         }

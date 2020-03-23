@@ -1,10 +1,10 @@
-import * as THREE from "three";
-import { easeOutQuad, easeInOutExpo, easeOutExpo } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeOutQuad, easeInOutExpo, easeOutExpo } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import ImagePlane from "@/webgl/ImagePlane";
-import ImageFire from "@/webgl/ImageFire";
-import ImagePoints from "@/webgl/ImagePoints";
+import ImagePlane from '@/webgl/ImagePlane';
+import ImageFire from '@/webgl/ImageFire';
+import ImagePoints from '@/webgl/ImagePoints';
 
 const DURATION_RISE = 1.8;
 const DURATION_CHANGE = 1.8;
@@ -12,7 +12,7 @@ const DURATION_CHANGE = 1.8;
 export default class Image extends THREE.Group {
   constructor() {
     super();
-    this.name = "ImageGroup";
+    this.name = 'ImageGroup';
     this.size = new THREE.Vector3();
     this.margin = new THREE.Vector2();
     this.timeTranslate = 0;

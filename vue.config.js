@@ -17,9 +17,9 @@ module.exports = {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: ["@babel/preset-env"]
+              presets: ['@babel/preset-env']
             }
           }
         },
@@ -27,27 +27,27 @@ module.exports = {
           test: /\.(glsl|fs|vs)$/,
           exclude: /node_modules/,
           use: {
-            loader: "glslify-import-loader"
+            loader: 'glslify-import-loader'
           }
         },
         {
           test: /\.(glsl|fs|vs)$/,
           exclude: /node_modules/,
           use: {
-            loader: "raw-loader"
+            loader: 'raw-loader'
           }
         },
         {
           test: /\.(glsl|fs|vs)$/,
           exclude: /node_modules/,
           use: {
-            loader: "glslify-loader"
+            loader: 'glslify-loader'
           }
         },
         {
           test: /\.(obj)$/,
           use: {
-            loader: "file-loader"
+            loader: 'file-loader'
           }
         }
       ]
@@ -57,6 +57,6 @@ module.exports = {
     ]
   },
   chainWebpack(config) {
-    config.plugins.delete("prefetch");
+    config.plugins.delete('prefetch');
   }
 };

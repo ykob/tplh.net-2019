@@ -1,7 +1,7 @@
-import { easeOutCirc } from "easing-js";
-import MathEx from "js-util/MathEx";
+import { easeOutCirc } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import Petal from "@/webgl/Petal";
+import Petal from '@/webgl/Petal';
 
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1.2;
@@ -13,7 +13,7 @@ export default class PetalRotate extends Petal {
   constructor(geometry, hsv1, hsv2, hsv3) {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
-    this.name = "PetalRotate";
+    this.name = 'PetalRotate';
     this.durationRise = (1 - this.mass) * 5 + Math.random() * 4 + 8;
     this.delayShow = DELAY_SHOW + Math.random();
     this.delayHide = DELAY_HIDE + Math.random() * 0.2;

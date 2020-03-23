@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Link",
+  name: 'Link',
   props: {
     vertical: {
       type: Boolean,
@@ -19,8 +19,8 @@ export default {
   computed: {
     classnames() {
       return {
-        "is-horizontal": this.vertical === false,
-        "is-vertical": this.vertical === true
+        'is-horizontal': this.vertical === false,
+        'is-vertical': this.vertical === true
       };
     }
   },

@@ -1,6 +1,6 @@
-const THREE = require("three");
+const THREE = require('three');
 
-require("@/webgl/OBJLoader.js");
+require('@/webgl/OBJLoader.js');
 
 const objLoader = new THREE.OBJLoader();
 

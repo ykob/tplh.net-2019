@@ -1,15 +1,15 @@
 <script>
-import findIndex from "lodash/findIndex";
-import normalizeWheel from "normalize-wheel";
-import sleep from "js-util/sleep";
+import findIndex from 'lodash/findIndex';
+import normalizeWheel from 'normalize-wheel';
+import sleep from 'js-util/sleep';
 
-import store from "@/store";
-import WorkOutline from "@/components/organisms/WorkOutline.vue";
+import store from '@/store';
+import WorkOutline from '@/components/organisms/WorkOutline.vue';
 
 export default {
-  name: "Works",
+  name: 'Works',
   metaInfo: {
-    title: "Works / "
+    title: 'Works / '
   },
   components: {
     WorkOutline
@@ -17,7 +17,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     const index = findIndex(store.state.works, { key: to.params.key });
 
-    store.commit("transit", {
+    store.commit('transit', {
       globalId: 1,
       currentWorksId: index
     });
@@ -25,55 +25,55 @@ export default {
     next();
   },
   created() {
-    window.addEventListener("wheel", this.wheel, { passive: false });
-    window.addEventListener("touchmove", this.touchmove);
+    window.addEventListener('wheel', this.wheel, { passive: false });
+    window.addEventListener('touchmove', this.touchmove);
   },
   async mounted() {
     const index = findIndex(this.$store.state.works, {
       key: this.$route.params.key
     });
 
-    this.$store.commit("changeBackground", {
+    this.$store.commit('changeBackground', {
       isHome: false,
       hasDelay: false
     });
-    this.$store.commit("showHomeObjs", false);
-    this.$store.commit("showWorksObjs", {
+    this.$store.commit('showHomeObjs', false);
+    this.$store.commit('showWorksObjs', {
       index: index + 1,
       direction: 0
     });
-    this.$store.commit("showWhoIAmObjs", false);
+    this.$store.commit('showWhoIAmObjs', false);
 
     await sleep(500);
-    this.$store.commit("showUI");
+    this.$store.commit('showUI');
   },
   destroyed() {
-    window.removeEventListener("wheel", this.wheel, { passive: false });
-    window.removeEventListener("touchmove", this.touchmove);
+    window.removeEventListener('wheel', this.wheel, { passive: false });
+    window.removeEventListener('touchmove', this.touchmove);
   },
   watch: {
-    "$route.params.key": function(key) {
+    '$route.params.key': function(key) {
       const index = findIndex(this.$store.state.works, { key: key });
 
-      this.$store.commit("showWorksObjs", {
+      this.$store.commit('showWorksObjs', {
         index: index + 1,
         direction: 0
       });
-      this.$store.commit("transit", {
+      this.$store.commit('transit', {
         globalId: 1,
         currentWorksId: index
       });
 
       // send google analytics
       /* global gtag */
-      gtag("config", "UA-568033-1", { page_path: this.$route.path });
+      gtag('config', 'UA-568033-1', { page_path: this.$route.path });
     }
   },
   computed: {
     transitionName() {
       return this.$store.state.isTransitionDescend === true
-        ? "show"
-        : "show-asc";
+        ? 'show'
+        : 'show-asc';
     }
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
       // Run at the first wheel event only.
       if (state.isWheeling === false) {
         if (Math.abs(n.pixelY) < 10) return;
-        commit("startWheeling");
+        commit('startWheeling');
 
         if (n.pixelY > 0) {
           // go to the next page.
@@ -94,7 +94,7 @@ export default {
             const i = state.currentWorksId + 1;
             this.$router.push(`/works/${state.works[i].key}/`);
           } else {
-            this.$router.push("/who-i-am/");
+            this.$router.push('/who-i-am/');
           }
         } else {
           // go to the previous page.
@@ -102,7 +102,7 @@ export default {
             const i = state.currentWorksId - 1;
             this.$router.push(`/works/${state.works[i].key}/`);
           } else {
-            this.$router.push("/");
+            this.$router.push('/');
           }
         }
       }
@@ -115,20 +115,20 @@ export default {
           // go to the next page.
           if (state.currentWorksId < state.works.length - 1) {
             const i = state.currentWorksId + 1;
-            dispatch("debounceRouterPush", `/works/${state.works[i].key}/`);
+            dispatch('debounceRouterPush', `/works/${state.works[i].key}/`);
           } else {
-            dispatch("debounceRouterPush", "/who-i-am/");
+            dispatch('debounceRouterPush', '/who-i-am/');
           }
-          commit("touchEnd");
+          commit('touchEnd');
         } else if (state.touchMove.y > 10) {
           // go to the previous page.
           if (state.currentWorksId > 0) {
             const i = state.currentWorksId - 1;
-            dispatch("debounceRouterPush", `/works/${state.works[i].key}/`);
+            dispatch('debounceRouterPush', `/works/${state.works[i].key}/`);
           } else {
-            dispatch("debounceRouterPush", "/");
+            dispatch('debounceRouterPush', '/');
           }
-          commit("touchEnd");
+          commit('touchEnd');
         }
       }
     }

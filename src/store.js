@@ -1,11 +1,11 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import * as THREE from "three";
-import MathEx from "js-util/MathEx";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import * as THREE from 'three';
+import MathEx from 'js-util/MathEx';
 
-import router from "@/router";
+import router from '@/router';
 
-import WORKS from "@/const/WORKS";
+import WORKS from '@/const/WORKS';
 
 const INTERVAL_TO_FIRE_WHEEL = 1000;
 
@@ -14,7 +14,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     globalId: 0,
-    canvas: document.createElement("canvas"),
+    canvas: document.createElement('canvas'),
     resolution: new THREE.Vector2(),
     mouse: new THREE.Vector2(),
     mousePrev: new THREE.Vector2(),
@@ -143,17 +143,17 @@ export default new Vuex.Store({
   },
   actions: {
     async initWebGL(context) {
-      await import("@/webgl/").then(module => {
+      await import('@/webgl/').then(module => {
         const webgl = new module.default();
-        context.commit("initWebGL", webgl);
+        context.commit('initWebGL', webgl);
       });
     },
     debounceRouterPush(context, url) {
       if (context.state.isTransition === true) return;
-      context.commit("startTransition");
+      context.commit('startTransition');
       router.push(url);
       setTimeout(() => {
-        context.commit("endTransition");
+        context.commit('endTransition');
       }, INTERVAL_TO_FIRE_WHEEL);
     }
   }

@@ -1,22 +1,22 @@
 <script>
-import * as THREE from "three";
-import sleep from "js-util/sleep";
-import debounce from "js-util/debounce";
+import * as THREE from 'three';
+import sleep from 'js-util/sleep';
+import debounce from 'js-util/debounce';
 
-import GlobalTitle from "@/components/templates/GlobalTitle.vue";
-import UtilityNavi from "@/components/templates/UtilityNavi.vue";
-import WorksNavi from "@/components/templates/WorksNavi.vue";
-import Preloader from "@/components/templates/Preloader.vue";
-import Guide from "@/components/templates/Guide.vue";
+import GlobalTitle from '@/components/templates/GlobalTitle.vue';
+import UtilityNavi from '@/components/templates/UtilityNavi.vue';
+import WorksNavi from '@/components/templates/WorksNavi.vue';
+import Preloader from '@/components/templates/Preloader.vue';
+import Guide from '@/components/templates/Guide.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   metaInfo: {
-    title: "",
-    titleTemplate: "%sYoichi Kobayashi",
+    title: '',
+    titleTemplate: '%sYoichi Kobayashi',
     meta: [
       {
-        name: "description",
+        name: 'description',
         content: "I'm a Web Developer.Just love World-Wide-Web."
       }
     ]
@@ -47,24 +47,24 @@ export default {
       `;
 
     // On global events.
-    window.addEventListener("resize", debounce(this.resize, 100));
-    window.addEventListener("mousemove", this.mousemove);
-    document.addEventListener("mouseleave", this.mouseleave);
-    document.addEventListener("touchstart", this.touchstart);
-    document.addEventListener("touchmove", this.touchmove);
-    document.addEventListener("touchend", this.touchend);
+    window.addEventListener('resize', debounce(this.resize, 100));
+    window.addEventListener('mousemove', this.mousemove);
+    document.addEventListener('mouseleave', this.mouseleave);
+    document.addEventListener('touchstart', this.touchstart);
+    document.addEventListener('touchmove', this.touchmove);
+    document.addEventListener('touchend', this.touchend);
 
     await sleep(500);
-    this.$store.commit("showPreloader");
+    this.$store.commit('showPreloader');
     this.update();
-    await dispatch("initWebGL");
+    await dispatch('initWebGL');
     state.webgl.start(state.canvas, this.$store);
   },
   computed: {
     transitionName() {
       return this.$store.state.isTransitionDescend === true
-        ? "view"
-        : "view-asc";
+        ? 'view'
+        : 'view-asc';
     }
   },
   methods: {
@@ -76,7 +76,7 @@ export default {
         isLoaded
       } = this.$store.state;
       if (isLoaded === false) {
-        this.$store.commit("updatePreloadProgress");
+        this.$store.commit('updatePreloadProgress');
         if (preloadProgress / preloadMax > 0.999) {
           this.loaded();
         }
@@ -87,14 +87,14 @@ export default {
     },
     async loaded() {
       this.resize();
-      this.$store.commit("loaded");
-      if (this.$route.name === "home") {
+      this.$store.commit('loaded');
+      if (this.$route.name === 'home') {
         await sleep(800);
       } else {
         await sleep(2400);
       }
       this.$store.state.webgl.play();
-      this.$store.commit("showView");
+      this.$store.commit('showView');
     },
     resize() {
       const { canvas, resolution, webgl } = this.$store.state;
@@ -102,7 +102,7 @@ export default {
       resolution.set(document.body.clientWidth, window.innerHeight);
       canvas.width = resolution.x;
       canvas.height = resolution.y;
-      this.$store.commit("changeMediaQuery", resolution.x < 768);
+      this.$store.commit('changeMediaQuery', resolution.x < 768);
       webgl.resize();
     },
     mousemove(e) {
@@ -133,8 +133,8 @@ export default {
     },
     touchstart(e) {
       const { commit } = this.$store;
-      commit("setEnabledTouch", true);
-      commit("startTouch");
+      commit('setEnabledTouch', true);
+      commit('startTouch');
       this.vTouchStart.set(e.touches[0].clientX, e.touches[0].clientY);
       this.vTouchMove.set(e.touches[0].clientX, e.touches[0].clientY);
     },
@@ -154,18 +154,18 @@ export default {
             .length() > 3
         ) {
           this.vTouchMoveStart.set(e.touches[0].clientX, e.touches[0].clientY);
-          commit("startTouchMove");
+          commit('startTouchMove');
         }
       } else {
         // judge whether the swipe direction is X or Y.
-        commit("touchMove", {
+        commit('touchMove', {
           x: this.vTouchMove.x - this.vTouchMoveStart.x,
           y: this.vTouchMove.y - this.vTouchMoveStart.y
         });
       }
     },
     touchend() {
-      this.$store.commit("touchEnd");
+      this.$store.commit('touchEnd');
     }
   }
 };
@@ -190,11 +190,11 @@ export default {
 </template>
 
 <style lang="scss">
-@import "@/assets/scss/foundation/font.scss";
+@import '@/assets/scss/foundation/font.scss';
 
-@import "@/assets/scss/foundation/normalize.scss";
-@import "@/assets/scss/foundation/global.scss";
-@import "@/assets/scss/foundation/keyframes.scss";
-@import "@/assets/scss/object/project/view-wrap.scss";
-@import "@/assets/scss/object/vendor/ps.scss";
+@import '@/assets/scss/foundation/normalize.scss';
+@import '@/assets/scss/foundation/global.scss';
+@import '@/assets/scss/foundation/keyframes.scss';
+@import '@/assets/scss/object/project/view-wrap.scss';
+@import '@/assets/scss/object/vendor/ps.scss';
 </style>

@@ -1,11 +1,11 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import store from "@/store";
-import PromiseOBJLoader from "@/webgl/PromiseOBJLoader";
-import PromiseTextureLoader from "@/webgl/PromiseTextureLoader";
-import checkWebpFeature from "@/utils/checkWebpFeature";
+import store from '@/store';
+import PromiseOBJLoader from '@/webgl/PromiseOBJLoader';
+import PromiseTextureLoader from '@/webgl/PromiseTextureLoader';
+import checkWebpFeature from '@/utils/checkWebpFeature';
 
-import PIXEL_RATIO from "@/const/PIXEL_RATIO";
+import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
 // ==========
 // Define common variables
@@ -52,58 +52,58 @@ export default class WebGLContent {
   }
   async start(canvas, store) {
     // Check whether the webp format is enabled.
-    let webpExe = "";
-    await checkWebpFeature("lossy")
+    let webpExe = '';
+    await checkWebpFeature('lossy')
       .then(() => {
-        webpExe = "webp";
+        webpExe = 'webp';
       })
       .catch(() => {
-        webpExe = "jpg";
+        webpExe = 'jpg';
       });
 
     // import modules
     await Promise.all([
-      import("@/webgl/Camera").then(module => {
+      import('@/webgl/Camera').then(module => {
         this.camera = new module.default();
       }),
-      import("@/webgl/SkullAuraCamera").then(module => {
+      import('@/webgl/SkullAuraCamera').then(module => {
         this.skullAuraCamera = new module.default();
       }),
-      import("@/webgl/Skull").then(module => {
+      import('@/webgl/Skull').then(module => {
         this.skull = new module.default();
       }),
-      import("@/webgl/Title").then(module => {
+      import('@/webgl/Title').then(module => {
         this.title = new module.default();
       }),
-      import("@/webgl/PetalFallGroup").then(module => {
+      import('@/webgl/PetalFallGroup').then(module => {
         this.petalFallGroup = new module.default();
       }),
-      import("@/webgl/PetalRotateGroup").then(module => {
+      import('@/webgl/PetalRotateGroup').then(module => {
         this.petalRotateGroup = new module.default();
       }),
-      import("@/webgl/Image").then(module => {
+      import('@/webgl/Image').then(module => {
         this.image = new module.default();
       }),
-      import("@/webgl/WorksText").then(module => {
+      import('@/webgl/WorksText').then(module => {
         this.worksText = new module.default();
       }),
-      import("@/webgl/WhoIamText").then(module => {
+      import('@/webgl/WhoIamText').then(module => {
         this.whoiamText = new module.default();
       }),
-      import("@/webgl/Background").then(module => {
+      import('@/webgl/Background').then(module => {
         this.bg = new module.default();
       }),
-      import("@/webgl/Intersector").then(module => {
+      import('@/webgl/Intersector').then(module => {
         this.intersector = new module.default();
       }),
-      import("@/webgl/PostEffectBright").then(module => {
+      import('@/webgl/PostEffectBright').then(module => {
         this.postEffectBright = new module.default();
       }),
-      import("@/webgl/PostEffectBlur").then(module => {
+      import('@/webgl/PostEffectBlur').then(module => {
         this.postEffectBlurX = new module.default();
         this.postEffectBlurY = new module.default();
       }),
-      import("@/webgl/PostEffectBloom").then(module => {
+      import('@/webgl/PostEffectBloom').then(module => {
         this.postEffectBloom = new module.default();
       })
     ]);
@@ -125,12 +125,12 @@ export default class WebGLContent {
 
     // Loading all assets for WebGL.
     const updateProgressAnchor = result => {
-      store.commit("updatePreloadAnchor");
+      store.commit('updatePreloadAnchor');
       return result;
     };
     const assetsObj = [
-      require("@/assets/obj/SkullHead.obj"),
-      require("@/assets/obj/CherryBlossom.obj")
+      require('@/assets/obj/SkullHead.obj'),
+      require('@/assets/obj/CherryBlossom.obj')
     ];
     const assetsImgs = [
       require(`@/assets/img/webgl/title.${webpExe}`),
@@ -138,14 +138,14 @@ export default class WebGLContent {
       require(`@/assets/img/webgl/noise_burn.${webpExe}`),
       require(`@/assets/img/webgl/works_text.${webpExe}`),
       require(`@/assets/img/webgl/whoiam_text.${webpExe}`),
-      require("@/assets/img/webgl/thumb_blank.png"),
+      require('@/assets/img/webgl/thumb_blank.png'),
       require(`@/assets/img/webgl/thumb_sketch_threejs.${webpExe}`),
       require(`@/assets/img/webgl/thumb_warpdrive.${webpExe}`),
       require(`@/assets/img/webgl/thumb_hassyadai.${webpExe}`),
       require(`@/assets/img/webgl/thumb_imago.${webpExe}`),
       require(`@/assets/img/webgl/thumb_best_film_2018.${webpExe}`)
     ];
-    store.commit("setPreloadMax", assetsObj.length + assetsImgs.length);
+    store.commit('setPreloadMax', assetsObj.length + assetsImgs.length);
 
     await Promise.all([
       ...assetsObj.map(o => {
@@ -213,8 +213,8 @@ export default class WebGLContent {
     });
 
     // show the dat.gui.
-    if (process.env.VUE_APP_MODE === "development") {
-      const initDatGui = await import("@/utils/initDatGui");
+    if (process.env.VUE_APP_MODE === 'development') {
+      const initDatGui = await import('@/utils/initDatGui');
 
       initDatGui.default(
         this.skull,

@@ -1,13 +1,13 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import PetalRotate from "@/webgl/PetalRotate";
+import PetalRotate from '@/webgl/PetalRotate';
 
 const PETAL_NUM = 60;
 
 export default class PetalRotateGroup extends THREE.Group {
   constructor() {
     super();
-    this.name = "PetalRotateGroup";
+    this.name = 'PetalRotateGroup';
     this.petals = Array(PETAL_NUM);
     this.time = 0;
     this.isActive = false;

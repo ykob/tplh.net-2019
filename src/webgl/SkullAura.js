@@ -1,10 +1,10 @@
-import * as THREE from "three";
-import { easeOutCirc } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeOutCirc } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import store from "@/store";
-import vs from "@/webgl/glsl/SkullAura.vs";
-import fs from "@/webgl/glsl/SkullAura.fs";
+import store from '@/store';
+import vs from '@/webgl/glsl/SkullAura.vs';
+import fs from '@/webgl/glsl/SkullAura.fs';
 
 const DURATION_SHOW = 1;
 const DELAY_SHOW = 2.6;
@@ -18,51 +18,51 @@ export default class SkullAura extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         postEffectTex: {
-          type: "t",
+          type: 't',
           value: null
         },
         noiseTex: {
-          type: "t",
+          type: 't',
           value: null
         },
         alpha: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         hsv1: {
-          type: "v3",
+          type: 'v3',
           value: new THREE.Vector3()
         },
         hsv2: {
-          type: "v3",
+          type: 'v3',
           value: new THREE.Vector3(0, 0, 0)
         },
         strength: {
-          type: "f",
+          type: 'f',
           value: 1.8
         },
         colorRangeMin: {
-          type: "f",
+          type: 'f',
           value: 0.3
         },
         colorRangeMax: {
-          type: "f",
+          type: 'f',
           value: 0.7
         },
         opacityRangeMin: {
-          type: "f",
+          type: 'f',
           value: 0.58
         },
         opacityRangeMax: {
-          type: "f",
+          type: 'f',
           value: 0.8
         },
         opacityBase: {
-          type: "f",
+          type: 'f',
           value: 0.9
         }
       },
@@ -74,7 +74,7 @@ export default class SkullAura extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "SkullAura";
+    this.name = 'SkullAura';
     this.timeShow = 0;
     this.mouseForce = 0;
     this.hsv1Base = new THREE.Vector3(0.15, 0.62, 1);

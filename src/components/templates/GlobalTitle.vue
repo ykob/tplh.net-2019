@@ -1,10 +1,10 @@
 <script>
 export default {
-  name: "GlobalTitle",
+  name: 'GlobalTitle',
   computed: {
     classnames() {
       return {
-        "is-shown": this.$store.state.isShownUI === true
+        'is-shown': this.$store.state.isShownUI === true
       };
     }
   }

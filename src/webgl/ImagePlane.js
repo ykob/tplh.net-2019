@@ -1,7 +1,7 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import vs from "@/webgl/glsl/ImagePlane.vs";
-import fs from "@/webgl/glsl/ImagePlane.fs";
+import vs from '@/webgl/glsl/ImagePlane.vs';
+import fs from '@/webgl/glsl/ImagePlane.fs';
 
 export default class ImagePlane extends THREE.Mesh {
   constructor(width) {
@@ -17,39 +17,39 @@ export default class ImagePlane extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         easeTransition1: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         easeTransition2: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         easeTransition3: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: "t",
+          type: 't',
           value: null
         },
         imgTex1: {
-          type: "t",
+          type: 't',
           value: null
         },
         imgTex2: {
-          type: "t",
+          type: 't',
           value: null
         },
         imgTex3: {
-          type: "t",
+          type: 't',
           value: null
         },
         imgRatio: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2(1, 0.666)
         }
       },
@@ -60,7 +60,7 @@ export default class ImagePlane extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "ImagePlane";
+    this.name = 'ImagePlane';
     this.imgIndexPrev = 0;
     this.imgIndexNext = 0;
     this.renderOrder = 5;

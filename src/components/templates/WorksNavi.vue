@@ -1,8 +1,8 @@
 <script>
-import SplitStr from "@/components/atoms/SplitStr.vue";
+import SplitStr from '@/components/atoms/SplitStr.vue';
 
 export default {
-  name: "WorksNavi",
+  name: 'WorksNavi',
   components: {
     SplitStr
   },
@@ -17,11 +17,11 @@ export default {
   computed: {
     classnames() {
       return {
-        "is-shown": this.$store.state.isShownUI === true,
-        "is-previous": this.$store.state.positionFromWorks === -1,
-        "is-current": this.$store.state.positionFromWorks === 0,
-        "is-next": this.$store.state.positionFromWorks === 1,
-        "is-overed": this.isOvered === true
+        'is-shown': this.$store.state.isShownUI === true,
+        'is-previous': this.$store.state.positionFromWorks === -1,
+        'is-current': this.$store.state.positionFromWorks === 0,
+        'is-next': this.$store.state.positionFromWorks === 1,
+        'is-overed': this.isOvered === true
       };
     },
     lineProgressStyles() {
@@ -46,7 +46,7 @@ export default {
     }
   },
   watch: {
-    "$store.state.positionFromWorks"() {
+    '$store.state.positionFromWorks'() {
       if (this.$store.state.positionFromWorks === 0) {
         this.hasAnchorDelay = true;
         setTimeout(() => {
@@ -65,7 +65,7 @@ export default {
     },
     transit(i) {
       const { state, dispatch } = this.$store;
-      dispatch("debounceRouterPush", `/works/${state.works[i].key}/`);
+      dispatch('debounceRouterPush', `/works/${state.works[i].key}/`);
     },
     anchorEnter(i) {
       if (this.$store.state.isEnabledTouch === true) return;
@@ -98,11 +98,11 @@ export default {
     },
     anchorClassnames(i) {
       return {
-        "is-shown":
+        'is-shown':
           this.$store.state.positionFromWorks === 0 &&
           this.$store.state.isShownUI,
-        "is-overed": this.isOveredAnchor === i,
-        "is-current": this.$store.state.works[i].key === this.$route.params.key
+        'is-overed': this.isOveredAnchor === i,
+        'is-current': this.$store.state.works[i].key === this.$route.params.key
       };
     },
     anchorLabelStyles(i) {
@@ -117,8 +117,8 @@ export default {
     anchorLabelClassnames(i) {
       const { state } = this.$store;
       return {
-        "is-overed": this.isOveredAnchor === i,
-        "is-current":
+        'is-overed': this.isOveredAnchor === i,
+        'is-current':
           state.works[i].key === this.$route.params.key &&
           this.isOveredAnchor === -1 &&
           state.isShownUI
@@ -358,7 +358,7 @@ export default {
     }
     &:before {
       backface-visibility: hidden;
-      content: "";
+      content: '';
       display: block;
       box-sizing: border-box;
       position: absolute;

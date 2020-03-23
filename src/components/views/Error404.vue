@@ -1,17 +1,17 @@
 <script>
-import sleep from "js-util/sleep";
+import sleep from 'js-util/sleep';
 
-import store from "@/store";
-import ErrorMessage from "@/components/atoms/ErrorMessage.vue";
+import store from '@/store';
+import ErrorMessage from '@/components/atoms/ErrorMessage.vue';
 
 export default {
-  name: "error-404",
+  name: 'error-404',
   metaInfo: {
-    title: "404 File not found / ",
+    title: '404 File not found / ',
     meta: [
       {
-        name: "description",
-        content: ""
+        name: 'description',
+        content: ''
       }
     ]
   },
@@ -19,24 +19,24 @@ export default {
     ErrorMessage
   },
   beforeRouteEnter(to, from, next) {
-    store.commit("transit", {
+    store.commit('transit', {
       globalId: 0
     });
     next();
   },
   async mounted() {
-    this.$store.commit("changeBackground", {
+    this.$store.commit('changeBackground', {
       isHome: true,
       hasDelay: false
     });
-    this.$store.commit("showHomeObjs", false);
-    this.$store.commit("showWorksObjs", {
+    this.$store.commit('showHomeObjs', false);
+    this.$store.commit('showWorksObjs', {
       index: 0,
       direction: -1
     });
-    this.$store.commit("showWhoIAmObjs", false);
+    this.$store.commit('showWhoIAmObjs', false);
     await sleep(500);
-    this.$store.commit("showUI");
+    this.$store.commit('showUI');
   }
 };
 </script>

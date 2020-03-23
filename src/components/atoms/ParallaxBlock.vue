@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ParallaxBlock",
+  name: 'ParallaxBlock',
   props: {
     scrollY: {
       type: Number,
@@ -17,10 +17,10 @@ export default {
     };
   },
   watch: {
-    "$store.state.resolution.x"() {
+    '$store.state.resolution.x'() {
       this.getCenter();
     },
-    "$store.state.resolution.y"() {
+    '$store.state.resolution.y'() {
       this.getCenter();
     }
   },

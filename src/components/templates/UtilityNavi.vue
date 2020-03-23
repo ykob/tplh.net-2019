@@ -1,8 +1,8 @@
 <script>
-import SplitStr from "@/components/atoms/SplitStr.vue";
+import SplitStr from '@/components/atoms/SplitStr.vue';
 
 export default {
-  name: "UtilityNavi",
+  name: 'UtilityNavi',
   components: {
     SplitStr
   },
@@ -14,15 +14,15 @@ export default {
   computed: {
     classnames() {
       return {
-        "is-shown": this.$store.state.isShownUI === true,
-        "is-current": this.$route.name === "who-i-am"
+        'is-shown': this.$store.state.isShownUI === true,
+        'is-current': this.$route.name === 'who-i-am'
       };
     },
     classnamesLabel() {
       return {
-        "is-shown": this.$store.state.isShownUI === true,
-        "is-current": this.$route.name === "who-i-am",
-        "is-overed": this.isOvered === true
+        'is-shown': this.$store.state.isShownUI === true,
+        'is-current': this.$route.name === 'who-i-am',
+        'is-overed': this.isOvered === true
       };
     },
     barStyles() {

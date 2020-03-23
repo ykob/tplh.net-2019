@@ -1,8 +1,8 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import store from "@/store";
-import vs from "@/webgl/glsl/PostEffect.vs";
-import fs from "@/webgl/glsl/PostEffectBlur.fs";
+import store from '@/store';
+import vs from '@/webgl/glsl/PostEffect.vs';
+import fs from '@/webgl/glsl/PostEffectBlur.fs';
 
 export default class PostEffectBlur extends THREE.Mesh {
   constructor() {
@@ -13,15 +13,15 @@ export default class PostEffectBlur extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         resolution: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2()
         },
         direction: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2()
         },
         texture: {
-          type: "t",
+          type: 't',
           value: null
         }
       },
@@ -31,7 +31,7 @@ export default class PostEffectBlur extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "PostEffectBlur";
+    this.name = 'PostEffectBlur';
   }
   start(texture, x, y) {
     this.material.uniforms.texture.value = texture;

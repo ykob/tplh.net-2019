@@ -1,11 +1,11 @@
-import * as THREE from "three";
-import { easeInCirc, easeOutCirc } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeInCirc, easeOutCirc } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import vs from "@/webgl/glsl/WorksText.vs";
-import fs from "@/webgl/glsl/WorksText.fs";
+import vs from '@/webgl/glsl/WorksText.vs';
+import fs from '@/webgl/glsl/WorksText.fs';
 
-import WORKS from "@/const/WORKS";
+import WORKS from '@/const/WORKS';
 
 const WIDTH = 90;
 const DURATION_TRANSITION = 1;
@@ -25,87 +25,87 @@ export default class WorksText extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex: {
-          type: "t",
+          type: 't',
           value: null
         },
         tex1Index: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex1MaxUvX: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex2Index: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex2MaxUvX: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex3Index: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         tex3MaxUvX: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         maxIndex: {
-          type: "f",
+          type: 'f',
           value: 16
         },
         alphaShow1: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaHide1: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaShow2: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaHide2: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaShow3: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaHide3: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         directionShow1: {
-          type: "f",
+          type: 'f',
           value: 1
         },
         directionHide1: {
-          type: "f",
+          type: 'f',
           value: 1
         },
         directionShow2: {
-          type: "f",
+          type: 'f',
           value: 1
         },
         directionHide2: {
-          type: "f",
+          type: 'f',
           value: 1
         },
         directionShow3: {
-          type: "f",
+          type: 'f',
           value: 1
         },
         directionHide3: {
-          type: "f",
+          type: 'f',
           value: 1
         }
       },
@@ -118,7 +118,7 @@ export default class WorksText extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "WorksText";
+    this.name = 'WorksText';
     this.time = 0;
     this.timeShow1 = 0;
     this.timeShow2 = 0;

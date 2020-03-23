@@ -1,14 +1,14 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import store from "@/store";
-import PetalFall from "@/webgl/PetalFall";
+import store from '@/store';
+import PetalFall from '@/webgl/PetalFall';
 
 const PETAL_NUM = 48;
 
 export default class PetalFallGroup extends THREE.Group {
   constructor() {
     super();
-    this.name = "PetalFallGroup";
+    this.name = 'PetalFallGroup';
     this.petals = Array(PETAL_NUM);
     this.time = 0;
     this.isActive = false;

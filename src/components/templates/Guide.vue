@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Guide"
+  name: 'Guide'
 };
 </script>
 

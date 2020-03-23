@@ -1,14 +1,14 @@
-import * as THREE from "three";
-import { easeInOutCirc, easeOutCirc } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeInOutCirc, easeOutCirc } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import store from "@/store";
+import store from '@/store';
 
-import SkullBody from "@/webgl/SkullBody";
-import SkullAuraPostEffect from "@/webgl/SkullAuraPostEffect";
-import SkullAura from "@/webgl/SkullAura";
-import SkullPoints from "@/webgl/SkullPoints";
-import SkullPointsFirst from "@/webgl/SkullPointsFirst";
+import SkullBody from '@/webgl/SkullBody';
+import SkullAuraPostEffect from '@/webgl/SkullAuraPostEffect';
+import SkullAura from '@/webgl/SkullAura';
+import SkullPoints from '@/webgl/SkullPoints';
+import SkullPointsFirst from '@/webgl/SkullPointsFirst';
 
 const DURATION_SHOW = 2;
 const DELAY_SHOW = 1;
@@ -18,7 +18,7 @@ const DELAY_HIDE = 0;
 export default class Skull extends THREE.Group {
   constructor() {
     super();
-    this.name = "Skull";
+    this.name = 'Skull';
     this.body;
     this.auraPostEffect;
     this.aura;

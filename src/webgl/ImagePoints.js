@@ -1,10 +1,10 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import store from "@/store";
-import vs from "@/webgl/glsl/ImagePoints.vs";
-import fs from "@/webgl/glsl/ImagePoints.fs";
+import store from '@/store';
+import vs from '@/webgl/glsl/ImagePoints.vs';
+import fs from '@/webgl/glsl/ImagePoints.fs';
 
-import PIXEL_RATIO from "@/const/PIXEL_RATIO";
+import PIXEL_RATIO from '@/const/PIXEL_RATIO';
 
 export default class ImagePoints extends THREE.Points {
   constructor(width) {
@@ -17,42 +17,42 @@ export default class ImagePoints extends THREE.Points {
     );
     const geometry = new THREE.BufferGeometry();
 
-    geometry.setAttribute("position", baseGeometry.attributes.position);
-    geometry.setAttribute("uv", baseGeometry.attributes.uv);
+    geometry.setAttribute('position', baseGeometry.attributes.position);
+    geometry.setAttribute('uv', baseGeometry.attributes.uv);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         easeTransition1: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         easeTransition2: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         easeTransition3: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         resolution: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2()
         },
         noiseTex: {
-          type: "t",
+          type: 't',
           value: null
         },
         imgRatio: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2(1, 0.666)
         },
         pixelRatio: {
-          type: "f",
+          type: 'f',
           value: PIXEL_RATIO
         }
       },
@@ -65,7 +65,7 @@ export default class ImagePoints extends THREE.Points {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "ImagePoints";
+    this.name = 'ImagePoints';
   }
   start(noiseTex) {
     this.material.uniforms.noiseTex.value = noiseTex;

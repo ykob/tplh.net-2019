@@ -1,9 +1,9 @@
-import * as THREE from "three";
-import { easeOutCirc, easeInOutCubic } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeOutCirc, easeInOutCubic } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import vs from "@/webgl/glsl/SkullBody.vs";
-import fs from "@/webgl/glsl/SkullBody.fs";
+import vs from '@/webgl/glsl/SkullBody.vs';
+import fs from '@/webgl/glsl/SkullBody.fs';
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1;
 const DURATION_HIDE = 1.2;
@@ -20,23 +20,23 @@ export default class SkullBody extends THREE.Group {
     this.material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         rotateMatrix: {
-          type: "m4",
+          type: 'm4',
           value: new THREE.Matrix4()
         },
         renderOutline: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alpha: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         hsv1: {
-          type: "v3",
+          type: 'v3',
           value: new THREE.Vector3(0.09, 0.7, 0.3)
         }
       },
@@ -52,7 +52,7 @@ export default class SkullBody extends THREE.Group {
     this.add(this.head);
     this.add(this.jaw);
 
-    this.name = "SkullBody";
+    this.name = 'SkullBody';
     this.timeShow = 0;
     this.timeHide = 0;
     this.timeScream = 0;

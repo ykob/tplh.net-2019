@@ -1,18 +1,18 @@
 <script>
-import sleep from "js-util/sleep";
-import MathEx from "js-util/MathEx";
-import normalizeWheel from "normalize-wheel";
+import sleep from 'js-util/sleep';
+import MathEx from 'js-util/MathEx';
+import normalizeWheel from 'normalize-wheel';
 
-import store from "@/store";
-import WhoIAmSection from "@/components/atoms/WhoIAmSection.vue";
-import WhoIAmHeading from "@/components/atoms/WhoIAmHeading.vue";
-import WhoIAmThanks from "@/components/atoms/WhoIAmThanks.vue";
-import WhoIAmLinks from "@/components/organisms/WhoIAmLinks.vue";
+import store from '@/store';
+import WhoIAmSection from '@/components/atoms/WhoIAmSection.vue';
+import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue';
+import WhoIAmThanks from '@/components/atoms/WhoIAmThanks.vue';
+import WhoIAmLinks from '@/components/organisms/WhoIAmLinks.vue';
 
 export default {
-  name: "WhoIAm",
+  name: 'WhoIAm',
   metaInfo: {
-    title: "Who I am / "
+    title: 'Who I am / '
   },
   components: {
     WhoIAmSection,
@@ -29,7 +29,7 @@ export default {
     };
   },
   watch: {
-    async "$store.state.resolution.y"() {
+    async '$store.state.resolution.y'() {
       await sleep(10);
       this.resize();
     }
@@ -43,41 +43,41 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    store.commit("transit", {
+    store.commit('transit', {
       globalId: 50
     });
     next();
   },
   async created() {
-    window.addEventListener("wheel", this.wheel, { passive: false });
-    window.addEventListener("touchstart", this.touchstart);
-    window.addEventListener("touchmove", this.touchmove);
+    window.addEventListener('wheel', this.wheel, { passive: false });
+    window.addEventListener('touchstart', this.touchstart);
+    window.addEventListener('touchmove', this.touchmove);
     this.scrollY = 0;
     this.anchorY = 0;
     this.anchorYPrev = 0;
-    this.$store.commit("setScrollProgress", 0);
+    this.$store.commit('setScrollProgress', 0);
   },
   async mounted() {
-    this.$store.commit("changeBackground", {
+    this.$store.commit('changeBackground', {
       isHome: false,
       hasDelay: false
     });
-    this.$store.commit("showHomeObjs", false);
-    this.$store.commit("showWorksObjs", {
+    this.$store.commit('showHomeObjs', false);
+    this.$store.commit('showWorksObjs', {
       index: 0,
       direction: 1
     });
-    this.$store.commit("showWhoIAmObjs", true);
+    this.$store.commit('showWhoIAmObjs', true);
     await sleep(500);
-    this.$store.commit("showUI");
+    this.$store.commit('showUI');
     this.isRendering = true;
     this.resize();
     this.update();
   },
   destroyed() {
-    window.removeEventListener("wheel", this.wheel, { passive: false });
-    window.removeEventListener("touchstart", this.touchstart);
-    window.removeEventListener("touchmove", this.touchmove);
+    window.removeEventListener('wheel', this.wheel, { passive: false });
+    window.removeEventListener('touchstart', this.touchstart);
+    window.removeEventListener('touchmove', this.touchmove);
     this.isRendering = false;
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
         Math.floor((this.scrollY + (this.anchorY - this.scrollY) / 10) * 100) /
         100;
       this.$store.commit(
-        "setScrollProgress",
+        'setScrollProgress',
         this.scrollY / (this.clientHeight - this.$store.state.resolution.y)
       );
       if (this.isRendering === true) {
@@ -103,7 +103,7 @@ export default {
 
       if (this.scrollY < 1 && n.pixelY < 0) {
         // Go to the previous page.
-        commit("startWheeling");
+        commit('startWheeling');
         this.$router.push(`/works/${state.works[state.works.length - 1].key}/`);
       } else {
         // Scroll the content of the current page.
@@ -124,10 +124,10 @@ export default {
         if (this.scrollY < 1 && state.touchMove.y > 10) {
           // Go to the previous page.
           dispatch(
-            "debounceRouterPush",
+            'debounceRouterPush',
             `/works/${state.works[state.works.length - 1].key}/`
           );
-          commit("touchEnd");
+          commit('touchEnd');
         } else {
           // Scroll the content of the current page.
           this.anchorY = MathEx.clamp(
@@ -139,14 +139,14 @@ export default {
       }
     },
     resize() {
-      this.clientHeight = this.$refs["whoiam-wrap"].clientHeight;
+      this.clientHeight = this.$refs['whoiam-wrap'].clientHeight;
       this.anchorY = MathEx.clamp(
         this.anchorY,
         0,
         this.clientHeight - this.$store.state.resolution.y
       );
       this.$store.commit(
-        "setScrollProgress",
+        'setScrollProgress',
         this.scrollY / (this.clientHeight - this.$store.state.resolution.y)
       );
     }

@@ -1,9 +1,9 @@
-import * as THREE from "three";
-import { easeOutCubic, easeInOutCubic } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeOutCubic, easeInOutCubic } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import vs from "@/webgl/glsl/Background.vs";
-import fs from "@/webgl/glsl/Background.fs";
+import vs from '@/webgl/glsl/Background.vs';
+import fs from '@/webgl/glsl/Background.fs';
 
 const DURATION_SHOW = 4;
 const DURATION_CHANGE = 2;
@@ -17,23 +17,23 @@ export default class Background extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: "t",
+          type: 't',
           value: null
         },
         imgRatio: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2()
         },
         alpha: {
-          type: "f",
+          type: 'f',
           value: 0
         },
         alphaShowFirst: {
-          type: "f",
+          type: 'f',
           value: 0
         }
       },
@@ -43,7 +43,7 @@ export default class Background extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "Background";
+    this.name = 'Background';
     this.size = new THREE.Vector3();
     this.time = 0;
     this.timeShowFirst = 0;

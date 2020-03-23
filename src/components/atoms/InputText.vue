@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "InputText",
+  name: 'InputText',
   components: {},
   props: {
     hasError: {
@@ -11,13 +11,13 @@ export default {
   computed: {
     classnames: function() {
       return {
-        "has-error": this.hasError === true
+        'has-error': this.hasError === true
       };
     }
   },
   methods: {
     onChange(e) {
-      this.$emit("change", e);
+      this.$emit('change', e);
     }
   }
 };

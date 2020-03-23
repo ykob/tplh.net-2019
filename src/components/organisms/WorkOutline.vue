@@ -2,50 +2,50 @@
 const romanize = num => {
   if (isNaN(num)) return NaN;
 
-  const digits = String(+num).split("");
+  const digits = String(+num).split('');
   const key = [
-    "",
-    "C",
-    "CC",
-    "CCC",
-    "CD",
-    "D",
-    "DC",
-    "DCC",
-    "DCCC",
-    "CM",
-    "",
-    "X",
-    "XX",
-    "XXX",
-    "XL",
-    "L",
-    "LX",
-    "LXX",
-    "LXXX",
-    "XC",
-    "",
-    "I",
-    "II",
-    "III",
-    "IV",
-    "V",
-    "VI",
-    "VII",
-    "VIII",
-    "IX"
+    '',
+    'C',
+    'CC',
+    'CCC',
+    'CD',
+    'D',
+    'DC',
+    'DCC',
+    'DCCC',
+    'CM',
+    '',
+    'X',
+    'XX',
+    'XXX',
+    'XL',
+    'L',
+    'LX',
+    'LXX',
+    'LXXX',
+    'XC',
+    '',
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX'
   ];
-  let roman = "";
+  let roman = '';
   let i = 3;
 
   while (i--) {
-    roman = (key[+digits.pop() + i * 10] || "") + roman;
+    roman = (key[+digits.pop() + i * 10] || '') + roman;
   }
-  return Array(+digits.join("") + 1).join("M") + roman;
+  return Array(+digits.join('') + 1).join('M') + roman;
 };
 
 export default {
-  name: "WorkOutline",
+  name: 'WorkOutline',
   props: {
     index: {
       type: Number,
@@ -53,19 +53,19 @@ export default {
     },
     title: {
       type: String,
-      default: ""
+      default: ''
     },
     description: {
       type: String,
-      default: ""
+      default: ''
     },
     credit: {
       type: String,
-      default: ""
+      default: ''
     },
     href: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   data() {
@@ -76,10 +76,10 @@ export default {
   },
   mounted() {
     this.resize();
-    window.addEventListener("resize", this.resize);
+    window.addEventListener('resize', this.resize);
   },
   destroyed() {
-    window.removeEventListener("resize", this.resize);
+    window.removeEventListener('resize', this.resize);
   },
   computed: {
     getNumber() {
@@ -87,7 +87,7 @@ export default {
     },
     linkLineClassnames() {
       return {
-        "is-overed": this.isOvered === true
+        'is-overed': this.isOvered === true
       };
     },
     linkWrapStyles() {
@@ -105,7 +105,7 @@ export default {
       this.isOvered = false;
     },
     resize() {
-      this.headingHeight = this.$refs["work-outline-heading"].clientHeight;
+      this.headingHeight = this.$refs['work-outline-heading'].clientHeight;
     }
   }
 };
@@ -304,7 +304,7 @@ $delayStepShow: 0.07s;
     &:before {
       width: 5px;
       height: 1px;
-      content: "";
+      content: '';
       display: block;
       margin-top: 15px;
       margin-bottom: 15px;

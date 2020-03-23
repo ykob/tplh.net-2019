@@ -1,8 +1,8 @@
-import * as THREE from "three";
-import { easeOutCirc } from "easing-js";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import { easeOutCirc } from 'easing-js';
+import MathEx from 'js-util/MathEx';
 
-import Petal from "@/webgl/Petal";
+import Petal from '@/webgl/Petal';
 
 const DURATION_SHOW = 5;
 const DELAY_SHOW = 1.2;
@@ -13,7 +13,7 @@ export default class PetalFall extends Petal {
   constructor(geometry, hsv1, hsv2, hsv3) {
     // Create Object3D
     super(geometry, hsv1, hsv2, hsv3);
-    this.name = "PetalFall";
+    this.name = 'PetalFall';
     this.durationFall = (1 - this.mass) * 10 + Math.random() * 5 + 5;
     this.delayFall = this.durationFall * Math.random();
     this.delayShow = DELAY_SHOW + Math.random();

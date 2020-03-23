@@ -1,5 +1,5 @@
-import * as THREE from "three";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import MathEx from 'js-util/MathEx';
 
 export default class SkullAuraCamera extends THREE.PerspectiveCamera {
   constructor(fov, aspect, near, far) {

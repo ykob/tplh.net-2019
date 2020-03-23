@@ -1,8 +1,8 @@
-import * as THREE from "three";
-import MathEx from "js-util/MathEx";
+import * as THREE from 'three';
+import MathEx from 'js-util/MathEx';
 
-import vs from "@/webgl/glsl/Intersector.vs";
-import fs from "@/webgl/glsl/Intersector.fs";
+import vs from '@/webgl/glsl/Intersector.vs';
+import fs from '@/webgl/glsl/Intersector.fs';
 
 export default class Intersector extends THREE.Mesh {
   constructor() {
@@ -17,7 +17,7 @@ export default class Intersector extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "Intersector";
+    this.name = 'Intersector';
     this.size = new THREE.Vector3();
 
     this.position.set(0, 0, 30);

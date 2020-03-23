@@ -5,10 +5,10 @@ const YEAR_NEXT = 2020;
 const makeDigitArr = (prev, next, digit) => {
   const count = Math.ceil((next - prev) / Math.pow(10, digit - 1));
   const firstNum = parseInt(
-    String(Math.floor(prev / Math.pow(10, digit - 1))).slice("-1")
+    String(Math.floor(prev / Math.pow(10, digit - 1))).slice('-1')
   );
   return [...Array(count + 1).keys()].map(n => {
-    return parseInt(String(n + firstNum).slice("-1"));
+    return parseInt(String(n + firstNum).slice('-1'));
   });
 };
 const makeCounterCol = digit => {
@@ -18,7 +18,7 @@ const makeCounterCol = digit => {
 };
 
 export default {
-  name: "PreloaderCount",
+  name: 'PreloaderCount',
   data() {
     return {
       cols: makeCounterCol(4)

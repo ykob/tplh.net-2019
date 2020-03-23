@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "PreloaderProgress",
+  name: 'PreloaderProgress',
   computed: {
     ratio() {
       const { preloadProgress, preloadMax } = this.$store.state;

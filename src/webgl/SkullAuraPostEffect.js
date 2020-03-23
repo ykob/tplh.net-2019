@@ -1,7 +1,7 @@
-const THREE = require("three");
+const THREE = require('three');
 
-import vs from "@/webgl/glsl/SkullAuraPostEffect.vs";
-import fs from "@/webgl/glsl/SkullAuraPostEffect.fs";
+import vs from '@/webgl/glsl/SkullAuraPostEffect.vs';
+import fs from '@/webgl/glsl/SkullAuraPostEffect.fs';
 
 export default class SkullAuraPostEffect extends THREE.Mesh {
   constructor() {
@@ -12,19 +12,19 @@ export default class SkullAuraPostEffect extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         resolution: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2(1024, 1024)
         },
         direction: {
-          type: "v2",
+          type: 'v2',
           value: new THREE.Vector2(0, 0)
         },
         radius: {
-          type: "f",
+          type: 'f',
           value: 1
         },
         texture: {
-          type: "t",
+          type: 't',
           value: null
         }
       },
@@ -34,7 +34,7 @@ export default class SkullAuraPostEffect extends THREE.Mesh {
 
     // Create Object3D
     super(geometry, material);
-    this.name = "AuraPostEffect";
+    this.name = 'AuraPostEffect';
   }
   setDirection(x, y) {
     this.material.uniforms.direction.value.set(x, y);

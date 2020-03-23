@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ErrorMessage"
+  name: 'ErrorMessage'
 };
 </script>
 

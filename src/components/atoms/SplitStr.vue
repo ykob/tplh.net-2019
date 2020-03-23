@@ -1,15 +1,15 @@
 <script>
 export default {
-  name: "SplitStr",
+  name: 'SplitStr',
   components: {},
   props: {
     tag: {
       Type: String,
-      default: "div"
+      default: 'div'
     },
     label: {
       Type: String,
-      default: ""
+      default: ''
     },
     step: {
       Type: Number,
@@ -21,11 +21,11 @@ export default {
     },
     align: {
       Type: String,
-      default: "left"
+      default: 'left'
     },
     childClassname: {
       Type: String,
-      default: ""
+      default: ''
     }
   },
   data: function() {
@@ -34,26 +34,26 @@ export default {
     };
   },
   created: function() {
-    this.strArr = this.label.split("").map(s => {
-      return s === " " ? "&nbsp;" : s;
+    this.strArr = this.label.split('').map(s => {
+      return s === ' ' ? '&nbsp;' : s;
     });
   },
   methods: {
     classnames: function(i) {
-      const base = "c-split-str__typo-in";
+      const base = 'c-split-str__typo-in';
       let num;
 
       switch (this.align) {
-        case "center":
+        case 'center':
           num =
             Math.floor(Math.abs(i - (this.strArr.length - 1) * 0.5)) *
               this.step +
             this.base;
           break;
-        case "right":
+        case 'right':
           num = (this.strArr.length - 1 - i) * this.step + this.base;
           break;
-        case "left":
+        case 'left':
         default:
           num = i * this.step + this.base;
       }

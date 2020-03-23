@@ -1,8 +1,8 @@
 <script>
-import ParallaxBlock from "@/components/atoms/ParallaxBlock";
+import ParallaxBlock from '@/components/atoms/ParallaxBlock';
 
 export default {
-  name: "WhoIAmSection",
+  name: 'WhoIAmSection',
   components: {
     ParallaxBlock
   },

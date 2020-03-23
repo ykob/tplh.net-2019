@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "PreloaderInitial"
+  name: 'PreloaderInitial'
 };
 </script>
 

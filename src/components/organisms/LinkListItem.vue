@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "LinkListItem",
+  name: 'LinkListItem',
   data() {
     return {
       isOvered: false
@@ -9,7 +9,7 @@ export default {
   computed: {
     classnames() {
       return {
-        "is-overed": this.isOvered === true
+        'is-overed': this.isOvered === true
       };
     }
   },

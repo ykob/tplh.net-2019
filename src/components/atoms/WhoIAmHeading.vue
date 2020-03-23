@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "WhoIAmHeading"
+  name: 'WhoIAmHeading'
 };
 </script>
 
