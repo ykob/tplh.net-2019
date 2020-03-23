@@ -94,7 +94,7 @@ export default {
             const i = state.currentWorksId + 1;
             this.$router.push(`/works/${state.works[i].key}/`);
           } else {
-            this.$router.push(`/who-i-am/`);
+            this.$router.push("/who-i-am/");
           }
         } else {
           // go to the previous page.
@@ -102,7 +102,7 @@ export default {
             const i = state.currentWorksId - 1;
             this.$router.push(`/works/${state.works[i].key}/`);
           } else {
-            this.$router.push(`/`);
+            this.$router.push("/");
           }
         }
       }
@@ -117,7 +117,7 @@ export default {
             const i = state.currentWorksId + 1;
             dispatch("debounceRouterPush", `/works/${state.works[i].key}/`);
           } else {
-            dispatch("debounceRouterPush", `/who-i-am/`);
+            dispatch("debounceRouterPush", "/who-i-am/");
           }
           commit("touchEnd");
         } else if (state.touchMove.y > 10) {
@@ -126,7 +126,7 @@ export default {
             const i = state.currentWorksId - 1;
             dispatch("debounceRouterPush", `/works/${state.works[i].key}/`);
           } else {
-            dispatch("debounceRouterPush", `/`);
+            dispatch("debounceRouterPush", "/");
           }
           commit("touchEnd");
         }
