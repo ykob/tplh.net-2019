@@ -3,11 +3,11 @@ import * as THREE from 'three';
 import sleep from 'js-util/sleep';
 import debounce from 'js-util/debounce';
 
-import GlobalTitle from '@/components/templates/GlobalTitle.vue';
-import UtilityNavi from '@/components/templates/UtilityNavi.vue';
-import WorksNavi from '@/components/templates/WorksNavi.vue';
-import Preloader from '@/components/templates/Preloader.vue';
-import Guide from '@/components/templates/Guide.vue';
+import GlobalTitle from '@/components/global/GlobalTitle.vue';
+import UtilityNavi from '@/components/global/UtilityNavi.vue';
+import WorksNavi from '@/components/global/WorksNavi.vue';
+import Preloader from '@/components/global/Preloader.vue';
+import Guide from '@/components/global/Guide.vue';
 
 export default {
   name: 'App',

@@ -4,7 +4,7 @@ import normalizeWheel from 'normalize-wheel';
 import sleep from 'js-util/sleep';
 
 import store from '@/store';
-import WorkOutline from '@/components/organisms/WorkOutline.vue';
+import WorkOutline from '@/components/works/WorkOutline.vue';
 
 export default {
   name: 'Works',

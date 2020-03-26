@@ -3,7 +3,7 @@ import normalizeWheel from 'normalize-wheel';
 import sleep from 'js-util/sleep';
 
 import store from '@/store';
-import HomeHeading from '@/components/atoms/HomeHeading.vue';
+import HomeHeading from '@/components/home/HomeHeading.vue';
 
 export default {
   name: 'Home',

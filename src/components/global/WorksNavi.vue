@@ -1,5 +1,5 @@
 <script>
-import SplitStr from '@/components/atoms/SplitStr.vue';
+import SplitStr from '@/components/common/SplitStr.vue';
 
 export default {
   name: 'WorksNavi',

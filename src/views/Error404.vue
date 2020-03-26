@@ -2,7 +2,7 @@
 import sleep from 'js-util/sleep';
 
 import store from '@/store';
-import ErrorMessage from '@/components/atoms/ErrorMessage.vue';
+import ErrorMessage from '@/components/error/ErrorMessage.vue';
 
 export default {
   name: 'error-404',

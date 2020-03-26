@@ -4,10 +4,10 @@ import MathEx from 'js-util/MathEx';
 import normalizeWheel from 'normalize-wheel';
 
 import store from '@/store';
-import WhoIAmSection from '@/components/atoms/WhoIAmSection.vue';
-import WhoIAmHeading from '@/components/atoms/WhoIAmHeading.vue';
-import WhoIAmThanks from '@/components/atoms/WhoIAmThanks.vue';
-import WhoIAmLinks from '@/components/organisms/WhoIAmLinks.vue';
+import WhoIAmSection from '@/components/who-i-am/WhoIAmSection.vue';
+import WhoIAmHeading from '@/components/who-i-am/WhoIAmHeading.vue';
+import WhoIAmThanks from '@/components/who-i-am/WhoIAmThanks.vue';
+import WhoIAmLinks from '@/components/who-i-am/WhoIAmLinks.vue';
 
 export default {
   name: 'WhoIAm',

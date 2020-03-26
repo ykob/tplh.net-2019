@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Meta from 'vue-meta';
 
-import Home from './components/views/Home.vue';
-import Works from './components/views/Works.vue';
-import WhoIAm from './components/views/WhoIAm.vue';
-import Error404 from './components/views/Error404.vue';
+import Home from './views/Home.vue';
+import Works from './views/Works.vue';
+import WhoIAm from './views/WhoIAm.vue';
+import Error404 from './views/Error404.vue';
 
 Vue.use(Router);
 Vue.use(Meta);

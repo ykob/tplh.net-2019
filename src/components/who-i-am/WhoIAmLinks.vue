@@ -1,6 +1,6 @@
 <script>
-import ParallaxBlock from '@/components/atoms/ParallaxBlock';
-import LinkListItem from '@/components/organisms/LinkListItem';
+import ParallaxBlock from '@/components/common/ParallaxBlock';
+import LinkListItem from '@/components/common/LinkListItem';
 
 export default {
   name: 'WhoIAmLinks',
