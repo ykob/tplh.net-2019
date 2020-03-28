@@ -196,5 +196,4 @@ export default {
 @import '@/assets/scss/foundation/global.scss';
 @import '@/assets/scss/foundation/keyframes.scss';
 @import '@/assets/scss/object/project/view-wrap.scss';
-@import '@/assets/scss/object/vendor/ps.scss';
 </style>
