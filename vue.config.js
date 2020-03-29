@@ -51,10 +51,7 @@ module.exports = {
           }
         }
       ]
-    },
-    plugins: [
-      // new BundleAnalyzerPlugin()
-    ]
+    }
   },
   chainWebpack(config) {
     config.plugins.delete('prefetch');
