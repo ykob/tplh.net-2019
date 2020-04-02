@@ -213,7 +213,7 @@ export default class WebGLContent {
     });
 
     // show the dat.gui.
-    if (process.env.VUE_APP_MODE === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       const initDatGui = await import('@/utils/initDatGui');
 
       initDatGui.default(
