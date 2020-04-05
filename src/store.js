@@ -39,8 +39,6 @@ export default new Vuex.Store({
     isWheeling: false,
     isMobile: false,
     isEnabledTouch: false,
-    isSwipingX: false,
-    isSwipingY: false,
     isTouchStarted: false,
     isTouchMoving: false
   },
@@ -122,21 +120,11 @@ export default new Vuex.Store({
     startTouchMove(state) {
       state.isTouchMoving = true;
     },
-    startSwipeX(state) {
-      state.isSwipingX = true;
-      state.isSwipingY = false;
-    },
-    startSwipeY(state) {
-      state.isSwipingX = false;
-      state.isSwipingY = true;
-    },
     touchMove(state, { x, y }) {
       state.touchMove.set(x, y);
     },
     touchEnd(state) {
       state.touchMove.set(0, 0);
-      state.isSwipingX = false;
-      state.isSwipingY = false;
       state.isTouchStarted = false;
       state.isTouchMoving = false;
     }

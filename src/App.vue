@@ -112,27 +112,27 @@ export default {
       ) {
         return;
       }
+
       const { resolution, mouse, mousePrev, mouseForce } = this.$store.state;
-      if (mousePrev.length() !== 0) {
-        mousePrev.copy(mouse);
-      }
+
+      if (mousePrev.length() !== 0) mousePrev.copy(mouse);
       mouse.set(
         (e.clientX / resolution.x) * 2 - 1,
         -(e.clientY / resolution.y) * 2 + 1
       );
-      if (mousePrev.length() === 0) {
-        mousePrev.copy(mouse);
-      }
+      if (mousePrev.length() === 0) mousePrev.copy(mouse);
       mouseForce.copy(mouse.clone().sub(mousePrev));
     },
     mouseleave() {
       const { mouse, mousePrev, mouseForce } = this.$store.state;
+
       mouse.set(0, 0);
       mousePrev.set(0, 0);
       mouseForce.set(0, 0);
     },
     touchstart(e) {
       const { commit } = this.$store;
+
       commit('setEnabledTouch', true);
       commit('startTouch');
       this.vTouchStart.set(e.touches[0].clientX, e.touches[0].clientY);
@@ -142,9 +142,7 @@ export default {
       const { state, commit } = this.$store;
 
       if (state.isTouchStarted === false) return;
-
       this.vTouchMove.set(e.touches[0].clientX, e.touches[0].clientY);
-
       if (state.isTouchMoving === false) {
         // judge whether the touch is a swipe or a single tap.
         if (
