@@ -10,6 +10,13 @@ module.exports = {
       }
     }
   },
+  pwa: {
+    name: 'Yoichi Kobayashi',
+    themeColor: '#1b191c',
+    msTileColor: '#1b191c',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+  },
   configureWebpack: {
     module: {
       rules: [
@@ -55,12 +62,5 @@ module.exports = {
   },
   chainWebpack(config) {
     config.plugins.delete('prefetch');
-  },
-  pwa: {
-    name: 'Yoichi Kobayashi',
-    themeColor: '#1b191c',
-    msTileColor: '#1b191c',
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
   }
 };
