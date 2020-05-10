@@ -24,6 +24,7 @@ export default {
     return {
       scrollY: 0,
       anchorY: 0,
+      anchorYPrev: 0,
       clientHeight: 0,
       isRendering: false
     };
@@ -48,7 +49,7 @@ export default {
     });
     next();
   },
-  async created() {
+  created() {
     window.addEventListener('wheel', this.wheel, { passive: false });
     window.addEventListener('touchstart', this.touchstart);
     window.addEventListener('touchmove', this.touchmove);
