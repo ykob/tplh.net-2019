@@ -190,14 +190,14 @@ export default {
         p
           |When I started thinking about renewing my site, I didn't want to make this site just a portfolio. I explored what my identity was and tried to express it as much as possible using whatever technology I have now.
         p
-          |Japan, where I was born, is a wealthy and peaceful country, but now it is on a gradual decline. The generations of my grandfather and father have prospered after a war defeat and economic growth, but our generation has not experienced the harsh like them. I think our generation is always indulging in our enjoyment, devouring what the previous generation has cultivated. The fact that I focus only on what I find fun without aiming for an expert seems to have such generational aspects and a great cause and effect. I thought that is just my identity.
+          |Japan, where I was born, is a wealthy and peaceful country, but now it is on a gradual decline. The generations of my grandfather and father have prospered after a war defeat and economic growth, but our generation has not experienced the harsh like them. I think our generation is always indulging in our enjoyment, devouring what the previous generation has cultivated. The fact that I focus only on what I find fun without aiming for an expert seems to have such generational aspects and a great cause and effect. I thought that is just my identity, and I wanted to use something that reminds me of death or sacrifice as an object that shows my identity.
       WhoIAmSection(
         :num = '3'
         :scrollY = 'scrollY'
         :parallaxRatio = '0.1'
         )
         p
-          |I have selected skull and flower objects as motifs for prosperity and death. To make them more ephemeral and vacuity, I colored these in brilliant golden color. The development way is composite with three.js and Vue-CLI. By these means, I'm proud that I have been able to reflect my innerness, generation, and physicality on this site.
+          |I have selected skull and flower objects as motifs for death or sacrifice. To make them more ephemeral and vacuity, I colored these in brilliant golden color. The development way is composite with three.js and Vue-CLI. By these means, I'm proud that I have been able to reflect my innerness, generation, and physicality on this site.
         p
           |Initially, I planned to develop this site alone, but fortunately, I was able to get the help of my friend and designer Shunsuke Iseki, who has world-class skills. I was able to experience his art direction skills up close and was impressed by his precise work. I appreciate his excellent performance.
       WhoIAmLinks(
