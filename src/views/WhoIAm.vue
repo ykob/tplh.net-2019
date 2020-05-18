@@ -173,7 +173,7 @@ export default {
           br
           |Just love World-Wide-Web.
         p
-          |I love the web. I look forward to all the possibilities of the Web. Right now, I'm full of development with WebGL and Vue.js, but that's not all I'm interested in. The ever-expanding web world is very attractive. I will continue to develop the web.
+          |I love the web. I look forward to all the possibilities of the Web. Right now, I'm good at developing with three.js and Vue.js, but that's not all I'm interested in. The ever-expanding web world is very attractive. I will continue to develop the web.
         p
           |My career as a web developer started in 2006.
         p
