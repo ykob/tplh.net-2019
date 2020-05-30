@@ -20,23 +20,18 @@ export default class SkullBody extends THREE.Group {
     this.material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         rotateMatrix: {
-          type: 'm4',
           value: new THREE.Matrix4()
         },
         renderOutline: {
-          type: 'f',
           value: 0
         },
         alpha: {
-          type: 'f',
           value: 0
         },
         hsv1: {
-          type: 'v3',
           value: new THREE.Vector3(0.09, 0.7, 0.3)
         }
       },
