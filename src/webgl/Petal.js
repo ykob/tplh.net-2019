@@ -10,31 +10,24 @@ export default class Petal extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         alphaShow: {
-          type: 'f',
           value: 0
         },
         alphaColor: {
-          type: 'f',
           value: 0
         },
         hsv1: {
-          type: 'v3',
           value: hsv1
         },
         hsv2: {
-          type: 'v3',
           value: hsv2
         },
         hsv3: {
-          type: 'v3',
           value: hsv3
         }
       },

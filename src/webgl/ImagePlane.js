@@ -17,39 +17,30 @@ export default class ImagePlane extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         easeTransition1: {
-          type: 'f',
           value: 0
         },
         easeTransition2: {
-          type: 'f',
           value: 0
         },
         easeTransition3: {
-          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         imgTex1: {
-          type: 't',
           value: null
         },
         imgTex2: {
-          type: 't',
           value: null
         },
         imgTex3: {
-          type: 't',
           value: null
         },
         imgRatio: {
-          type: 'v2',
           value: new THREE.Vector2(1, 0.666)
         }
       },

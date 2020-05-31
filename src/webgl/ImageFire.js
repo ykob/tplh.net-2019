@@ -17,19 +17,15 @@ export default class ImageFire extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         easeTransition: {
-          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         imgRatio: {
-          type: 'v2',
           value: new THREE.Vector2(1, 0.666)
         }
       },

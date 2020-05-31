@@ -17,23 +17,18 @@ export default class Background extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         imgRatio: {
-          type: 'v2',
           value: new THREE.Vector2()
         },
         alpha: {
-          type: 'f',
           value: 0
         },
         alphaShowFirst: {
-          type: 'f',
           value: 0
         }
       },

@@ -24,23 +24,18 @@ export default class ImagePoints extends THREE.Points {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         easeTransition1: {
-          type: 'f',
           value: 0
         },
         easeTransition2: {
-          type: 'f',
           value: 0
         },
         easeTransition3: {
-          type: 'f',
           value: 0
         },
         resolution: {
-          type: 'v2',
           value: new THREE.Vector2()
         },
         noiseTex: {
@@ -48,11 +43,9 @@ export default class ImagePoints extends THREE.Points {
           value: null
         },
         imgRatio: {
-          type: 'v2',
           value: new THREE.Vector2(1, 0.666)
         },
         pixelRatio: {
-          type: 'f',
           value: PIXEL_RATIO
         }
       },
