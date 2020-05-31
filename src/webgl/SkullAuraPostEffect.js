@@ -12,19 +12,15 @@ export default class SkullAuraPostEffect extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         resolution: {
-          type: 'v2',
           value: new THREE.Vector2(1024, 1024)
         },
         direction: {
-          type: 'v2',
           value: new THREE.Vector2(0, 0)
         },
         radius: {
-          type: 'f',
           value: 1
         },
         texture: {
-          type: 't',
           value: null
         }
       },

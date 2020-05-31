@@ -43,27 +43,21 @@ export default class SkullPoints extends THREE.Points {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         duration: {
-          type: 'f',
           value: DURATION
         },
         resolution: {
-          type: 'v2',
           value: new THREE.Vector2()
         },
         pixelRatio: {
-          type: 'f',
           value: PIXEL_RATIO
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         alpha: {
-          type: 'f',
           value: 0
         }
       },

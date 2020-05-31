@@ -25,19 +25,15 @@ export default class WhoIamText extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         tex: {
-          type: 't',
           value: null
         },
         alphaShow: {
-          type: 'f',
           value: 0
         },
         alphaHide: {
-          type: 'f',
           value: 0
         }
       },

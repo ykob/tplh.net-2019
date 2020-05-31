@@ -18,51 +18,39 @@ export default class SkullAura extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         postEffectTex: {
-          type: 't',
           value: null
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         alpha: {
-          type: 'f',
           value: 0
         },
         hsv1: {
-          type: 'v3',
           value: new THREE.Vector3()
         },
         hsv2: {
-          type: 'v3',
           value: new THREE.Vector3(0, 0, 0)
         },
         strength: {
-          type: 'f',
           value: 1.8
         },
         colorRangeMin: {
-          type: 'f',
           value: 0.3
         },
         colorRangeMax: {
-          type: 'f',
           value: 0.7
         },
         opacityRangeMin: {
-          type: 'f',
           value: 0.58
         },
         opacityRangeMax: {
-          type: 'f',
           value: 0.8
         },
         opacityBase: {
-          type: 'f',
           value: 0.9
         }
       },

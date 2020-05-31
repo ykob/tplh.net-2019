@@ -21,23 +21,18 @@ export default class Title extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         alphaTex: {
-          type: 't',
           value: null
         },
         noiseTex: {
-          type: 't',
           value: null
         },
         alpha: {
-          type: 'f',
           value: 0
         },
         isMobile: {
-          type: 'f',
           value: 0
         }
       },

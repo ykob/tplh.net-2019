@@ -21,23 +21,18 @@ export default class PostEffectBloom extends THREE.Mesh {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
-          type: 'f',
           value: 0
         },
         alpha: {
-          type: 'f',
           value: 0
         },
         resolution: {
-          type: 'v2',
           value: store.state.resolution
         },
         texture1: {
-          type: 't',
           value: null
         },
         texture2: {
-          type: 't',
           value: null
         }
       },
