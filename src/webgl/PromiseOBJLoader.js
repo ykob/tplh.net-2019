@@ -1,8 +1,6 @@
-const THREE = require('three');
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
-require('@/webgl/OBJLoader.js');
-
-const objLoader = new THREE.OBJLoader();
+const objLoader = new OBJLoader();
 
 export default function(src) {
   return new Promise((resolve, reject) => {

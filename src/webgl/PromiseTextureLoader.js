@@ -1,6 +1,6 @@
-const THREE = require('three');
+import { TextureLoader } from 'three';
 
-const texLoader = new THREE.TextureLoader();
+const texLoader = new TextureLoader();
 
 export default function(src) {
   return new Promise((resolve, reject) => {
