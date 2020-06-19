@@ -129,8 +129,8 @@ export default class WebGLContent {
       return result;
     };
     const assetsObj = [
-      require('@/assets/obj/SkullHead.obj'),
-      require('@/assets/obj/CherryBlossom.obj')
+      `${process.env.BASE_URL}obj/SkullHead.obj`,
+      `${process.env.BASE_URL}obj/CherryBlossom.obj`
     ];
     const assetsImgs = [
       require(`@/assets/img/webgl/title.${webpExe}`),
