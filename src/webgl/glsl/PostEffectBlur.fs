@@ -13,7 +13,7 @@ vec4 gaussianBlur(sampler2D texture, vec2 uv, float radius, vec2 resolution, vec
   color += texture2D(texture, uv - 3.0 * step) * 0.06475879783294587;
   color += texture2D(texture, uv - 2.0 * step) * 0.12098536225957168;
   color += texture2D(texture, uv - 1.0 * step) * 0.17603266338214976;
-  color += texture2D(texture, uv) * 0.19947114020071635;
+  color += texture2D(texture, uv) * 0.22245538653748;
   color += texture2D(texture, uv + 1.0 * step) * 0.17603266338214976;
   color += texture2D(texture, uv + 2.0 * step) * 0.12098536225957168;
   color += texture2D(texture, uv + 3.0 * step) * 0.06475879783294587;
