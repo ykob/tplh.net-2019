@@ -22,7 +22,7 @@
     "lodash": "^4.17.15",
     "normalize-wheel": "^1.0.1",
     "register-service-worker": "^1.6.2",
-    "three": "^0.117.0",
+    "three": "^0.120.1",
     "ua-parser-js": "^0.7.21",
     "vue": "^2.6.11",
     "vue-meta": "^2.3.3",

@@ -109,7 +109,7 @@ export default class WebGLContent {
     ]);
 
     // Initialize the WebGL renderer.
-    renderer = new THREE.WebGLRenderer({
+    renderer = new THREE.WebGL1Renderer({
       alpha: true,
       antialias: false,
       canvas: canvas
