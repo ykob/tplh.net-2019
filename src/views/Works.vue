@@ -141,6 +141,7 @@ export default {
     :name = 'transitionName'
     appear
     tag = 'div'
+    :duration= '2000'
     )
     WorkOutline(
       v-for = 'item, index in $store.state.works'

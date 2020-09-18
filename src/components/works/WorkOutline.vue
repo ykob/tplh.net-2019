@@ -161,26 +161,6 @@ $delayStepShow: 0.07s;
     left: 44px;
     bottom: 22px;
   }
-
-  // Transition
-  &.show-enter-active,
-  &.show-leave-active,
-  &.show-asc-enter-active,
-  &.show-asc-leave-active {
-    transition-duration: 2s;
-    transition-property: opacity;
-  }
-  &.show-enter,
-  &.show-leave-to,
-  &.show-asc-enter,
-  &.show-asc-leave-to {
-    opacity: 0.999;
-  }
-  &.show-leave-to,
-  &.show-asc-leave-to {
-    pointer-events: none;
-  }
-
   &__content {
     box-sizing: border-box;
     @include l-more-than-mobile {

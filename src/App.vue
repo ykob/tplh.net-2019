@@ -177,6 +177,7 @@ export default {
     main
       transition(
         :name = 'transitionName'
+        :duration= '3000'
         appear
         v-if = '$store.state.isShowView === true'
         )
