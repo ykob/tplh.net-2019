@@ -83,17 +83,15 @@ export default {
       }, 50);
     },
     anchorStyles(i) {
+      const { state } = this.$store;
+
       return {
         top:
-          this.$store.state.isMobile === true
-            ? `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) *
-                25}px)`
-            : `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) *
-                50}px)`,
+          state.isMobile === true
+            ? `calc(50% + ${(i - (state.works.length - 1) / 2) * 25}px)`
+            : `calc(50% + ${(i - (state.works.length - 1) / 2) * 50}px)`,
         transitionDelay:
-          this.$store.state.positionFromWorks === 0
-            ? `${i * 0.06 + 0.6}s`
-            : `${i * 0.06}s`
+          state.positionFromWorks === 0 ? `${i * 0.06 + 0.6}s` : `${i * 0.06}s`
       };
     },
     anchorClassnames(i) {
