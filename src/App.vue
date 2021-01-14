@@ -37,7 +37,7 @@ export default {
     };
   },
   async created() {
-    const { state, dispatch } = this.$store;
+    const { state, commit, dispatch } = this.$store;
 
     document.body.append(state.canvas);
     state.canvas.style = `
@@ -55,7 +55,7 @@ export default {
     document.addEventListener('touchend', this.touchend);
 
     await sleep(500);
-    this.$store.commit('showPreloader');
+    commit('showPreloader');
     this.update();
     await dispatch('initWebGL');
     state.webgl.start(state.canvas, this.$store);
@@ -69,6 +69,7 @@ export default {
   },
   methods: {
     update() {
+      const { commit } = this.$store;
       const {
         webgl,
         preloadMax,
@@ -76,7 +77,7 @@ export default {
         isLoaded
       } = this.$store.state;
       if (isLoaded === false) {
-        this.$store.commit('updatePreloadProgress');
+        commit('updatePreloadProgress');
         if (preloadProgress / preloadMax > 0.999) {
           this.loaded();
         }
@@ -86,30 +87,32 @@ export default {
       requestAnimationFrame(this.update);
     },
     async loaded() {
+      const { state, commit } = this.$store;
+
       this.resize();
-      this.$store.commit('loaded');
+      commit('loaded');
       if (this.$route.name === 'home') {
         await sleep(800);
       } else {
         await sleep(2400);
       }
-      this.$store.state.webgl.play();
-      this.$store.commit('showView');
+      state.webgl.play();
+      commit('showView');
     },
     resize() {
+      const { commit } = this.$store;
       const { canvas, resolution, webgl } = this.$store.state;
 
       resolution.set(document.body.clientWidth, window.innerHeight);
       canvas.width = resolution.x;
       canvas.height = resolution.y;
-      this.$store.commit('changeMediaQuery', resolution.x < 768);
+      commit('changeMediaQuery', resolution.x < 768);
       webgl.resize();
     },
     mousemove(e) {
-      if (
-        this.$store.state.isShownUI === false ||
-        this.$store.state.isEnabledTouch === true
-      ) {
+      const { state } = this.$store;
+
+      if (state.isShownUI === false || state.isEnabledTouch === true) {
         return;
       }
 
