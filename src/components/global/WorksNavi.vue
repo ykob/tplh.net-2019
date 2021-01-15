@@ -16,11 +16,13 @@ export default {
   },
   computed: {
     classnames() {
+      const { state } = this.$store;
+
       return {
-        'is-shown': this.$store.state.isShownUI === true,
-        'is-previous': this.$store.state.positionFromWorks === -1,
-        'is-current': this.$store.state.positionFromWorks === 0,
-        'is-next': this.$store.state.positionFromWorks === 1,
+        'is-shown': state.isShownUI === true,
+        'is-previous': state.positionFromWorks === -1,
+        'is-current': state.positionFromWorks === 0,
+        'is-next': state.positionFromWorks === 1,
         'is-overed': this.isOvered === true
       };
     },
@@ -95,25 +97,28 @@ export default {
       };
     },
     anchorClassnames(i) {
+      const { state } = this.$store;
+
       return {
-        'is-shown':
-          this.$store.state.positionFromWorks === 0 &&
-          this.$store.state.isShownUI,
+        'is-shown': state.positionFromWorks === 0 && state.isShownUI,
         'is-overed': this.isOveredAnchor === i,
-        'is-current': this.$store.state.works[i].key === this.$route.params.key
+        'is-current': state.works[i].key === this.$route.params.key
       };
     },
     anchorLabelStyles(i) {
-      const strLength = this.$store.state.works[i].shortTitle.length;
+      const { state } = this.$store;
+      const strLength = state.works[i].shortTitle.length;
       const height = strLength + (strLength - 1) * 0.15;
+
       return {
         height: `${height}em`,
-        top: `calc(50% + ${(i - (this.$store.state.works.length - 1) / 2) *
+        top: `calc(50% + ${(i - (state.works.length - 1) / 2) *
           50}px - ${height / 2}em)`
       };
     },
     anchorLabelClassnames(i) {
       const { state } = this.$store;
+
       return {
         'is-overed': this.isOveredAnchor === i,
         'is-current':
@@ -124,6 +129,7 @@ export default {
     },
     isShownAnchor(i) {
       const { state } = this.$store;
+
       return (
         this.isOveredAnchor === i ||
         (state.works[i].key === this.$route.params.key &&
