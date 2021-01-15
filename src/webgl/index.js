@@ -50,7 +50,9 @@ export default class WebGLContent {
     this.postEffectBlurY;
     this.postEffectBloom;
   }
-  async start(canvas, store) {
+  async start() {
+    const { state } = store;
+
     // Check whether the webp format is enabled.
     let webpExe = '';
     await checkWebpFeature('lossy')
@@ -112,7 +114,7 @@ export default class WebGLContent {
     renderer = new THREE.WebGL1Renderer({
       alpha: true,
       antialias: false,
-      canvas: canvas
+      canvas: state.canvas
     });
     renderer.setPixelRatio(PIXEL_RATIO);
     renderer.setClearColor(0x1b191c, 0.0);
