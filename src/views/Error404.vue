@@ -25,18 +25,20 @@ export default {
     next();
   },
   async mounted() {
-    this.$store.commit('changeBackground', {
+    const { commit } = this.$store;
+
+    commit('changeBackground', {
       isHome: true,
       hasDelay: false
     });
-    this.$store.commit('showHomeObjs', false);
-    this.$store.commit('showWorksObjs', {
+    commit('showHomeObjs', false);
+    commit('showWorksObjs', {
       index: 0,
       direction: -1
     });
-    this.$store.commit('showWhoIAmObjs', false);
+    commit('showWhoIAmObjs', false);
     await sleep(500);
-    this.$store.commit('showUI');
+    commit('showUI');
   }
 };
 </script>

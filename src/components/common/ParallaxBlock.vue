@@ -30,9 +30,12 @@ export default {
   computed: {
     styles() {
       if (this.parallaxRatio === 0) return;
-      const windowCenter = this.scrollY + this.$store.state.resolution.y * 0.5;
+
+      const { state } = this.$store;
+      const windowCenter = this.scrollY + state.resolution.y * 0.5;
       const diff = (this.center - windowCenter) * -this.parallaxRatio;
-      if (this.$store.state.isMobile === true) {
+
+      if (state.isMobile === true) {
         return;
       } else {
         return {

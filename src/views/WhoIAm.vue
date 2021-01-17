@@ -59,18 +59,20 @@ export default {
     this.$store.commit('setScrollProgress', 0);
   },
   async mounted() {
-    this.$store.commit('changeBackground', {
+    const { commit } = this.$store;
+
+    commit('changeBackground', {
       isHome: false,
       hasDelay: false
     });
-    this.$store.commit('showHomeObjs', false);
-    this.$store.commit('showWorksObjs', {
+    commit('showHomeObjs', false);
+    commit('showWorksObjs', {
       index: 0,
       direction: 1
     });
-    this.$store.commit('showWhoIAmObjs', true);
+    commit('showWhoIAmObjs', true);
     await sleep(500);
-    this.$store.commit('showUI');
+    commit('showUI');
     this.isRendering = true;
     this.resize();
     this.update();
@@ -83,12 +85,14 @@ export default {
   },
   methods: {
     update() {
+      const { state, commit } = this.$store;
+
       this.scrollY =
         Math.floor((this.scrollY + (this.anchorY - this.scrollY) / 10) * 100) /
         100;
-      this.$store.commit(
+      commit(
         'setScrollProgress',
-        this.scrollY / (this.clientHeight - this.$store.state.resolution.y)
+        this.scrollY / (this.clientHeight - state.resolution.y)
       );
       if (this.isRendering === true) {
         requestAnimationFrame(this.update);

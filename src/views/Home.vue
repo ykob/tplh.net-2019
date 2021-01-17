@@ -24,18 +24,20 @@ export default {
     window.addEventListener('touchmove', this.touchmove);
   },
   async mounted() {
-    this.$store.commit('changeBackground', {
+    const { commit } = this.$store;
+
+    commit('changeBackground', {
       isHome: true,
       hasDelay: true
     });
-    this.$store.commit('showHomeObjs', true);
-    this.$store.commit('showWorksObjs', {
+    commit('showHomeObjs', true);
+    commit('showWorksObjs', {
       index: 0,
       direction: -1
     });
-    this.$store.commit('showWhoIAmObjs', false);
+    commit('showWhoIAmObjs', false);
     await sleep(5000);
-    this.$store.commit('showUI');
+    commit('showUI');
   },
   destroyed() {
     window.removeEventListener('wheel', this.wheel, { passive: false });
