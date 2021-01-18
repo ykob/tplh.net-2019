@@ -29,23 +29,24 @@ export default {
     window.addEventListener('touchmove', this.touchmove);
   },
   async mounted() {
-    const index = findIndex(this.$store.state.works, {
+    const { state, commit } = this.$store;
+    const index = findIndex(state.works, {
       key: this.$route.params.key
     });
 
-    this.$store.commit('changeBackground', {
+    commit('changeBackground', {
       isHome: false,
       hasDelay: false
     });
-    this.$store.commit('showHomeObjs', false);
-    this.$store.commit('showWorksObjs', {
+    commit('showHomeObjs', false);
+    commit('showWorksObjs', {
       index: index + 1,
       direction: 0
     });
-    this.$store.commit('showWhoIAmObjs', false);
+    commit('showWhoIAmObjs', false);
 
     await sleep(500);
-    this.$store.commit('showUI');
+    commit('showUI');
   },
   destroyed() {
     window.removeEventListener('wheel', this.wheel, { passive: false });
@@ -53,13 +54,14 @@ export default {
   },
   watch: {
     '$route.params.key': function(key) {
-      const index = findIndex(this.$store.state.works, { key: key });
+      const { state, commit } = this.$store;
+      const index = findIndex(state.works, { key: key });
 
-      this.$store.commit('showWorksObjs', {
+      commit('showWorksObjs', {
         index: index + 1,
         direction: 0
       });
-      this.$store.commit('transit', {
+      commit('transit', {
         globalId: 1,
         currentWorksId: index
       });

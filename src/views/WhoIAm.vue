@@ -144,15 +144,17 @@ export default {
       }
     },
     resize() {
+      const { state, commit } = this.$store;
+
       this.clientHeight = this.$refs['whoiam-wrap'].clientHeight;
       this.anchorY = MathEx.clamp(
         this.anchorY,
         0,
-        this.clientHeight - this.$store.state.resolution.y
+        this.clientHeight - state.resolution.y
       );
-      this.$store.commit(
+      commit(
         'setScrollProgress',
-        this.scrollY / (this.clientHeight - this.$store.state.resolution.y)
+        this.scrollY / (this.clientHeight - state.resolution.y)
       );
     }
   }
