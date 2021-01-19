@@ -58,7 +58,7 @@ export default {
     commit('showPreloader');
     this.update();
     await dispatch('initWebGL');
-    state.webgl.start(state.canvas, this.$store);
+    state.webgl.start();
   },
   computed: {
     transitionName() {
