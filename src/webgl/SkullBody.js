@@ -37,8 +37,7 @@ export default class SkullBody extends THREE.Group {
       },
       vertexShader: vs,
       fragmentShader: fs,
-      transparent: true,
-      flatShading: true
+      transparent: true
     });
 
     this.head = new THREE.Mesh(geometry1, this.material);

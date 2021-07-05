@@ -33,7 +33,6 @@ export default class Petal extends THREE.Mesh {
       },
       vertexShader: vs,
       fragmentShader: fs,
-      flatShading: true,
       side: THREE.DoubleSide,
       transparent: true
     });
