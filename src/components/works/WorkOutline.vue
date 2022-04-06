@@ -152,8 +152,8 @@ $delayStepShow: 0.07s;
   position: absolute;
   letter-spacing: 0.15em;
   @include l-more-than-mobile {
-    width: 1000 / 1600 * 100%;
-    left: 300 / 1600 * 100%;
+    width: math.div(1000, 1600) * 100%;
+    left: math.div(300, 1600) * 100%;
     bottom: 50px;
   }
   @include l-mobile {
@@ -308,7 +308,7 @@ $delayStepShow: 0.07s;
     }
   }
   &__link-wrap {
-    height: (25 / 12) * 1em;
+    height: math.div(25, 12) * 1em;
     @include fontSizeAll(12, 12, 9);
     @include l-more-than-mobile {
       position: absolute;
@@ -364,7 +364,7 @@ $delayStepShow: 0.07s;
     }
   }
   &__link {
-    line-height: (25 / 12);
+    line-height: math.div(25, 12);
     position: absolute;
     top: 0;
     @include l-more-than-mobile {
