@@ -90,7 +90,7 @@ export default {
   }
   &__text {
     width: 1em;
-    height: (30 / 26) * 3em;
+    height: math.div(30, 26) * 3em;
     position: absolute;
     top: calc(50% - 30 / 26 * 1.5em - 2px);
     @include fontSizeAll(26, 26, 16);
@@ -107,11 +107,11 @@ export default {
   }
   &__typo-in {
     width: 1em;
-    height: (30 / 26) * 1em;
+    height: math.div(30, 26) * 1em;
     display: flex;
     justify-content: center;
     align-items: center;
-    line-height: (30 / 26);
+    line-height: math.div(30, 26);
 
     // Transition
     .view-enter &,

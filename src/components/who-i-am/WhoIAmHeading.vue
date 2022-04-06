@@ -16,7 +16,7 @@ export default {
 <style lang="scss">
 .p-whoiam-heading {
   perspective: 500px;
-  line-height: (70 / 60);
+  line-height: math.div(70, 60);
   @include fontSizeAll(60, 60, 30);
   letter-spacing: 0.15em;
   @include l-more-than-mobile {

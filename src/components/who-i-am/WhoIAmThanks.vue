@@ -21,7 +21,7 @@ export default {
 .p-whoiam-credit {
   position: relative;
   @include l-more-than-mobile {
-    padding-left: 500 / 1360 * 100%;
+    padding-left: math.div(500, 1360) * 100%;
   }
   @include l-mobile {
   }
@@ -42,10 +42,10 @@ export default {
     @include fontSizeAll(12, 12, 9);
     font-weight: 400;
     @include l-more-than-mobile {
-      width: 140 / 1000 * 100%;
+      width: math.div(140, 1000) * 100%;
       position: absolute;
       top: 0;
-      left: 360 / 1360 * 100%;
+      left: math.div(360, 1360) * 100%;
     }
     @include l-mobile {
     }

@@ -47,10 +47,10 @@ export default {
 <style lang="scss">
 .p-whoiam-links {
   @include l-more-than-mobile {
-    width: 500 / 1360 * 100%;
+    width: math.div(500, 1360) * 100%;
     position: absolute;
     top: 270px;
-    left: 180 / 1360 * 100%;
+    left: math.div(180, 1360) * 100%;
   }
   @include l-mobile {
     margin-bottom: 50px;

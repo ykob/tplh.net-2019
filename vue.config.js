@@ -3,6 +3,7 @@ module.exports = {
     loaderOptions: {
       sass: {
         prependData: `
+          @use "sass:math";
           @import "@/assets/scss/foundation/variables.scss";
           @import "@/assets/scss/foundation/functions.scss";
           @import "@/assets/scss/foundation/mixins.scss";

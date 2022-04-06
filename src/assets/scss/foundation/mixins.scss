@@ -2,14 +2,14 @@
 
 @mixin fontSize($size: 14) {
   font-size: $size + px;
-  font-size: $size / 16 * 1rem;
+  font-size: math.div($size, 16) * 1rem;
 }
 @mixin fontSizeMobile($size: 14) {
   @media all and (min-width: $break-point-mobile-p + 1) and (max-width: $break-point-tablet-p - 1px) {
-    font-size: round($size / 375 * 414px);
+    font-size: round(math.div($size, 375) * 414px);
   }
   @media all and (max-width: $break-point-mobile-p) {
-    font-size: $size / 375 * 100vw;
+    font-size: math.div($size, 375) * 100vw;
   }
 }
 @mixin fontSizeAll($sizePc, $sizeTab, $sizeSp) {
@@ -23,7 +23,7 @@
 }
 @mixin flexFontSize($vw) {
   @include l-pc-l {
-    font-size: $break-point-pc-s / 100 * $vw;
+    font-size: math.div($break-point-pc-s, 100) * $vw;
   }
   @include l-pc-s {
     font-size: $vw * 1vw;
@@ -32,7 +32,7 @@
     font-size: $vw * 1vw;
   }
   @include l-mobile {
-    font-size: $break-point-tablet-p / 100 * $vw;
+    font-size: math.div($break-point-tablet-p, 100) * $vw;
   }
 }
 @mixin iterateTransitionDelay($size, $step, $base) {
