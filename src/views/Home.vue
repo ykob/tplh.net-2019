@@ -1,6 +1,6 @@
 <script>
 import normalizeWheel from 'normalize-wheel';
-import sleep from 'js-util/sleep';
+import { sleep } from '@ykob/js-util';
 
 import store from '@/store';
 import HomeHeading from '@/components/home/HomeHeading.vue';

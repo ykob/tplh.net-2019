@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { easeOutQuad, easeInOutExpo, easeOutExpo } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import { MathEx } from '@ykob/js-util';
 
 import ImagePlane from '@/webgl/ImagePlane';
 import ImageFire from '@/webgl/ImageFire';

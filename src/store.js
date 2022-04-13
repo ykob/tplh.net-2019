@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+import { MathEx } from '@ykob/js-util';
 
 import router from '@/router';
 

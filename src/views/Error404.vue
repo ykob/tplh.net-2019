@@ -1,5 +1,5 @@
 <script>
-import sleep from 'js-util/sleep';
+import { sleep } from '@ykob/js-util';
 
 import store from '@/store';
 import ErrorMessage from '@/components/error/ErrorMessage.vue';
