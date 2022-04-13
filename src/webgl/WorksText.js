@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { easeInCirc, easeOutCirc } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import { MathEx } from '@ykob/js-util';
 
 import vs from '@/webgl/glsl/WorksText.vs';
 import fs from '@/webgl/glsl/WorksText.fs';

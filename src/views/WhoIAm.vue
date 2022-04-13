@@ -1,6 +1,5 @@
 <script>
-import sleep from 'js-util/sleep';
-import MathEx from 'js-util/MathEx';
+import { MathEx, sleep } from '@ykob/js-util';
 import normalizeWheel from 'normalize-wheel';
 
 import store from '@/store';

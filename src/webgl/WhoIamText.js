@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { easeInCubic, easeOutCubic } from 'easing-js';
-import MathEx from 'js-util/MathEx';
+import { MathEx } from '@ykob/js-util';
 
 import store from '@/store';
 import vs from '@/webgl/glsl/WhoIamText.vs';

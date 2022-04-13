@@ -1,7 +1,7 @@
 <script>
 import findIndex from 'lodash/findIndex';
 import normalizeWheel from 'normalize-wheel';
-import sleep from 'js-util/sleep';
+import { sleep } from '@ykob/js-util';
 
 import store from '@/store';
 import WorkOutline from '@/components/works/WorkOutline.vue';

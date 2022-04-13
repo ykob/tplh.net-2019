@@ -1,7 +1,6 @@
 <script>
 import * as THREE from 'three';
-import sleep from 'js-util/sleep';
-import debounce from 'js-util/debounce';
+import { debounce, sleep } from '@ykob/js-util';
 
 import GlobalTitle from '@/components/global/GlobalTitle.vue';
 import UtilityNavi from '@/components/global/UtilityNavi.vue';
