@@ -68,7 +68,7 @@ export default {
 
       // send google analytics
       /* global gtag */
-      gtag('config', 'UA-568033-1', { page_path: this.$route.path });
+      gtag('config', 'G-NE55RESCLQ', { page_path: this.$route.path });
     }
   },
   computed: {
