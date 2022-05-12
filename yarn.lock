@@ -1592,6 +1592,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@ykob/glsl-util@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@ykob/glsl-util/-/glsl-util-1.0.3.tgz#a754b1b6dce06cf6926dd0f1299c048c9a08fb12"
+  integrity sha512-g7TC+v/D/TU0JN98cj7GvVoRWBDle6KBJmIiUlBmKc+ig69Mx9ekhecm1vJDEoSaNF9bfG0MMO+5VSHSJONJow==
+
 "@ykob/js-util@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ykob/js-util/-/js-util-2.0.0.tgz#8c6613585c6bb96d44671b57fada6d9267a96238"
@@ -4451,10 +4456,6 @@ glsl-tokenizer@^2.0.0, glsl-tokenizer@^2.0.2:
   integrity sha512-XSZEJ/i4dmz3Pmbnpsy3cKh7cotvFlBiZnDOwnj/05EwNp2XrhQ4XKJxT7/pDt4kp4YcpRSKz8eTV7S+mwV6MA==
   dependencies:
     through2 "^0.6.3"
-
-"glsl-util@git://github.com/ykob/glsl-util.git":
-  version "1.0.2"
-  resolved "git://github.com/ykob/glsl-util.git#8a7273d974bea8d8c6a3c083b3ff5d85f49174d6"
 
 glslify-bundle@^5.0.0:
   version "5.1.1"

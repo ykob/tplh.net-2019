@@ -11,6 +11,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@ykob/glsl-util": "^1.0.3",
     "@ykob/js-util": "^2.0.0",
     "core-js": "^3.6.5",
     "dat.gui": "^0.7.7",
@@ -18,7 +19,6 @@
     "glsl-inverse": "^1.0.0",
     "glsl-matrix": "git://github.com/ykob/glsl-matrix.git",
     "glsl-noise": "0.0.0",
-    "glsl-util": "git://github.com/ykob/glsl-util.git",
     "lodash": "^4.17.20",
     "normalize-wheel": "^1.0.1",
     "register-service-worker": "^1.6.2",
