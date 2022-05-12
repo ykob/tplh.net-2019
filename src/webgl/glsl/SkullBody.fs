@@ -10,7 +10,7 @@ uniform vec3 hsv1;
 varying vec3 vPosition;
 varying float vEdge;
 
-#pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb)
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb)
 #pragma glslify: cnoise3 = require(glsl-noise/classic/3d)
 
 void main() {

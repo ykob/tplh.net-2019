@@ -16,7 +16,7 @@ varying float vTime1;
 varying float vTime2;
 varying float vTime3;
 
-#pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb)
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb)
 
 void main() {
   vec2 imgUv = vec2(
