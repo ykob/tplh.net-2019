@@ -11,7 +11,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@ykob/glsl-util": "^1.0.3",
+    "@ykob/glsl-util": "^1.1.0",
     "@ykob/js-util": "^2.0.0",
     "core-js": "^3.6.5",
     "dat.gui": "^0.7.7",
