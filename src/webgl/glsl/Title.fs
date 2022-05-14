@@ -8,7 +8,7 @@ uniform float isMobile;
 
 varying vec2 vUv;
 
-#pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb);
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb);
 
 void main() {
   vec4 texColor = texture2D(alphaTex, vUv);

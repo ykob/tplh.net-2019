@@ -2,7 +2,7 @@ precision highp float;
 
 varying float vOpacity;
 
-#pragma glslify: convertHsvToRgb = require(glsl-util/convertHsvToRgb);
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb);
 
 void main() {
   // Convert PointCoord to the other vec2 has a range from -1.0 to 1.0.
