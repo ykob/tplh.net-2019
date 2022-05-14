@@ -17,7 +17,6 @@
     "dat.gui": "^0.7.7",
     "easing-js": "git://github.com/danro/easing-js.git",
     "glsl-inverse": "^1.0.0",
-    "glsl-matrix": "git://github.com/ykob/glsl-matrix.git",
     "glsl-noise": "0.0.0",
     "lodash": "^4.17.20",
     "normalize-wheel": "^1.0.1",

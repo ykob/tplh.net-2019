@@ -4381,10 +4381,6 @@ glsl-inverse@^1.0.0:
   resolved "https://registry.yarnpkg.com/glsl-inverse/-/glsl-inverse-1.0.0.tgz#12c0b1d065f558444d1e6feaf79b5ddf8a918ae6"
   integrity sha1-EsCx0GX1WERNHm/q95td34qRiuY=
 
-"glsl-matrix@git://github.com/ykob/glsl-matrix.git":
-  version "1.0.3"
-  resolved "git://github.com/ykob/glsl-matrix.git#bb1b369c8f4675099f51ce8915c58694d0696620"
-
 glsl-noise@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/glsl-noise/-/glsl-noise-0.0.0.tgz#367745f3a33382c0eeec4cb54b7e99cfc1d7670b"
